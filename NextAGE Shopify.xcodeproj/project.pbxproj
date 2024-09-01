@@ -9,21 +9,31 @@
 /* Begin PBXBuildFile section */
 		A94A12152C84D06D00AE0E09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A12142C84D06D00AE0E09 /* AppDelegate.swift */; };
 		A94A12172C84D06D00AE0E09 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A12162C84D06D00AE0E09 /* SceneDelegate.swift */; };
-		A94A12192C84D06D00AE0E09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A12182C84D06D00AE0E09 /* ViewController.swift */; };
 		A94A121C2C84D06D00AE0E09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A94A121A2C84D06D00AE0E09 /* Main.storyboard */; };
 		A94A121E2C84D07000AE0E09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A94A121D2C84D07000AE0E09 /* Assets.xcassets */; };
 		A94A12212C84D07000AE0E09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A94A121F2C84D07000AE0E09 /* LaunchScreen.storyboard */; };
+		A94A122B2C84D75000AE0E09 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A122A2C84D75000AE0E09 /* MainViewController.swift */; };
+		A94A122D2C84DCA000AE0E09 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A122C2C84DCA000AE0E09 /* UIView+Extension.swift */; };
+		A94A12312C84E5CD00AE0E09 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A122F2C84E5CD00AE0E09 /* SignupViewController.swift */; };
+		A94A12352C84E60E00AE0E09 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A12332C84E60E00AE0E09 /* SignInViewController.swift */; };
+		A9D0F09E2C84EC5E00ABA14E /* SignUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9D0F09D2C84EC5E00ABA14E /* SignUpViewController.storyboard */; };
+		A9D0F0A02C84EF4000ABA14E /* SignInViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9D0F09F2C84EF4000ABA14E /* SignInViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A94A12112C84D06D00AE0E09 /* NextAGE Shopify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NextAGE Shopify.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A94A12142C84D06D00AE0E09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A94A12162C84D06D00AE0E09 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A94A12182C84D06D00AE0E09 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A94A121B2C84D06D00AE0E09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A94A121D2C84D07000AE0E09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A94A12202C84D07000AE0E09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A94A12222C84D07000AE0E09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A94A122A2C84D75000AE0E09 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A94A122C2C84DCA000AE0E09 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		A94A122F2C84E5CD00AE0E09 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		A94A12332C84E60E00AE0E09 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		A9D0F09D2C84EC5E00ABA14E /* SignUpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUpViewController.storyboard; sourceTree = "<group>"; };
+		A9D0F09F2C84EF4000ABA14E /* SignInViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignInViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +66,84 @@
 		A94A12132C84D06D00AE0E09 /* NextAGE Shopify */ = {
 			isa = PBXGroup;
 			children = (
+				A94A122C2C84DCA000AE0E09 /* UIView+Extension.swift */,
+				A94A122E2C84E5A900AE0E09 /* Modules */,
 				A94A12142C84D06D00AE0E09 /* AppDelegate.swift */,
 				A94A12162C84D06D00AE0E09 /* SceneDelegate.swift */,
-				A94A12182C84D06D00AE0E09 /* ViewController.swift */,
-				A94A121A2C84D06D00AE0E09 /* Main.storyboard */,
 				A94A121D2C84D07000AE0E09 /* Assets.xcassets */,
-				A94A121F2C84D07000AE0E09 /* LaunchScreen.storyboard */,
 				A94A12222C84D07000AE0E09 /* Info.plist */,
 			);
 			path = "NextAGE Shopify";
+			sourceTree = "<group>";
+		};
+		A94A12282C84D35C00AE0E09 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				A94A121F2C84D07000AE0E09 /* LaunchScreen.storyboard */,
+				A94A121A2C84D06D00AE0E09 /* Main.storyboard */,
+				A94A122A2C84D75000AE0E09 /* MainViewController.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		A94A122E2C84E5A900AE0E09 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				A94A12282C84D35C00AE0E09 /* MainView */,
+				A94A123C2C84E6F900AE0E09 /* SignUp */,
+				A94A12382C84E66500AE0E09 /* SignIn */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		A94A12382C84E66500AE0E09 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				A94A123A2C84E68400AE0E09 /* ViewModel */,
+				A94A12392C84E67E00AE0E09 /* View */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		A94A12392C84E67E00AE0E09 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A94A12332C84E60E00AE0E09 /* SignInViewController.swift */,
+				A9D0F09F2C84EF4000ABA14E /* SignInViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A94A123A2C84E68400AE0E09 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A94A123C2C84E6F900AE0E09 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				A94A123E2C84E7A800AE0E09 /* View */,
+				A94A123F2C84E7AD00AE0E09 /* ViewModel */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		A94A123E2C84E7A800AE0E09 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A94A122F2C84E5CD00AE0E09 /* SignupViewController.swift */,
+				A9D0F09D2C84EC5E00ABA14E /* SignUpViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A94A123F2C84E7AD00AE0E09 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,8 +205,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A94A12212C84D07000AE0E09 /* LaunchScreen.storyboard in Resources */,
+				A9D0F0A02C84EF4000ABA14E /* SignInViewController.storyboard in Resources */,
 				A94A121E2C84D07000AE0E09 /* Assets.xcassets in Resources */,
 				A94A121C2C84D06D00AE0E09 /* Main.storyboard in Resources */,
+				A9D0F09E2C84EC5E00ABA14E /* SignUpViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +219,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A94A12192C84D06D00AE0E09 /* ViewController.swift in Sources */,
+				A94A122D2C84DCA000AE0E09 /* UIView+Extension.swift in Sources */,
+				A94A122B2C84D75000AE0E09 /* MainViewController.swift in Sources */,
+				A94A12352C84E60E00AE0E09 /* SignInViewController.swift in Sources */,
+				A94A12312C84E5CD00AE0E09 /* SignupViewController.swift in Sources */,
 				A94A12152C84D06D00AE0E09 /* AppDelegate.swift in Sources */,
 				A94A12172C84D06D00AE0E09 /* SceneDelegate.swift in Sources */,
 			);
