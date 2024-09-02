@@ -40,6 +40,7 @@
 		C67432802C863AD5001A0753 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674327F2C863AD5001A0753 /* SettingsViewModel.swift */; };
 		C67432822C863AE1001A0753 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67432812C863AE1001A0753 /* SettingsViewController.swift */; };
 		C67432862C863AFA001A0753 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C67432852C863AFA001A0753 /* Settings.storyboard */; };
+		C67432882C863CE6001A0753 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67432872C863CE6001A0753 /* ProductCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		C674327F2C863AD5001A0753 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		C67432812C863AE1001A0753 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C67432852C863AFA001A0753 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		C67432872C863CE6001A0753 /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				C66E1F782C8511A3001127F6 /* ShoppingCartViewController.swift */,
+				C67432872C863CE6001A0753 /* ProductCell.swift */,
 				C66E1F772C851192001127F6 /* Storyboard */,
 			);
 			path = View;
@@ -503,6 +506,7 @@
 				A94A12152C84D06D00AE0E09 /* AppDelegate.swift in Sources */,
 				C66E1F792C8511A3001127F6 /* ShoppingCartViewController.swift in Sources */,
 				C67432802C863AD5001A0753 /* SettingsViewModel.swift in Sources */,
+				C67432882C863CE6001A0753 /* ProductCell.swift in Sources */,
 				A94A12172C84D06D00AE0E09 /* SceneDelegate.swift in Sources */,
 				C66E1F882C8512C6001127F6 /* placeholder3.swift in Sources */,
 			);
