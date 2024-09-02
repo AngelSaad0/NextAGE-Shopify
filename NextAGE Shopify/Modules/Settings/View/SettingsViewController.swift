@@ -1,20 +1,20 @@
 //
-//  SignUpViewController.swift
+//  SettingsViewController.swift
 //  NextAGE Shopify
 //
-//  Created by Engy on 9/1/24.
+//  Created by Mohamed Ayman on 02/09/2024.
 //
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Sign Up"
+
         // Do any additional setup after loading the view.
     }
-
+    
 
     /*
     // MARK: - Navigation

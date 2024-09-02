@@ -17,15 +17,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WWx-K9-iwa">
-                                <rect key="frame" x="40" y="674.66666666666663" width="313" height="103.33333333333337"/>
+                                <rect key="frame" x="40" y="678" width="313" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PyS-2d-o0x">
-                                        <rect key="frame" x="0.0" y="0.0" width="313" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="RYa-Or-wF0"/>
+                                            <constraint firstAttribute="height" constant="40" id="fij-Af-SZg"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Sing Up">
+                                        <buttonConfiguration key="configuration" style="plain" title="Sign up">
                                             <backgroundConfiguration key="background">
                                                 <color key="backgroundColor" systemColor="linkColor"/>
                                             </backgroundConfiguration>
@@ -36,9 +36,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZI-Bf-ibz">
-                                        <rect key="frame" x="0.0" y="65" width="313" height="38.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="60" width="313" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Jsu-1i-a8C"/>
+                                        </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Long in ">
+                                        <buttonConfiguration key="configuration" style="plain" title="Log in ">
                                             <backgroundConfiguration key="background">
                                                 <color key="backgroundColor" systemColor="linkColor"/>
                                             </backgroundConfiguration>
@@ -49,9 +52,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="gZI-Bf-ibz" firstAttribute="height" secondItem="PyS-2d-o0x" secondAttribute="height" multiplier="0.851852" id="rTy-Uz-RXI"/>
-                                </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kms-zT-j1m">
                                 <rect key="frame" x="106" y="109" width="180" height="546"/>
@@ -96,10 +96,10 @@
             </objects>
             <point key="canvasLocation" x="1020.6106870229007" y="-2.1126760563380285"/>
         </scene>
-        <!--Sign Up View Controller-->
+        <!--Sign In View Controller-->
         <scene sceneID="VRR-ka-Ut7">
             <objects>
-                <viewController id="Sh6-zZ-8Nb" customClass="SignUpViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Sh6-zZ-8Nb" customClass="SignInViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Knk-Lw-Pop">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,7 +123,7 @@
                                             <constraint firstAttribute="height" constant="40" id="ko9-al-DXl"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Login"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dG7-4P-kaK">
                                         <rect key="frame" x="0.0" y="183" width="313" height="20.333333333333343"/>
@@ -150,12 +150,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t89-US-u0X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1724" y="461"/>
+            <point key="canvasLocation" x="1793" y="462"/>
         </scene>
-        <!--Sign In View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="Rjf-PG-YcH">
             <objects>
-                <viewController id="EIw-BQ-jWa" customClass="SignInViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="EIw-BQ-jWa" customClass="SignUpViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1G9-ys-JOt">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -189,7 +189,7 @@
                                             <constraint firstAttribute="height" constant="40" id="LCR-fT-EfP"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Sing UP "/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Register"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57T-wc-rnR">
                                         <rect key="frame" x="0.0" y="325" width="313" height="20.333333333333314"/>
@@ -218,7 +218,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAQ-15-Up0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1725" y="-250"/>
+            <point key="canvasLocation" x="1792" y="-250"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="di8-DQ-0m6">
@@ -268,22 +268,22 @@
     </scenes>
     <resources>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemPinkColor">
-            <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tableBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tableCellBlueTextColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
