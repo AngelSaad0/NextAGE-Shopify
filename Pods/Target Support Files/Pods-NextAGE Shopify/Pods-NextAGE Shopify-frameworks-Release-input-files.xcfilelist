@@ -1,0 +1,5 @@
+${PODS_ROOT}/Target Support Files/Pods-NextAGE Shopify/Pods-NextAGE Shopify-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework
+${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework
+${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework
