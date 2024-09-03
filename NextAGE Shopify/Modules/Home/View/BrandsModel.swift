@@ -6,3 +6,7 @@
 //
 
 import Foundation
+struct BrandsModel {
+    let title: String
+    let image: String
+}
