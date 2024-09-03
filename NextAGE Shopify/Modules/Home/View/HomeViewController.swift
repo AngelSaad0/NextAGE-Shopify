@@ -9,28 +9,33 @@ import UIKit
 
 class HomeViewController: UIViewController {
     let offersList = ["add1","add2","add3","add4","add5","add6","add7","add8","add9","add10","add11"]
-    let offersList2 = ["11","12","13","14","15","11","12","13","14","15"]
 
     @IBOutlet var brandsCollection: UICollectionView!
     @IBOutlet var adsCollectionView: UICollectionView!
 
     @IBOutlet var adsPageControl: UIPageControl!
+    
+    var networkManager: NetworkManager
+    
     var homeViewModel : HomeViewModel?
-    var brandsArray : [BrandsModel]?
+    var brandsArray : [SmartCollection]?
     var adsArray : [adsModel]?
     var indicator : UIActivityIndicatorView?
     var loggedIn :Bool?
     var currentPage = 0
     var timer:Timer?
 
-
+    required init?(coder: NSCoder) {
+        networkManager = NetworkManager()
+        super.init(coder: coder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         startTimer()
         adsPageControl.numberOfPages = offersList.count
 
-        
+        loadBrands()
 
     }
     func setIndicator(){
@@ -49,6 +54,16 @@ class HomeViewController: UIViewController {
         let scrollPostion = (currentPage<offersList.count-1) ? currentPage+1 : 0
         adsCollectionView.scrollToItem(at: IndexPath(item: scrollPostion, section: 0), at: .centeredHorizontally, animated: true)
 
+    }
+    
+    func loadBrands() {
+        networkManager.fetchData(from: ShopifyAPI.smartCollections.shopifyURLString(), responseType: BrandsCollection.self) { result in
+            guard let brands = result else {return}
+            DispatchQueue.main.async { [weak self] in
+                self?.brandsArray = brands.smartCollections
+                self?.brandsCollection.reloadData()
+            }
+        }
     }
 
 
@@ -71,7 +86,7 @@ extension HomeViewController:UICollectionViewDataSource {
         case 0 :
             return offersList.count
         default :
-            return offersList2.count
+            return (brandsArray ?? []).count
 
         }
 
@@ -86,8 +101,8 @@ extension HomeViewController:UICollectionViewDataSource {
             return cell
         case 1 :
             let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BrandsCollectionCell", for: indexPath) as! BrandsCollectionCell
-            let image  = offersList2[indexPath.row]
-            cell.configure(with: adsModel(image: image))
+            let imageURLString = brandsArray![indexPath.row].image.src
+            cell.configure(with: imageURLString)
             return cell
 
         default:
