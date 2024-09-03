@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Payment View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="PaymentViewController" id="Y6W-OH-hqX" customClass="PaymentViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKV-wo-Q5M">
+                                <rect key="frame" x="20" y="758" width="353" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="KhE-S8-wbp"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Purchase" cornerStyle="capsule">
+                                    <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="purchaseButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="v2Z-jk-MBC"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aIA-fv-ogY">
+                                <rect key="frame" x="0.0" y="59" width="393" height="679"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="74" id="TCD-fk-UAP" customClass="PaymentMethodCell" customModule="NextAGE_Shopify" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="74"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TCD-fk-UAP" id="W1e-tJ-Unh">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="74"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banknote" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6gP-O1-htx">
+                                                    <rect key="frame" x="20" y="14.333333333333336" width="50" height="45.666666666666671"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="6gP-O1-htx" secondAttribute="height" multiplier="1:1" id="oQT-QI-Mlc"/>
+                                                        <constraint firstAttribute="width" constant="50" id="vIe-zI-7so"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cash on delivery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoP-FG-YZW">
+                                                    <rect key="frame" x="90" y="25" width="228" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="59p-0y-HjJ">
+                                                    <rect key="frame" x="338" y="25.666666666666664" width="25" height="23.666666666666664"/>
+                                                    <color key="tintColor" systemColor="systemGreenColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="59p-0y-HjJ" secondAttribute="height" multiplier="1:1" id="P6Z-0k-fbG"/>
+                                                        <constraint firstAttribute="width" constant="25" id="urX-mi-apr"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="59p-0y-HjJ" secondAttribute="trailing" constant="30" id="08S-a2-3c9"/>
+                                                <constraint firstItem="LoP-FG-YZW" firstAttribute="centerY" secondItem="6gP-O1-htx" secondAttribute="centerY" id="5uK-Xt-A1H"/>
+                                                <constraint firstItem="LoP-FG-YZW" firstAttribute="leading" secondItem="6gP-O1-htx" secondAttribute="trailing" constant="20" id="7V3-j4-FFe"/>
+                                                <constraint firstItem="59p-0y-HjJ" firstAttribute="centerY" secondItem="LoP-FG-YZW" secondAttribute="centerY" id="BLf-ya-y8K"/>
+                                                <constraint firstItem="59p-0y-HjJ" firstAttribute="leading" secondItem="LoP-FG-YZW" secondAttribute="trailing" constant="20" id="kul-FR-EVl"/>
+                                                <constraint firstItem="6gP-O1-htx" firstAttribute="top" secondItem="W1e-tJ-Unh" secondAttribute="top" constant="12" id="nWT-lD-7Sv"/>
+                                                <constraint firstItem="6gP-O1-htx" firstAttribute="leading" secondItem="W1e-tJ-Unh" secondAttribute="leading" constant="20" id="oBj-Ve-gk9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="paymentMethodImage" destination="6gP-O1-htx" id="0yC-Hj-DCT"/>
+                                            <outlet property="paymentMethodLabel" destination="LoP-FG-YZW" id="1nX-sm-MX9"/>
+                                            <outlet property="paymentMethodSelected" destination="59p-0y-HjJ" id="kKO-EB-Lgc"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nKV-wo-Q5M" firstAttribute="top" secondItem="aIA-fv-ogY" secondAttribute="bottom" constant="20" id="1c5-Lk-6Lv"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aIA-fv-ogY" secondAttribute="trailing" id="5OU-cn-aka"/>
+                            <constraint firstItem="aIA-fv-ogY" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Ep8-LB-FX5"/>
+                            <constraint firstItem="aIA-fv-ogY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="K4D-sc-dv8"/>
+                            <constraint firstItem="nKV-wo-Q5M" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="XfF-am-eO2"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="nKV-wo-Q5M" secondAttribute="bottom" constant="10" id="iMh-df-IEH"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="nKV-wo-Q5M" secondAttribute="trailing" constant="20" id="ihc-LI-FxC"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="paymentMethodsTableView" destination="aIA-fv-ogY" id="xQI-ws-nkU"/>
+                        <outlet property="purchase" destination="nKV-wo-Q5M" id="VCE-kY-eKv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="124.42748091603053" y="-34.507042253521128"/>
+        </scene>
+        <!--Confirmation View Controller-->
+        <scene sceneID="wJu-DE-oHH">
+            <objects>
+                <viewController storyboardIdentifier="ConfirmationViewController" id="d4A-li-dFf" customClass="ConfirmationViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zid-q9-2Tf">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.bubble.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="T22-01-gFB">
+                                <rect key="frame" x="20" y="80.333333333333314" width="353" height="335"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Confirmed!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TaC-1B-VwY">
+                                <rect key="frame" x="20" y="455" width="353" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Afg-3d-TdX">
+                                <rect key="frame" x="20" y="758" width="353" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="2gD-yI-ddR"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Continue Shopping" cornerStyle="capsule">
+                                    <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="continueShoppingButton:" destination="d4A-li-dFf" eventType="touchUpInside" id="tsT-tj-tMH"/>
+                                    <action selector="purchaseButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="dzj-UY-eCG"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will recieve a call from us soon" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sn6-aL-eKc">
+                                <rect key="frame" x="20" y="510.99999999999994" width="353" height="26.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tJm-Vi-fUt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="TaC-1B-VwY" firstAttribute="leading" secondItem="T22-01-gFB" secondAttribute="leading" id="An6-Er-oUF"/>
+                            <constraint firstItem="T22-01-gFB" firstAttribute="top" secondItem="tJm-Vi-fUt" secondAttribute="top" constant="20" id="Dir-Yl-DTd"/>
+                            <constraint firstItem="Afg-3d-TdX" firstAttribute="leading" secondItem="tJm-Vi-fUt" secondAttribute="leading" constant="20" id="E1I-3d-lcZ"/>
+                            <constraint firstItem="TaC-1B-VwY" firstAttribute="top" secondItem="T22-01-gFB" secondAttribute="bottom" constant="40" id="Lhh-6E-f28"/>
+                            <constraint firstItem="sn6-aL-eKc" firstAttribute="top" secondItem="TaC-1B-VwY" secondAttribute="bottom" constant="20" id="PbJ-dk-QEb"/>
+                            <constraint firstItem="T22-01-gFB" firstAttribute="leading" secondItem="tJm-Vi-fUt" secondAttribute="leading" constant="20" id="QIh-sE-8bN"/>
+                            <constraint firstItem="sn6-aL-eKc" firstAttribute="leading" secondItem="TaC-1B-VwY" secondAttribute="leading" id="VLL-dm-cy3"/>
+                            <constraint firstItem="tJm-Vi-fUt" firstAttribute="bottom" secondItem="Afg-3d-TdX" secondAttribute="bottom" constant="10" id="Wsi-H0-W1K"/>
+                            <constraint firstItem="tJm-Vi-fUt" firstAttribute="trailing" secondItem="Afg-3d-TdX" secondAttribute="trailing" constant="20" id="Yez-gu-NdE"/>
+                            <constraint firstItem="sn6-aL-eKc" firstAttribute="trailing" secondItem="TaC-1B-VwY" secondAttribute="trailing" id="gPi-Pd-IDi"/>
+                            <constraint firstItem="TaC-1B-VwY" firstAttribute="trailing" secondItem="T22-01-gFB" secondAttribute="trailing" id="gVG-ru-hQt"/>
+                            <constraint firstItem="T22-01-gFB" firstAttribute="height" secondItem="zid-q9-2Tf" secondAttribute="height" multiplier="0.394366" id="mgq-fh-uyD"/>
+                            <constraint firstItem="tJm-Vi-fUt" firstAttribute="trailing" secondItem="T22-01-gFB" secondAttribute="trailing" constant="20" id="rlG-Tp-b8Y"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Who-DB-Iad" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="861.83206106870227" y="-34.507042253521128"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="banknote" catalog="system" width="128" height="78"/>
+        <image name="checkmark.bubble.fill" catalog="system" width="128" height="110"/>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

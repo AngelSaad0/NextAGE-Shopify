@@ -24,6 +24,11 @@
 		A9D0F0CC2C864B6400ABA14E /* CustomTapBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0CB2C864B6400ABA14E /* CustomTapBar.swift */; };
 		A9D0F0D02C864B9B00ABA14E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9D0F0CF2C864B9B00ABA14E /* Colors.xcassets */; };
 		A9D0F0D22C864BBD00ABA14E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0D12C864BBD00ABA14E /* Colors.swift */; };
+		C64C33822C8741F500EF1928 /* Payment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64C33792C8741F500EF1928 /* Payment.storyboard */; };
+		C64C33832C8741F500EF1928 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */; };
+		C64C33842C8741F500EF1928 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */; };
+		C64C33852C8741F500EF1928 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337D2C8741F500EF1928 /* PaymentViewController.swift */; };
+		C64C33862C8741F500EF1928 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337F2C8741F500EF1928 /* PaymentViewModel.swift */; };
 		C662651A2C86596D003D317F /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66265192C86596D003D317F /* CurrencyViewController.swift */; };
 		C662651C2C86597D003D317F /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C662651B2C86597D003D317F /* AboutViewController.swift */; };
 		C66E1F652C85108F001127F6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E1F642C85108F001127F6 /* MainTabBarController.swift */; };
@@ -74,6 +79,11 @@
 		A9D0F0CB2C864B6400ABA14E /* CustomTapBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTapBar.swift; sourceTree = "<group>"; };
 		A9D0F0CF2C864B9B00ABA14E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		A9D0F0D12C864BBD00ABA14E /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		C64C33792C8741F500EF1928 /* Payment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Payment.storyboard; sourceTree = "<group>"; };
+		C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
+		C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
+		C64C337D2C8741F500EF1928 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		C64C337F2C8741F500EF1928 /* PaymentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		C66265192C86596D003D317F /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
 		C662651B2C86597D003D317F /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		C66E1F642C85108F001127F6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -161,6 +171,7 @@
 		A94A122E2C84E5A900AE0E09 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				C64C33812C8741F500EF1928 /* Payment */,
 				C674328E2C863F11001A0753 /* Settings */,
 				C67432712C863A10001A0753 /* ProductDetails */,
 				C66E1F602C850F9B001127F6 /* Auth */,
@@ -169,6 +180,42 @@
 				C66E1F742C851185001127F6 /* ShoppingCart */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		C64C337A2C8741F500EF1928 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				C64C33792C8741F500EF1928 /* Payment.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		C64C337E2C8741F500EF1928 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C64C337A2C8741F500EF1928 /* Storyboard */,
+				C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */,
+				C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */,
+				C64C337D2C8741F500EF1928 /* PaymentViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C64C33802C8741F500EF1928 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C64C337F2C8741F500EF1928 /* PaymentViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C64C33812C8741F500EF1928 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				C64C337E2C8741F500EF1928 /* View */,
+				C64C33802C8741F500EF1928 /* ViewModel */,
+			);
+			path = Payment;
 			sourceTree = "<group>";
 		};
 		C66E1F522C850E3F001127F6 /* Services */ = {
@@ -505,6 +552,7 @@
 				C66E1F732C85116B001127F6 /* Home.storyboard in Resources */,
 				A94A12212C84D07000AE0E09 /* LaunchScreen.storyboard in Resources */,
 				C674327A2C863A5E001A0753 /* ProductDetails.storyboard in Resources */,
+				C64C33822C8741F500EF1928 /* Payment.storyboard in Resources */,
 				A94A121E2C84D07000AE0E09 /* Assets.xcassets in Resources */,
 				C66E1F692C8510D6001127F6 /* MainTabBar.storyboard in Resources */,
 				A9D0F0D02C864B9B00ABA14E /* Colors.xcassets in Resources */,
@@ -522,10 +570,12 @@
 			files = (
 				C67432762C863A43001A0753 /* ProductDetailsViewController.swift in Sources */,
 				C662651A2C86596D003D317F /* CurrencyViewController.swift in Sources */,
+				C64C33832C8741F500EF1928 /* ConfirmationViewController.swift in Sources */,
 				A94A122D2C84DCA000AE0E09 /* UIView+Extension.swift in Sources */,
 				C674327C2C863AA6001A0753 /* ProductDetailsViewModel.swift in Sources */,
 				C674326C2C863693001A0753 /* AuthOptionsViewController.swift in Sources */,
 				C674326D2C863693001A0753 /* HomeViewControllerr.swift in Sources */,
+				C64C33852C8741F500EF1928 /* PaymentViewController.swift in Sources */,
 				A9D0F0D22C864BBD00ABA14E /* Colors.swift in Sources */,
 				C66E1F822C851258001127F6 /* placeholder1.swift in Sources */,
 				C66E1F6F2C85113E001127F6 /* HomeViewModel.swift in Sources */,
@@ -540,6 +590,7 @@
 				C66E1F802C85124D001127F6 /* placeholder2.swift in Sources */,
 				C67432902C863F11001A0753 /* SettingCell.swift in Sources */,
 				C66E1F652C85108F001127F6 /* MainTabBarController.swift in Sources */,
+				C64C33862C8741F500EF1928 /* PaymentViewModel.swift in Sources */,
 				A9D0F0CC2C864B6400ABA14E /* CustomTapBar.swift in Sources */,
 				C674326E2C863693001A0753 /* AuthOptionsView.swift in Sources */,
 				A94A12312C84E5CD00AE0E09 /* SignupViewController.swift in Sources */,
@@ -550,6 +601,7 @@
 				C66E1F792C8511A3001127F6 /* ShoppingCartViewController.swift in Sources */,
 				C67432882C863CE6001A0753 /* ProductCell.swift in Sources */,
 				A94A12172C84D06D00AE0E09 /* SceneDelegate.swift in Sources */,
+				C64C33842C8741F500EF1928 /* PaymentMethodCell.swift in Sources */,
 				C66E1F882C8512C6001127F6 /* placeholder3.swift in Sources */,
 				A9D0F0C72C864B1D00ABA14E /* AdsCollectionCell.swift in Sources */,
 				C67432912C863F11001A0753 /* SettingsViewController.swift in Sources */,

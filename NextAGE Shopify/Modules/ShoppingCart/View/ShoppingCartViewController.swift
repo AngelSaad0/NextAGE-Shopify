@@ -39,6 +39,9 @@ class ShoppingCartViewController: UIViewController {
     }
     
     @IBAction func checkoutButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Payment", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PaymentViewController")
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
