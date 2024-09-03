@@ -13,22 +13,20 @@ class ProductDetailsViewController: UIViewController {
     
     @IBOutlet var size: UIButton!
     @IBOutlet var ProductPhotosCollectionview: UICollectionView!
-    var indexOfSize = 0
+    @IBOutlet var reviewTableView: UITableView!
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
         ProductPhotosCollectionview.dataSource = self
         ProductPhotosCollectionview.delegate = self
-    
+        reviewTableView.dataSource = self
+        reviewTableView.delegate = self
         setProductPhotosCollectionviewLayout()
           
          
     }
     
-
-
-
-
 }
 
 //MARK: collectionView
@@ -70,4 +68,23 @@ extension ProductDetailsViewController :UICollectionViewDelegate,UICollectionVie
 }
 //MARK: sizeStepper
 
-
+//MARK: Reviews tabel view
+extension ProductDetailsViewController:UITableViewDelegate,UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath)
+        return cell
+        
+        
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(140)
+    }
+}
