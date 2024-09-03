@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class BrandsCollectionCell: UICollectionViewCell {
     
@@ -24,8 +25,8 @@ class BrandsCollectionCell: UICollectionViewCell {
         brandImg.addCornerRadius(radius: 10)
 
     }
-    func configure(with model: adsModel) {
-        brandImg.image = UIImage(named: model.image)
+    func configure(with imageURLString: String) {
+        brandImg.kf.setImage(with: URL(string: imageURLString))
 
     }
 
