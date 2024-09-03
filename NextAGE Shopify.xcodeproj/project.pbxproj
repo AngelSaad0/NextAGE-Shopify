@@ -24,6 +24,8 @@
 		A9D0F0CC2C864B6400ABA14E /* CustomTapBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0CB2C864B6400ABA14E /* CustomTapBar.swift */; };
 		A9D0F0D02C864B9B00ABA14E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9D0F0CF2C864B9B00ABA14E /* Colors.xcassets */; };
 		A9D0F0D22C864BBD00ABA14E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0D12C864BBD00ABA14E /* Colors.swift */; };
+		C662651A2C86596D003D317F /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66265192C86596D003D317F /* CurrencyViewController.swift */; };
+		C662651C2C86597D003D317F /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C662651B2C86597D003D317F /* AboutViewController.swift */; };
 		C66E1F652C85108F001127F6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E1F642C85108F001127F6 /* MainTabBarController.swift */; };
 		C66E1F672C8510C4001127F6 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E1F662C8510C4001127F6 /* MainTabBarViewModel.swift */; };
 		C66E1F692C8510D6001127F6 /* MainTabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66E1F682C8510D6001127F6 /* MainTabBar.storyboard */; };
@@ -72,6 +74,8 @@
 		A9D0F0CB2C864B6400ABA14E /* CustomTapBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTapBar.swift; sourceTree = "<group>"; };
 		A9D0F0CF2C864B9B00ABA14E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		A9D0F0D12C864BBD00ABA14E /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		C66265192C86596D003D317F /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
+		C662651B2C86597D003D317F /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		C66E1F642C85108F001127F6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		C66E1F662C8510C4001127F6 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
 		C66E1F682C8510D6001127F6 /* MainTabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainTabBar.storyboard; sourceTree = "<group>"; };
@@ -411,6 +415,8 @@
 			isa = PBXGroup;
 			children = (
 				C674328C2C863F11001A0753 /* SettingsViewController.swift */,
+				C66265192C86596D003D317F /* CurrencyViewController.swift */,
+				C662651B2C86597D003D317F /* AboutViewController.swift */,
 				C674328B2C863F11001A0753 /* SettingCell.swift */,
 				C674328A2C863F11001A0753 /* Stroyboard */,
 			);
@@ -515,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C67432762C863A43001A0753 /* ProductDetailsViewController.swift in Sources */,
+				C662651A2C86596D003D317F /* CurrencyViewController.swift in Sources */,
 				A94A122D2C84DCA000AE0E09 /* UIView+Extension.swift in Sources */,
 				C674327C2C863AA6001A0753 /* ProductDetailsViewModel.swift in Sources */,
 				C674326C2C863693001A0753 /* AuthOptionsViewController.swift in Sources */,
@@ -537,6 +544,7 @@
 				C674326E2C863693001A0753 /* AuthOptionsView.swift in Sources */,
 				A94A12312C84E5CD00AE0E09 /* SignupViewController.swift in Sources */,
 				A9D0F0C82C864B1D00ABA14E /* BrandsCollectionCell.swift in Sources */,
+				C662651C2C86597D003D317F /* AboutViewController.swift in Sources */,
 				C66E1F7D2C8511B7001127F6 /* ShoppingCartViewModel.swift in Sources */,
 				A94A12152C84D06D00AE0E09 /* AppDelegate.swift in Sources */,
 				C66E1F792C8511A3001127F6 /* ShoppingCartViewController.swift in Sources */,
