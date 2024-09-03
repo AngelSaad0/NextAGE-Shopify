@@ -21,7 +21,7 @@
         <!--Navigation Controller-->
         <scene sceneID="FFO-2q-C2N">
             <objects>
-                <navigationController id="fob-ML-Zno" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavigationController" id="fob-ML-Zno" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CA0-mm-7dJ">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
