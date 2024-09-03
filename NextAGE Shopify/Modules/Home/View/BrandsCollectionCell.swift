@@ -11,12 +11,11 @@ class BrandsCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var brandBackground: UIView!
     @IBOutlet weak var brandImg: UIImageView!
-    static func nib()->UINib{
-        return UINib(nibName: "BrandsCollectionViewCell", bundle: nil)
-    }
+   
     override func awakeFromNib() {
         super.awakeFromNib()
         updatUI()
+        brandBackground.applyShadow()
     }
     func updatUI(){
         brandBackground.layer.borderColor = UIColor.black.cgColor
