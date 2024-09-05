@@ -35,12 +35,12 @@ class ShoppingCartViewController: UIViewController {
         for product in dummyData {
             sum += Double(product.productPrice) ?? 0.0
         }
-        subTotalLabel.text = "Sub Total: " + sum.formatted() + " EGP"
+        subTotalLabel.text = "Subtotal: " + sum.formatted() + " EGP"
     }
     
     @IBAction func checkoutButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Payment", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "PaymentViewController")
+        let storyboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "DiscountViewController")
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
