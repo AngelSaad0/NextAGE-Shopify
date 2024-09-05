@@ -91,6 +91,22 @@ class NetworkManager {
             print("Response Data: \(String(data: responseData, encoding: .utf8) ?? "")")
         }
     }
+//    func createCustomer(firstName: String, lastName: String, email: String, phone: String, password: String, completion: @escaping (CustomerModel?) -> Void) {
+//        let parameters: Parameters = [
+//            "customer": [
+//                "first_name": firstName,
+//                "last_name": lastName,
+//                "email": email,
+//                "phone": phone,
+//                "verified_email": true,
+//                "password": password
+//            ]
+//        ]
+//        postData(to: url, responseType: Customer.self, parameters: parameters) { response in
+//            completion(response?.customer)
+//        }
+//    }
+
 }
  
 

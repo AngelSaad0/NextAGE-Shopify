@@ -7,6 +7,11 @@
 
 import UIKit
 extension UIViewController {
+
+    func pushViewController(storyboard:String = "Main",vcIdentifier:String, withNav nav: UINavigationController?){
+        let viewController = UIStoryboard(name: storyboard, bundle: nil).instantiateViewController(withIdentifier:vcIdentifier)
+        nav?.pushViewController(viewController, animated: true)
+    }
     func setupKeyboardDismissal() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
