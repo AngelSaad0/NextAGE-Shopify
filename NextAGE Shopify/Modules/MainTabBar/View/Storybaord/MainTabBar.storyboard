@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FfI-vM-udm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FfI-vM-udm">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -87,7 +87,7 @@
             </objects>
             <point key="canvasLocation" x="-633" y="130"/>
         </scene>
-        <!--Next AGe-->
+        <!--NextAGE-->
         <scene sceneID="wN9-Hp-Qg4">
             <objects>
                 <viewController storyboardIdentifier="SearchViewController" id="9Lp-uA-jis" customClass="SearchViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
@@ -177,7 +177,7 @@
                             <constraint firstItem="W4E-S1-n8q" firstAttribute="trailing" secondItem="dto-83-IGL" secondAttribute="trailing" constant="16" id="sg1-6b-TUd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Next AGe" id="sEI-vc-NIF"/>
+                    <navigationItem key="navigationItem" title="NextAGE" id="sEI-vc-NIF"/>
                     <connections>
                         <outlet property="productTableView" destination="dto-83-IGL" id="yiH-hy-eaP"/>
                         <outlet property="searchBar" destination="fPi-MJ-gJX" id="aOo-PM-GlR"/>

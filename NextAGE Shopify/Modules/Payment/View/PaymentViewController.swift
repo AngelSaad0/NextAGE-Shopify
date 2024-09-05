@@ -69,12 +69,7 @@ extension PaymentViewController: UITableViewDataSource {
         return cell
     }
     
-    
-}
-
-extension PaymentViewController: UICollectionViewDelegateFlowLayout {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 74
     }
-    
 }

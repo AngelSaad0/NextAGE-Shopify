@@ -15,9 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let storyboard = UIStoryboard(name: "MainTabBar", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "MainTabBarNavigationController")
-        window?.rootViewController = viewController
+        let storyboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ShoppingCartVC")
+        window?.rootViewController = UINavigationController(rootViewController: viewController)
         window?.makeKeyAndVisible()
     }
 

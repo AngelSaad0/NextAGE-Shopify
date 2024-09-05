@@ -71,6 +71,9 @@
 		C68C4EC62C878CBE0040DF87 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4EC52C878CBE0040DF87 /* NetworkHelper.swift */; };
 		C68C4EDF2C87A6B00040DF87 /* ShopfiyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4EDE2C87A6B00040DF87 /* ShopfiyAPI.swift */; };
 		C68C4EE12C87A6D40040DF87 /* BrandsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4EE02C87A6D40040DF87 /* BrandsCollection.swift */; };
+		C6B78B7B2C8A117100889849 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B78B782C8A117100889849 /* AddressViewController.swift */; };
+		C6B78B7C2C8A117100889849 /* DiscountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B78B792C8A117100889849 /* DiscountViewController.swift */; };
+		C6B78B7D2C8A117100889849 /* AddAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B78B7A2C8A117100889849 /* AddAddressViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +144,9 @@
 		C68C4EC52C878CBE0040DF87 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		C68C4EDE2C87A6B00040DF87 /* ShopfiyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopfiyAPI.swift; sourceTree = "<group>"; };
 		C68C4EE02C87A6D40040DF87 /* BrandsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandsCollection.swift; sourceTree = "<group>"; };
+		C6B78B782C8A117100889849 /* AddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
+		C6B78B792C8A117100889849 /* DiscountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountViewController.swift; sourceTree = "<group>"; };
+		C6B78B7A2C8A117100889849 /* AddAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAddressViewController.swift; sourceTree = "<group>"; };
 		DC663D34942106885BA9D339 /* Pods_NextAGE_Shopify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextAGE_Shopify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -265,10 +271,10 @@
 		C64C337E2C8741F500EF1928 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C64C337A2C8741F500EF1928 /* Storyboard */,
-				C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */,
-				C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */,
 				C64C337D2C8741F500EF1928 /* PaymentViewController.swift */,
+				C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */,
+				C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */,
+				C64C337A2C8741F500EF1928 /* Storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -472,6 +478,9 @@
 			children = (
 				C66E1F782C8511A3001127F6 /* ShoppingCartViewController.swift */,
 				C67432872C863CE6001A0753 /* ProductCell.swift */,
+				C6B78B792C8A117100889849 /* DiscountViewController.swift */,
+				C6B78B782C8A117100889849 /* AddressViewController.swift */,
+				C6B78B7A2C8A117100889849 /* AddAddressViewController.swift */,
 				C66E1F772C851192001127F6 /* Storyboard */,
 			);
 			path = View;
@@ -719,6 +728,7 @@
 				C67432942C863F35001A0753 /* SettingsViewModel.swift in Sources */,
 				A970BF032C8780950082ED45 /* UICollectionView+Extension.swift in Sources */,
 				A970BF282C87D2940082ED45 /* UIViewController+Extension.swift in Sources */,
+				C6B78B7D2C8A117100889849 /* AddAddressViewController.swift in Sources */,
 				A970BF2C2C87F3AF0082ED45 /* Products.swift in Sources */,
 				A9D0F0C62C864B1D00ABA14E /* adsModel.swift in Sources */,
 				A970BF2A2C87D3070082ED45 /* ConnectivityService.swift in Sources */,
@@ -733,6 +743,7 @@
 				C674326E2C863693001A0753 /* AuthOptionsView.swift in Sources */,
 				C68C4EDF2C87A6B00040DF87 /* ShopfiyAPI.swift in Sources */,
 				A94A12312C84E5CD00AE0E09 /* SignupViewController.swift in Sources */,
+				C6B78B7B2C8A117100889849 /* AddressViewController.swift in Sources */,
 				A9D0F0C82C864B1D00ABA14E /* BrandsCollectionCell.swift in Sources */,
 				C662651C2C86597D003D317F /* AboutViewController.swift in Sources */,
 				A970BF0B2C8781070082ED45 /* BrandsViewController.swift in Sources */,
@@ -745,6 +756,7 @@
 				C67432882C863CE6001A0753 /* ProductCell.swift in Sources */,
 				A95F17CB2C88F50C001FF2EF /* SearchViewController.swift in Sources */,
 				A94A12172C84D06D00AE0E09 /* SceneDelegate.swift in Sources */,
+				C6B78B7C2C8A117100889849 /* DiscountViewController.swift in Sources */,
 				C64C33842C8741F500EF1928 /* PaymentMethodCell.swift in Sources */,
 				C66E1F882C8512C6001127F6 /* placeholder3.swift in Sources */,
 				A9D0F0C72C864B1D00ABA14E /* AdsCollectionCell.swift in Sources */,
