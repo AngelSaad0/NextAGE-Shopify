@@ -8,7 +8,7 @@
 import UIKit
 
 class CategoriesCollectionCell: UICollectionViewCell {
-
+    
     @IBOutlet var imageBackground: UIView!
     @IBOutlet var productImage: UIImageView!
     @IBOutlet var productTitle: UILabel!
@@ -23,10 +23,13 @@ class CategoriesCollectionCell: UICollectionViewCell {
         imageBackground.addBorderView(color: Colors.C191919.rawValue, width: 1)
         imageBackground.applyShadow()
     }
-    func configure(with model: adsModel) {
-        productImage.image = UIImage(named: model.image)
-
+    func configure(with model: Product) {
+        productImage.kf.setImage(with: URL(string: model.image.src),placeholder: UIImage(named: "brand1"))
+        productTitle.text = model.vendor
+        productPrice.text = model.variants[0].price
+        productDetails.text = model.title.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
+        
     }
-
-
+    
+    
 }
