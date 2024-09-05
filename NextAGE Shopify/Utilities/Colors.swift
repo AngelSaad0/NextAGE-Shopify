@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 enum Colors:String {
-    case none = ""
     
+    case none = ""
     case C575757 = "#575757"
     case C0079FB = "#0079FB"
     case C707070 = "#707070"
