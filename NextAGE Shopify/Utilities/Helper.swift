@@ -41,7 +41,7 @@ public func displayMessage(message: String,buttonTitle:String, isError: Bool, ha
 }
 
 
-@MainActor public func displayMessage(massage:String , isError: Bool) {
+@MainActor public func displayMessage(massage:VaildMassage , isError: Bool) {
     let view = MessageView.viewFromNib(layout: .cardView)
     if isError == true {
         view.configureTheme(.error)
@@ -51,7 +51,7 @@ public func displayMessage(message: String,buttonTitle:String, isError: Bool, ha
         view.alpha = 0.8
     }
     view.titleLabel?.isHidden = true
-    view.bodyLabel?.text = massage
+    view.bodyLabel?.text = massage.rawValue
     view.titleLabel?.textColor = UIColor.white
     view.bodyLabel?.textColor = UIColor.white
     view.button?.isHidden = true

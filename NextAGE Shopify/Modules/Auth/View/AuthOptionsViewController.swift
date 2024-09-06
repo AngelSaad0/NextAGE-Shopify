@@ -8,34 +8,44 @@
 import UIKit
 import AVFoundation
 class AuthOptionsViewController: UIViewController {
+    // MARK: -  IBOutlet
+    @IBOutlet var signInButton: UIButton!
+    @IBOutlet var signUpButton: UIButton!
+    // MARK: -  properties
+    private var networkManager: NetworkManager
+    private var connectivityService: ConnectivityServiceProtocol
 
-    @IBOutlet var skipBtn: UIBarButtonItem!
-    @IBOutlet var singUpBtn: UIButton!
-    
-    @IBOutlet var vedioLayerView: UIView!
-    @IBOutlet var longInBtn: UIButton!
+    // MARK: - Required init
+    required init?(coder: NSCoder) {
+        networkManager = NetworkManager()
+        connectivityService = ConnectivityService.shared
+        super.init(coder: coder)
+    }
+    // MARK: -  View Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = skipBtn
-        playVedio()
+        updateUI()
     }
-    
-    func playVedio() {
-        guard let  path = Bundle.main.path(forResource: "intro", ofType: "mp4") else {
-            print(Bundle.main.bundlePath)
-            print("no vedio")
-            return
-        }
-        let player = AVPlayer(url: URL(fileURLWithPath: path))
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = self.view.bounds
-        playerLayer.videoGravity = .resizeAspectFill
-        self.vedioLayerView.layer.addSublayer(playerLayer)
-        self.view.insertSubview(vedioLayerView, at: 0)
 
-        player.play()
-   
-        
+    // MARK: -  private method
+    private func updateUI() {
+        signInButton.addCornerRadius(radius: 16)
+        signUpButton.addCornerRadius(radius: 16)
+    }
+    // MARK: -  Action Button
+    @IBAction func skipButtonClicked(_ sender: UIButton) {
+        UserDefaultManager.shared.continueAsAGuest = true
+        UserDefaultManager.shared.storeData()
+        UIWindow.setRootViewController(storyboard:"MainTabBar", vcIdentifier : "MainTabBarNavigationController")
+
+    }
+
+    @IBAction func signInButtonClicked(_ sender: UIButton) {
+        pushViewController(vcIdentifier: "SignInViewController", withNav: navigationController)
+    }
+
+    @IBAction func signUpButtonClicked(_ sender: UIButton) {
+        pushViewController(vcIdentifier: "SignUpViewController", withNav: navigationController)
     }
 
 }

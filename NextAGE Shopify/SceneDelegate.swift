@@ -10,14 +10,16 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let storyboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "ShoppingCartVC")
-        window?.rootViewController = UINavigationController(rootViewController: viewController)
+        let viewController: UIViewController
+        if UserDefaultManager.shared.continueAsAGuest || UserDefaultManager.shared.isLogin {
+            viewController = UIStoryboard(name: "MainTabBar", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarNavigationController")
+        } else {
+            viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AuthOptionsNavigationController")
+        }
+        window?.rootViewController = viewController
         window?.makeKeyAndVisible()
     }
 
