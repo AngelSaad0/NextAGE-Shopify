@@ -18,6 +18,7 @@ enum ShopifyAPI {
     case products
     case orders
     case order(id: String)
+    case newCustomer
 
     private var path: String {
         switch self {
@@ -29,7 +30,10 @@ enum ShopifyAPI {
             return "orders.json"
         case .order(let id):
             return "orders/\(id).json"
+        case .newCustomer:
+            return "customers.json?since_id=1"
         }
+        
     }
 
     func shopifyURLString() -> String {

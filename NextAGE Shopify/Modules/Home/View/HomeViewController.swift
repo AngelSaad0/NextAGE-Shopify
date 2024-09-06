@@ -122,7 +122,6 @@ class HomeViewController: UIViewController {
     }
     
     private func showNotLoggedInAlert() {
-       
         showAlert(
             title: "Not Logged In",
             message: "Please log in to access the coupon.",

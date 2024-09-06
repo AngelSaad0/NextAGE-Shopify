@@ -11,11 +11,12 @@ class SignInViewController: UIViewController {
     // MARK: - IBOutlet
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var emailTextField: UITextField!
-    @IBOutlet var passwordTextField: UIView!
+    @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var passwordView: UIView!
     @IBOutlet var emailView: UIView!
-    
-
+    @IBOutlet var hidePasswordButton: UIButton!
+    // MARK: -  properties
+    var isSecurePasswordText = true
     // MARK: -  View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,12 @@ class SignInViewController: UIViewController {
     }
 
     // MARK: -  Action
+    @IBAction func hidePasswordButtonClicked(_ sender: UIButton) {
+        isSecurePasswordText.toggle()
+        hidePasswordButton.setImage(UIImage(systemName: isSecurePasswordText ? ("eye.slash"):("eye")), for:.normal)
+        passwordTextField.isSecureTextEntry = isSecurePasswordText
+
+    }
     @IBAction func loginButtonClicked(_ sender: UIButton) {
     }
 
