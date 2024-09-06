@@ -18,6 +18,7 @@ class SignInViewController: UIViewController {
     // MARK: -  properties
     var isSecurePasswordText = true
     private var networkManager: NetworkManager
+    private var userDefaultManager: UserDefaultManager
     private var connectivityService: ConnectivityServiceProtocol
     private var email: String?
     private var password: String?
@@ -30,6 +31,7 @@ class SignInViewController: UIViewController {
     // MARK: - Required init
     required init?(coder: NSCoder) {
         networkManager = NetworkManager()
+        userDefaultManager = UserDefaultManager.shared
         connectivityService = ConnectivityService.shared
         super.init(coder: coder)
     }
@@ -47,11 +49,44 @@ class SignInViewController: UIViewController {
         password = passwordTextField.text?.trimmingCharacters(in: .whitespaces)
     }
     
+    private func saveToUserDefaults(customer: CustomerInfo) {
+        userDefaultManager.isLogin = true
+        userDefaultManager.name = (customer.firstName ?? "") + " " + (customer.lastName ?? "")
+        userDefaultManager.email = customer.email ?? ""
+        userDefaultManager.password = customer.tags ?? ""
+        userDefaultManager.userID = customer.id ?? 0
+        if let draftOrderIDs = customer.note?.components(separatedBy: ","), draftOrderIDs.count == 2 {
+            userDefaultManager.shoppingCartID = Int(draftOrderIDs[0]) ?? 0
+            userDefaultManager.wishlistID = Int(draftOrderIDs[1]) ?? 0
+        }
+        userDefaultManager.storeData()
+    }
+    
     private func fetchAllCustomers(compilation: @escaping ([CustomerInfo]?) -> Void) {
         let urlString = ShopifyAPI.customers.shopifyURLString()
         networkManager.fetchData(from: urlString, responseType: Customers.self) { result in
             compilation(result?.customers)
         }
+    }
+    
+    private func validateLoginFields() -> Bool {
+        if emailTextField.text?.trimmingCharacters(in: .whitespaces) == "" {
+            displayMessage(massage: .emailEmpty, isError: true)
+            return false
+        }
+        if !isValidMobileOrEmail(emailTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""){
+            displayMessage(massage: .emailValid, isError: true)
+            return false
+        }
+        if passwordTextField.text?.trimmingCharacters(in: .whitespaces) == "" {
+            displayMessage(massage: .passwordEmpty, isError: true)
+            return false
+        }
+        if !isValidPassword(passwordTextField.text?.trimmingCharacters(in: .whitespaces) ?? "") {
+            displayMessage(massage: .passwordVaild, isError: true)
+            return false
+        }
+        return true
     }
     
     private func checkUserAuth() {
@@ -77,9 +112,12 @@ class SignInViewController: UIViewController {
                     return
                 }
                 
-                displayMessage(massage: .succeses, isError: false)
-#warning("copy customer info and shopping and wishlist IDs to core data and navigate to home view")
-
+                self.saveToUserDefaults(customer: foundCustomer!)
+                
+                DispatchQueue.main.async {
+                    UIWindow.setRootViewController(storyboard: "MainTabBar", vcIdentifier: "MainTabBarNavigationController")
+                    displayMessage(massage: .successLogin, isError: false)
+                }
             }
         }
     }
@@ -95,12 +133,10 @@ class SignInViewController: UIViewController {
         
         connectivityService.checkInternetConnection { [weak self] isConnected in
             if isConnected {
-//                if self?.validateRegisterFields() ?? false {
+                if self?.validateLoginFields() ?? false {
                     self?.copyEnteredFields()
-                    
                     self?.checkUserAuth()
-                    
-//                }
+                }
             } else {
                 self?.showNoInternetAlert()
             }
@@ -119,8 +155,7 @@ class SignInViewController: UIViewController {
 
 
     @IBAction func guestButtonClicked(_ sender: UIButton) {
-#warning("uncomment user default")
-        // UserDefaultManager.shared.continueAsAGuest = true
+        UserDefaultManager.shared.continueAsAGuest = true
         UserDefaultManager.shared.storeData()
         UIWindow.setRootViewController(storyboard:"MainTabBar", vcIdentifier : "MainTabBarNavigationController")
 

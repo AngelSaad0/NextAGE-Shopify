@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -497,10 +497,10 @@
                                                                                                 </constraints>
                                                                                             </imageView>
                                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hah-j4-yIG">
-                                                                                                <rect key="frame" x="30" y="5" width="305.66666666666669" height="16"/>
+                                                                                                <rect key="frame" x="30" y="5.6666666666666856" width="305.66666666666669" height="15"/>
                                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                                             </textField>
                                                                                         </subviews>
                                                                                     </stackView>
@@ -526,10 +526,10 @@
                                                                                                 </constraints>
                                                                                             </imageView>
                                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re type password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hPM-qJ-fwm">
-                                                                                                <rect key="frame" x="30" y="5" width="305.66666666666669" height="16"/>
+                                                                                                <rect key="frame" x="30" y="5.6666666666666856" width="305.66666666666669" height="15"/>
                                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                                             </textField>
                                                                                         </subviews>
                                                                                     </stackView>

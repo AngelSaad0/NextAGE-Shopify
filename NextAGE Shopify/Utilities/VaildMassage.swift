@@ -21,7 +21,8 @@ public enum VaildMassage: String {
    case mobileVaild = "mobile not vaild"
    case mobileEmpty = "mobile is empty"
    case termsConditions = "agree for term and conditions"
-   case succeses = "Succeses login"
+   case successLogin = "LoggedIn Successfully"
+   case successRegister = "Registered Successfully"
 
    case checkingEmailFail = "Error checking if email not already registered"
    case emailExist = "Entered email already exists"

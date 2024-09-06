@@ -18,6 +18,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet var rePasswordTextField: UITextField!
     // MARK: -  Properties
     private var networkManager: NetworkManager
+    private var userDefaultManager: UserDefaultManager
     private var connectivityService: ConnectivityServiceProtocol
     private var customer: CustomerInfo?
     private var firstName: String?
@@ -25,27 +26,24 @@ class SignUpViewController: UIViewController {
     private var email: String?
     private var password: String?
     
-    private var shoppingCartID: Int?
+    private var userID: Int?
     private var wishlistID: Int?
-    private var note: String?
+    private var shoppingCartID: Int?
 
     // MARK: -  View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        loadCustomerData()
     }
     // MARK: - Required init
     required init?(coder: NSCoder) {
         networkManager = NetworkManager()
+        userDefaultManager = UserDefaultManager.shared
         connectivityService = ConnectivityService.shared
         super.init(coder: coder)
     }
 
     // MARK: -  private method
-    private func loadCustomerData() {
-    }
-
     private func updateUI(){
         title = "Sign Up"
         registerButton.addCornerRadius(radius: 16)
@@ -54,18 +52,29 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    private func copyEnteredFields() {
+        firstName = firstNameTextField.text?.trimmingCharacters(in: .whitespaces)
+        lastName = secondNameTextField.text?.trimmingCharacters(in: .whitespaces)
+        email = emailTextField.text?.trimmingCharacters(in: .whitespaces).lowercased()
+        password = passwordTextField.text?.trimmingCharacters(in: .whitespaces)
+    }
+    
+    private func saveToUserDefaults() {
+        userDefaultManager.isLogin = true
+        userDefaultManager.name = (firstName ?? "") + " " + (lastName ?? "")
+        userDefaultManager.email = email ?? ""
+        userDefaultManager.password = password ?? ""
+        userDefaultManager.userID = userID ?? 0
+        userDefaultManager.wishlistID = wishlistID ?? 0
+        userDefaultManager.shoppingCartID = shoppingCartID ?? 0
+        userDefaultManager.storeData()
+    }
+    
     private func fetchAllCustomers(compilation: @escaping ([CustomerInfo]?) -> Void) {
         let urlString = ShopifyAPI.customers.shopifyURLString()
         networkManager.fetchData(from: urlString, responseType: Customers.self) { result in
             compilation(result?.customers)
         }
-    }
-    
-    private func copyEnteredFields() {
-        firstName = firstNameTextField.text?.trimmingCharacters(in: .whitespaces)
-        lastName = secondNameTextField.text?.trimmingCharacters(in: .whitespaces)
-        email = emailTextField.text?.trimmingCharacters(in: .whitespaces)
-        password = passwordTextField.text?.trimmingCharacters(in: .whitespaces)
     }
     
     private func createNewCustomer() {
@@ -96,9 +105,7 @@ class SignUpViewController: UIViewController {
             )
             
             // encoded customer
-            let jsonEncoder = JSONEncoder()
-//            jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
-            guard let encodedCustomer = try? jsonEncoder.encode(self.customer) else {
+            guard let encodedCustomer = try? JSONEncoder().encode(self.customer) else {
                 displayMessage(massage: .encodingFail, isError: true)
                 return
             }
@@ -113,6 +120,8 @@ class SignUpViewController: UIViewController {
                     displayMessage(massage: .customerCreationFail, isError: true)
                     return
                 }
+                self.userID = createdCustomer.id
+                
                 self.createShoppingCartAndWishlist { result in
                     guard let (cartID, wishID) = result else {
                         displayMessage(massage: .draftsCreationFail, isError: true)
@@ -130,10 +139,18 @@ class SignUpViewController: UIViewController {
                     self.networkManager.updateData(at: ShopifyAPI.customer(id: String(createdCustomer.id ?? 0)).shopifyURLString(), with: note)
                 }
                 
-#warning("copy customer info and shopping and wishlist IDs to core data and navigate to home view")
                 print("Successfully created new Customer")
-                displayMessage(massage: .succeses, isError: false)
                 print(createdCustomer)
+                
+                DispatchQueue.global().async {
+                    sleep(3)
+                    self.saveToUserDefaults()
+                }
+                
+                DispatchQueue.main.async {
+                    UIWindow.setRootViewController(storyboard: "MainTabBar", vcIdentifier: "MainTabBarNavigationController")
+                    displayMessage(massage: .successRegister, isError: false)
+                }
             }
             
         }
@@ -164,30 +181,6 @@ class SignUpViewController: UIViewController {
                 completion((shoppingCartDraft.id, wishlistDraft.id))
             }
         }
-    }
-
-    @IBAction func registerWithGoogle(_ sender: UIButton) {
-        print("Register with Google")
-    }
-    // MARK: -  Action
-    @IBAction func registerButtonClicked(_ sender: UIButton) {
-        connectivityService.checkInternetConnection { [weak self] isConnected in
-            if isConnected {
-                if self?.validateRegisterFields() ?? false {
-                    self?.copyEnteredFields()
-                    
-                    
-                    
-//                    displayMessage(massage: .succeses, isError: false)
-                    self?.createNewCustomer()
-                }
-            } else {
-                self?.showNoInternetAlert()
-            }
-        }
-    }
-    @IBAction func loginButtonClicked(_ sender: UIButton) {
-        pushViewController(vcIdentifier:"SignInViewController" , withNav: navigationController)
     }
 
     private func validateRegisterFields() -> Bool {
@@ -237,6 +230,27 @@ class SignUpViewController: UIViewController {
         }
         return true
     }
+    
+    // MARK: -  Action
+    @IBAction func registerButtonClicked(_ sender: UIButton) {
+        connectivityService.checkInternetConnection { [weak self] isConnected in
+            if isConnected {
+                if self?.validateRegisterFields() ?? false {
+                    self?.copyEnteredFields()
+                    self?.createNewCustomer()
+                }
+            } else {
+                self?.showNoInternetAlert()
+            }
+        }
+    }
+    @IBAction func registerWithGoogle(_ sender: UIButton) {
+        print("Register with Google")
+    }
+    @IBAction func loginButtonClicked(_ sender: UIButton) {
+        pushViewController(vcIdentifier:"SignInViewController" , withNav: navigationController)
+    }
+
 }
 
 

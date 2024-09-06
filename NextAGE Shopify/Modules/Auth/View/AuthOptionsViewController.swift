@@ -34,8 +34,7 @@ class AuthOptionsViewController: UIViewController {
     }
     // MARK: -  Action Button
     @IBAction func skipButtonClicked(_ sender: UIButton) {
-#warning("uncomment user default")
-        // UserDefaultManager.shared.continueAsAGuest = true
+        UserDefaultManager.shared.continueAsAGuest = true
         UserDefaultManager.shared.storeData()
         UIWindow.setRootViewController(storyboard:"MainTabBar", vcIdentifier : "MainTabBarNavigationController")
 

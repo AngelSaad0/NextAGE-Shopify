@@ -10,12 +10,15 @@ class UserDefaultManager {
     static let shared = UserDefaultManager()
     private let pref = UserDefaults.standard
     var continueAsAGuest: Bool = false
-    var islogin: Bool = false
+    var isLogin: Bool = false
     var darkModeEnabled: Bool = false
     
     var name: String = ""
     var email: String = ""
     var password: String = ""
+    var userID: Int = 0
+    var wishlistID: Int = 0
+    var shoppingCartID: Int = 0
     
     private init(){
         getStoredData()
@@ -23,27 +26,36 @@ class UserDefaultManager {
     
     func getStoredData(){
         self.continueAsAGuest = getSharedBool(forKey: "guest")
-        self.islogin  = getSharedBool(forKey: "islogin")
+        self.isLogin  = getSharedBool(forKey: "isLogin")
         self.darkModeEnabled  = getSharedBool(forKey: "darkMode")
         self.name = getSharedString(forKey: "name")
         self.email = getSharedString(forKey: "email")
         self.password = getSharedString(forKey: "password")
+        self.userID = getSharedInt(forKey: "userID")
+        self.wishlistID = getSharedInt(forKey: "wishlistID")
+        self.shoppingCartID = getSharedInt(forKey: "shoppingCartID")
     }
     func storeData(){
         setSharedValue("guest", value: continueAsAGuest)
-        setSharedValue("islogin", value: islogin)
+        setSharedValue("isLogin", value: isLogin)
         setSharedValue("darkMode",value: darkModeEnabled)
         setSharedValue("name", value: name)
         setSharedValue("email", value: email)
         setSharedValue("password", value: password)
+        setSharedValue("userID", value: userID)
+        setSharedValue("wishlistID", value: wishlistID)
+        setSharedValue("shoppingCartID", value: shoppingCartID)
     }
     func logout(){
         removeValue(forKey: "guest")
-        removeValue(forKey: "islogin")
+        removeValue(forKey: "isLogin")
         removeValue(forKey: "darkMode")
         removeValue(forKey: "name")
         removeValue(forKey: "email")
         removeValue(forKey: "password")
+        removeValue(forKey: "userID")
+        removeValue(forKey: "wishlistID")
+        removeValue(forKey: "shoppingCartID")
     }
     
     private func setSharedValue(_ key: String, value: Any) {
