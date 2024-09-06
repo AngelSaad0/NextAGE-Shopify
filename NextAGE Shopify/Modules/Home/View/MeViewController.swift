@@ -9,18 +9,19 @@ import UIKit
 
 class MeViewController: UIViewController {
     // MARK: -  @IBOutlet
+
+    @IBOutlet var logInStack: UIStackView!
     @IBOutlet weak var userGreetingLabel: UILabel!
     @IBOutlet weak var ordersListTableView: UITableView!
     @IBOutlet weak var wishlistCollectionView: UICollectionView!
     @IBOutlet weak var notLoggedInView: UIView!
     @IBOutlet var registerButton: UIButton!
     @IBOutlet var logInButton: UIButton!
-    @IBOutlet var viewWishListButton: UIButton!
-    @IBOutlet var viewMyOrderButton: UIButton!
 
     // MARK: -  Properties
-    private var networkManager: NetworkManager
-    private var connectivityService: ConnectivityServiceProtocol
+    private var networkManager:NetworkManager
+    private var userDefaultManager:UserDefaultManager
+    private var connectivityService:ConnectivityServiceProtocol
     var orderListResult: Orders?
     var wishListResult: [LineItem] = []
     var currentCustomerId: Int?
@@ -38,19 +39,20 @@ class MeViewController: UIViewController {
     // MARK: - Required init
     required init?(coder: NSCoder) {
         networkManager = NetworkManager()
+        userDefaultManager = UserDefaultManager.shared
         connectivityService = ConnectivityService.shared
         super.init(coder: coder)
     }
     private func updateUI() {
+        isUserLoggedIn = userDefaultManager.isLogin
         registerButton.addCornerRadius(radius: 12)
         logInButton.addCornerRadius(radius: 12)
         wishlistCollectionView.register(UINib(nibName: "CategoriesCollectionCell", bundle: nil), forCellWithReuseIdentifier: "CategoriesCollectionCell")
     }
-
     // MARK: -  private Method
     private func getOrderListData() {
         if (orderListResult?.orders.count  == 0) {
-            ordersListTableView.displayEmptyMessage("No Orders Yet ")
+           // ordersListTableView.displayEmptyMessage("No Orders Yet ")
         } else {
             ordersListTableView.removeEmptyMessage()
         }
@@ -63,12 +65,14 @@ class MeViewController: UIViewController {
             guard let self = self else { return }
             if isConnected {
                 if self.isUserLoggedIn ?? false{
-                    self.userGreetingLabel.text = "Welcome \(self.currentCustomerName ?? "")"
+                    self.logInStack.isHidden = false
                     self.notLoggedInView.isHidden = true
+                    self.userGreetingLabel.text = "Welcome \(self.currentCustomerName ?? "")"
                     self.getOrderListData()
                     self.loadWishlistData()
                 } else {
                     self.notLoggedInView.isHidden = false
+                    self.logInStack.isHidden = true
                 }
             } else {
                 self.showNoInternetAlert()
@@ -76,20 +80,23 @@ class MeViewController: UIViewController {
         }
     }
     // MARK: -  Method
-
     @IBAction func viewAllOrdersClicked(_ sender: UIButton) {
+        pushViewController(storyboard: "MainTabBar", vcIdentifier: "OrderViewController", withNav: navigationController)
 
     }
-
     @IBAction func viewAllWishListClicked(_ sender: UIButton) {
+        #warning("will changed to go to wishlist ")
+        pushViewController(storyboard: "MainTabBar", vcIdentifier: "OrderViewController", withNav: navigationController)
+
     }
 
     @IBAction func logInButtonClicked(_ sender: UIButton) {
-
+        pushViewController(storyboard: "Main", vcIdentifier: "SignInViewController", withNav: navigationController)
     }
-
     @IBAction func registerButtonClicked(_ sender: UIButton) {
-        
+        pushViewController(storyboard: "Main", vcIdentifier: "SignUpViewController", withNav: navigationController)
+
+
     }
     
 
