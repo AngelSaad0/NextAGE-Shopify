@@ -23,5 +23,9 @@ public enum VaildMassage: String {
    case termsConditions = "agree for term and conditions"
    case succeses = "Succeses login"
 
+   case checkingEmailFail = "Error checking if email not already registered"
+   case emailExist = "Entered email already exist"
+   case encodingFail = "Error encoding customer info"
+   case customerCreationFail = "Failed to create new customer"
 }
 

@@ -19,7 +19,11 @@ class SignUpViewController: UIViewController {
     // MARK: -  Properties
     private var networkManager: NetworkManager
     private var connectivityService: ConnectivityServiceProtocol
-    private var customers:CustomerInfo?
+    private var customer: CustomerInfo?
+    private var firstName: String?
+    private var lastName: String?
+    private var email: String?
+    private var password: String?
 
     // MARK: -  View life cycle
     override func viewDidLoad() {
@@ -45,18 +49,74 @@ class SignUpViewController: UIViewController {
             view.addCornerRadius(radius: 8)
         }
     }
-    private func saveCustomerInfo() {
-        customers = CustomerInfo(
-            firstName:firstNameTextField.text?.trimmingCharacters(in: .whitespaces),
-            lastName:secondNameTextField.text?.trimmingCharacters(in: .whitespaces),
-            email: emailTextField.text?.trimmingCharacters(in: .whitespaces),
-            phone: nil,
-            tags:nil,
-            id: nil,
-            validEmail: nil,
-            note: passwordTextField.text?.trimmingCharacters(in: .whitespaces)
-        )
-//        networkManager.postData(to: ShopifyAPI.newCustomer.shopifyURLString(), responseType: <#T##(Decodable & Encodable).Protocol#>, parameters: <#T##Parameters#>, completion: <#T##((Decodable & Encodable)?) -> Void#>)
+    
+    private func fetchAllCustomers(compilation: @escaping ([CustomerInfo]?) -> Void) {
+        let urlString = ShopifyAPI.customers.shopifyURLString()
+        networkManager.fetchData(from: urlString, responseType: Customers.self) { result in
+            compilation(result?.customers)
+        }
+    }
+    
+    private func copyEnteredFields() {
+        firstName = firstNameTextField.text?.trimmingCharacters(in: .whitespaces)
+        lastName = secondNameTextField.text?.trimmingCharacters(in: .whitespaces)
+        email = emailTextField.text?.trimmingCharacters(in: .whitespaces)
+        password = passwordTextField.text?.trimmingCharacters(in: .whitespaces)
+    }
+    
+    private func createNewCustomer() {
+        // check if email already exist
+        fetchAllCustomers { customers in
+            guard let customers = customers else {
+                displayMessage(massage: .checkingEmailFail, isError: true)
+                return
+            }
+            
+            for customer in customers {
+                if customer.email == self.email {
+                    displayMessage(massage: .emailExist, isError: true)
+                    return
+                }
+            }
+            
+            // creating new user
+            self.customer = CustomerInfo(
+                firstName: self.firstName,
+                lastName: self.lastName,
+                email: self.email,
+                phone: nil,
+                tags:nil,
+                id: nil,
+                validEmail: nil,
+                note: self.password
+            )
+            
+            // encoded customer
+            let jsonEncoder = JSONEncoder()
+//            jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
+            guard let encodedCustomer = try? jsonEncoder.encode(self.customer) else {
+                displayMessage(massage: .encodingFail, isError: true)
+                return
+            }
+            guard let jsonCustomer = try? JSONSerialization.jsonObject(with: encodedCustomer) as? [String: Any] else {
+                displayMessage(massage: .encodingFail, isError: true)
+                return
+            }
+            
+            // post new customer to shopify
+            self.networkManager.postData(to: ShopifyAPI.customers.shopifyURLString(), responseType: Customer.self, parameters: ["customer": jsonCustomer]) { result in
+                guard let createdCustomer = result?.customer else {
+                    displayMessage(massage: .customerCreationFail, isError: true)
+                    return
+                }
+#warning("copy customer info to core data and navigate to home view + add shopping and wishlist draft order")
+                print("Successfully created new Customer")
+                displayMessage(massage: .succeses, isError: false)
+                print(createdCustomer)
+            }
+            
+        }
+
     }
 
     @IBAction func registerWithGoogle(_ sender: UIButton) {
@@ -67,8 +127,12 @@ class SignUpViewController: UIViewController {
         connectivityService.checkInternetConnection { [weak self] isConnected in
             if isConnected {
                 if self?.validateRegisterFields() ?? false {
-                    displayMessage(massage: .succeses, isError: false)
-                    self?.saveCustomerInfo()
+                    self?.copyEnteredFields()
+                    
+                    
+                    
+//                    displayMessage(massage: .succeses, isError: false)
+                    self?.createNewCustomer()
                 }
             } else {
                 self?.showNoInternetAlert()
