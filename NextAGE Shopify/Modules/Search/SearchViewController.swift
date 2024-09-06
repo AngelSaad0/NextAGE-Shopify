@@ -46,7 +46,6 @@ class SearchViewController: UIViewController {
     // MARK: -  private Method
     private func setupSearchTextPublisher() {
         searchTextSubject
-            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .removeDuplicates()
             .sink { [weak self] searchText in
                 self?.searchProducts(with: searchText)

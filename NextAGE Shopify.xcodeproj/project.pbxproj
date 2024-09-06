@@ -33,6 +33,9 @@
 		A970BF2A2C87D3070082ED45 /* ConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970BF292C87D3070082ED45 /* ConnectivityService.swift */; };
 		A970BF2C2C87F3AF0082ED45 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970BF2B2C87F3AF0082ED45 /* Products.swift */; };
 		A970BF2E2C88ABE40082ED45 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970BF2D2C88ABE40082ED45 /* Helper.swift */; };
+		A9AB32B22C8BBE4500A3EB88 /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AB32B12C8BBE4500A3EB88 /* Orders.swift */; };
+		A9AB32B52C8BBE7200A3EB88 /* OrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AB32B32C8BBE7200A3EB88 /* OrdersTableViewCell.swift */; };
+		A9AB32B62C8BBE7200A3EB88 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AB32B42C8BBE7200A3EB88 /* MeViewController.swift */; };
 		A9D0F0C62C864B1D00ABA14E /* adsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0C22C864B1D00ABA14E /* adsModel.swift */; };
 		A9D0F0C72C864B1D00ABA14E /* AdsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0C32C864B1D00ABA14E /* AdsCollectionCell.swift */; };
 		A9D0F0C82C864B1D00ABA14E /* BrandsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0C42C864B1D00ABA14E /* BrandsCollectionCell.swift */; };
@@ -106,6 +109,9 @@
 		A970BF292C87D3070082ED45 /* ConnectivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityService.swift; sourceTree = "<group>"; };
 		A970BF2B2C87F3AF0082ED45 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		A970BF2D2C88ABE40082ED45 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		A9AB32B12C8BBE4500A3EB88 /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
+		A9AB32B32C8BBE7200A3EB88 /* OrdersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTableViewCell.swift; sourceTree = "<group>"; };
+		A9AB32B42C8BBE7200A3EB88 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		A9D0F0C22C864B1D00ABA14E /* adsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adsModel.swift; sourceTree = "<group>"; };
 		A9D0F0C32C864B1D00ABA14E /* AdsCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdsCollectionCell.swift; sourceTree = "<group>"; };
 		A9D0F0C42C864B1D00ABA14E /* BrandsCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandsCollectionCell.swift; sourceTree = "<group>"; };
@@ -434,6 +440,8 @@
 			children = (
 				C66E1F702C85115C001127F6 /* HomeViewController.swift */,
 				A9D0F0C32C864B1D00ABA14E /* AdsCollectionCell.swift */,
+				A9AB32B42C8BBE7200A3EB88 /* MeViewController.swift */,
+				A9AB32B32C8BBE7200A3EB88 /* OrdersTableViewCell.swift */,
 				A9D0F0C22C864B1D00ABA14E /* adsModel.swift */,
 				A9D0F0C42C864B1D00ABA14E /* BrandsCollectionCell.swift */,
 				C66E1F6D2C851124001127F6 /* Storyboard */,
@@ -491,6 +499,7 @@
 			isa = PBXGroup;
 			children = (
 				C68C4EE02C87A6D40040DF87 /* BrandsCollection.swift */,
+				A9AB32B12C8BBE4500A3EB88 /* Orders.swift */,
 				A943E1132C8A5A5A00E655C8 /* Customers.swift */,
 				C6B3D69C2C8B32A900063E52 /* DraftOrders.swift */,
 				A970BF2B2C87F3AF0082ED45 /* Products.swift */,
@@ -724,14 +733,17 @@
 				A970BF282C87D2940082ED45 /* UIViewController+Extension.swift in Sources */,
 				A943E1122C8A56BD00E655C8 /* VaildMassage.swift in Sources */,
 				C6B78B7D2C8A117100889849 /* AddAddressViewController.swift in Sources */,
+				A9AB32B62C8BBE7200A3EB88 /* MeViewController.swift in Sources */,
 				A970BF2C2C87F3AF0082ED45 /* Products.swift in Sources */,
 				A9D0F0C62C864B1D00ABA14E /* adsModel.swift in Sources */,
 				A970BF2A2C87D3070082ED45 /* ConnectivityService.swift in Sources */,
+				A9AB32B22C8BBE4500A3EB88 /* Orders.swift in Sources */,
 				C66E1F712C85115C001127F6 /* HomeViewController.swift in Sources */,
 				A970BF2E2C88ABE40082ED45 /* Helper.swift in Sources */,
 				A943E1102C8A3C1000E655C8 /* UIWindow+Extension.swift in Sources */,
 				C67432902C863F11001A0753 /* SettingCell.swift in Sources */,
 				C66E1F652C85108F001127F6 /* MainTabBarController.swift in Sources */,
+				A9AB32B52C8BBE7200A3EB88 /* OrdersTableViewCell.swift in Sources */,
 				C64C33862C8741F500EF1928 /* PaymentViewModel.swift in Sources */,
 				A9D0F0CC2C864B6400ABA14E /* CustomTapBar.swift in Sources */,
 				C68C4EC22C878ADC0040DF87 /* NetworkManager.swift in Sources */,

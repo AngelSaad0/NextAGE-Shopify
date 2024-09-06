@@ -10,6 +10,7 @@ import Combine
 class HomeViewController: UIViewController {
     
     // MARK: - @IBOutlet
+    @IBOutlet var brandViewForTitle: UIView!
     @IBOutlet private weak var brandBackground: UIImageView!
     @IBOutlet private weak var brandsCollection: UICollectionView!
     @IBOutlet private weak var adsCollectionView: UICollectionView!
@@ -44,8 +45,14 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         initializeUIComponents()
         setupBindings()
+        updateUI()
     }
-    
+
+ private func updateUI() {
+     brandViewForTitle.addRoundedRadius(radius: 8)
+
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startTimer()
@@ -122,6 +129,7 @@ class HomeViewController: UIViewController {
     }
     
     private func showNotLoggedInAlert() {
+        
         showAlert(
             title: "Not Logged In",
             message: "Please log in to access the coupon.",
