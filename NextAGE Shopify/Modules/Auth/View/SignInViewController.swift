@@ -17,10 +17,21 @@ class SignInViewController: UIViewController {
     @IBOutlet var hidePasswordButton: UIButton!
     // MARK: -  properties
     var isSecurePasswordText = true
+    private var networkManager: NetworkManager
+    private var connectivityService: ConnectivityServiceProtocol
+    private var email: String?
+    private var password: String?
+
     // MARK: -  View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+    }
+    // MARK: - Required init
+    required init?(coder: NSCoder) {
+        networkManager = NetworkManager()
+        connectivityService = ConnectivityService.shared
+        super.init(coder: coder)
     }
 
     // MARK: -  Privte method
@@ -31,6 +42,48 @@ class SignInViewController: UIViewController {
         passwordView.addCornerRadius(radius: 8)
     }
 
+    private func copyEnteredFields() {
+        email = emailTextField.text?.trimmingCharacters(in: .whitespaces)
+        password = passwordTextField.text?.trimmingCharacters(in: .whitespaces)
+    }
+    
+    private func fetchAllCustomers(compilation: @escaping ([CustomerInfo]?) -> Void) {
+        let urlString = ShopifyAPI.customers.shopifyURLString()
+        networkManager.fetchData(from: urlString, responseType: Customers.self) { result in
+            compilation(result?.customers)
+        }
+    }
+    
+    private func checkUserAuth() {
+        fetchAllCustomers { customers in
+            guard let customers = customers else {
+                displayMessage(massage: .checkingEmailFail, isError: true)
+                return
+            }
+            
+            var foundCustomer: CustomerInfo?
+            for customer in customers {
+                if customer.email == self.email?.lowercased() {
+                    foundCustomer = customer
+                    break
+                }
+            }
+            
+            if foundCustomer == nil {
+                displayMessage(massage: .emailDoesNotExist, isError: true)
+            } else {
+                guard foundCustomer!.tags == self.password else {
+                    displayMessage(massage: .passwordDoesNotMatch, isError: true)
+                    return
+                }
+                
+                displayMessage(massage: .succeses, isError: false)
+#warning("copy customer info and shopping and wishlist IDs to core data and navigate to home view")
+
+            }
+        }
+    }
+    
     // MARK: -  Action
     @IBAction func hidePasswordButtonClicked(_ sender: UIButton) {
         isSecurePasswordText.toggle()
@@ -39,6 +92,20 @@ class SignInViewController: UIViewController {
 
     }
     @IBAction func loginButtonClicked(_ sender: UIButton) {
+        
+        connectivityService.checkInternetConnection { [weak self] isConnected in
+            if isConnected {
+//                if self?.validateRegisterFields() ?? false {
+                    self?.copyEnteredFields()
+                    
+                    self?.checkUserAuth()
+                    
+//                }
+            } else {
+                self?.showNoInternetAlert()
+            }
+        }
+        
     }
 
     @IBAction func registerButtonClicked(_ sender: UIButton) {

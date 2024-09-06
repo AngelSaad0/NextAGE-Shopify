@@ -24,6 +24,10 @@ class SignUpViewController: UIViewController {
     private var lastName: String?
     private var email: String?
     private var password: String?
+    
+    private var shoppingCartID: Int?
+    private var wishlistID: Int?
+    private var note: String?
 
     // MARK: -  View life cycle
     override func viewDidLoad() {
@@ -85,10 +89,10 @@ class SignUpViewController: UIViewController {
                 lastName: self.lastName,
                 email: self.email,
                 phone: nil,
-                tags:nil,
+                tags: self.password,
                 id: nil,
                 validEmail: nil,
-                note: self.password
+                note: ""
             )
             
             // encoded customer
@@ -109,7 +113,24 @@ class SignUpViewController: UIViewController {
                     displayMessage(massage: .customerCreationFail, isError: true)
                     return
                 }
-#warning("copy customer info to core data and navigate to home view + add shopping and wishlist draft order")
+                self.createShoppingCartAndWishlist { result in
+                    guard let (cartID, wishID) = result else {
+                        displayMessage(massage: .draftsCreationFail, isError: true)
+                        return
+                    }
+                    self.shoppingCartID = cartID
+                    self.wishlistID = wishID
+                    
+                    let note: [String: [String: String]] = [
+                        "customer": [
+                            "note":"\(cartID),\(wishID)"
+                        ]
+                    ]
+                    
+                    self.networkManager.updateData(at: ShopifyAPI.customer(id: String(createdCustomer.id ?? 0)).shopifyURLString(), with: note)
+                }
+                
+#warning("copy customer info and shopping and wishlist IDs to core data and navigate to home view")
                 print("Successfully created new Customer")
                 displayMessage(massage: .succeses, isError: false)
                 print(createdCustomer)
@@ -117,6 +138,32 @@ class SignUpViewController: UIViewController {
             
         }
 
+    }
+    
+    private func createShoppingCartAndWishlist(completion: @escaping ((Int, Int)?) -> Void) {
+        let lineItem: [String : Any] =
+        [
+            "title": "Test",
+            "quantity": 1,
+            "price": "0",
+            "properties":[]
+        ]
+        
+        networkManager.postData(to: ShopifyAPI.draftOrders.shopifyURLString(), responseType: DraftOrderWrapper.self, parameters: ["draft_order": ["line_items": [lineItem]]]) { result in
+            guard let shoppingCartDraft = result?.draftOrder else {
+                completion(nil)
+                return
+            }
+            
+            self.networkManager.postData(to: ShopifyAPI.draftOrders.shopifyURLString(), responseType: DraftOrderWrapper.self, parameters: ["draft_order": ["line_items": [lineItem]]]) { result in
+                guard let wishlistDraft = result?.draftOrder else {
+                    completion(nil)
+                    return
+                }
+                
+                completion((shoppingCartDraft.id, wishlistDraft.id))
+            }
+        }
     }
 
     @IBAction func registerWithGoogle(_ sender: UIButton) {

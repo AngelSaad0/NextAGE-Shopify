@@ -24,8 +24,12 @@ public enum VaildMassage: String {
    case succeses = "Succeses login"
 
    case checkingEmailFail = "Error checking if email not already registered"
-   case emailExist = "Entered email already exist"
+   case emailExist = "Entered email already exists"
    case encodingFail = "Error encoding customer info"
    case customerCreationFail = "Failed to create new customer"
+   case draftsCreationFail = "Failed to create ShoppingCart or Wishlist"
+    
+   case emailDoesNotExist = "Entered email does not exist"
+   case passwordDoesNotMatch = "You have entered wrong password"
 }
 
