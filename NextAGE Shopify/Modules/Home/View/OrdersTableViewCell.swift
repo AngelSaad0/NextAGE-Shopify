@@ -24,10 +24,16 @@ class OrdersTableViewCell: UITableViewCell {
         setupView()
 
     }
+    
+    override var isSelected: Bool {
+        didSet {
+            contentView.backgroundColor = isSelected ? UIColor.systemBackground : UIColor.systemBackground
+        }
+    }
 
     // MARK: - View Setup
     private func setupView() {
-     cellBackgroundView.addCornerRadius(radius: 10)
+        cellBackgroundView.addCornerRadius(radius: 10)
         cellBackgroundView.addBorderView(color: Colors.C191919.rawValue, width:0.3)
         cellBackgroundView.applyShadow()
     }

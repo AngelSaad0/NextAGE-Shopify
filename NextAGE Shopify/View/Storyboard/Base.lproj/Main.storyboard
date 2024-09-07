@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DxG-al-cVL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o4g-wP-Gov">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -1884,9 +1884,10 @@ Hassle Free 30 days returns </string>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
-                    <tabBar key="tabBar" contentMode="top" semanticContentAttribute="playback" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="centered" itemSpacing="20" id="gvD-dK-VO6" customClass="CustomTapBar" customModule="NextAGE_Shopify" customModuleProvider="target">
+                    <tabBar key="tabBar" contentMode="top" semanticContentAttribute="playback" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="centered" itemSpacing="20" id="gvD-dK-VO6">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <outlet property="rightBarButton" destination="PQG-Ji-w5Y" id="a0K-0f-dCd"/>
@@ -2294,7 +2295,7 @@ Hassle Free 30 days returns </string>
                                     <size key="itemSize" width="361" height="449"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="15" minY="20" maxX="15" maxY="20"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
                                 <connections>
@@ -2462,7 +2463,7 @@ Hassle Free 30 days returns </string>
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ULR-XG-sbJ">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ULR-XG-sbJ">
                                         <rect key="frame" x="0.0" y="115" width="361" height="168"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -2557,7 +2558,7 @@ Hassle Free 30 days returns </string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="olq-s5-aCx">
-                                <rect key="frame" x="0.0" y="75" width="393" height="727"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="DxG-al-cVL" id="gnH-Dn-NFL"/>
@@ -2569,9 +2570,9 @@ Hassle Free 30 days returns </string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="olq-s5-aCx" firstAttribute="leading" secondItem="0em-be-yep" secondAttribute="leading" id="E2S-Ut-0y6"/>
-                            <constraint firstItem="olq-s5-aCx" firstAttribute="top" secondItem="0em-be-yep" secondAttribute="top" constant="16" id="gkP-wi-rQu"/>
+                            <constraint firstItem="olq-s5-aCx" firstAttribute="top" secondItem="0em-be-yep" secondAttribute="top" id="gkP-wi-rQu"/>
                             <constraint firstItem="0em-be-yep" firstAttribute="trailing" secondItem="olq-s5-aCx" secondAttribute="trailing" id="kCx-ws-gk0"/>
-                            <constraint firstItem="0em-be-yep" firstAttribute="bottom" secondItem="olq-s5-aCx" secondAttribute="bottom" constant="16" id="yHT-WQ-hpv"/>
+                            <constraint firstItem="0em-be-yep" firstAttribute="bottom" secondItem="olq-s5-aCx" secondAttribute="bottom" id="yHT-WQ-hpv"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2582,10 +2583,47 @@ Hassle Free 30 days returns </string>
             </objects>
             <point key="canvasLocation" x="1518" y="1349"/>
         </scene>
+        <!--Wishlist View Controller-->
+        <scene sceneID="cd4-iL-1W0">
+            <objects>
+                <viewController storyboardIdentifier="WishlistViewController" id="gHg-kI-rpl" customClass="WishlistViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v4M-dN-Bh4">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="K4j-RF-FkQ">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LF9-UU-3tQ">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="15" minY="0.0" maxX="15" maxY="20"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="xgP-FM-623"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="K4j-RF-FkQ" firstAttribute="top" secondItem="xgP-FM-623" secondAttribute="top" id="3Vu-Je-vqP"/>
+                            <constraint firstItem="xgP-FM-623" firstAttribute="trailing" secondItem="K4j-RF-FkQ" secondAttribute="trailing" id="VmZ-UV-FLv"/>
+                            <constraint firstItem="K4j-RF-FkQ" firstAttribute="leading" secondItem="xgP-FM-623" secondAttribute="leading" id="pap-Lf-7eC"/>
+                            <constraint firstItem="xgP-FM-623" firstAttribute="bottom" secondItem="K4j-RF-FkQ" secondAttribute="bottom" id="pxy-Qy-pi6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="wishlistCollectionView" destination="K4j-RF-FkQ" id="hqV-dE-hTT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4kf-NH-VnP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2229.770992366412" y="1348.5915492957747"/>
+        </scene>
         <!--Product Details View Controller-->
         <scene sceneID="FWf-ZY-btD">
             <objects>
-                <viewController storyboardIdentifier="id" id="D5p-kh-2u6" customClass="ProductDetailsViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductDetailsViewController" id="D5p-kh-2u6" customClass="ProductDetailsViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pe9-Zu-ACQ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2800,7 +2838,7 @@ Hassle Free 30 days returns </string>
                                                                         <color key="textColor" name="#121212"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UaO-va-wCw">
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UaO-va-wCw">
                                                                         <rect key="frame" x="0.0" y="200" width="361" height="60"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
@@ -2830,7 +2868,7 @@ Hassle Free 30 days returns </string>
                                                                                     <color key="titleColor" name="#121212"/>
                                                                                 </state>
                                                                                 <connections>
-                                                                                    <action selector="viewAllOrdersClicked:" destination="vYa-fi-DXD" eventType="touchUpInside" id="NO6-yG-zHP"/>
+                                                                                    <action selector="viewAllReviewsButtonClicked:" destination="D5p-kh-2u6" eventType="touchUpInside" id="gVG-ov-9vc"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
@@ -2840,7 +2878,7 @@ Hassle Free 30 days returns </string>
                                                                             <constraint firstItem="6yd-OD-3Je" firstAttribute="leading" secondItem="fAi-Wf-LTB" secondAttribute="leading" id="JND-fS-E3V"/>
                                                                         </constraints>
                                                                     </stackView>
-                                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="M2V-EM-Z3e">
+                                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="M2V-EM-Z3e">
                                                                         <rect key="frame" x="0.0" y="310" width="361" height="220"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
@@ -3049,6 +3087,37 @@ Hassle Free 30 days returns </string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8V-7e-00K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1410" y="599"/>
+        </scene>
+        <!--All Reviews View Controller-->
+        <scene sceneID="qg3-gg-hPh">
+            <objects>
+                <viewController storyboardIdentifier="AllReviewsViewController" id="xDA-lO-mb2" customClass="AllReviewsViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XON-Yj-eaQ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="au8-Ng-zio">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ea8-35-Jtv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="au8-Ng-zio" firstAttribute="bottom" secondItem="Ea8-35-Jtv" secondAttribute="bottom" id="50U-lN-fat"/>
+                            <constraint firstItem="Ea8-35-Jtv" firstAttribute="bottom" secondItem="au8-Ng-zio" secondAttribute="bottom" id="Cn3-xa-9VT"/>
+                            <constraint firstItem="au8-Ng-zio" firstAttribute="top" secondItem="Ea8-35-Jtv" secondAttribute="top" id="F80-S6-IYi"/>
+                            <constraint firstItem="au8-Ng-zio" firstAttribute="leading" secondItem="Ea8-35-Jtv" secondAttribute="leading" id="bcN-Gv-6ec"/>
+                            <constraint firstItem="Ea8-35-Jtv" firstAttribute="trailing" secondItem="au8-Ng-zio" secondAttribute="trailing" id="hk9-5N-yw4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="allReviewsTableView" destination="au8-Ng-zio" id="ffd-PT-fs8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="62G-pV-a2a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2059" y="599"/>
         </scene>
     </scenes>
     <resources>

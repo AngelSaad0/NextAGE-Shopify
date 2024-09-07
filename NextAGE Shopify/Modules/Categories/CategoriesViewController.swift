@@ -194,6 +194,13 @@ class CategoriesViewController: UIViewController {
 }
 
 // MARK: -  Collection View Data Source and Delegate Methods
+
+extension CategoriesViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+#warning("Move to product details vc")
+    }
+}
+
 extension CategoriesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredOrSortedProducts.count
