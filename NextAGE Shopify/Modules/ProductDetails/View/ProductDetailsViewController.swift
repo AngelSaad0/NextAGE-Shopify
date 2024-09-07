@@ -18,10 +18,16 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var productColorButton: UIButton!
     @IBOutlet weak var productDescriptionTextView: UITextView!
     @IBOutlet var reviewTableView: UITableView!
-   
+
+    @IBOutlet var addToChartButton: UIButton!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addToChartButton.addCornerRadius(radius: 12)
+        productSizeButton.addCornerRadius(radius: 12)
+        productColorButton.addCornerRadius(radius: 12)
+
         productCollectionView.dataSource = self
         productCollectionView.delegate = self
         reviewTableView.dataSource = self

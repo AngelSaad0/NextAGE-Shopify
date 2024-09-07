@@ -10,23 +10,26 @@ import UIKit
 class DiscountViewController: UIViewController {
     var isApplied = false
     
+    @IBOutlet var selectAddressButton: UIButton!
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var discountTextField: UITextField!
-    @IBOutlet weak var applyDiscount: UIButton!
+    @IBOutlet weak var applyDiscountButton: UIButton!
     @IBOutlet weak var subtotalLabel: UILabel!
     @IBOutlet weak var discountLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        selectAddressButton.addCornerRadius(radius: 12)
+        applyDiscountButton.addCornerRadius(radius: 12)
         title = "Review"
         
         productsCollectionView.delegate = self
         productsCollectionView.dataSource = self
         // Do any additional setup after loading the view.
     }
-    
+
+
 
     /*
     // MARK: - Navigation
@@ -40,7 +43,7 @@ class DiscountViewController: UIViewController {
 
     @IBAction func applyDiscountButton(_ sender: Any) {
         isApplied.toggle()
-        applyDiscount.setTitle(isApplied ? "Change" : "Apply", for: .normal)
+        applyDiscountButton.setTitle(isApplied ? "Change" : "Apply", for: .normal)
     }
     @IBAction func selectAddressButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

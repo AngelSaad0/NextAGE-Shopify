@@ -15,9 +15,10 @@ struct DummyProduct {
 }
 
 class ShoppingCartViewController: UIViewController {
-    var dummyData = Array(repeating: DummyProduct(productName: "Adidas Halawany", productInfo: "Black", productPrice: "3197.89", productImage: "shoe.fill"), count: 10)
+    var dummyData = Array(repeating: DummyProduct(productName: "Adidas Classic Adidas Classic Adidas Classic Adidas Classic Adidas Classic Adidas Classic Adidas Classic Adidas Classic", productInfo: "Black", productPrice: "3197.89", productImage: "9"), count: 10)
+
     
-    
+    @IBOutlet var reviewButton: UIButton!
     @IBOutlet weak var subTotalLabel: UILabel!
     @IBOutlet weak var cartTableView: UITableView!
     override func viewDidLoad() {
@@ -28,8 +29,12 @@ class ShoppingCartViewController: UIViewController {
         cartTableView.dataSource = self
 
         calcSubTotal()
+        updateUI()
     }
-    
+    private func updateUI(){
+        reviewButton.addCornerRadius(radius: 12)
+    }
+
     func calcSubTotal() {
         var sum = 0.0
         for product in dummyData {
@@ -75,6 +80,6 @@ extension ShoppingCartViewController: UITableViewDataSource {
 
 extension ShoppingCartViewController: UICollectionViewDelegateFlowLayout {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 124
+        return 180
     }
 }
