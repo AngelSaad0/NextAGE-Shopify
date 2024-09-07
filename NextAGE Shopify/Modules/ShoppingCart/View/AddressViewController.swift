@@ -13,8 +13,8 @@ class AddressViewController: UIViewController {
     @IBOutlet weak var selectPayment: UIButton!
     
     let addresses = [
-        ("Eiffel tower, floor 7", "location.circle.fill"),
-        ("Eiffel tower, floor 9", "location.circle")
+        ("Eiffel tower, floor 7", "gps"),
+        ("Eiffel tower, floor 9", "gps")
     ]
     
     override func viewDidLoad() {
