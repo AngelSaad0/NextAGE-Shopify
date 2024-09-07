@@ -44,6 +44,7 @@ class MeViewController: UIViewController {
         super.init(coder: coder)
     }
     private func updateUI() {
+        ordersListTableView.register(UINib(nibName: "OrdersTableViewCell", bundle: nil), forCellReuseIdentifier: "OrdersTableViewCell")
         isUserLoggedIn = userDefaultManager.isLogin
         registerButton.addCornerRadius(radius: 12)
         logInButton.addCornerRadius(radius: 12)
@@ -52,7 +53,7 @@ class MeViewController: UIViewController {
     // MARK: -  private Method
     private func getOrderListData() {
         if (orderListResult?.orders.count  == 0) {
-           // ordersListTableView.displayEmptyMessage("No Orders Yet ")
+            // ordersListTableView.displayEmptyMessage("No Orders Yet ")
         } else {
             ordersListTableView.removeEmptyMessage()
         }
@@ -85,7 +86,7 @@ class MeViewController: UIViewController {
 
     }
     @IBAction func viewAllWishListClicked(_ sender: UIButton) {
-        #warning("will changed to go to wishlist ")
+#warning("will changed to go to wishlist ")
         pushViewController(storyboard: "Main", vcIdentifier: "OrderViewController", withNav: navigationController)
 
     }
@@ -98,7 +99,7 @@ class MeViewController: UIViewController {
 
 
     }
-    
+
 
 
 }
@@ -129,8 +130,8 @@ extension MeViewController: UICollectionViewDelegate, UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesCollectionCell", for: indexPath) as! CategoriesCollectionCell
-       // let wishlistItem = wishListResult[indexPath.row]
-       // cell.configure(with: wishlistItem)
+        // let wishlistItem = wishListResult[indexPath.row]
+        // cell.configure(with: wishlistItem)
         return cell
     }
 
@@ -138,8 +139,8 @@ extension MeViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let width = collectionView.frame.width / 2 - 18
-//        return CGSize(width: width, height: 200)
+        //        let width = collectionView.frame.width / 2 - 18
+        //        return CGSize(width: width, height: 200)
         return CGSize(width:collectionView.frame.width/2 - 18 , height: collectionView.frame.height)
 
     }
