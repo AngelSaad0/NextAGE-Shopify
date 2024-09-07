@@ -4,13 +4,23 @@
 //
 //  Created by Engy on 9/4/24.
 //
+
 import SwiftMessages
 import Foundation
+
+ func formatDate(_ dateString: String) -> String {
+       let dateFormatter = DateFormatter()
+       dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ" // Adjust according to your date format
+       guard let date = dateFormatter.date(from: dateString) else { return dateString }
+       dateFormatter.dateStyle = .medium
+       dateFormatter.timeStyle = .none
+       return dateFormatter.string(from: date)
+   }
 
 @MainActor
 public func displayMessage(message: String,buttonTitle:String, isError: Bool, handler: (() -> Void)? = nil) {
     let view = MessageView.viewFromNib(layout: .cardView)
-    
+
     if isError {
         view.configureTheme(.error)
         view.alpha = 0.9
@@ -18,22 +28,22 @@ public func displayMessage(message: String,buttonTitle:String, isError: Bool, ha
         view.configureTheme(.success)
         view.alpha = 0.8
     }
-    
+
     view.titleLabel?.isHidden = true
     view.bodyLabel?.text = message
     view.bodyLabel?.textColor = UIColor.white
-    
+
     view.button?.isHidden = false
     view.button?.setTitle(buttonTitle, for: .normal)
     view.button?.setTitleColor(.white, for: .normal)
     view.button?.backgroundColor = .red
     view.button?.layer.cornerRadius = 10
-    
+
     view.buttonTapHandler = { _ in
         SwiftMessages.hide()
         handler?()
     }
-    
+
     var config = SwiftMessages.Config()
     config.presentationStyle = .bottom
     config.shouldAutorotate = true
@@ -98,7 +108,7 @@ public func displayMessage(
     cancelHandler: (() -> Void)? = nil
 ) {
     let view = MessageView.viewFromNib(layout: .cardView)
-    
+
     if isError {
         view.configureTheme(.error)
         view.alpha = 0.9
@@ -106,11 +116,11 @@ public func displayMessage(
         view.configureTheme(.success)
         view.alpha = 0.8
     }
-    
+
     view.titleLabel?.isHidden = true
     view.bodyLabel?.text = message
     view.bodyLabel?.textColor = UIColor.white
-    
+
     // Create and configure "Stop" button
     let stopButton = UIButton(type: .system)
     stopButton.setTitle("Stop", for: .normal)
@@ -123,7 +133,7 @@ public func displayMessage(
         stopHandler?() // Executes the stop handler
     }), for: .touchUpInside)
     view.addSubview(stopButton)
-    
+
     // Create and configure "Cancel" button
     let cancelButton = UIButton(type: .system)
     cancelButton.setTitle("Cancel", for: .normal)
@@ -136,7 +146,7 @@ public func displayMessage(
         cancelHandler?() // Executes the cancel handler
     }), for: .touchUpInside)
     view.addSubview(cancelButton)
-    
+
     // Layout the buttons
     NSLayoutConstraint.activate([
         // Stop Button Constraints
@@ -144,20 +154,22 @@ public func displayMessage(
         stopButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
         stopButton.widthAnchor.constraint(equalToConstant: 80),
         stopButton.heightAnchor.constraint(equalToConstant: 44),
-        
+
         // Cancel Button Constraints
         cancelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
         cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
         cancelButton.widthAnchor.constraint(equalToConstant: 80),
         cancelButton.heightAnchor.constraint(equalToConstant: 44),
-        
+
         // Align buttons horizontally
         stopButton.trailingAnchor.constraint(equalTo: cancelButton.leadingAnchor, constant: -16)
     ])
-    
+
     // SwiftMessages configuration
     var config = SwiftMessages.Config()
     config.presentationStyle = .bottom
     config.shouldAutorotate = true
     SwiftMessages.show(config: config, view: view)
 }
+
+

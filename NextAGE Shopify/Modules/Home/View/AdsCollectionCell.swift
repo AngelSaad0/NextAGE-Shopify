@@ -8,14 +8,14 @@
 import UIKit
 
 class AdsCollectionCell: UICollectionViewCell {
-    
+
     @IBOutlet var addsImg: UIImageView!
-
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         updatUI()
     }
+
     func updatUI(){
         addsImg.addCornerRadius(radius: 10)
     }
