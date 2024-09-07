@@ -8,11 +8,15 @@
 import UIKit
 
 class AddAddressViewController: UIViewController {
+    @IBOutlet var cornerRaduisView:[UIView]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Add Address"
+        for view in cornerRaduisView {
+            view.addCornerRadius(radius: 12)
+        }
         // Do any additional setup after loading the view.
     }
     

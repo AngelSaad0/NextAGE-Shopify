@@ -10,11 +10,12 @@ import UIKit
 class ProductCell: UITableViewCell {
     let maxCount = 5
 
+    @IBOutlet var backgroundViewCell: UIView!
     @IBOutlet weak var countPlus: UIButton!
     @IBOutlet weak var countMinus: UIButton!
     @IBOutlet weak var productCount: UILabel!
     @IBOutlet weak var productPrice: UILabel!
-    @IBOutlet weak var productInfo: UILabel!
+    //@IBOutlet weak var productInfo: UILabel!
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var productImage: UIImageView!
     override func awakeFromNib() {
@@ -26,6 +27,12 @@ class ProductCell: UITableViewCell {
 //        countMinus.layer.borderWidth = 1.0
         
         updateCountingState()
+        updateUI()
+    }
+    func updateUI(){
+        backgroundViewCell.addBorderView(color: Colors.CBFBFBF.rawValue, width: 0.3)
+        backgroundViewCell.addCornerRadius(radius: 12)
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,9 +50,9 @@ class ProductCell: UITableViewCell {
     
     func configCell(with product: DummyProduct) {
         productName.text = product.productName
-        productInfo.text = product.productInfo
+       // productInfo.text = product.productInfo
         productPrice.text = product.productPrice + " EGP"
-        productImage.image = UIImage(systemName: product.productImage)
+        productImage.image = UIImage(named: product.productImage)
     }
     
     func updateCountingState() {
