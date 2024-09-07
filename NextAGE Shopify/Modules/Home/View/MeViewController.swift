@@ -81,12 +81,12 @@ class MeViewController: UIViewController {
     }
     // MARK: -  Method
     @IBAction func viewAllOrdersClicked(_ sender: UIButton) {
-        pushViewController(storyboard: "MainTabBar", vcIdentifier: "OrderViewController", withNav: navigationController)
+        pushViewController(storyboard: "Main", vcIdentifier: "OrderViewController", withNav: navigationController)
 
     }
     @IBAction func viewAllWishListClicked(_ sender: UIButton) {
         #warning("will changed to go to wishlist ")
-        pushViewController(storyboard: "MainTabBar", vcIdentifier: "OrderViewController", withNav: navigationController)
+        pushViewController(storyboard: "Main", vcIdentifier: "OrderViewController", withNav: navigationController)
 
     }
 

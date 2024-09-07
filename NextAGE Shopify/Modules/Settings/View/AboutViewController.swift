@@ -9,9 +9,10 @@ import UIKit
 
 class AboutViewController: UIViewController {
 
+    @IBOutlet weak var backgroundView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        backgroundView.layer.cornerRadius = 20
         // Do any additional setup after loading the view.
     }
     

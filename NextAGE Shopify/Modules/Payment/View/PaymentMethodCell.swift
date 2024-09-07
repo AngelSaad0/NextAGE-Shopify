@@ -25,7 +25,7 @@ class PaymentMethodCell: UITableViewCell {
     
     func config(methodName: String, methodImageName: String) {
         paymentMethodLabel.text = methodName
-        paymentMethodImage.image = UIImage(systemName: methodImageName)
+        paymentMethodImage.image = UIImage(named: methodImageName)
     }
     
     func select() {

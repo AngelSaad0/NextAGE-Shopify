@@ -9,9 +9,10 @@ import UIKit
 
 class PaymentViewController: UIViewController {
     
+    @IBOutlet weak var purchaseButton: UIButton!
     let paymentMethods = [
-        ("Cash on delivery", "banknote"),
-        ("Apple pay", "applelogo")
+        ("Cash on delivery", "cash"),
+        ("Apple pay", "applePay")
     ]
     
     @IBOutlet weak var paymentMethodsTableView: UITableView!
@@ -27,6 +28,8 @@ class PaymentViewController: UIViewController {
         
         paymentMethodsTableView.delegate = self
         paymentMethodsTableView.dataSource = self
+        
+        purchaseButton.addCornerRadius(radius: 12)
         // Do any additional setup after loading the view.
     }
     

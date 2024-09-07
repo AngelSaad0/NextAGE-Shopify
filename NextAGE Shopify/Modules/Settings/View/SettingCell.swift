@@ -22,7 +22,7 @@ class SettingCell: UITableViewCell {
     }
     
     func config(label: String, imageName: String) {
-        settingImage.image = UIImage(systemName: imageName)
+        settingImage.image = UIImage(named: imageName)
         settingLabel.text = label
     }
 

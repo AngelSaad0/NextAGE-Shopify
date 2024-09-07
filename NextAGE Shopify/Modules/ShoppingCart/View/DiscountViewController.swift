@@ -43,7 +43,7 @@ class DiscountViewController: UIViewController {
         applyDiscount.setTitle(isApplied ? "Change" : "Apply", for: .normal)
     }
     @IBAction func selectAddressButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "AddressViewController")
         self.navigationController?.pushViewController(vc, animated: true)
     }

@@ -9,13 +9,14 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     let settings = [
-        ("Address", "mappin.and.ellipse.circle"),
-        ("Currency", "coloncurrencysign.circle"),
-        ("About", "info.circle")
+        ("Address", "gps"),
+        ("Currency", "transfer"),
+        ("About", "information")
     ]
 
     
     @IBOutlet weak var settingsTableView: UITableView!
+    @IBOutlet weak var logoutButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +24,8 @@ class SettingsViewController: UIViewController {
         
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
+        
+        logoutButton.addCornerRadius(radius: 8)
         // Do any additional setup after loading the view.
     }
     
@@ -55,7 +58,7 @@ class SettingsViewController: UIViewController {
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc: UIViewController
         switch indexPath.row {
         case 0:

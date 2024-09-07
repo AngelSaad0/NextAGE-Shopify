@@ -19,6 +19,7 @@ class UserDefaultManager {
     var userID: Int = 0
     var wishlistID: Int = 0
     var shoppingCartID: Int = 0
+    var currency: String = ""
     
     private init(){
         getStoredData()
@@ -34,6 +35,10 @@ class UserDefaultManager {
         self.userID = getSharedInt(forKey: "userID")
         self.wishlistID = getSharedInt(forKey: "wishlistID")
         self.shoppingCartID = getSharedInt(forKey: "shoppingCartID")
+        self.currency = getSharedString(forKey: "currency")
+        if self.currency == "" {
+            self.currency = "USD"
+        }
     }
     func storeData(){
         setSharedValue("guest", value: continueAsAGuest)
@@ -45,6 +50,7 @@ class UserDefaultManager {
         setSharedValue("userID", value: userID)
         setSharedValue("wishlistID", value: wishlistID)
         setSharedValue("shoppingCartID", value: shoppingCartID)
+        setSharedValue("currency", value: currency)
     }
     func logout(){
         removeValue(forKey: "guest")
@@ -56,6 +62,7 @@ class UserDefaultManager {
         removeValue(forKey: "userID")
         removeValue(forKey: "wishlistID")
         removeValue(forKey: "shoppingCartID")
+        removeValue(forKey: "currency")
     }
     
     private func setSharedValue(_ key: String, value: Any) {

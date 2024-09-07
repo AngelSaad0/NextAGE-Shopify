@@ -115,7 +115,7 @@ class SignInViewController: UIViewController {
                 self.saveToUserDefaults(customer: foundCustomer!)
                 
                 DispatchQueue.main.async {
-                    UIWindow.setRootViewController(storyboard: "MainTabBar", vcIdentifier: "MainTabBarNavigationController")
+                    UIWindow.setRootViewController(storyboard: "Main", vcIdentifier: "MainTabBarNavigationController")
                     displayMessage(massage: .successLogin, isError: false)
                 }
             }
@@ -157,7 +157,7 @@ class SignInViewController: UIViewController {
     @IBAction func guestButtonClicked(_ sender: UIButton) {
         UserDefaultManager.shared.continueAsAGuest = true
         UserDefaultManager.shared.storeData()
-        UIWindow.setRootViewController(storyboard:"MainTabBar", vcIdentifier : "MainTabBarNavigationController")
+        UIWindow.setRootViewController(storyboard:"Main", vcIdentifier : "MainTabBarNavigationController")
 
 
     }

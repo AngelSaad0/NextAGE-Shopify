@@ -148,7 +148,7 @@ class SignUpViewController: UIViewController {
                 }
                 
                 DispatchQueue.main.async {
-                    UIWindow.setRootViewController(storyboard: "MainTabBar", vcIdentifier: "MainTabBarNavigationController")
+                    UIWindow.setRootViewController(storyboard: "Main", vcIdentifier: "MainTabBarNavigationController")
                     displayMessage(massage: .successRegister, isError: false)
                 }
             }

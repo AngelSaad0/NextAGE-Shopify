@@ -8,9 +8,17 @@
 import UIKit
 
 class CurrencyViewController: UIViewController {
+    @IBOutlet weak var currencyTableView: UITableView!
+    
+    
+    let userDefaultsManager: UserDefaultManager
     let currencies = ["USD", "EGP", "SAR", "AED"]
     
-    @IBOutlet weak var currencyTableView: UITableView!
+    
+    required init?(coder: NSCoder) {
+        userDefaultsManager = UserDefaultManager.shared
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +45,8 @@ class CurrencyViewController: UIViewController {
 
 extension CurrencyViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
-        print(tableView.cellForRow(at: indexPath)?.textLabel?.text! ?? "")
+        userDefaultsManager.currency = currencies[indexPath.row]
+        userDefaultsManager.storeData()
         self.navigationController?.popViewController(animated: true)
     }
 }
@@ -50,9 +58,16 @@ extension CurrencyViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = currencies[indexPath.row]
+        cell.viewWithTag(3)?.addCornerRadius(radius: 12)
+        cell.viewWithTag(3)?.addBorderView(color: Colors.CBFBFBF.rawValue, width: 0.5)
+        (cell.viewWithTag(1) as! UILabel).text = currencies[indexPath.row]
+        if userDefaultsManager.currency == currencies[indexPath.row] {
+            cell.viewWithTag(2)?.isHidden = false
+        }
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
 }
