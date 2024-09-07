@@ -14,6 +14,7 @@ class OrdersDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "All Orders"
         orderListResult = Orders(orders: [])
         orderTableView.register(UINib(nibName: "OrdersTableViewCell", bundle: nil), forCellReuseIdentifier: "OrdersTableViewCell")
         orderTableView.delegate = self

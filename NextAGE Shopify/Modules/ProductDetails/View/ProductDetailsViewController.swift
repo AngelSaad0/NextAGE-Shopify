@@ -34,9 +34,13 @@ class ProductDetailsViewController: UIViewController {
         reviewTableView.delegate = self
         setProductPhotosCollectionviewLayout()
           
-         
+        reviewTableView.register(UINib(nibName: "ReviewCell", bundle: nil), forCellReuseIdentifier: "ReviewCell")
     }
     
+    
+    @IBAction func viewAllReviewsButtonClicked(_ sender: UIButton) {
+        pushViewController(vcIdentifier: "AllReviewsViewController", withNav: navigationController)
+    }
 }
 
 //MARK: collectionView
@@ -79,14 +83,11 @@ extension ProductDetailsViewController :UICollectionViewDelegate,UICollectionVie
 extension ProductDetailsViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return min(2, 10)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewCell
         return cell
         
         
