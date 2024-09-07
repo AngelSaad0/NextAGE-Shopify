@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D7FF2953AAA35FD3C652648 /* Pods_NextAGE_Shopify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC663D34942106885BA9D339 /* Pods_NextAGE_Shopify.framework */; };
+		8288A222BE029C913ABC395E /* Pods_NextAGE_Shopify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5890898183AD2B19A350B439 /* Pods_NextAGE_Shopify.framework */; };
 		A943E1102C8A3C1000E655C8 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A943E10F2C8A3C1000E655C8 /* UIWindow+Extension.swift */; };
 		A943E1122C8A56BD00E655C8 /* VaildMassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A943E1112C8A56BD00E655C8 /* VaildMassage.swift */; };
 		A943E1142C8A5A5A00E655C8 /* Customers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A943E1132C8A5A5A00E655C8 /* Customers.swift */; };
@@ -34,9 +34,10 @@
 		A970BF2C2C87F3AF0082ED45 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970BF2B2C87F3AF0082ED45 /* Products.swift */; };
 		A970BF2E2C88ABE40082ED45 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970BF2D2C88ABE40082ED45 /* Helper.swift */; };
 		A9AB32B22C8BBE4500A3EB88 /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AB32B12C8BBE4500A3EB88 /* Orders.swift */; };
-		A9AB32B52C8BBE7200A3EB88 /* OrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AB32B32C8BBE7200A3EB88 /* OrdersTableViewCell.swift */; };
 		A9AB32B62C8BBE7200A3EB88 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AB32B42C8BBE7200A3EB88 /* MeViewController.swift */; };
-		A9AB32B82C8BC32400A3EB88 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AB32B72C8BC32400A3EB88 /* OrderViewController.swift */; };
+		A9AB32B82C8BC32400A3EB88 /* OrdersDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AB32B72C8BC32400A3EB88 /* OrdersDetailsViewController.swift */; };
+		A9AB32BB2C8CE3CF00A3EB88 /* OrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AB32B92C8CE3CF00A3EB88 /* OrdersTableViewCell.swift */; };
+		A9AB32BC2C8CE3CF00A3EB88 /* OrdersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9AB32BA2C8CE3CF00A3EB88 /* OrdersTableViewCell.xib */; };
 		A9D0F0C62C864B1D00ABA14E /* adsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0C22C864B1D00ABA14E /* adsModel.swift */; };
 		A9D0F0C72C864B1D00ABA14E /* AdsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0C32C864B1D00ABA14E /* AdsCollectionCell.swift */; };
 		A9D0F0C82C864B1D00ABA14E /* BrandsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0C42C864B1D00ABA14E /* BrandsCollectionCell.swift */; };
@@ -75,7 +76,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3A68950D12B1ACB373B86999 /* Pods-NextAGE Shopify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAGE Shopify.debug.xcconfig"; path = "Target Support Files/Pods-NextAGE Shopify/Pods-NextAGE Shopify.debug.xcconfig"; sourceTree = "<group>"; };
+		5890898183AD2B19A350B439 /* Pods_NextAGE_Shopify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextAGE_Shopify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B814936FAFE1EC6F0998431 /* Pods-NextAGE Shopify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAGE Shopify.release.xcconfig"; path = "Target Support Files/Pods-NextAGE Shopify/Pods-NextAGE Shopify.release.xcconfig"; sourceTree = "<group>"; };
+		A32D851AF21FC5A917918789 /* Pods-NextAGE Shopify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAGE Shopify.debug.xcconfig"; path = "Target Support Files/Pods-NextAGE Shopify/Pods-NextAGE Shopify.debug.xcconfig"; sourceTree = "<group>"; };
 		A943E10F2C8A3C1000E655C8 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		A943E1112C8A56BD00E655C8 /* VaildMassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaildMassage.swift; sourceTree = "<group>"; };
 		A943E1132C8A5A5A00E655C8 /* Customers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customers.swift; sourceTree = "<group>"; };
@@ -104,9 +107,10 @@
 		A970BF2B2C87F3AF0082ED45 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		A970BF2D2C88ABE40082ED45 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		A9AB32B12C8BBE4500A3EB88 /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
-		A9AB32B32C8BBE7200A3EB88 /* OrdersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTableViewCell.swift; sourceTree = "<group>"; };
 		A9AB32B42C8BBE7200A3EB88 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
-		A9AB32B72C8BC32400A3EB88 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		A9AB32B72C8BC32400A3EB88 /* OrdersDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersDetailsViewController.swift; sourceTree = "<group>"; };
+		A9AB32B92C8CE3CF00A3EB88 /* OrdersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersTableViewCell.swift; sourceTree = "<group>"; };
+		A9AB32BA2C8CE3CF00A3EB88 /* OrdersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrdersTableViewCell.xib; sourceTree = "<group>"; };
 		A9D0F0C22C864B1D00ABA14E /* adsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adsModel.swift; sourceTree = "<group>"; };
 		A9D0F0C32C864B1D00ABA14E /* AdsCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdsCollectionCell.swift; sourceTree = "<group>"; };
 		A9D0F0C42C864B1D00ABA14E /* BrandsCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandsCollectionCell.swift; sourceTree = "<group>"; };
@@ -114,7 +118,6 @@
 		A9D0F0CB2C864B6400ABA14E /* CustomTapBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTapBar.swift; sourceTree = "<group>"; };
 		A9D0F0CF2C864B9B00ABA14E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		A9D0F0D12C864BBD00ABA14E /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		B72BC91ED353A326E35BAEEE /* Pods-NextAGE Shopify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAGE Shopify.release.xcconfig"; path = "Target Support Files/Pods-NextAGE Shopify/Pods-NextAGE Shopify.release.xcconfig"; sourceTree = "<group>"; };
 		C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 		C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
 		C64C337D2C8741F500EF1928 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
@@ -143,7 +146,6 @@
 		C6B78B782C8A117100889849 /* AddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		C6B78B792C8A117100889849 /* DiscountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountViewController.swift; sourceTree = "<group>"; };
 		C6B78B7A2C8A117100889849 /* AddAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAddressViewController.swift; sourceTree = "<group>"; };
-		DC663D34942106885BA9D339 /* Pods_NextAGE_Shopify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextAGE_Shopify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,17 +153,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D7FF2953AAA35FD3C652648 /* Pods_NextAGE_Shopify.framework in Frameworks */,
+				8288A222BE029C913ABC395E /* Pods_NextAGE_Shopify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		84FB15B2E652238D624325B4 /* Frameworks */ = {
+		909B7B01690F9411F7C9D65F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DC663D34942106885BA9D339 /* Pods_NextAGE_Shopify.framework */,
+				5890898183AD2B19A350B439 /* Pods_NextAGE_Shopify.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -172,7 +174,7 @@
 				A94A12132C84D06D00AE0E09 /* NextAGE Shopify */,
 				A94A12122C84D06D00AE0E09 /* Products */,
 				C9F62C285B9CD962C443C723 /* Pods */,
-				84FB15B2E652238D624325B4 /* Frameworks */,
+				909B7B01690F9411F7C9D65F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -408,10 +410,11 @@
 			isa = PBXGroup;
 			children = (
 				C66E1F702C85115C001127F6 /* HomeViewController.swift */,
-				A9AB32B72C8BC32400A3EB88 /* OrderViewController.swift */,
+				A9AB32B72C8BC32400A3EB88 /* OrdersDetailsViewController.swift */,
 				A9D0F0C32C864B1D00ABA14E /* AdsCollectionCell.swift */,
 				A9AB32B42C8BBE7200A3EB88 /* MeViewController.swift */,
-				A9AB32B32C8BBE7200A3EB88 /* OrdersTableViewCell.swift */,
+				A9AB32B92C8CE3CF00A3EB88 /* OrdersTableViewCell.swift */,
+				A9AB32BA2C8CE3CF00A3EB88 /* OrdersTableViewCell.xib */,
 				A9D0F0C22C864B1D00ABA14E /* adsModel.swift */,
 				A9D0F0C42C864B1D00ABA14E /* BrandsCollectionCell.swift */,
 			);
@@ -515,8 +518,8 @@
 		C9F62C285B9CD962C443C723 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3A68950D12B1ACB373B86999 /* Pods-NextAGE Shopify.debug.xcconfig */,
-				B72BC91ED353A326E35BAEEE /* Pods-NextAGE Shopify.release.xcconfig */,
+				A32D851AF21FC5A917918789 /* Pods-NextAGE Shopify.debug.xcconfig */,
+				6B814936FAFE1EC6F0998431 /* Pods-NextAGE Shopify.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -528,11 +531,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A94A12252C84D07000AE0E09 /* Build configuration list for PBXNativeTarget "NextAGE Shopify" */;
 			buildPhases = (
-				61040F12C3BF9F29E963B8A8 /* [CP] Check Pods Manifest.lock */,
+				F66CA71773822D5666E98806 /* [CP] Check Pods Manifest.lock */,
 				A94A120D2C84D06D00AE0E09 /* Sources */,
 				A94A120E2C84D06D00AE0E09 /* Frameworks */,
 				A94A120F2C84D06D00AE0E09 /* Resources */,
-				2F987ACEFF48AB28DE10FEB9 /* [CP] Embed Pods Frameworks */,
+				2DA5E1329C20B0ECE01EE46B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -586,6 +589,7 @@
 				A94A121E2C84D07000AE0E09 /* Assets.xcassets in Resources */,
 				A970BF242C87AB580082ED45 /* CategoriesCollectionCell.xib in Resources */,
 				A9D0F0D02C864B9B00ABA14E /* Colors.xcassets in Resources */,
+				A9AB32BC2C8CE3CF00A3EB88 /* OrdersTableViewCell.xib in Resources */,
 				A94A121C2C84D06D00AE0E09 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -593,7 +597,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2F987ACEFF48AB28DE10FEB9 /* [CP] Embed Pods Frameworks */ = {
+		2DA5E1329C20B0ECE01EE46B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -610,7 +614,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NextAGE Shopify/Pods-NextAGE Shopify-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		61040F12C3BF9F29E963B8A8 /* [CP] Check Pods Manifest.lock */ = {
+		F66CA71773822D5666E98806 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -646,7 +650,7 @@
 				C6B3D69D2C8B32A900063E52 /* DraftOrders.swift in Sources */,
 				A94A122D2C84DCA000AE0E09 /* UIView+Extension.swift in Sources */,
 				C674327C2C863AA6001A0753 /* ProductDetailsViewModel.swift in Sources */,
-				A9AB32B82C8BC32400A3EB88 /* OrderViewController.swift in Sources */,
+				A9AB32B82C8BC32400A3EB88 /* OrdersDetailsViewController.swift in Sources */,
 				C674326C2C863693001A0753 /* AuthOptionsViewController.swift in Sources */,
 				C64C33852C8741F500EF1928 /* PaymentViewController.swift in Sources */,
 				A9D0F0D22C864BBD00ABA14E /* Colors.swift in Sources */,
@@ -671,12 +675,12 @@
 				A943E1102C8A3C1000E655C8 /* UIWindow+Extension.swift in Sources */,
 				C67432902C863F11001A0753 /* SettingCell.swift in Sources */,
 				C66E1F652C85108F001127F6 /* MainTabBarController.swift in Sources */,
-				A9AB32B52C8BBE7200A3EB88 /* OrdersTableViewCell.swift in Sources */,
 				C64C33862C8741F500EF1928 /* PaymentViewModel.swift in Sources */,
 				A9D0F0CC2C864B6400ABA14E /* CustomTapBar.swift in Sources */,
 				C68C4EC22C878ADC0040DF87 /* NetworkManager.swift in Sources */,
 				C68C4EC62C878CBE0040DF87 /* NetworkHelper.swift in Sources */,
 				C68C4EDF2C87A6B00040DF87 /* ShopfiyAPI.swift in Sources */,
+				A9AB32BB2C8CE3CF00A3EB88 /* OrdersTableViewCell.swift in Sources */,
 				A94A12312C84E5CD00AE0E09 /* SignupViewController.swift in Sources */,
 				C6B78B7B2C8A117100889849 /* AddressViewController.swift in Sources */,
 				A9D0F0C82C864B1D00ABA14E /* BrandsCollectionCell.swift in Sources */,
@@ -843,7 +847,7 @@
 		};
 		A94A12262C84D07000AE0E09 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A68950D12B1ACB373B86999 /* Pods-NextAGE Shopify.debug.xcconfig */;
+			baseConfigurationReference = A32D851AF21FC5A917918789 /* Pods-NextAGE Shopify.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -872,7 +876,7 @@
 		};
 		A94A12272C84D07000AE0E09 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B72BC91ED353A326E35BAEEE /* Pods-NextAGE Shopify.release.xcconfig */;
+			baseConfigurationReference = 6B814936FAFE1EC6F0998431 /* Pods-NextAGE Shopify.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
