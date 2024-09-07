@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomTapBar" customModule="NextAGE_Shopify" customModuleProvider="target">
+            <connections>
+                <outlet property="customView" destination="Ejf-4v-edX" id="KQ0-TI-Ia0"/>
+                <outlet property="imageView" destination="lge-a3-awQ" id="69e-Qy-IXf"/>
+                <outlet property="mainView" destination="iN0-l3-epB" id="cRg-61-dhA"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="751" height="353"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ejf-4v-edX">
+                    <rect key="frame" x="0.0" y="0.0" width="751" height="353"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lge-a3-awQ">
+                            <rect key="frame" x="20" y="0.0" width="711" height="328"/>
+                            <color key="backgroundColor" name="#FFFFFF"/>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="lge-a3-awQ" secondAttribute="trailing" constant="20" id="66A-XK-VUy"/>
+                        <constraint firstItem="lge-a3-awQ" firstAttribute="top" secondItem="Ejf-4v-edX" secondAttribute="top" id="Xdi-if-slH"/>
+                        <constraint firstAttribute="bottom" secondItem="lge-a3-awQ" secondAttribute="bottom" constant="25" id="jI5-oh-bat"/>
+                        <constraint firstItem="lge-a3-awQ" firstAttribute="leading" secondItem="Ejf-4v-edX" secondAttribute="leading" constant="20" id="nLL-XL-auT"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Ejf-4v-edX" secondAttribute="bottom" id="2kQ-uL-VUs"/>
+                <constraint firstItem="Ejf-4v-edX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="JOn-xu-3Th"/>
+                <constraint firstItem="Ejf-4v-edX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="MKQ-5A-MNp"/>
+                <constraint firstItem="Ejf-4v-edX" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="ghe-ea-P5y"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-773.28244274809163" y="-402.46478873239437"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="#FFFFFF">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

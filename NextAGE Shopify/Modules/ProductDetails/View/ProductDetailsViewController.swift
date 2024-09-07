@@ -10,16 +10,20 @@ import UIKit
 class ProductDetailsViewController: UIViewController {
 
 
-    
-    @IBOutlet var size: UIButton!
-    @IBOutlet var ProductPhotosCollectionview: UICollectionView!
+    @IBOutlet var productCollectionView: UICollectionView!
+    @IBOutlet weak var productTitleLabel: UILabel!
+    @IBOutlet weak var productPriceLabel: UILabel!
+    @IBOutlet var productRatingButton: [UIButton]!
+    @IBOutlet weak var productSizeButton: UIButton!
+    @IBOutlet weak var productColorButton: UIButton!
+    @IBOutlet weak var productDescriptionTextView: UITextView!
     @IBOutlet var reviewTableView: UITableView!
    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ProductPhotosCollectionview.dataSource = self
-        ProductPhotosCollectionview.delegate = self
+        productCollectionView.dataSource = self
+        productCollectionView.delegate = self
         reviewTableView.dataSource = self
         reviewTableView.delegate = self
         setProductPhotosCollectionviewLayout()
@@ -36,7 +40,7 @@ extension ProductDetailsViewController :UICollectionViewDelegate,UICollectionVie
             return self.createProductPhotosSection()
             
         }
-        ProductPhotosCollectionview.collectionViewLayout = layout
+        productCollectionView.collectionViewLayout = layout
     }
     
     func createProductPhotosSection() -> NSCollectionLayoutSection {
@@ -52,9 +56,6 @@ extension ProductDetailsViewController :UICollectionViewDelegate,UICollectionVie
             return section
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
@@ -85,6 +86,6 @@ extension ProductDetailsViewController:UITableViewDelegate,UITableViewDataSource
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(140)
+        return 110
     }
 }

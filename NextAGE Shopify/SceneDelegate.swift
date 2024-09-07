@@ -11,16 +11,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        let viewController: UIViewController
-        if UserDefaultManager.shared.continueAsAGuest || UserDefaultManager.shared.isLogin {
-            viewController = UIStoryboard(name: "MainTabBar", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarNavigationController")
-        } else {
-            viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AuthOptionsNavigationController")
-        }
-        window?.rootViewController = viewController
-        window?.makeKeyAndVisible()
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        window = UIWindow(windowScene: windowScene)
+//        let viewController: UIViewController
+//        viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShoppingCartViewController")
+//        window?.rootViewController = UINavigationController(rootViewController: viewController)
+//        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

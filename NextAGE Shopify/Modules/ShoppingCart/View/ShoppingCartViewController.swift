@@ -39,7 +39,7 @@ class ShoppingCartViewController: UIViewController {
     }
     
     @IBAction func checkoutButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "DiscountViewController")
         self.navigationController?.pushViewController(vc, animated: true)
     }

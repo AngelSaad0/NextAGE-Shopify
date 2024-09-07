@@ -41,12 +41,12 @@ class AddressViewController: UIViewController {
     */
 
     @IBAction func addAddressButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "AddAddressViewController")
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func selectPaymentButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Payment", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "PaymentViewController")
         self.navigationController?.pushViewController(vc, animated: true)
     }

@@ -9,9 +9,11 @@ import UIKit
 
 class ConfirmationViewController: UIViewController {
 
+    @IBOutlet weak var continueShoppingButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        continueShoppingButton.addCornerRadius(radius: 12)
         // Do any additional setup after loading the view.
     }
     
@@ -29,7 +31,7 @@ class ConfirmationViewController: UIViewController {
     @IBAction func continueShoppingButton(_ sender: Any) {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let window = windowScene.windows.first {
-            let story = UIStoryboard(name: "MainTabBar", bundle:nil)
+            let story = UIStoryboard(name: "Main", bundle:nil)
             let vc = story.instantiateViewController(withIdentifier: "MainTabBarNavigationController")
             window.rootViewController = vc
             window.makeKeyAndVisible()
