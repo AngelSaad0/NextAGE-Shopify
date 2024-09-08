@@ -19,8 +19,11 @@ class UserDefaultManager {
     var customerID: Int = 0
     var wishlistID: Int = 0
     var shoppingCartID: Int = 0
+    var exchangeRate:Double = 0
     var currency: String = ""
-    
+    var shoppingCart:[Int] = []
+    var wishlist:[Int] = []
+
     private init(){
         getStoredData()
     }
@@ -36,6 +39,11 @@ class UserDefaultManager {
         self.wishlistID = getSharedInt(forKey: "wishlistID")
         self.shoppingCartID = getSharedInt(forKey: "shoppingCartID")
         self.currency = getSharedString(forKey: "currency")
+        self.exchangeRate = getSharedDouble(forKey: "exchangeRate")
+        self.shoppingCart = getSharedValue(forKey: "shoppingCart") as? [Int] ?? []
+        self.wishlist = getSharedValue(forKey: "wishlist") as? [Int] ?? []
+
+
         if self.currency == "" {
             self.currency = "USD"
         }
@@ -51,6 +59,9 @@ class UserDefaultManager {
         setSharedValue("wishlistID", value: wishlistID)
         setSharedValue("shoppingCartID", value: shoppingCartID)
         setSharedValue("currency", value: currency)
+        setSharedValue("shoppingCart", value: shoppingCart)
+        setSharedValue("wishlist", value: wishlist)
+        setSharedValue("exchangeRate", value: exchangeRate)
     }
     func logout(){
         removeValue(forKey: "guest")
@@ -63,6 +74,9 @@ class UserDefaultManager {
         removeValue(forKey: "wishlistID")
         removeValue(forKey: "shoppingCartID")
         removeValue(forKey: "currency")
+        removeValue(forKey: "shoppingCart")
+        removeValue(forKey: "wishlist")
+        removeValue(forKey: "exchangeRate")
     }
     
     private func setSharedValue(_ key: String, value: Any) {
@@ -78,7 +92,10 @@ class UserDefaultManager {
     private func getSharedInt(forKey key: String) -> Int {
         return self.pref.object(forKey: key) as? Int ?? 0
     }
-    
+    private func getSharedDouble(forKey key: String) -> Double {
+        return self.pref.object(forKey: key) as? Double ?? 0.0
+    }
+
     private func getSharedBool(forKey key: String) -> Bool {
         return self.pref.object(forKey: key) as? Bool ?? false
     }

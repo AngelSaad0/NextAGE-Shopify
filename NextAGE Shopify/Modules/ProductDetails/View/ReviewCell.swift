@@ -13,13 +13,14 @@ class ReviewCell: UITableViewCell {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var reviewRatingLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var reviewDateLabel: UIStackView!
     @IBOutlet weak var userReviewLabel: UILabel!
+
+    @IBOutlet var dateLabel: UILabel!
     
+
     override func awakeFromNib() {
         super.awakeFromNib()
         updateUI()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -29,9 +30,17 @@ class ReviewCell: UITableViewCell {
     }
     
     func updateUI() {
-        #warning("user image changed")
-        userImageView.image = UIImage(named: "1person")
         cellBackgroundView.addCornerRadius(radius: 12)
         cellBackgroundView.addBorderView()
+    }
+    func configure(with cell:DumyReview) {
+        userImageView.image = UIImage(named:cell.userImage)
+        userNameLabel.text = cell.userName
+        reviewRatingLabel.text = cell.rating
+        dateLabel.text = cell.date
+        userReviewLabel.text = cell.review
+
+
+
     }
 }

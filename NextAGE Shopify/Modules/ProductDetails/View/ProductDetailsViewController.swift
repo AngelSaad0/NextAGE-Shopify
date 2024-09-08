@@ -9,53 +9,65 @@ import UIKit
 import Kingfisher
 
 class ProductDetailsViewController: UIViewController {
-
     // MARK: - IBOutlets
     @IBOutlet var productCollectionView: UICollectionView!
+    @IBOutlet var productRatingButton: [UIButton]!
     @IBOutlet weak var productTitleLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
-    @IBOutlet var productRatingButton: [UIButton]!
     @IBOutlet weak var productSizeButton: UIButton!
     @IBOutlet weak var productColorButton: UIButton!
     @IBOutlet weak var productDescriptionTextView: UITextView!
     @IBOutlet var reviewTableView: UITableView!
-    @IBOutlet var sizeDropdownTableView: UITableView!
     @IBOutlet var viewAllReviewsButton: UIButton!
-    @IBOutlet var addToChartButton: UIButton!
-    @IBOutlet var colorDropdownTableView: UITableView!
-    private var isSizeDropdownVisible = false
-    private var isColorDropdownVisible = false
+    @IBOutlet var addToFavoriteButton: UIButton!
+    private var rating: Double = 0
+    private var selectedVariant:Int?
+    private var selcetedColor:String?
+    private var selectedSize:String?
+
+    private var sizes: [String]? {
+        didSet {
+            configureSizeMenu()
+        }
+    }
+    private var colors: [String]? {
+        didSet {
+            configureColorMenu()
+        }
+    }
+    private var userDefaultManger:UserDefaultManager
     private var selectedButton: UIButton?
     private let selectedButtonColor = UIColor.red
-    private var productSize: [String] = []
-    private var dropdownColor: [String] = []
+    private var product: ProductInfo?
+    
     // MARK: - Properties
     let indicator = UIActivityIndicatorView(style: .large)
     let networkManager: NetworkManager
     var productID: Int?
-    var product: ProductInfo?
 
     // MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        UpdateUI()
         setupIndicator()
+        updateUI()
         fetchProduct()
+
     }
+
 
     required init?(coder: NSCoder) {
         networkManager = NetworkManager()
+        userDefaultManger = UserDefaultManager.shared
         super.init(coder: coder)
     }
 
     // MARK: - Private Methods
-    private func UpdateUI() {
+    private func updateUI() {
         title = "NextAGE"
-        sizeDropdownTableView.isHidden = true
-        colorDropdownTableView.isHidden = true
-        addToChartButton.addCornerRadius(radius: 12)
+        addToFavoriteButton.addCornerRadius(radius: 12)
         productSizeButton.addCornerRadius(radius: 12)
         productColorButton.addCornerRadius(radius: 12)
+        viewAllReviewsButton.addCornerRadius(radius: 12)
         reviewTableView.register(UINib(nibName: "ReviewCell", bundle: nil), forCellReuseIdentifier: "ReviewCell")
     }
 
@@ -69,14 +81,36 @@ class ProductDetailsViewController: UIViewController {
         viewAllReviewsButton.isEnabled = true
         productSizeButton.isEnabled = true
         productColorButton.isEnabled = true
-        productTitleLabel.text = product?.title
-        productPriceLabel.text = product?.variants.first?.price
-        productDescriptionTextView.text = product?.bodyHTML
-        reviewTableView.reloadData()
-        productCollectionView.reloadData()
-        updateDropdownOptions()
-    }
 
+        if let product = product {
+            productTitleLabel.text = product.title
+            let price = Double(product.variants.first?.price ?? "0.0") ?? 0.0
+            let exchangeRate = userDefaultManger.exchangeRate
+            let formattedPrice = String(format: "%.2f", exchangeRate * price)
+            let currency = userDefaultManger.currency
+            #warning("rating for test ")
+            rating = Double(product.id % 10 + 1) / 2
+            updateStars()
+
+            productPriceLabel.text = "\(formattedPrice) \(currency)"
+            productDescriptionTextView.text = product.bodyHTML
+            reviewTableView.reloadData()
+            productCollectionView.reloadData()
+            updateDropdownOptions()
+            selectedVariant = product.variants.first?.id
+                let isInWishlist = userDefaultManger.wishlist.contains(product.id)
+                let favoriteImage = UIImage(systemName: isInWishlist ? "heart.fill" : "heart")
+            addToFavoriteButton.setImage(favoriteImage, for: .normal)
+
+            if let selectedSize = productSizeButton.titleLabel?.text,
+               let selectedSizeIndex = sizes?.firstIndex(of: selectedSize)
+                {
+                let variantId = product.variants[selectedSizeIndex].id
+                addToFavoriteButton.isEnabled = !userDefaultManger.shoppingCart.contains(variantId)
+            }
+        }
+    }
+    
     private func updateDropdownOptions() {
         var sizeOptions: [String] = []
         var colorOptions: [String] = []
@@ -87,27 +121,55 @@ class ProductDetailsViewController: UIViewController {
                 colorOptions = option.values
             }
         }
-        productSize = sizeOptions
-        dropdownColor = colorOptions
-        sizeDropdownTableView.reloadData()
-        colorDropdownTableView.reloadData()
+        sizes = sizeOptions
+        colors = colorOptions
 
-        if let firstSize = productSize.first {
+        if let firstSize = sizes?.first {
             productSizeButton.setTitle(firstSize, for: .normal)
-            productSizeButton.backgroundColor = .blue
-
+            productSizeButton.backgroundColor = UIColor(named: Colors.C0079FB.rawValue)
         }
-
-        if let firstColor = dropdownColor.first {
+        if let firstColor = colors?.first {
             productColorButton.setTitle(firstColor, for: .normal)
-            productColorButton.backgroundColor = .blue
-
+            productColorButton.backgroundColor = UIColor(named: Colors.C0079FB.rawValue)
         }
+    }
+
+    private func configureSizeMenu() {
+        let actionClosure = { [weak self] (action: UIAction) in
+            guard let self = self else { return }
+             selectedSize = action.title
+            self.productSizeButton.setTitle(action.title, for: .normal)
+        }
+
+        var menuChildren: [UIMenuElement] = []
+        for size in sizes ?? [] {
+            menuChildren.append(UIAction(title: size, handler: actionClosure))
+        }
+
+        productSizeButton.menu = UIMenu(options: .displayInline, children: menuChildren)
+        productSizeButton.showsMenuAsPrimaryAction = true
+        productSizeButton.changesSelectionAsPrimaryAction = true
+    }
+
+    private func configureColorMenu() {
+        let actionClosure = { [weak self] (action: UIAction) in
+            guard let self = self else { return }
+            selcetedColor = action.title
+            self.productColorButton.setTitle(action.title, for: .normal)
+        }
+
+        var menuChildren: [UIMenuElement] = []
+        for color in colors ?? [] {
+            menuChildren.append(UIAction(title: color, handler: actionClosure))
+        }
+        productColorButton.menu = UIMenu(options: .displayInline, children: menuChildren)
+        productColorButton.showsMenuAsPrimaryAction = true
+        productColorButton.changesSelectionAsPrimaryAction = true
     }
 
     private func presentError() {
         indicator.stopAnimating()
-        showAlert(title: "Error happened", message: "An unexpected error loading product info", okHandler: { _ in
+        showAlert(title: "Error", message: "An unexpected error occurred while loading product info.", okHandler: { _ in
             self.navigationController?.popViewController(animated: true)
         })
     }
@@ -118,8 +180,8 @@ class ProductDetailsViewController: UIViewController {
             presentError()
             return
         }
-        print(productID)
-        networkManager.fetchData(from: ShopifyAPI.product(id: productID).shopifyURLString(), responseType: Product.self) { result in
+        networkManager.fetchData(from: ShopifyAPI.product(id: productID).shopifyURLString(), responseType: Product.self) { [weak self] result in
+            guard let self = self else { return }
             self.indicator.stopAnimating()
             guard let product = result?.product else {
                 self.presentError()
@@ -130,41 +192,41 @@ class ProductDetailsViewController: UIViewController {
         }
     }
 
-    private func toggleSizeDropdown() {
-        if isSizeDropdownVisible {
-            sizeDropdownTableView.isHidden = true
-            isSizeDropdownVisible = false
-        } else {
-            sizeDropdownTableView.reloadData()
-            if let button = selectedButton {
-                sizeDropdownTableView.isHidden = false
-                isSizeDropdownVisible = true
+
+    private func updateStars() {
+        for (index, button) in productRatingButton.enumerated() {
+            let starRating = Double(index + 1)
+            if rating >= starRating {
+                button.setImage(UIImage(systemName: "star.fill"), for: .normal)
+            } else if rating > starRating - 1 && rating < starRating {
+                button.setImage(UIImage(systemName: "star.leadinghalf.fill"), for: .normal)
+            } else {
+                button.setImage(UIImage(systemName: "star"), for: .normal)
             }
         }
     }
 
-    private func toggleColorDropdown() {
-        if isColorDropdownVisible {
-            colorDropdownTableView.isHidden = true
-            isColorDropdownVisible = false
-        } else {
-            colorDropdownTableView.reloadData()
-            if let button = selectedButton {
-                colorDropdownTableView.isHidden = false
-                isColorDropdownVisible = true
-            }
-        }
+    // MARK: - IBActions
+
+    @IBAction func viewAllReviewsButtonClicked(_ sender: UIButton) {
+        pushViewController(vcIdentifier: "AllReviewsViewController", withNav: navigationController)
+    }
+    @IBAction func addToWishListButtonClicked(_ sender: UIButton) {
+#warning("post to draft order then append")
+        userDefaultManger.wishlist.append(selectedVariant ?? 0)
+        userDefaultManger.storeData()
+        print( userDefaultManger.wishlist)
+
+    }
+    @IBAction func addToChartButtonClicked(_ sender: UIButton) {
+#warning("post to draft order then append")
+        userDefaultManger.shoppingCart.append(selectedVariant ?? 0)
+        userDefaultManger.storeData()
+        print( userDefaultManger.shoppingCart)
+
     }
 
-    @IBAction func productSizeButtonClicked(_ sender: UIButton) {
-        selectedButton = sender
-        toggleSizeDropdown()
-    }
 
-    @IBAction func productColorButtonClicked(_ sender: UIButton) {
-        selectedButton = sender
-        toggleColorDropdown()
-    }
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
@@ -189,40 +251,23 @@ extension ProductDetailsViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension ProductDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == sizeDropdownTableView {
-            return productSize.count
-        } else if tableView == colorDropdownTableView {
-            return dropdownColor.count
-        } else if tableView == reviewTableView {
-            return product == nil ? 0 : 2
+        if tableView == reviewTableView {
+            return 2
         }
         return 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == sizeDropdownTableView || tableView == colorDropdownTableView {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-            if tableView == sizeDropdownTableView {
-                cell.textLabel?.text = productSize[indexPath.row]
-            } else if tableView == colorDropdownTableView {
-                cell.textLabel?.text = dropdownColor[indexPath.row]
-            }
-            return cell
-        } else if tableView == reviewTableView {
+        if tableView == reviewTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewCell
+            cell.configure(with: dummyReviews[indexPath.row])
             return cell
         }
         return UITableViewCell()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == sizeDropdownTableView {
-            productSizeButton.setTitle(productSize[indexPath.row], for: .normal)
-            toggleSizeDropdown()
-        } else if tableView == colorDropdownTableView {
-            productColorButton.setTitle(dropdownColor[indexPath.row], for: .normal)
-            toggleColorDropdown()
-        } else if tableView == reviewTableView {
+        if tableView == reviewTableView {
             pushViewController(vcIdentifier: "AllReviewsViewController", withNav: navigationController)
         }
     }
@@ -234,3 +279,4 @@ extension ProductDetailsViewController: UITableViewDelegate, UITableViewDataSour
         return UITableView.automaticDimension
     }
 }
+
