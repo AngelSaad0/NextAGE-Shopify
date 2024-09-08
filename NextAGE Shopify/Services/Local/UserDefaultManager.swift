@@ -43,7 +43,9 @@ class UserDefaultManager {
         self.shoppingCart = getSharedValue(forKey: "shoppingCart") as? [Int] ?? []
         self.wishlist = getSharedValue(forKey: "wishlist") as? [Int] ?? []
 
-
+        if self.exchangeRate == 0 {
+            self.exchangeRate = 1
+        }
         if self.currency == "" {
             self.currency = "USD"
         }

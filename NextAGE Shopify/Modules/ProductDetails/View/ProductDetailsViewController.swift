@@ -21,8 +21,8 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet var viewAllReviewsButton: UIButton!
     @IBOutlet var addToFavoriteButton: UIButton!
     private var rating: Double = 0
-    private var selectedVariant:Int?
-    private var selcetedColor:String?
+    private var selectedVariantID:Int?
+    private var selectedColor:String?
     private var selectedSize:String?
 
     private var sizes: [String]? {
@@ -44,6 +44,7 @@ class ProductDetailsViewController: UIViewController {
     let indicator = UIActivityIndicatorView(style: .large)
     let networkManager: NetworkManager
     var productID: Int?
+    var isFavorite = false
 
     // MARK: - View LifeCycle
     override func viewDidLoad() {
@@ -97,18 +98,24 @@ class ProductDetailsViewController: UIViewController {
             reviewTableView.reloadData()
             productCollectionView.reloadData()
             updateDropdownOptions()
-            selectedVariant = product.variants.first?.id
-                let isInWishlist = userDefaultManger.wishlist.contains(product.id)
-                let favoriteImage = UIImage(systemName: isInWishlist ? "heart.fill" : "heart")
-            addToFavoriteButton.setImage(favoriteImage, for: .normal)
+            selectedVariantID = product.variants.first?.id
+            
+            updateFavoriteState()
+            
 
-            if let selectedSize = productSizeButton.titleLabel?.text,
-               let selectedSizeIndex = sizes?.firstIndex(of: selectedSize)
-                {
-                let variantId = product.variants[selectedSizeIndex].id
-                addToFavoriteButton.isEnabled = !userDefaultManger.shoppingCart.contains(variantId)
-            }
+//            if let selectedSize = productSizeButton.titleLabel?.text,
+//               let selectedSizeIndex = sizes?.firstIndex(of: selectedSize)
+//                {
+//                let variantId = product.variants[selectedSizeIndex].id
+//                addToFavoriteButton.isEnabled = !userDefaultManger.shoppingCart.contains(variantId)
+//            }
         }
+    }
+    
+    private func updateFavoriteState() {
+        isFavorite = userDefaultManger.wishlist.contains(product?.id ?? 0)
+        let favoriteImage = UIImage(systemName: isFavorite ? "heart.fill" : "heart")
+        addToFavoriteButton.setImage(favoriteImage, for: .normal)
     }
     
     private func updateDropdownOptions() {
@@ -125,10 +132,12 @@ class ProductDetailsViewController: UIViewController {
         colors = colorOptions
 
         if let firstSize = sizes?.first {
+            selectedSize = firstSize
             productSizeButton.setTitle(firstSize, for: .normal)
             productSizeButton.backgroundColor = UIColor(named: Colors.C0079FB.rawValue)
         }
         if let firstColor = colors?.first {
+            selectedColor = firstColor
             productColorButton.setTitle(firstColor, for: .normal)
             productColorButton.backgroundColor = UIColor(named: Colors.C0079FB.rawValue)
         }
@@ -154,7 +163,7 @@ class ProductDetailsViewController: UIViewController {
     private func configureColorMenu() {
         let actionClosure = { [weak self] (action: UIAction) in
             guard let self = self else { return }
-            selcetedColor = action.title
+            selectedColor = action.title
             self.productColorButton.setTitle(action.title, for: .normal)
         }
 
@@ -192,6 +201,15 @@ class ProductDetailsViewController: UIViewController {
         }
     }
 
+    func updateSelectedVariantID() {
+        if let variants = product?.variants {
+            for variant in variants {
+                if selectedSize == variant.option1 && selectedColor == variant.option2 {
+                    selectedVariantID = variant.id
+                }
+            }
+        }
+    }
 
     private func updateStars() {
         for (index, button) in productRatingButton.enumerated() {
@@ -212,17 +230,24 @@ class ProductDetailsViewController: UIViewController {
         pushViewController(vcIdentifier: "AllReviewsViewController", withNav: navigationController)
     }
     @IBAction func addToWishListButtonClicked(_ sender: UIButton) {
+#warning("check if logged in first")
 #warning("post to draft order then append")
-        userDefaultManger.wishlist.append(selectedVariant ?? 0)
+        if isFavorite {
+            userDefaultManger.wishlist.removeAll{$0 == product?.id}
+        } else {
+            userDefaultManger.wishlist.append(productID ?? 0)
+        }
         userDefaultManger.storeData()
-        print( userDefaultManger.wishlist)
-
+        updateFavoriteState()
+        
+        print(userDefaultManger.wishlist)
     }
     @IBAction func addToChartButtonClicked(_ sender: UIButton) {
 #warning("post to draft order then append")
-        userDefaultManger.shoppingCart.append(selectedVariant ?? 0)
+        updateSelectedVariantID()
+        userDefaultManger.shoppingCart.append(selectedVariantID ?? 0)
         userDefaultManger.storeData()
-        print( userDefaultManger.shoppingCart)
+        print(userDefaultManger.shoppingCart)
 
     }
 
