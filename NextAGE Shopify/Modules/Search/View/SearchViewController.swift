@@ -13,8 +13,8 @@ class SearchViewController: UIViewController {
     @IBOutlet var searchBar: UISearchBar!
     
     // MARK: -  properties
-    var products: [Product] = []
-    var filteredProducts: [Product] = []
+    var products: [ProductInfo] = []
+    var filteredProducts: [ProductInfo] = []
     var searchKeyword : String = ""
     var isSearching : Bool = false
     var networkManager: NetworkManager

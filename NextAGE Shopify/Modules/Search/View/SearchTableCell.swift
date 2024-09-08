@@ -44,7 +44,7 @@ class SearchTableCell: UITableViewCell {
 
 
     }
-    func configure(with model: Product) {
+    func configure(with model: ProductInfo) {
         productImg.kf.setImage(with: URL(string: model.image.src),placeholder: UIImage(named: "brand1"))
         brandTitle.text = model.vendor
         productTitleD.text = model.title.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)

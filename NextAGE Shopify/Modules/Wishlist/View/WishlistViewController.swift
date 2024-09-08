@@ -11,7 +11,7 @@ class WishlistViewController: UIViewController {
     
     @IBOutlet weak var wishlistCollectionView: UICollectionView!
     
-    var products: [Product]?
+    var products: [ProductInfo]?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -25,7 +25,7 @@ class CategoriesCollectionCell: UICollectionViewCell {
         imageBackground.addBorderView()
 //        imageBackground.applyShadow()
     }
-    func configure(with cell: Product) {
+    func configure(with cell: ProductInfo) {
         productImage.kf.setImage(with: URL(string: cell.image.src),placeholder: UIImage(named: "brand1"))
         productTitle.text = cell.vendor
         productPrice.text = cell.variants[0].price
