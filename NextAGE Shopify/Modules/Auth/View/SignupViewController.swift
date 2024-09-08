@@ -64,7 +64,7 @@ class SignUpViewController: UIViewController {
         userDefaultManager.name = (firstName ?? "") + " " + (lastName ?? "")
         userDefaultManager.email = email ?? ""
         userDefaultManager.password = password ?? ""
-        userDefaultManager.userID = userID ?? 0
+        userDefaultManager.customerID = userID ?? 0
         userDefaultManager.wishlistID = wishlistID ?? 0
         userDefaultManager.shoppingCartID = shoppingCartID ?? 0
         userDefaultManager.storeData()

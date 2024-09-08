@@ -54,7 +54,7 @@ class SignInViewController: UIViewController {
         userDefaultManager.name = (customer.firstName ?? "") + " " + (customer.lastName ?? "")
         userDefaultManager.email = customer.email ?? ""
         userDefaultManager.password = customer.tags ?? ""
-        userDefaultManager.userID = customer.id ?? 0
+        userDefaultManager.customerID = customer.id ?? 0
         if let draftOrderIDs = customer.note?.components(separatedBy: ","), draftOrderIDs.count == 2 {
             userDefaultManager.shoppingCartID = Int(draftOrderIDs[0]) ?? 0
             userDefaultManager.wishlistID = Int(draftOrderIDs[1]) ?? 0
