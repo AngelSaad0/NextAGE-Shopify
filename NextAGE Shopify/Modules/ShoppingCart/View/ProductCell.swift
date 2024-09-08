@@ -30,7 +30,7 @@ class ProductCell: UITableViewCell {
         updateUI()
     }
     func updateUI(){
-        backgroundViewCell.addBorderView(color: Colors.CBFBFBF.rawValue, width: 0.3)
+        backgroundViewCell.addBorderView()
         backgroundViewCell.addCornerRadius(radius: 12)
 
     }

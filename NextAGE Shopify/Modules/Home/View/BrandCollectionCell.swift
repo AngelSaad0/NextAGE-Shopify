@@ -19,9 +19,9 @@ class BrandCollectionCell: UICollectionViewCell {
     }
     
     func updatUI(){
-        brandBackground.addBorderView(color: Colors.C000000.rawValue, width: 2)
+        brandBackground.addBorderView()
         brandBackground.addRoundedRadius(radius: 12)
-        brandImg.addCornerRadius(radius: 8)
+        brandImg.addCornerRadius(radius: 12)
         
         brandBackground.clipsToBounds = true
     }

@@ -97,7 +97,7 @@ class HomeViewController: UIViewController {
     }
     
     private func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateAdsScroll), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateAdsScroll), userInfo: nil, repeats: true)
     }
     
     private func stopTimer() {

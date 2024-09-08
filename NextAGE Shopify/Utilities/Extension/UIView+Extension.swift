@@ -24,7 +24,7 @@ extension UIView {
             imageView.transform = CGAffineTransform.identity
         })
     }
-    func addBorderView(color:Colors.RawValue,width:CGFloat){
+    func addBorderView(color:Colors.RawValue =  Colors.C707070.rawValue,width:CGFloat = 0.8) {
         self.layer.borderColor = UIColor(named:color)?.cgColor
         self.layer.borderWidth = width
     }

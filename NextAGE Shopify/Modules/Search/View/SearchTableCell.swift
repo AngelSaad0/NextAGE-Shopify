@@ -11,13 +11,15 @@ import Kingfisher
 class SearchTableCell: UITableViewCell {
     // MARK: -  IBOutlet
 
+    @IBOutlet var backgroundViewCell: UIView!
     @IBOutlet var productImg: UIImageView!
     @IBOutlet var brandTitle: UILabel!
     @IBOutlet var productTitleD: UILabel!
-
+    @IBOutlet var shadowView: UIImageView!
     // MARK: -  ViewLifeCycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        updateUI()
 
     }
     override var isSelected: Bool {
@@ -35,7 +37,11 @@ class SearchTableCell: UITableViewCell {
     // MARK: -  methods
 
     func updateUI(){
-        productImg.addCornerRadius(radius: 8)
+        shadowView.addCornerRadius(radius: 12)
+        backgroundViewCell.addCornerRadius(radius: 12)
+        backgroundViewCell.addBorderView()
+        productImg.applyShadow()
+
 
     }
     func configure(with model: Product) {

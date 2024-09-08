@@ -59,7 +59,7 @@ extension CurrencyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.viewWithTag(3)?.addCornerRadius(radius: 12)
-        cell.viewWithTag(3)?.addBorderView(color: Colors.CBFBFBF.rawValue, width: 0.5)
+        cell.viewWithTag(3)?.addBorderView()
         (cell.viewWithTag(1) as! UILabel).text = currencies[indexPath.row]
         if userDefaultsManager.currency == currencies[indexPath.row] {
             cell.viewWithTag(2)?.isHidden = false
