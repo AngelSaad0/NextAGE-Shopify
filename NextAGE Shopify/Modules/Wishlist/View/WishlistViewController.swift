@@ -27,7 +27,9 @@ class WishlistViewController: UIViewController {
 
 extension WishlistViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-#warning("Move to product details vc")
+        let productDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
+        productDetailsViewController.productID = products?[indexPath.row].id ?? 0
+        navigationController?.pushViewController(productDetailsViewController, animated: true)
     }
 }
 

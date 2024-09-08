@@ -24,15 +24,18 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     @IBAction func rightButtonClicked(_ sender: Any) {
         if isWishList {
-            print("heart.fill")
+            let wishlistViewController = storyboard?.instantiateViewController(withIdentifier: "WishlistViewController") as! WishlistViewController
+            navigationController?.pushViewController(wishlistViewController, animated: true)
             
         } else {
-            print("setting")
+            let settingsViewController = storyboard?.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
+            navigationController?.pushViewController(settingsViewController, animated: true)
         }
         
     }
     @IBAction func cartButtonTapped(_ sender: UIBarButtonItem) {
-        print("Cart button tapped")
+        let shoppingCartViewController = storyboard?.instantiateViewController(withIdentifier: "ShoppingCartViewController") as! ShoppingCartViewController
+        navigationController?.pushViewController(shoppingCartViewController, animated: true)
     }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {

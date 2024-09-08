@@ -807,7 +807,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ikY-6T-L2G">
-                                <rect key="frame" x="40" y="753" width="130" height="40"/>
+                                <rect key="frame" x="20" y="753" width="130" height="40"/>
                                 <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="WGh-En-L3Y"/>
@@ -828,7 +828,7 @@
                         <viewLayoutGuide key="safeArea" id="37h-dV-Ogu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ikY-6T-L2G" firstAttribute="leading" secondItem="37h-dV-Ogu" secondAttribute="leading" constant="40" id="5VW-F5-EMI"/>
+                            <constraint firstItem="ikY-6T-L2G" firstAttribute="leading" secondItem="37h-dV-Ogu" secondAttribute="leading" constant="20" id="5VW-F5-EMI"/>
                             <constraint firstItem="ikY-6T-L2G" firstAttribute="top" secondItem="99h-6M-v8K" secondAttribute="bottom" constant="20" id="FXu-Dh-R89"/>
                             <constraint firstItem="99h-6M-v8K" firstAttribute="top" secondItem="37h-dV-Ogu" secondAttribute="top" id="Qh1-qK-vBU"/>
                             <constraint firstItem="37h-dV-Ogu" firstAttribute="trailing" secondItem="99h-6M-v8K" secondAttribute="trailing" id="QpG-a5-oqs"/>
@@ -877,7 +877,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Sdw-7H-f3h">
-                                                            <rect key="frame" x="320" y="20.666666666666664" width="25" height="23.666666666666664"/>
+                                                            <rect key="frame" x="320" y="20.666666666666661" width="25" height="23.666666666666654"/>
                                                             <color key="tintColor" red="0.19607841970000001" green="0.45098042490000001" blue="0.86274516580000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Sdw-7H-f3h" secondAttribute="height" multiplier="1:1" id="AeI-8Y-NUH"/>

@@ -20,7 +20,7 @@ class CategoriesCollectionCell: UICollectionViewCell {
         super.awakeFromNib()
         productImage.addCornerRadius(radius: 10)
         imageBackground.addCornerRadius(radius: 10)
-        imageBackground.addBorderView(color: Colors.C191919.rawValue, width: 1)
+        imageBackground.addBorderView(color: Colors.C191919.rawValue, width: 0.3)
 //        imageBackground.applyShadow()
     }
     func configure(with cell: Product) {

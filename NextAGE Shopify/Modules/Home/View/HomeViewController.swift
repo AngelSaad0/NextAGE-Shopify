@@ -20,6 +20,7 @@ class HomeViewController: UIViewController {
     private let offersList = ["add1","add2","add3","add4","add5","add6","add7","add8","add9","add10","add11"]
     private let activityIndicator = UIActivityIndicatorView(style: .large)
     private var networkManager: NetworkManager
+    private var userDefaultsManager: UserDefaultManager
     private var connectivityService: ConnectivityServiceProtocol
     private var homeViewModel: HomeViewModel?
     private var brandsResultArray: [SmartCollection] = []
@@ -35,6 +36,7 @@ class HomeViewController: UIViewController {
     // MARK: - Required init
     required init?(coder: NSCoder) {
         networkManager = NetworkManager()
+        userDefaultsManager = UserDefaultManager.shared
         connectivityService = ConnectivityService.shared
         super.init(coder: coder)
     }
@@ -65,8 +67,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Private Methods
     private func initializeUIComponents() {
-        loggedIn = false
-#warning("loggedIn = true will change")
+        loggedIn = userDefaultsManager.isLogin
         setupActivityIndicator()
         configureAdsPageControl()
         checkInternetConnection()
@@ -136,7 +137,7 @@ class HomeViewController: UIViewController {
             okTitle: "Login",
             cancelTitle: "Cancel",
             okHandler: { _ in
-#warning("Perform segue to login")
+                self.pushViewController(vcIdentifier: "SignInViewController", withNav: self.navigationController)
             }
         )
     }

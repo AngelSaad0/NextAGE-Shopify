@@ -200,10 +200,9 @@ class CategoriesAndBrandsViewController: UIViewController {
 
 extension CategoriesAndBrandsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-#warning("Move to product details vc")
-        let productDetailsVC = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
-        productDetailsVC.productID = filteredOrSortedProducts[indexPath.row].id
-        navigationController?.pushViewController(productDetailsVC, animated: true)
+        let productDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
+        productDetailsViewController.productID = filteredOrSortedProducts[indexPath.row].id
+        navigationController?.pushViewController(productDetailsViewController, animated: true)
     }
 }
 
