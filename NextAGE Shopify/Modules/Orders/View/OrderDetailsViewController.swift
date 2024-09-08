@@ -11,7 +11,7 @@ class OrderDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "Order Details"
         // Do any additional setup after loading the view.
     }
     

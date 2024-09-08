@@ -27,6 +27,7 @@ class MeViewController: UIViewController {
     var currentCustomerId: Int?
     var currentCustomerName: String?
     var isUserLoggedIn: Bool?
+    var wishlistProducts: [Product]?
 
     // MARK: -  View LifeCycle
     override func viewDidLoad() {
@@ -68,7 +69,7 @@ class MeViewController: UIViewController {
                 if self.isUserLoggedIn ?? false{
                     self.logInStack.isHidden = false
                     self.notLoggedInView.isHidden = true
-                    self.userGreetingLabel.text = "Welcome \(self.currentCustomerName ?? "")"
+                    self.userGreetingLabel.text = "Welcome \(self.currentCustomerName ?? "Sir")"
                     self.getOrderListData()
                     self.loadWishlistData()
                 } else {
@@ -82,20 +83,18 @@ class MeViewController: UIViewController {
     }
     // MARK: -  Method
     @IBAction func viewAllOrdersClicked(_ sender: UIButton) {
-        pushViewController(storyboard: "Main", vcIdentifier: "AllOrdersViewController", withNav: navigationController)
+        pushViewController(vcIdentifier: "AllOrdersViewController", withNav: navigationController)
 
     }
     @IBAction func viewAllWishListClicked(_ sender: UIButton) {
-#warning("will changed to go to wishlist ")
-        pushViewController(storyboard: "Main", vcIdentifier: "WishlistViewController", withNav: navigationController)
-
+        pushViewController(vcIdentifier: "WishlistViewController", withNav: navigationController)
     }
 
     @IBAction func logInButtonClicked(_ sender: UIButton) {
-        pushViewController(storyboard: "Main", vcIdentifier: "SignInViewController", withNav: navigationController)
+        pushViewController(vcIdentifier: "SignInViewController", withNav: navigationController)
     }
     @IBAction func registerButtonClicked(_ sender: UIButton) {
-        pushViewController(storyboard: "Main", vcIdentifier: "SignUpViewController", withNav: navigationController)
+        pushViewController(vcIdentifier: "SignUpViewController", withNav: navigationController)
 
 
     }
@@ -114,7 +113,12 @@ extension MeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrdersTableViewCell", for: indexPath) as! OrdersTableViewCell
         //cell.configure(with: T##Order)
-        return UITableViewCell()
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let orderDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
+        navigationController?.pushViewController(orderDetailsViewController, animated: true)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -136,6 +140,9 @@ extension MeViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let productDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
+        productDetailsViewController.productID = wishlistProducts?[indexPath.row].id ?? 0
+        navigationController?.pushViewController(productDetailsViewController, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

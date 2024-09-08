@@ -23,7 +23,11 @@ class AllOrdersViewController: UIViewController {
 }
 
 extension AllOrdersViewController: UITableViewDelegate, UITableViewDataSource {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let orderDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
+        navigationController?.pushViewController(orderDetailsViewController, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
         //orderListResult?.orders.count ?? 0

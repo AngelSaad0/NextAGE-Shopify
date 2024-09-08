@@ -35,7 +35,7 @@ class OrdersTableViewCell: UITableViewCell {
     private func setupView() {
         cellBackgroundView.addCornerRadius(radius: 10)
         cellBackgroundView.addBorderView(color: Colors.C191919.rawValue, width:0.3)
-        cellBackgroundView.applyShadow()
+//        cellBackgroundView.applyShadow()
     }
 // MARK: -  configure
     func configure(with order: Order) {
