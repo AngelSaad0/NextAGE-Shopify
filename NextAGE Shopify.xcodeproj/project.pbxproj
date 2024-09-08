@@ -39,6 +39,7 @@
 		A9D0F0CC2C864B6400ABA14E /* CustomTapBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0CB2C864B6400ABA14E /* CustomTapBar.swift */; };
 		A9D0F0D02C864B9B00ABA14E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9D0F0CF2C864B9B00ABA14E /* Colors.xcassets */; };
 		A9D0F0D22C864BBD00ABA14E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0D12C864BBD00ABA14E /* Colors.swift */; };
+		A9F72BF62C8E2E6600D884E6 /* DumyReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F72BF52C8E2E6600D884E6 /* DumyReview.swift */; };
 		C64C33832C8741F500EF1928 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */; };
 		C64C33842C8741F500EF1928 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */; };
 		C64C33852C8741F500EF1928 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337D2C8741F500EF1928 /* PaymentViewController.swift */; };
@@ -124,6 +125,7 @@
 		A9D0F0CB2C864B6400ABA14E /* CustomTapBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTapBar.swift; sourceTree = "<group>"; };
 		A9D0F0CF2C864B9B00ABA14E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		A9D0F0D12C864BBD00ABA14E /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		A9F72BF52C8E2E6600D884E6 /* DumyReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumyReview.swift; sourceTree = "<group>"; };
 		C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 		C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
 		C64C337D2C8741F500EF1928 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 			children = (
 				C68C4EE02C87A6D40040DF87 /* BrandsCollection.swift */,
 				A9AB32B12C8BBE4500A3EB88 /* Orders.swift */,
+				A9F72BF52C8E2E6600D884E6 /* DumyReview.swift */,
 				A943E1132C8A5A5A00E655C8 /* Customers.swift */,
 				C6B3D69C2C8B32A900063E52 /* DraftOrders.swift */,
 				A970BF2B2C87F3AF0082ED45 /* Products.swift */,
@@ -481,9 +484,9 @@
 			isa = PBXGroup;
 			children = (
 				C67432752C863A43001A0753 /* ProductDetailsViewController.swift */,
+				C6AEABFC2C8D0A9800246123 /* AllReviewsViewController.swift */,
 				C6AEABF82C8D040900246123 /* ReviewCell.swift */,
 				C6AEABF52C8D03ED00246123 /* ReviewCell.xib */,
-				C6AEABFC2C8D0A9800246123 /* AllReviewsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -895,6 +898,7 @@
 				C6B78B7B2C8A117100889849 /* AddressViewController.swift in Sources */,
 				A9D0F0C82C864B1D00ABA14E /* BrandCollectionCell.swift in Sources */,
 				C662651C2C86597D003D317F /* AboutViewController.swift in Sources */,
+				A9F72BF62C8E2E6600D884E6 /* DumyReview.swift in Sources */,
 				C68C4EE12C87A6D40040DF87 /* BrandsCollection.swift in Sources */,
 				C66E1F7D2C8511B7001127F6 /* ShoppingCartViewModel.swift in Sources */,
 				A943E1142C8A5A5A00E655C8 /* Customers.swift in Sources */,
