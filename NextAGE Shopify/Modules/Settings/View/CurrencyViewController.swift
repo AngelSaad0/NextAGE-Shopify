@@ -9,8 +9,7 @@ import UIKit
 
 class CurrencyViewController: UIViewController {
     @IBOutlet weak var currencyTableView: UITableView!
-    
-    
+
     let userDefaultsManager: UserDefaultManager
     let currencies = ["USD", "EGP", "SAR", "AED"]
     
@@ -22,24 +21,13 @@ class CurrencyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         title = "Currency"
-        
         currencyTableView.delegate = self
         currencyTableView.dataSource = self
         // Do any additional setup after loading the view.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -68,6 +56,6 @@ extension CurrencyViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 90
     }
 }

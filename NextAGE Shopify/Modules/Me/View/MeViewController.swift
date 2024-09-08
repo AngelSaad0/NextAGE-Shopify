@@ -9,7 +9,6 @@ import UIKit
 
 class MeViewController: UIViewController {
     // MARK: -  @IBOutlet
-
     @IBOutlet var logInStack: UIStackView!
     @IBOutlet weak var userGreetingLabel: UILabel!
     @IBOutlet weak var ordersListTableView: UITableView!
@@ -24,9 +23,10 @@ class MeViewController: UIViewController {
     private var connectivityService:ConnectivityServiceProtocol
     var orderListResult: Orders?
     var wishListResult: [LineItem] = []
-    var currentCustomerId: Int?
     var currentCustomerName: String?
-    var isUserLoggedIn: Bool?
+#warning("delte default value of isUserLoggedIn ")
+    var isUserLoggedIn: Bool = true
+    var currentCustomerId: Int?
     var wishlistProducts: [ProductInfo]?
 
     // MARK: -  View LifeCycle
@@ -45,41 +45,46 @@ class MeViewController: UIViewController {
         super.init(coder: coder)
     }
     private func updateUI() {
-        ordersListTableView.register(UINib(nibName: "OrdersTableViewCell", bundle: nil), forCellReuseIdentifier: "OrdersTableViewCell")
-        isUserLoggedIn = userDefaultManager.isLogin
+#warning("uncomment UserLoggedIn ")
+        //isUserLoggedIn = userDefaultManager.isLogin
+        currentCustomerId = userDefaultManager.customerID
         registerButton.addCornerRadius(radius: 12)
         logInButton.addCornerRadius(radius: 12)
         wishlistCollectionView.register(UINib(nibName: "CategoriesCollectionCell", bundle: nil), forCellWithReuseIdentifier: "CategoriesCollectionCell")
+        ordersListTableView.register(UINib(nibName: "OrdersTableViewCell", bundle: nil), forCellReuseIdentifier: "OrdersTableViewCell")
+
     }
     // MARK: -  private Method
-    private func getOrderListData() {
+    private func checkInternetConnection() {
+            connectivityService.checkInternetConnection { [weak self] isConnected in
+                guard let self = self else { return }
+                if isConnected {
+                    self.updateUIForLoginState()
+                } else {
+                    self.showNoInternetAlert()
+                }
+            }
+        }
+     private func updateUIForLoginState() {
+        if isUserLoggedIn ?? false{
+            logInStack.isHidden = false
+            notLoggedInView.isHidden = true
+            userGreetingLabel.text = "Welcome \(currentCustomerName ?? "Sir")"
+            loadOrderListData()
+            loadWishlistData()
+        } else {
+            notLoggedInView.isHidden = false
+            logInStack.isHidden = true
+        }
+    }
+    private func loadOrderListData() {
         if (orderListResult?.orders.count  == 0) {
-            // ordersListTableView.displayEmptyMessage("No Orders Yet ")
+             ordersListTableView.displayEmptyMessage("No Orders Yet ")
         } else {
             ordersListTableView.removeEmptyMessage()
         }
     }
     private func loadWishlistData() {
-    }
-
-    private func checkInternetConnection() {
-        connectivityService.checkInternetConnection { [weak self] isConnected in
-            guard let self = self else { return }
-            if isConnected {
-                if self.isUserLoggedIn ?? false{
-                    self.logInStack.isHidden = false
-                    self.notLoggedInView.isHidden = true
-                    self.userGreetingLabel.text = "Welcome \(self.currentCustomerName ?? "Sir")"
-                    self.getOrderListData()
-                    self.loadWishlistData()
-                } else {
-                    self.notLoggedInView.isHidden = false
-                    self.logInStack.isHidden = true
-                }
-            } else {
-                self.showNoInternetAlert()
-            }
-        }
     }
     // MARK: -  Method
     @IBAction func viewAllOrdersClicked(_ sender: UIButton) {
@@ -99,8 +104,6 @@ class MeViewController: UIViewController {
 
     }
 
-
-
 }
 
 // MARK: - TableView DataSource & Delegate
@@ -108,17 +111,22 @@ class MeViewController: UIViewController {
 extension MeViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        #warning("uncomment")//orderListResult?.orders.count ?? 0
         return 10
+
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrdersTableViewCell", for: indexPath) as! OrdersTableViewCell
-        //cell.configure(with: T##Order)
+#warning("uncomment two line to confinge cell")
+//        if let order = orderListResult?.orders[indexPath.row] {
+//            cell.configure(with: order)
+//        }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let orderDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
-        navigationController?.pushViewController(orderDetailsViewController, animated: true)
+        print("yes")
+        pushViewController(vcIdentifier: "AllOrdersViewController", withNav: navigationController)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -130,12 +138,14 @@ extension MeViewController: UICollectionViewDelegate, UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
+#warning("uncomment ")
+        //wishListResult.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesCollectionCell", for: indexPath) as! CategoriesCollectionCell
-        // let wishlistItem = wishListResult[indexPath.row]
-        // cell.configure(with: wishlistItem)
+#warning("uncomment line to confinge cell")
+      //cell.configure(with: wishListResult[indexPath.row])
         return cell
     }
 
@@ -146,8 +156,6 @@ extension MeViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //        let width = collectionView.frame.width / 2 - 18
-        //        return CGSize(width: width, height: 200)
         return CGSize(width:collectionView.frame.width/2 - 18 , height: collectionView.frame.height)
 
     }

@@ -29,6 +29,8 @@ class ReviewCell: UITableViewCell {
     }
     
     func updateUI() {
+        #warning("user image changed")
+        userImageView.image = UIImage(named: "1person")
         cellBackgroundView.addCornerRadius(radius: 12)
         cellBackgroundView.addBorderView()
     }

@@ -16,7 +16,7 @@ class UserDefaultManager {
     var name: String = ""
     var email: String = ""
     var password: String = ""
-    var userID: Int = 0
+    var customerID: Int = 0
     var wishlistID: Int = 0
     var shoppingCartID: Int = 0
     var currency: String = ""
@@ -32,7 +32,7 @@ class UserDefaultManager {
         self.name = getSharedString(forKey: "name")
         self.email = getSharedString(forKey: "email")
         self.password = getSharedString(forKey: "password")
-        self.userID = getSharedInt(forKey: "userID")
+        self.customerID = getSharedInt(forKey: "userID")
         self.wishlistID = getSharedInt(forKey: "wishlistID")
         self.shoppingCartID = getSharedInt(forKey: "shoppingCartID")
         self.currency = getSharedString(forKey: "currency")
@@ -47,7 +47,7 @@ class UserDefaultManager {
         setSharedValue("name", value: name)
         setSharedValue("email", value: email)
         setSharedValue("password", value: password)
-        setSharedValue("userID", value: userID)
+        setSharedValue("userID", value: customerID)
         setSharedValue("wishlistID", value: wishlistID)
         setSharedValue("shoppingCartID", value: shoppingCartID)
         setSharedValue("currency", value: currency)
