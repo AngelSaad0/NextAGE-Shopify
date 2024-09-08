@@ -82,7 +82,7 @@ class MeViewController: UIViewController {
     }
     // MARK: -  Method
     @IBAction func viewAllOrdersClicked(_ sender: UIButton) {
-        pushViewController(storyboard: "Main", vcIdentifier: "OrdersDetailsViewController", withNav: navigationController)
+        pushViewController(storyboard: "Main", vcIdentifier: "AllOrdersViewController", withNav: navigationController)
 
     }
     @IBAction func viewAllWishListClicked(_ sender: UIButton) {

@@ -9,7 +9,7 @@ import UIKit
 import Combine
 import Kingfisher
 
-class CategoriesViewController: UIViewController {
+class CategoriesAndBrandsViewController: UIViewController {
     // MARK: -  @IBOutlet
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var categoryOrBrandCollectionView: UICollectionView!
@@ -76,10 +76,10 @@ class CategoriesViewController: UIViewController {
     }
 
     @IBAction func sortButtonClicked(_ sender: UIButton) {
-        isFilterApplied.toggle()
         filteredOrSortedProducts.sort {
             ((Double($0.variants[0].price) ?? 0.0) > (Double($1.variants[0].price) ?? 0.0)) == isFilterApplied
         }
+        isFilterApplied.toggle()
         categoryOrBrandCollectionView.reloadData()
     }
 
@@ -133,6 +133,9 @@ class CategoriesViewController: UIViewController {
     }
 
     func updateUI() {
+        if isBrandScreen {
+            title = "NextAGE"
+        }
         categoryOrBrandCollectionView.register(UINib(nibName: "CategoriesCollectionCell", bundle: nil), forCellWithReuseIdentifier: "CategoriesCollectionCell")
     }
 
@@ -195,13 +198,16 @@ class CategoriesViewController: UIViewController {
 
 // MARK: -  Collection View Data Source and Delegate Methods
 
-extension CategoriesViewController: UICollectionViewDelegate {
+extension CategoriesAndBrandsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 #warning("Move to product details vc")
+        let productDetailsVC = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
+        productDetailsVC.productID = filteredOrSortedProducts[indexPath.row].id
+        navigationController?.pushViewController(productDetailsVC, animated: true)
     }
 }
 
-extension CategoriesViewController: UICollectionViewDataSource {
+extension CategoriesAndBrandsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredOrSortedProducts.count
     }
@@ -214,7 +220,7 @@ extension CategoriesViewController: UICollectionViewDataSource {
     }
 }
 
-extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
+extension CategoriesAndBrandsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width / 2 - 25
         return CGSize(width: width, height: collectionView.frame.width - 120)
@@ -223,7 +229,7 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: -  Search Bar Delegate Methods
 
-extension CategoriesViewController: UISearchBarDelegate {
+extension CategoriesAndBrandsViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
         isSearching = true

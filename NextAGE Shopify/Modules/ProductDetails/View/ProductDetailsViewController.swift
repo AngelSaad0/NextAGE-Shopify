@@ -18,12 +18,15 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var productColorButton: UIButton!
     @IBOutlet weak var productDescriptionTextView: UITextView!
     @IBOutlet var reviewTableView: UITableView!
-
     @IBOutlet var addToChartButton: UIButton!
     
+    var productID: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "NextAGE"
+        
         addToChartButton.addCornerRadius(radius: 12)
         productSizeButton.addCornerRadius(radius: 12)
         productColorButton.addCornerRadius(radius: 12)

@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class BrandsCollectionCell: UICollectionViewCell {
+class BrandCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var brandBackground: UIView!
     @IBOutlet weak var brandImg: UIImageView!

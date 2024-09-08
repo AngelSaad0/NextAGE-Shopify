@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OrdersDetailsViewController: UIViewController {
+class AllOrdersViewController: UIViewController {
 
     @IBOutlet var orderTableView: UITableView!
     var orderListResult: Orders?
@@ -22,7 +22,7 @@ class OrdersDetailsViewController: UIViewController {
     }
 }
 
-extension OrdersDetailsViewController: UITableViewDelegate, UITableViewDataSource {
+extension AllOrdersViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
