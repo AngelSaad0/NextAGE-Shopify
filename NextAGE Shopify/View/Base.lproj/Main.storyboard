@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o4g-wP-Gov">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="awn-Ql-mXg">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -1863,6 +1863,7 @@ Hassle Free 30 days returns </string>
             <objects>
                 <tabBarController storyboardIdentifier="MainTabBarController" id="VUR-7Y-BzH" customClass="MainTabBarController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="NextAGE" id="jAz-ex-ZD9">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Joj-Og-sqJ"/>
                         <barButtonItem key="leftBarButtonItem" title="Item" image="search" id="bon-ml-jqC">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -2004,7 +2005,7 @@ Hassle Free 30 days returns </string>
         <!--Home-->
         <scene sceneID="6Yp-Fa-QIq">
             <objects>
-                <viewController id="kgl-Vu-ACM" customClass="HomeViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="kgl-Vu-ACM" customClass="HomeViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iob-Fh-RnK">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2029,7 +2030,7 @@ Hassle Free 30 days returns </string>
                                             <rect key="frame" x="0.0" y="0.0" width="368" height="151"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="84S-vn-X3D">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="84S-vn-X3D">
                                                     <rect key="frame" x="0.0" y="0.0" width="368" height="151"/>
                                                 </imageView>
                                             </subviews>
@@ -2042,9 +2043,6 @@ Hassle Free 30 days returns </string>
                                                 <constraint firstItem="84S-vn-X3D" firstAttribute="height" secondItem="3Fx-NB-WZN" secondAttribute="height" id="jzq-nK-JPe"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <connections>
-                                            <outlet property="addsImg" destination="84S-vn-X3D" id="wqp-KM-DHO"/>
-                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -2094,7 +2092,7 @@ Hassle Free 30 days returns </string>
                                     <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="20"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BrandsCollectionCell" id="2Gk-eN-8zE" customClass="BrandsCollectionCell" customModule="NextAGE_Shopify" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BrandsCollectionCell" id="2Gk-eN-8zE" customClass="BrandCollectionCell" customModule="NextAGE_Shopify" customModuleProvider="target">
                                         <rect key="frame" x="30" y="0.0" width="333" height="295"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="oqb-iv-p4o">
@@ -2173,7 +2171,7 @@ Hassle Free 30 days returns </string>
         <!--Categories-->
         <scene sceneID="jCV-x2-Epb">
             <objects>
-                <viewController storyboardIdentifier="CategoriesViewController" id="1s1-sD-aPx" customClass="CategoriesViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoriesAndBrandsViewController" id="1s1-sD-aPx" customClass="CategoriesAndBrandsViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PF4-Mb-KRq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2549,10 +2547,10 @@ Hassle Free 30 days returns </string>
             </objects>
             <point key="canvasLocation" x="815" y="1349"/>
         </scene>
-        <!--Orders Details View Controller-->
+        <!--All Orders View Controller-->
         <scene sceneID="MYe-5S-wgJ">
             <objects>
-                <viewController storyboardIdentifier="OrdersDetailsViewController" id="DxG-al-cVL" customClass="OrdersDetailsViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AllOrdersViewController" id="DxG-al-cVL" customClass="AllOrdersViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BFe-G1-YXH">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2618,7 +2616,7 @@ Hassle Free 30 days returns </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4kf-NH-VnP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2229.770992366412" y="1348.5915492957747"/>
+            <point key="canvasLocation" x="2969" y="1349"/>
         </scene>
         <!--Product Details View Controller-->
         <scene sceneID="FWf-ZY-btD">
@@ -3041,7 +3039,7 @@ Hassle Free 30 days returns </string>
                                     <constraint firstAttribute="height" constant="48" id="SIG-2S-RZz"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add to chart">
+                                <buttonConfiguration key="configuration" style="plain" title="Add to cart">
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                             </button>
@@ -3118,6 +3116,21 @@ Hassle Free 30 days returns </string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="62G-pV-a2a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2059" y="599"/>
+        </scene>
+        <!--Order Details View Controller-->
+        <scene sceneID="Dim-uD-hAz">
+            <objects>
+                <viewController storyboardIdentifier="OrderDetailsViewController" id="z2Y-hZ-s4q" customClass="OrderDetailsViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CdR-1Y-Ske">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="2vu-ab-aiT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GOg-jB-qIJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2185" y="1349"/>
         </scene>
     </scenes>
     <resources>

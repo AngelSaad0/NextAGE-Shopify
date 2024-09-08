@@ -48,4 +48,8 @@ extension UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    func changeBackButtonName(name: String) {
+        navigationController?.navigationBar.topItem?.title = name
+    }
 }

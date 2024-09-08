@@ -21,7 +21,7 @@ class CategoriesCollectionCell: UICollectionViewCell {
         productImage.addCornerRadius(radius: 10)
         imageBackground.addCornerRadius(radius: 10)
         imageBackground.addBorderView(color: Colors.C191919.rawValue, width: 1)
-        imageBackground.applyShadow()
+//        imageBackground.applyShadow()
     }
     func configure(with cell: Product) {
         productImage.kf.setImage(with: URL(string: cell.image.src),placeholder: UIImage(named: "brand1"))

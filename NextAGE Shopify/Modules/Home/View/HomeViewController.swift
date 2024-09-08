@@ -23,7 +23,6 @@ class HomeViewController: UIViewController {
     private var connectivityService: ConnectivityServiceProtocol
     private var homeViewModel: HomeViewModel?
     private var brandsResultArray: [SmartCollection] = []
-    private var adsArray: [adsModel] = []
     private var loggedIn: Bool?
     private var currentPage = 0
     private var timer: Timer?
@@ -49,6 +48,7 @@ class HomeViewController: UIViewController {
     }
 
  private func updateUI() {
+     tabBarController?.navigationItem.title = "NextAGE"
      brandViewForTitle.addRoundedRadius(radius: 8)
 
     }
@@ -174,7 +174,7 @@ extension HomeViewController: UICollectionViewDelegate {
 #warning("let code will change")
             showCouponAlert(code: "code")
         } else if collectionView == brandsCollection {
-            let brandsVC = storyboard?.instantiateViewController(identifier: "CategoriesViewController") as! CategoriesViewController
+            let brandsVC = storyboard?.instantiateViewController(identifier: "CategoriesAndBrandsViewController") as! CategoriesAndBrandsViewController
             brandsVC.isBrandScreen = true
             brandsVC.brandLogoURL = brandsResultArray[indexPath.row].image.src
             brandsVC.selectedVendor = brandsResultArray[indexPath.row].title
@@ -191,12 +191,14 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == adsCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AdsCollectionCell", for: indexPath) as! AdsCollectionCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AdsCollectionCell", for: indexPath)
             let image = offersList[indexPath.row]
-            cell.configure(with: adsModel(image: image))
+            let imageView = cell.viewWithTag(1) as! UIImageView
+            imageView.image = UIImage(named: image)
+            imageView.addCornerRadius(radius: 10)
             return cell
         } else if collectionView == brandsCollection {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BrandsCollectionCell", for: indexPath) as! BrandsCollectionCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BrandsCollectionCell", for: indexPath) as! BrandCollectionCell
             cell.configure(with: brandsResultArray[indexPath.row])
             return cell
         }
