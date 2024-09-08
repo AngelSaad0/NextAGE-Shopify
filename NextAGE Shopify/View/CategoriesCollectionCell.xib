@@ -23,9 +23,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SFj-1P-vWF">
                                 <rect key="frame" x="8" y="8" width="1007" height="870"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="0vD-IN-wPf">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="10" translatesAutoresizingMaskIntoConstraints="NO" id="0vD-IN-wPf">
                                         <rect key="frame" x="0.0" y="0.0" width="1007" height="514"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QtU-n9-Hr1">
                                         <rect key="frame" x="0.0" y="522" width="1007" height="348"/>
@@ -83,13 +82,21 @@
                             <constraint firstAttribute="bottom" secondItem="SFj-1P-vWF" secondAttribute="bottom" constant="8" id="y1J-s4-IK5"/>
                         </constraints>
                     </view>
+                    <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UrA-3E-rw4">
+                        <rect key="frame" x="0.0" y="0.0" width="1023" height="886"/>
+                        <color key="backgroundColor" red="0.75686275960000005" green="0.74901962280000001" blue="0.75686275960000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="v3i-n0-55c" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7YL-ya-LPx"/>
+                <constraint firstItem="UrA-3E-rw4" firstAttribute="trailing" secondItem="v3i-n0-55c" secondAttribute="trailing" id="8ID-Qa-ZeM"/>
+                <constraint firstItem="UrA-3E-rw4" firstAttribute="top" secondItem="v3i-n0-55c" secondAttribute="top" id="X4G-CD-QGJ"/>
                 <constraint firstItem="v3i-n0-55c" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="aLq-ui-I0q"/>
                 <constraint firstAttribute="bottom" secondItem="v3i-n0-55c" secondAttribute="bottom" id="dRP-mk-R18"/>
+                <constraint firstItem="UrA-3E-rw4" firstAttribute="bottom" secondItem="v3i-n0-55c" secondAttribute="bottom" id="jQ4-s5-Ydm"/>
+                <constraint firstItem="UrA-3E-rw4" firstAttribute="leading" secondItem="v3i-n0-55c" secondAttribute="leading" id="scW-Ti-ySd"/>
                 <constraint firstAttribute="trailing" secondItem="v3i-n0-55c" secondAttribute="trailing" id="sgH-dQ-Ujv"/>
             </constraints>
             <size key="customSize" width="1023" height="886"/>
@@ -100,11 +107,12 @@
                 <outlet property="productImage" destination="0vD-IN-wPf" id="hog-dg-lKd"/>
                 <outlet property="productPrice" destination="S0x-dP-Wbj" id="PYh-DG-GJx"/>
                 <outlet property="productTitle" destination="jYM-qN-bKY" id="ZcU-kH-cw7"/>
+                <outlet property="shadowView" destination="UrA-3E-rw4" id="8bF-ig-PPI"/>
             </connections>
             <point key="canvasLocation" x="727.48091603053433" y="-67.605633802816911"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="5" width="275" height="183"/>
+        <image name="10" width="204" height="192"/>
     </resources>
 </document>

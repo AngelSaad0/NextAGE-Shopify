@@ -29,7 +29,7 @@ class ReviewCell: UITableViewCell {
     }
     
     func updateUI() {
-        cellBackgroundView.addCornerRadius(radius: 10)
-        cellBackgroundView.addBorderView(color: Colors.CBFBFBF.rawValue, width:0.5)
+        cellBackgroundView.addCornerRadius(radius: 12)
+        cellBackgroundView.addBorderView()
     }
 }

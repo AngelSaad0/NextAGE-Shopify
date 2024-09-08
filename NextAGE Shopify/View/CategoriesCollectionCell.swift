@@ -10,6 +10,8 @@ import UIKit
 class CategoriesCollectionCell: UICollectionViewCell {
     
     @IBOutlet var imageBackground: UIView!
+
+    @IBOutlet var shadowView: UIView!
     @IBOutlet var productImage: UIImageView!
     @IBOutlet var productTitle: UILabel!
     @IBOutlet var productDetails: UILabel!
@@ -18,9 +20,9 @@ class CategoriesCollectionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        productImage.addCornerRadius(radius: 10)
-        imageBackground.addCornerRadius(radius: 10)
-        imageBackground.addBorderView(color: Colors.C191919.rawValue, width: 0.3)
+       // productImage.addCornerRadius(radius: 10)
+        imageBackground.addCornerRadius(radius: 12)
+        imageBackground.addBorderView()
 //        imageBackground.applyShadow()
     }
     func configure(with cell: Product) {
