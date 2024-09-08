@@ -27,7 +27,7 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func showAlert(
+    @MainActor func showAlert(
         title: String,
         message: String,
         okTitle: String = "OK",
@@ -45,6 +45,24 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: okTitle, style: okStyle, handler: okHandler))
         
         alert.addAction(UIAlertAction(title: cancelTitle, style: cancelStyle, handler: cancelHandler))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @MainActor func showAlert(
+        title: String,
+        message: String,
+        okTitle: String = "OK",
+        okStyle: UIAlertAction.Style = .default,
+        cancelStyle: UIAlertAction.Style = .cancel,
+        okHandler: ((UIAlertAction) -> Void)? = nil
+    ) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: okTitle, style: okStyle, handler: okHandler))
         
         present(alert, animated: true, completion: nil)
     }

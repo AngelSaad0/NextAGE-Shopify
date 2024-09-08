@@ -16,6 +16,7 @@ enum ShopifyAPI {
 
     case smartCollections
     case products
+    case product(id: Int)
     case orders
     case order(id: String)
     case customers
@@ -28,6 +29,8 @@ enum ShopifyAPI {
             return "smart_collections.json"
         case .products:
             return "products.json"
+        case .product(let id):
+            return "products/\(id).json"
         case .orders:
             return "orders.json"
         case .order(let id):

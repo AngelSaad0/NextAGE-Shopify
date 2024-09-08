@@ -27,7 +27,7 @@ class MeViewController: UIViewController {
     var currentCustomerId: Int?
     var currentCustomerName: String?
     var isUserLoggedIn: Bool?
-    var wishlistProducts: [Product]?
+    var wishlistProducts: [ProductInfo]?
 
     // MARK: -  View LifeCycle
     override func viewDidLoad() {

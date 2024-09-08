@@ -37,8 +37,8 @@ class CategoriesAndBrandsViewController: UIViewController {
     private let activityIndicator = UIActivityIndicatorView(style: .large)
     var itemsCountPublisher = PassthroughSubject<Int, Never>()
     private var cancellables = Set<AnyCancellable>()
-    var productResults: [Product] = []
-    var filteredOrSortedProducts: [Product] = [] {
+    var productResults: [ProductInfo] = []
+    var filteredOrSortedProducts: [ProductInfo] = [] {
         didSet {
             itemsCountLabel.text = "\(filteredOrSortedProducts.count) Items"
         }
