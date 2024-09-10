@@ -79,6 +79,8 @@ class UserDefaultManager {
         removeValue(forKey: "shoppingCart")
         removeValue(forKey: "wishlist")
         removeValue(forKey: "exchangeRate")
+        clearCache()
+        getStoredData()
     }
     
     private func setSharedValue(_ key: String, value: Any) {
@@ -104,6 +106,7 @@ class UserDefaultManager {
     
     private func removeValue(forKey key: String) {
         self.pref.removeObject(forKey: key)
+        self.pref.synchronize()
     }
     private func clearCache() {
         let domain = Bundle.main.bundleIdentifier ?? ""
