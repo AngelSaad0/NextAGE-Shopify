@@ -13,6 +13,7 @@ class AddressViewController: UIViewController {
     @IBOutlet weak var selectPayment: UIButton!
     @IBOutlet var addNewAddressButton: UIButton!
     
+    var isSettings = false
     let addresses = [
         ("Eiffel tower, floor 7", "gps"),
         ("Eiffel tower, floor 9", "gps")
@@ -20,13 +21,10 @@ class AddressViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = "Address"
-        
-
         updateUI()
     }
     private func updateUI() {
+        title = "Address"
         addNewAddressButton.addCornerRadius(radius: 12)
         selectPayment.addCornerRadius(radius: 12)
         addressesTableView.delegate = self
