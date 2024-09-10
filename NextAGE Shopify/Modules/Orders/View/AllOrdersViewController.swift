@@ -56,8 +56,9 @@ class AllOrdersViewController: UIViewController {
             if self.orders.count == 0 {
                 self.orderTableView.displayEmptyMessage("No Orders Yet ")
             } else {
-                self.orderTableView.reloadData()
+                self.orderTableView.removeEmptyMessage()
             }
+            self.orderTableView.reloadData()
         }
     }
 }

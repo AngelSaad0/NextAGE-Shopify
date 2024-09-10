@@ -33,11 +33,18 @@ class CategoriesCollectionCell: UICollectionViewCell {
 
     }
     func configure(with cell: LineItem) {
-        productImage.kf.setImage(with: URL(string: cell.properties[0].value ?? ""),placeholder: UIImage(named: "brand1"))
+        productImage.kf.setImage(with: URL(string: cell.properties[0].value),placeholder: UIImage(named: "brand1"))
         productTitle.text = "Quantity: \(cell.quantity)"
         productPrice.text = cell.price
-#warning("cell.productID?.descriptione")
         productDetails.text = cell.name?.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
+        currency.text = UserDefaultManager.shared.currency
+
+    }
+    func configureForWishlist(with cell: LineItem) {
+        productImage.kf.setImage(with: URL(string: cell.properties[0].value),placeholder: UIImage(named: "brand1"))
+        productTitle.text = cell.title?.split(separator: "|").first?.trimmingCharacters(in: .whitespaces)
+        productPrice.text = cell.price
+        productDetails.text = cell.title?.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
         currency.text = UserDefaultManager.shared.currency
 
     }

@@ -147,6 +147,7 @@ class HomeViewController: UIViewController {
             .sink { [weak self] isConnected in
                 if isConnected {
                     self?.loadBrands()
+                    self?.brandsCollection.removeEmptyMessage()
                 } else {
                     self?.showNoInternetAlert()
                     self?.brandsCollection.displayEmptyMessage("No items found")
