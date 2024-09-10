@@ -21,18 +21,18 @@ class MeViewController: UIViewController {
     private var networkManager:NetworkManager
     private var userDefaultManager:UserDefaultManager
     private var connectivityService:ConnectivityServiceProtocol
-    var orderListResult: Orders?
+    let ordersIndicator = UIActivityIndicatorView(style: .large)
+    let wishlistIndicator = UIActivityIndicatorView(style: .large)
+    var orders: [Order] = []
     var wishListResult: [LineItem] = []
-    var currentCustomerName: String?
-#warning("delte default value of isUserLoggedIn ")
-    var isUserLoggedIn: Bool = true
+    var customerName: String?
+    var isUserLoggedIn: Bool?
     var currentCustomerId: Int?
     var wishlistProducts: [ProductInfo]?
 
     // MARK: -  View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        orderListResult = Orders(orders: [])
         checkInternetConnection()
         updateUI()
     }
@@ -44,17 +44,23 @@ class MeViewController: UIViewController {
         connectivityService = ConnectivityService.shared
         super.init(coder: coder)
     }
+    // MARK: -  private Method
     private func updateUI() {
-#warning("uncomment UserLoggedIn ")
-        //isUserLoggedIn = userDefaultManager.isLogin
+        isUserLoggedIn = userDefaultManager.isLogin
         currentCustomerId = userDefaultManager.customerID
+        customerName = userDefaultManager.name == "" ? nil : userDefaultManager.name
         registerButton.addCornerRadius(radius: 12)
         logInButton.addCornerRadius(radius: 12)
         wishlistCollectionView.register(UINib(nibName: "CategoriesCollectionCell", bundle: nil), forCellWithReuseIdentifier: "CategoriesCollectionCell")
         ordersListTableView.register(UINib(nibName: "OrdersTableViewCell", bundle: nil), forCellReuseIdentifier: "OrdersTableViewCell")
-
+        setupIndicators()
     }
-    // MARK: -  private Method
+    private func setupIndicators() {
+        ordersIndicator.center = CGPoint(x: view.center.x, y: ordersListTableView.center.y + 80)
+        view.addSubview(ordersIndicator)
+        wishlistIndicator.center = CGPoint(x: view.center.x, y: wishlistCollectionView.center.y + 80)
+        view.addSubview(wishlistIndicator)
+    }
     private func checkInternetConnection() {
             connectivityService.checkInternetConnection { [weak self] isConnected in
                 guard let self = self else { return }
@@ -69,24 +75,41 @@ class MeViewController: UIViewController {
         if isUserLoggedIn ?? false{
             logInStack.isHidden = false
             notLoggedInView.isHidden = true
-            userGreetingLabel.text = "Welcome \(currentCustomerName ?? "Sir")"
-            loadOrderListData()
+            userGreetingLabel.text = "Welcome \(customerName ?? "Sir")"
+            updateUserOrders()
             loadWishlistData()
         } else {
             notLoggedInView.isHidden = false
             logInStack.isHidden = true
         }
     }
-    private func loadOrderListData() {
-        if (orderListResult?.orders.count  == 0) {
-             ordersListTableView.displayEmptyMessage("No Orders Yet ")
-        } else {
-            ordersListTableView.removeEmptyMessage()
+    private func updateUserOrders() {     
+        ordersIndicator.startAnimating()
+        wishlistIndicator.startAnimating()
+        fetchAllOrders { orders in
+            self.ordersIndicator.stopAnimating()
+            guard let orders = orders else {
+                self.ordersListTableView.displayEmptyMessage("No Orders Yet ")
+                displayMessage(massage: .ordersFetchingFailed, isError: true)
+                return
+            }
+            self.orders = orders.filter {$0.customer.id == self.currentCustomerId}
+            if (self.orders.count == 0) {
+                self.ordersListTableView.displayEmptyMessage("No Orders Yet ")
+            } else {
+                self.ordersListTableView.removeEmptyMessage()
+                self.ordersListTableView.reloadData()
+            }
         }
     }
     private func loadWishlistData() {
     }
-    // MARK: -  Method
+    private func fetchAllOrders(completion: @escaping ([Order]?)->()) {
+        networkManager.fetchData(from: ShopifyAPI.orders.shopifyURLString(), responseType: Orders.self) { result in
+            completion(result?.orders)
+        }
+    }
+    // MARK: - IBActions
     @IBAction func viewAllOrdersClicked(_ sender: UIButton) {
         pushViewController(vcIdentifier: "AllOrdersViewController", withNav: navigationController)
 
@@ -111,21 +134,15 @@ class MeViewController: UIViewController {
 extension MeViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        #warning("uncomment")//orderListResult?.orders.count ?? 0
-        return 10
-
+        return min(orders.count, 2)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrdersTableViewCell", for: indexPath) as! OrdersTableViewCell
-#warning("uncomment two line to confinge cell")
-//        if let order = orderListResult?.orders[indexPath.row] {
-//            cell.configure(with: order)
-//        }
+        cell.configure(with: orders[indexPath.row])
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("yes")
         pushViewController(vcIdentifier: "AllOrdersViewController", withNav: navigationController)
     }
 

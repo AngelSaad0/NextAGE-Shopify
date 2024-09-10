@@ -8,14 +8,20 @@
 import Foundation
 
 
-// MARK: - Welcome
+// MARK: - Orders
 struct Orders: Codable {
     var orders: [Order]
+}
+
+// MARK: - OrderWrapper
+struct OrderWrapper: Codable {
+    var order: Order
 }
 
 // MARK: - Order
 struct Order: Codable {
     let id: Int
+    let orderNumber: Int
     let lineItems: [LineItem]
     let createdAt: String
     let currency: String
@@ -23,19 +29,19 @@ struct Order: Codable {
     let name: String
     let subtotalPrice: String
     let totalPrice: String
-    #warning("customer model")
-   //let customer: Customer
+    let customer: CustomerInfo
     let currentTotalDiscounts: String
     let totalDiscounts: String
     enum CodingKeys: String, CodingKey {
         case id
+        case orderNumber = "order_number"
         case lineItems = "line_items"
         case createdAt = "created_at"
         case currency
         case currentSubtotalPrice = "current_subtotal_price"
         case name
         case totalDiscounts = "total_discounts"
-       // case customer
+        case customer
         case currentTotalDiscounts = "current_total_discounts"
         case totalPrice = "total_price"
         case subtotalPrice = "subtotal_price"

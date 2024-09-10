@@ -39,16 +39,16 @@ class OrdersTableViewCell: UITableViewCell {
     }
 // MARK: -  configure
     func configure(with order: Order) {
-           orderNumberLabel.text = "Order No \(order.id)"
+           orderNumberLabel.text = "#\(order.orderNumber)"
            totalPriceLabel.text = "\(order.totalPrice) \(order.currency)"
            createdDateLabel.text = formatDate(order.createdAt)
        }
-    func configure(with lineItem: LineItem) {
-           orderNumberLabel.text = "Order No \(lineItem.id)"
-           totalPriceLabel.text = "\(lineItem.price) \(lineItem.title ?? "")"
-        #warning("LineItem havant data what is correct pass all order array ?")
-       // createdDateLabel.text = formatDate(LineItem.createdAt)
-
-       }
+//    func configure(with lineItem: LineItem) {
+//           orderNumberLabel.text = "Order No \(lineItem.id)"
+//           totalPriceLabel.text = "\(lineItem.price) \(lineItem.title ?? "")"
+//        #warning("LineItem havant data what is correct pass all order array ?")
+//       // createdDateLabel.text = formatDate(LineItem.createdAt)
+//
+//       }
 
 }

@@ -37,5 +37,7 @@ public enum VaildMassage: String {
    case removedFromWishlist = "Item successfully removed from wishlist"
    case addedToShoppingCart = "Item successfully added to shopping cart"
    case removedFromShoppingCart = "Item successfully removed from shopping cart"
+    
+   case ordersFetchingFailed = "Error happened while loading your orders"
 }
 
