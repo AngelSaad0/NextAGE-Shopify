@@ -33,15 +33,12 @@ class CategoriesCollectionCell: UICollectionViewCell {
 
     }
     func configure(with cell: LineItem) {
-#warning("productImage.image ")
-//        productImage.kf.setImage(with: URL(string: cell.name ?? ""),placeholder: UIImage(named: "brand1"))
-      //  productImage.image = UIImage(named: "brand1")
-        productTitle.text = cell.name
+        productImage.kf.setImage(with: URL(string: cell.properties[0].value ?? ""),placeholder: UIImage(named: "brand1"))
+        productTitle.text = "Quantity: \(cell.quantity)"
         productPrice.text = cell.price
 #warning("cell.productID?.descriptione")
-        productDetails.text = cell.productID?.description
-        currency.text = UserDefaults.standard.string(forKey: "currencyTitle") ?? "USD"
+        productDetails.text = cell.name?.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
+        currency.text = UserDefaultManager.shared.currency
 
     }
-
 }
