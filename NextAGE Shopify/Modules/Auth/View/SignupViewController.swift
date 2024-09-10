@@ -136,7 +136,9 @@ class SignUpViewController: UIViewController {
                         ]
                     ]
                     
-                    self.networkManager.updateData(at: ShopifyAPI.customer(id: String(createdCustomer.id ?? 0)).shopifyURLString(), with: note)
+                    self.networkManager.updateData(at: ShopifyAPI.customer(id: String(createdCustomer.id ?? 0)).shopifyURLString(), with: note) {
+                        #warning("think for logic for added trailing closure")   
+                    }
                 }
                 
                 print("Successfully created new Customer")

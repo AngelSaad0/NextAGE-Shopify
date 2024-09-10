@@ -19,11 +19,15 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var productDescriptionTextView: UITextView!
     @IBOutlet var reviewTableView: UITableView!
     @IBOutlet var viewAllReviewsButton: UIButton!
-    @IBOutlet var addToFavoriteButton: UIButton!
+    @IBOutlet weak var addToCartButton: UIButton!
+    @IBOutlet weak var addToFavoriteButton: UIButton!
     private var rating: Double = 0
     private var selectedVariantID:Int?
+    private var selectedVariantInventoryQuantity:Int?
     private var selectedColor:String?
     private var selectedSize:String?
+    private var wishlist: [LineItem]?
+    private var shoppingCart: [LineItem]?
 
     private var sizes: [String]? {
         didSet {
@@ -52,6 +56,7 @@ class ProductDetailsViewController: UIViewController {
         setupIndicator()
         updateUI()
         fetchProduct()
+        fetchDrafts()
 
     }
 
@@ -66,6 +71,7 @@ class ProductDetailsViewController: UIViewController {
     private func updateUI() {
         title = "NextAGE"
         addToFavoriteButton.addCornerRadius(radius: 12)
+        addToCartButton.addCornerRadius(radius: 12)
         productSizeButton.addCornerRadius(radius: 12)
         productColorButton.addCornerRadius(radius: 12)
         viewAllReviewsButton.addCornerRadius(radius: 12)
@@ -76,6 +82,21 @@ class ProductDetailsViewController: UIViewController {
         indicator.center = view.center
         indicator.startAnimating()
         view.addSubview(indicator)
+    }
+    
+    private func fetchDrafts() {
+        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultManger.shoppingCartID).shopifyURLString(), responseType: DraftOrderWrapper.self) { result in
+            self.shoppingCart = result?.draftOrder.lineItems
+            print("fetched shopping cart")
+            print(self.shoppingCart)
+        }
+        
+        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultManger.wishlistID).shopifyURLString(), responseType: DraftOrderWrapper.self) { result in
+            self.wishlist = result?.draftOrder.lineItems
+            self.updateFavoriteState()
+            print("fetched wishlist")
+            print(self.wishlist)
+        }
     }
 
     private func updateProductInfo() {
@@ -99,8 +120,9 @@ class ProductDetailsViewController: UIViewController {
             productCollectionView.reloadData()
             updateDropdownOptions()
             selectedVariantID = product.variants.first?.id
+            selectedVariantInventoryQuantity = product.variants.first?.inventoryQuantity
             
-            updateFavoriteState()
+//            updateFavoriteState()
             
 
 //            if let selectedSize = productSizeButton.titleLabel?.text,
@@ -113,7 +135,17 @@ class ProductDetailsViewController: UIViewController {
     }
     
     private func updateFavoriteState() {
-        isFavorite = userDefaultManger.wishlist.contains(product?.id ?? 0)
+//        isFavorite = userDefaultManger.wishlist.contains(product?.id ?? 0)
+        for item in wishlist ?? [] {
+            if productID == item.productID {
+                isFavorite = true
+                break
+            }
+        }
+        updateFavoriteImage()
+    }
+    
+    private func updateFavoriteImage() {
         let favoriteImage = UIImage(systemName: isFavorite ? "heart.fill" : "heart")
         addToFavoriteButton.setImage(favoriteImage, for: .normal)
     }
@@ -206,6 +238,7 @@ class ProductDetailsViewController: UIViewController {
             for variant in variants {
                 if selectedSize == variant.option1 && selectedColor == variant.option2 {
                     selectedVariantID = variant.id
+                    selectedVariantInventoryQuantity = variant.inventoryQuantity
                 }
             }
         }
@@ -229,26 +262,143 @@ class ProductDetailsViewController: UIViewController {
     @IBAction func viewAllReviewsButtonClicked(_ sender: UIButton) {
         pushViewController(vcIdentifier: "AllReviewsViewController", withNav: navigationController)
     }
-    @IBAction func addToWishListButtonClicked(_ sender: UIButton) {
-#warning("check if logged in first")
-#warning("post to draft order then append")
-        if isFavorite {
-            userDefaultManger.wishlist.removeAll{$0 == product?.id}
-        } else {
-            userDefaultManger.wishlist.append(productID ?? 0)
-        }
-        userDefaultManger.storeData()
-        updateFavoriteState()
-        
-        print(userDefaultManger.wishlist)
-    }
-    @IBAction func addToChartButtonClicked(_ sender: UIButton) {
-#warning("post to draft order then append")
-        updateSelectedVariantID()
-        userDefaultManger.shoppingCart.append(selectedVariantID ?? 0)
-        userDefaultManger.storeData()
-        print(userDefaultManger.shoppingCart)
+    @IBAction func addToCartButtonClicked(_ sender: UIButton) {
+        print(userDefaultManger.shoppingCartID)
+        if userDefaultManger.isLogin {
+            updateSelectedVariantID()
+            let newItem: [String: Any] = [
+                "variant_id": selectedVariantID ?? 0,
+                "quantity" : 1,
+                "properties":[
+                    [
+                        "name": "image",
+                        "value": self.product?.image.src ?? ""
+                    ],
+                    [
+                        "name": "inventoryQuantity",
+                        "value": String(self.selectedVariantInventoryQuantity ?? 0)]]
+            ]
+            
+            var cartLineItems: [[String: Any]] = []
+            for item in shoppingCart ?? [] {
+                var properties : [[String: String]] = []
+                if item.variantID != nil {
+                    for property in item.properties {
+                        properties.append(["name":property.name, "value": property.value])
+                    }
+                    cartLineItems.append(["variant_id": item.variantID ?? 0, "quantity": item.quantity, "properties": properties, "product_id": item.productID ?? 0])
+                }
+            }
+            
+            cartLineItems.append(newItem)
+            print("added")
+            
+            networkManager.updateData(at: ShopifyAPI.draftOrder(id: userDefaultManger.shoppingCartID).shopifyURLString(), with: ["draft_order": ["line_items": cartLineItems]]) {
+                displayMessage(massage: .addedToShoppingCart, isError: false)
+            }
 
+            self.addToCartButton.setTitle("Added To Cart Successfully", for: .normal)
+            self.addToCartButton.isEnabled = false
+//            self.addToCartButton.alpha = 0.5
+//            updateSelectedVariantID()
+//            userDefaultManger.shoppingCart.append(selectedVariantID ?? 0)
+//            userDefaultManger.storeData()
+//            print(userDefaultManger.shoppingCart)
+        } else {
+            showAlert(title: "Login first", message: "You need to login in order to add this product to shopping cart", okTitle: "Login") { _ in
+                self.pushViewController(vcIdentifier: "SignInViewController", withNav: self.navigationController)
+            } cancelHandler: { _ in }
+        }
+
+#warning("post to draft order then append")
+    }
+    @IBAction func addToWishListButtonClicked(_ sender: UIButton) {
+        print(userDefaultManger.wishlistID)
+
+        if userDefaultManger.isLogin {
+            if isFavorite {
+//                userDefaultManger.wishlist.removeAll{$0 == product?.id}
+                
+                updateSelectedVariantID()
+                
+                var wishlistLineItems: [[String: Any]] = []
+                for item in wishlist ?? [] {
+                    var properties : [[String: String]] = []
+                    if item.variantID != nil && item.productID != productID {
+                        for property in item.properties {
+                            properties.append(["name":property.name, "value": property.value])
+                        }
+                        wishlistLineItems.append(["variant_id": item.variantID ?? 0, "quantity": item.quantity, "properties": properties, "product_id": item.productID ?? 0])
+                    }
+                }
+                
+                if wishlistLineItems.isEmpty {
+                    wishlistLineItems = [[
+                        "title": "Test",
+                        "quantity": 1,
+                        "price": "0",
+                        "properties":[]
+                    ]]
+                }
+                
+                networkManager.updateData(at: ShopifyAPI.draftOrder(id: userDefaultManger.wishlistID).shopifyURLString(), with: ["draft_order": ["line_items": wishlistLineItems]]) {
+                    displayMessage(massage: .removedFromWishlist, isError: false)
+                    self.isFavorite = false
+                    self.updateFavoriteImage()
+                }
+                
+                
+                
+                
+                
+                
+            } else {
+                updateSelectedVariantID()
+                let newItem: [String: Any] = [
+                    "variant_id": selectedVariantID ?? 0,
+                    "quantity" : 1,
+                    "properties":[
+                        [
+                            "name": "image",
+                            "value": self.product?.image.src ?? ""
+                        ],
+                        [
+                            "name": "inventoryQuantity",
+                            "value": String(self.selectedVariantInventoryQuantity ?? 0)]]
+                ]
+                
+                var wishlistLineItems: [[String: Any]] = []
+                for item in wishlist ?? [] {
+                    var properties : [[String: String]] = []
+                    for property in item.properties {
+                        if item.variantID != nil {
+                            properties.append(["name":property.name, "value": property.value])
+                        }
+                        wishlistLineItems.append(["variant_id": item.variantID ?? 0, "quantity": item.quantity, "properties": properties, "product_id": item.productID ?? 0])
+                    }
+                }
+                
+                wishlistLineItems.append(newItem)
+                
+                networkManager.updateData(at: ShopifyAPI.draftOrder(id: userDefaultManger.wishlistID).shopifyURLString(), with: ["draft_order": ["line_items": wishlistLineItems]]) {
+                    displayMessage(massage: .addedToWishlist, isError: false)
+                    self.isFavorite = true
+                    self.updateFavoriteImage()
+                }
+                
+                
+//                userDefaultManger.wishlist.append(productID ?? 0)
+//                            userDefaultManger.storeData()
+//                            updateFavoriteState()
+            }
+
+            
+//            print(userDefaultManger.wishlist)
+        } else {
+            showAlert(title: "Login first", message: "You need to login in order to add this product to whishlist", okTitle: "Login") { _ in
+                self.pushViewController(vcIdentifier: "SignInViewController", withNav: self.navigationController)
+            } cancelHandler: { _ in }
+        }
     }
 
 

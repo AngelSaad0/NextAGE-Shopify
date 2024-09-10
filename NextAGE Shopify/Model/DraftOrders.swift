@@ -35,7 +35,7 @@ struct DraftOrder: Codable {
     let note: String?
     let noteAttributes: [NoteAttribute]
     let email, currency: String?
-//    let lineItems: [LineItem]
+    let lineItems: [LineItem]
     let paymentTerms: PaymentTerms?
     let appliedDiscount: AppliedDiscount?
     let subtotalPrice, totalPrice: String
@@ -50,7 +50,7 @@ struct DraftOrder: Codable {
         case note
         case noteAttributes = "note_attributes"
         case email, currency
-//        case lineItems = "line_items"
+        case lineItems = "line_items"
         case paymentTerms = "payment_terms"
         case appliedDiscount = "applied_discount"
         case subtotalPrice = "subtotal_price"
