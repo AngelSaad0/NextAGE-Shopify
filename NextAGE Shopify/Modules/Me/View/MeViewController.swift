@@ -19,16 +19,15 @@ class MeViewController: UIViewController {
 
     // MARK: -  Properties
     private var networkManager:NetworkManager
-    private var userDefaultManager:UserDefaultManager
+    private var userDefaultsManager:UserDefaultManager
     private var connectivityService:ConnectivityServiceProtocol
     let ordersIndicator = UIActivityIndicatorView(style: .large)
     let wishlistIndicator = UIActivityIndicatorView(style: .large)
     var orders: [Order] = []
-    var wishListResult: [LineItem] = []
+    var wishlist: [LineItem] = []
     var customerName: String?
     var isUserLoggedIn: Bool?
     var currentCustomerId: Int?
-    var wishlistProducts: [ProductInfo]?
 
     // MARK: -  View LifeCycle
     override func viewDidLoad() {
@@ -36,19 +35,23 @@ class MeViewController: UIViewController {
         checkInternetConnection()
         updateUI()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        updateUserOrders()
+        loadWishlistData()
+    }
 
     // MARK: - Required init
     required init?(coder: NSCoder) {
         networkManager = NetworkManager()
-        userDefaultManager = UserDefaultManager.shared
+        userDefaultsManager = UserDefaultManager.shared
         connectivityService = ConnectivityService.shared
         super.init(coder: coder)
     }
     // MARK: -  private Method
     private func updateUI() {
-        isUserLoggedIn = userDefaultManager.isLogin
-        currentCustomerId = userDefaultManager.customerID
-        customerName = userDefaultManager.name == "" ? nil : userDefaultManager.name
+        isUserLoggedIn = userDefaultsManager.isLogin
+        currentCustomerId = userDefaultsManager.customerID
+        customerName = userDefaultsManager.name == "" ? nil : userDefaultsManager.name
         registerButton.addCornerRadius(radius: 12)
         logInButton.addCornerRadius(radius: 12)
         wishlistCollectionView.register(UINib(nibName: "CategoriesCollectionCell", bundle: nil), forCellWithReuseIdentifier: "CategoriesCollectionCell")
@@ -98,11 +101,26 @@ class MeViewController: UIViewController {
                 self.ordersListTableView.displayEmptyMessage("No Orders Yet ")
             } else {
                 self.ordersListTableView.removeEmptyMessage()
-                self.ordersListTableView.reloadData()
             }
+            self.ordersListTableView.reloadData()
         }
     }
     private func loadWishlistData() {
+        wishlistIndicator.startAnimating()
+        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultsManager.wishlistID).shopifyURLString(), responseType: DraftOrderWrapper.self) { result in
+            self.wishlist = result?.draftOrder.lineItems ?? []
+            if self.wishlist.first?.variantID == nil {
+                self.wishlist = Array(self.wishlist.dropFirst())
+            }
+            self.wishlistIndicator.stopAnimating()
+            if self.wishlist.count == 0 {
+                self.wishlistCollectionView.displayEmptyMessage("Add some products to your wishlist ")
+            } else {
+                self.wishlistCollectionView.removeEmptyMessage()
+            }
+            self.wishlistCollectionView.reloadData()
+            
+        }
     }
     private func fetchAllOrders(completion: @escaping ([Order]?)->()) {
         networkManager.fetchData(from: ShopifyAPI.orders.shopifyURLString(), responseType: Orders.self) { result in
@@ -154,21 +172,18 @@ extension MeViewController: UITableViewDelegate, UITableViewDataSource {
 extension MeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-#warning("uncomment ")
-        //wishListResult.count
+        return wishlist.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesCollectionCell", for: indexPath) as! CategoriesCollectionCell
-#warning("uncomment line to confinge cell")
-      //cell.configure(with: wishListResult[indexPath.row])
+        cell.configureForWishlist(with: wishlist[indexPath.row])
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
-        productDetailsViewController.productID = wishlistProducts?[indexPath.row].id ?? 0
+        productDetailsViewController.productID = wishlist[indexPath.row].productID
         navigationController?.pushViewController(productDetailsViewController, animated: true)
     }
 

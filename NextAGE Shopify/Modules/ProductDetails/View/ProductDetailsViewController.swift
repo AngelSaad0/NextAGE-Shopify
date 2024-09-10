@@ -370,8 +370,8 @@ class ProductDetailsViewController: UIViewController {
                 var wishlistLineItems: [[String: Any]] = []
                 for item in wishlist ?? [] {
                     var properties : [[String: String]] = []
-                    for property in item.properties {
-                        if item.variantID != nil {
+                    if item.variantID != nil {
+                        for property in item.properties {
                             properties.append(["name":property.name, "value": property.value])
                         }
                         wishlistLineItems.append(["variant_id": item.variantID ?? 0, "quantity": item.quantity, "properties": properties, "product_id": item.productID ?? 0])
