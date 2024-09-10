@@ -70,8 +70,10 @@ class NetworkManager {
         makeRequest(url: url, method: .post, parameters: parameters, responseType: EmptyResponse.self) { _ in }
     }
     
-    func updateData(at url: String, with parameters: Parameters) {
-        makeRequest(url: url, method: .put, parameters: parameters, responseType: EmptyResponse.self) { _ in }
+    func updateData(at url: String, with parameters: Parameters, compilation: @escaping()->()) {
+        makeRequest(url: url, method: .put, parameters: parameters, responseType: EmptyResponse.self) { _ in
+                compilation()
+        }
     }
     
     func deleteData(at url: String) {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -2357,16 +2357,16 @@ Hassle Free 30 days returns </string>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-dk-2Pf">
                                 <rect key="frame" x="16" y="760" width="261" height="48"/>
-                                <color key="backgroundColor" red="0.19607841970000001" green="0.45098042490000001" blue="0.86274516580000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="i0j-NV-U3z"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add to cart">
+                                <buttonConfiguration key="configuration" style="filled" title="Add to cart">
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" name="#0079FB"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="addToChartButtonClicked:" destination="cYa-5v-MXl" eventType="touchUpInside" id="8UY-Hq-g6z"/>
+                                    <action selector="addToCartButtonClicked:" destination="cYa-5v-MXl" eventType="touchUpInside" id="8UY-Hq-g6z"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2397,6 +2397,7 @@ Hassle Free 30 days returns </string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addToCartButton" destination="Smx-dk-2Pf" id="8TJ-5y-B5G"/>
                         <outlet property="addToFavoriteButton" destination="oyL-9T-Hy9" id="5eO-8r-hbx"/>
                         <outlet property="productCollectionView" destination="zwc-nf-5rF" id="Zfl-c9-hUQ"/>
                         <outlet property="productColorButton" destination="jRh-rJ-BmB" id="OyO-dj-4Lp"/>

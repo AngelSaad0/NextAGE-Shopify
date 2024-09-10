@@ -32,5 +32,10 @@ public enum VaildMassage: String {
     
    case emailDoesNotExist = "Entered email does not exist"
    case passwordDoesNotMatch = "You have entered wrong password"
+    
+   case addedToWishlist = "Item successfully added to wishlist"
+   case removedFromWishlist = "Item successfully removed from wishlist"
+   case addedToShoppingCart = "Item successfully added to shopping cart"
+   case removedFromShoppingCart = "Item successfully removed from shopping cart"
 }
 
