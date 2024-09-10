@@ -82,10 +82,10 @@ class SignInViewController: UIViewController {
             displayMessage(massage: .passwordEmpty, isError: true)
             return false
         }
-        if !isValidPassword(passwordTextField.text?.trimmingCharacters(in: .whitespaces) ?? "") {
-            displayMessage(massage: .passwordVaild, isError: true)
-            return false
-        }
+//        if !isValidPassword(passwordTextField.text?.trimmingCharacters(in: .whitespaces) ?? "") {
+//            displayMessage(massage: .passwordVaild, isError: true)
+//            return false
+//        }
         return true
     }
     
