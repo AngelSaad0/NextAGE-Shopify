@@ -14,14 +14,23 @@ class AddressViewController: UIViewController {
     @IBOutlet var addNewAddressButton: UIButton!
     
     var isSettings = false
-    let addresses = [
-        ("Eiffel tower, floor 7", "gps"),
-        ("Eiffel tower, floor 9", "gps")
-    ]
-    
+    var addresses: [Address] = []
+    var defaultAddressIndex: Int?
+    var newDefaultAddressIndex: Int?
+    let networkManager: NetworkManager
+    let userDefaultsManager: UserDefaultManager
+    let indicator = UIActivityIndicatorView(style: .large)
+    required init?(coder: NSCoder) {
+        networkManager = NetworkManager()
+        userDefaultsManager = UserDefaultManager.shared
+        super.init(coder: coder)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        fetchAddresses()
     }
     private func updateUI() {
         title = "Address"
@@ -30,30 +39,53 @@ class AddressViewController: UIViewController {
         addressesTableView.delegate = self
         addressesTableView.dataSource = self
         selectPayment.isEnabled = false
-
-
+        if isSettings {
+            selectPayment.setTitle("Set as default address", for: .normal)
+        }
+        setupIndicator()
+        fetchAddresses()
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupIndicator() {
+        indicator.center = view.center
+        view.addSubview(indicator)
     }
-    */
+    
+    private func fetchAddresses() {
+        indicator.startAnimating()
+        networkManager.fetchData(from: ShopifyAPI.addresses(id: userDefaultsManager.customerID).shopifyURLString(), responseType: Addresses.self) { result in
+            self.indicator.stopAnimating()
+            guard let addresses = result?.addresses else {
+                displayMessage(massage: .addressesFetchingFailed, isError: true)
+                return
+            }
+            self.addresses = addresses
+            self.addressesTableView.reloadData()
+        }
+    }
 
     @IBAction func addAddressButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "AddAddressViewController")
-        self.navigationController?.pushViewController(vc, animated: true)
+        pushViewController(vcIdentifier: "AddAddressViewController", withNav: navigationController)
     }
-    @IBAction func selectPaymentButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "PaymentViewController")
-        self.navigationController?.pushViewController(vc, animated: true)
+    @IBAction func selectPaymentOrSetDefaultAddressButton(_ sender: Any) {
+        if isSettings {
+            // set default address
+            guard let selectedNewAddressIndex = newDefaultAddressIndex else {
+                displayMessage(massage: .newSelectedAddressFailed, isError: true)
+                return
+            }
+            let addressID = addresses[selectedNewAddressIndex].id
+            networkManager.updateData(at: ShopifyAPI.defaultAddress(addressID: addressID, customerID: userDefaultsManager.customerID).shopifyURLString(), with: [:]) {
+                displayMessage(massage: .defaultAddressUpdated, isError: false)
+                self.selectPayment.isEnabled = false
+                self.fetchAddresses()
+            }
+        } else {
+            // select payment
+            pushViewController(vcIdentifier: "PaymentViewController", withNav: navigationController)
+        }
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "PaymentViewController")
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -63,7 +95,10 @@ extension AddressViewController: UITableViewDelegate {
             (tableView.cellForRow(at: IndexPath(row: index, section: 0)) as! PaymentMethodCell).deselect()
         }
         (tableView.cellForRow(at: indexPath) as! PaymentMethodCell).select()
-        selectPayment.isEnabled = true
+        if isSettings {
+            newDefaultAddressIndex = indexPath.row
+            selectPayment.isEnabled = newDefaultAddressIndex != defaultAddressIndex
+        }
     }
 }
 
@@ -74,7 +109,16 @@ extension AddressViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PaymentMethodCell
-        cell.config(methodName: addresses[indexPath.row].0, methodImageName: addresses[indexPath.row].1)
+        cell.config(methodName: addresses[indexPath.row].address1, methodImageName: "gps")
+        if addresses[indexPath.row].addressDefault {
+            defaultAddressIndex = indexPath.row
+            cell.select()
+            if !isSettings {
+                selectPayment.isEnabled = true
+            }
+        } else {
+            cell.deselect()
+        }
         return cell
     }
     

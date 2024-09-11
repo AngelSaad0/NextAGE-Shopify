@@ -23,6 +23,8 @@ enum ShopifyAPI {
     case customer(id: String)
     case draftOrders
     case draftOrder(id: Int)
+    case addresses(id: Int)
+    case defaultAddress(addressID: Int, customerID: Int)
 
     private var path: String {
         switch self {
@@ -44,6 +46,10 @@ enum ShopifyAPI {
             return "draft_orders.json"
         case .draftOrder(id: let id):
             return "draft_orders/\(id).json"
+        case .addresses(id: let id):
+            return "customers/\(id)/addresses.json"
+        case .defaultAddress(let addressID, let customerID):
+            return "customers/\(customerID)/addresses/\(addressID)/default.json"
         }
         
     }
