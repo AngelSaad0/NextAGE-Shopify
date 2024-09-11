@@ -8,31 +8,64 @@
 import UIKit
 
 class AddAddressViewController: UIViewController {
-    @IBOutlet var cornerRaduisView:[UIView]!
-
+    // MARK: - IBOutlets
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var cityTextField: UITextField!
+    @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var defaultSwitch: UISwitch!
+    @IBOutlet weak var addAddressButton: UIButton!
+    @IBOutlet var cornerRadiusView:[UIView]!
+    // MARK: - Properties
+    let networkManager: NetworkManager
+    let userDefaultsManager: UserDefaultManager
+    let indicator = UIActivityIndicatorView(style: .large)
+    // MARK: - Required Init
+    required init?(coder: NSCoder) {
+        networkManager = NetworkManager()
+        userDefaultsManager = UserDefaultManager.shared
+        super.init(coder: coder)
+    }
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        updateUI()
+    }
+    // MARK: - Private Methods
+    private func updateUI() {
         title = "Add Address"
-        for view in cornerRaduisView {
+        for view in cornerRadiusView {
             view.addCornerRadius(radius: 12)
         }
-        // Do any additional setup after loading the view.
+        addAddressButton.addCornerRadius(radius: 12)
+        setupIndicator()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupIndicator() {
+        indicator.center = view.center
+        view.addSubview(indicator)
     }
-    */
-
+    private func addAddress(completion: @escaping ()->()) {
+        self.indicator.startAnimating()
+        networkManager.postData(to: ShopifyAPI.addresses(id: userDefaultsManager.customerID).shopifyURLString(), responseType: EmptyResponse.self, parameters: [
+            "address":
+                [
+                    "name": nameTextField.text ?? "",
+                    "address1": addressTextField.text ?? "",
+                    "city": cityTextField.text ?? "",
+                    "phone": phoneTextField.text ?? "",
+                    "default": defaultSwitch.isOn
+                ]
+        ]) { _ in
+            displayMessage(massage: .defaultAddressUpdated, isError: false)
+            self.indicator.stopAnimating()
+            completion()
+        }
+    }
+    // MARK: - IBActions
     @IBAction func addAddressButton(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        addAddress {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 

@@ -1613,7 +1613,7 @@ Hassle Free 30 days returns </string>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="selectPaymentButton:" destination="Nw5-kq-Q3M" eventType="touchUpInside" id="sYc-xe-pui"/>
+                                    <action selector="selectPaymentOrSetDefaultAddressButton:" destination="Nw5-kq-Q3M" eventType="touchUpInside" id="sYc-xe-pui"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFE-jz-rxs">
@@ -1667,14 +1667,14 @@ Hassle Free 30 days returns </string>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pD-Jy-czJ">
                                 <rect key="frame" x="20" y="758" width="353" height="50"/>
-                                <color key="backgroundColor" name="#0079FB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6AA-fd-khi"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add Address" cornerStyle="capsule">
+                                <buttonConfiguration key="configuration" style="filled" title="Add Address">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" name="#0079FB"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="addAddressButton:" destination="00f-og-zrb" eventType="touchUpInside" id="caV-SM-xyG"/>
@@ -1839,10 +1839,16 @@ Hassle Free 30 days returns </string>
                         </constraints>
                     </view>
                     <connections>
-                        <outletCollection property="cornerRaduisView" destination="Hh8-wy-Eqo" collectionClass="NSMutableArray" id="dmU-iE-wm5"/>
-                        <outletCollection property="cornerRaduisView" destination="STN-7B-wQ9" collectionClass="NSMutableArray" id="SaZ-R1-dER"/>
-                        <outletCollection property="cornerRaduisView" destination="9ME-ep-2Kf" collectionClass="NSMutableArray" id="6M4-fb-pq2"/>
-                        <outletCollection property="cornerRaduisView" destination="YPg-cd-PrP" collectionClass="NSMutableArray" id="M6y-Jj-UG4"/>
+                        <outlet property="addAddressButton" destination="6pD-Jy-czJ" id="T2X-3P-Z3e"/>
+                        <outlet property="addressTextField" destination="62K-Lv-LOk" id="Db8-7h-ql6"/>
+                        <outlet property="cityTextField" destination="ex4-ml-FDy" id="M3v-Ul-Ht5"/>
+                        <outlet property="defaultSwitch" destination="xI0-aq-oNw" id="StO-x0-qep"/>
+                        <outlet property="nameTextField" destination="c0p-eW-85V" id="zC5-0W-HUj"/>
+                        <outlet property="phoneTextField" destination="Nz6-2J-1gI" id="Njd-CT-wV1"/>
+                        <outletCollection property="cornerRadiusView" destination="Hh8-wy-Eqo" collectionClass="NSMutableArray" id="dmU-iE-wm5"/>
+                        <outletCollection property="cornerRadiusView" destination="STN-7B-wQ9" collectionClass="NSMutableArray" id="SaZ-R1-dER"/>
+                        <outletCollection property="cornerRadiusView" destination="9ME-ep-2Kf" collectionClass="NSMutableArray" id="6M4-fb-pq2"/>
+                        <outletCollection property="cornerRadiusView" destination="YPg-cd-PrP" collectionClass="NSMutableArray" id="M6y-Jj-UG4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eGm-k1-pUZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

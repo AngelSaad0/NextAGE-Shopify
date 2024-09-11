@@ -39,5 +39,10 @@ public enum VaildMassage: String {
    case removedFromShoppingCart = "Item successfully removed from shopping cart"
     
    case ordersFetchingFailed = "Error happened while loading your orders"
+    
+   case addressesFetchingFailed = "Error happened while loading your addresses"
+   case newSelectedAddressFailed = "Error happened while updating your default address"
+   case defaultAddressUpdated = "Default address updated successfully"
+
 }
 

@@ -36,8 +36,10 @@ class MeViewController: UIViewController {
         updateUI()
     }
     override func viewWillAppear(_ animated: Bool) {
-        updateUserOrders()
-        loadWishlistData()
+        if isUserLoggedIn ?? false {
+            updateUserOrders()
+            loadWishlistData()
+        }
     }
 
     // MARK: - Required init
@@ -75,7 +77,7 @@ class MeViewController: UIViewController {
             }
         }
      private func updateUIForLoginState() {
-        if isUserLoggedIn ?? false{
+        if isUserLoggedIn ?? false {
             logInStack.isHidden = false
             notLoggedInView.isHidden = true
             userGreetingLabel.text = "Welcome \(customerName ?? "Sir")"
@@ -88,7 +90,6 @@ class MeViewController: UIViewController {
     }
     private func updateUserOrders() {     
         ordersIndicator.startAnimating()
-        wishlistIndicator.startAnimating()
         fetchAllOrders { orders in
             self.ordersIndicator.stopAnimating()
             guard let orders = orders else {

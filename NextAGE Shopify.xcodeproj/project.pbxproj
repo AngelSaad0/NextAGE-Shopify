@@ -86,6 +86,7 @@
 		C6B78B7B2C8A117100889849 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B78B782C8A117100889849 /* AddressViewController.swift */; };
 		C6B78B7C2C8A117100889849 /* DiscountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B78B792C8A117100889849 /* DiscountViewController.swift */; };
 		C6B78B7D2C8A117100889849 /* AddAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B78B7A2C8A117100889849 /* AddAddressViewController.swift */; };
+		C6C53E6A2C919827009CD638 /* Addresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C53E692C919827009CD638 /* Addresses.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -172,6 +173,7 @@
 		C6B78B782C8A117100889849 /* AddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		C6B78B792C8A117100889849 /* DiscountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountViewController.swift; sourceTree = "<group>"; };
 		C6B78B7A2C8A117100889849 /* AddAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAddressViewController.swift; sourceTree = "<group>"; };
+		C6C53E692C919827009CD638 /* Addresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Addresses.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -458,6 +460,7 @@
 				A943E1132C8A5A5A00E655C8 /* Customers.swift */,
 				C6B3D69C2C8B32A900063E52 /* DraftOrders.swift */,
 				A970BF2B2C87F3AF0082ED45 /* Products.swift */,
+				C6C53E692C919827009CD638 /* Addresses.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -890,6 +893,7 @@
 				C68C4EC22C878ADC0040DF87 /* NetworkManager.swift in Sources */,
 				C68C4EC62C878CBE0040DF87 /* NetworkHelper.swift in Sources */,
 				C68C4EDF2C87A6B00040DF87 /* ShopfiyAPI.swift in Sources */,
+				C6C53E6A2C919827009CD638 /* Addresses.swift in Sources */,
 				A9AB32BB2C8CE3CF00A3EB88 /* OrdersTableViewCell.swift in Sources */,
 				C6AEAC2B2C8D2BB200246123 /* AddAddressViewModel.swift in Sources */,
 				A94A12312C84E5CD00AE0E09 /* SignupViewController.swift in Sources */,
