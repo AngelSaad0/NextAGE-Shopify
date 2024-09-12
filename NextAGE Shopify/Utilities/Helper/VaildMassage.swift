@@ -50,5 +50,8 @@ public enum VaildMassage: String {
    case discountCodeApplied = "Congratulations, discount code applied"
     
    case placingOrderFailed = "Error happened while sending your order"
+
+   case emptyOrderArray = "No order found"
+
 }
 
