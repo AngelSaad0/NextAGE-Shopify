@@ -20,10 +20,7 @@ class BrandCollectionCell: UICollectionViewCell {
     
     func updatUI(){
         brandBackground.addBorderView()
-        brandBackground.addRoundedRadius(radius: 12)
-        brandImg.addCornerRadius(radius: 12)
-        
-        brandBackground.clipsToBounds = true
+        [brandBackground,brandImg].forEach{$0?.addCornerRadius(radius: 12)}
     }
     
     func configure(with cell: SmartCollection) {

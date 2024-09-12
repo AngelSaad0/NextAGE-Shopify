@@ -20,10 +20,10 @@ class CategoriesCollectionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-       // productImage.addCornerRadius(radius: 10)
+        productImage.addCornerRadius(radius: 10)
         imageBackground.addCornerRadius(radius: 12)
         imageBackground.addBorderView()
-//        imageBackground.applyShadow()
+        //imageBackground.applyShadow()
     }
     func configure(with cell: ProductInfo) {
         productImage.kf.setImage(with: URL(string: cell.image.src),placeholder: UIImage(named: "brand1"))
