@@ -6,3 +6,38 @@
 //
 
 import Foundation
+
+class AddAddressViewModel {
+    // MARK: - Properties
+    let networkManager: NetworkManager
+    let userDefaultsManager: UserDefaultManager
+    
+    // MARK: - Closures
+    var setIndicator: (Bool)->() = {_ in}
+    var showSuccessMessage: ()->() = {}
+    
+    // MARK: - Init
+    init() {
+        networkManager = NetworkManager()
+        userDefaultsManager = UserDefaultManager.shared
+    }
+    
+    // MARK: - Public Methods
+    func addAddress(name: String?, address: String?, city: String?, phone: String?, isDefault: Bool, completion: @escaping ()->()) {
+        setIndicator(true)
+        networkManager.postData(to: ShopifyAPI.addresses(id: userDefaultsManager.customerID).shopifyURLString(), responseType: EmptyResponse.self, parameters: [
+            "address":
+                [
+                    "name": name ?? "",
+                    "address1": address ?? "",
+                    "city": city ?? "",
+                    "phone": phone ?? "",
+                    "default": isDefault
+                ]
+        ]) { _ in
+            self.showSuccessMessage()
+            self.setIndicator(false)
+            completion()
+        }
+    }
+}

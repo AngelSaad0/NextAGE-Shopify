@@ -43,6 +43,7 @@ public enum VaildMassage: String {
    case addressesFetchingFailed = "Error happened while loading your addresses"
    case newSelectedAddressFailed = "Error happened while updating your default address"
    case defaultAddressUpdated = "Default address updated successfully"
+   case newAddressAdded = "New address added successfully"
 
    case discountCodeEmpty = "You have not entered a discount code"
    case discountCodeFailed = "Entered discount code is not valid"
