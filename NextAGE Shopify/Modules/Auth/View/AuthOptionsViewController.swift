@@ -7,45 +7,69 @@
 
 import UIKit
 import AVFoundation
+
 class AuthOptionsViewController: UIViewController {
     // MARK: -  IBOutlet
     @IBOutlet var signInButton: UIButton!
     @IBOutlet var signUpButton: UIButton!
-    // MARK: -  properties
-    private var networkManager: NetworkManager
-    private var connectivityService: ConnectivityServiceProtocol
+    @IBOutlet var skipButton: UIButton!
 
-    // MARK: - Required init
-    required init?(coder: NSCoder) {
-        networkManager = NetworkManager()
-        connectivityService = ConnectivityService.shared
-        super.init(coder: coder)
-    }
+    // MARK: -  Properties
+    private var viewModel:AuthOptionsViewModel!
+
     // MARK: -  View Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
+        viewModel = AuthOptionsViewModel()
+        setupBindings()
+        setupViewModel()
+
+
     }
 
-    // MARK: -  private method
-    private func updateUI() {
-        signInButton.addCornerRadius(radius: 16)
-        signUpButton.addCornerRadius(radius: 16)
+    // MARK: -  private Method
+
+    private func setupViewModel() {
+        viewModel.navigateToViewController = { [weak self] viewControllerName in
+            self?.pushViewController(vcIdentifier: viewControllerName, withNav: self?.navigationController)
+        }
     }
+
+    private func  setupBindings(){
+        viewModel.checkConnectivity { [weak self] isConnected in
+            if !isConnected {
+                self!.showNoInternetAlert()
+            }
+        }
+    }
+    private func handleConnectivity(action: @escaping() -> Void) {
+        viewModel.checkConnectivity { [weak self] isConnected in
+            DispatchQueue.main.async {
+                if isConnected {
+                    action()
+                } else {
+                    self?.showNoInternetAlert()
+                }
+            }
+        }
+    }
+
     // MARK: -  Action Button
     @IBAction func skipButtonClicked(_ sender: UIButton) {
-        UserDefaultManager.shared.continueAsAGuest = true
-        UserDefaultManager.shared.storeData()
-        UIWindow.setRootViewController(storyboard:"Main", vcIdentifier : "MainTabBarNavigationController")
-
+        handleConnectivity {
+            self.viewModel.skipButtonClicked()
+        }
     }
 
     @IBAction func signInButtonClicked(_ sender: UIButton) {
-        pushViewController(vcIdentifier: "SignInViewController", withNav: navigationController)
+        handleConnectivity {
+            self.viewModel.signInButtonClicked()
+        }
     }
 
     @IBAction func signUpButtonClicked(_ sender: UIButton) {
-        pushViewController(vcIdentifier: "SignUpViewController", withNav: navigationController)
+        handleConnectivity {
+            self.viewModel.signUpButtonClicked()
+        }
     }
-
 }
