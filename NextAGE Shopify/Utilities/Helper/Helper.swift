@@ -94,11 +94,16 @@ func isValidMobileOrEmail(_ input: String) -> Bool {
     let mobileNumberPredicate = NSPredicate(format: "SELF MATCHES %@", mobileNumberRegex)
     return emailPredicate.evaluate(with: input) || mobileNumberPredicate.evaluate(with: input)
 }
+//func isValidPassword(_ password: String) -> Bool {
+//    let passwordRegex = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"
+//    let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+//    return passwordPredicate.evaluate(with: password)
+//}
 func isValidPassword(_ password: String) -> Bool {
-    let passwordRegex = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"
-    let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-    return passwordPredicate.evaluate(with: password)
+
+    return password.count >= 6
 }
+
 
 @MainActor
 public func displayMessage(
