@@ -14,6 +14,7 @@ class AuthOptionsViewModel {
 
     // MARK: -  Closure to notify the view controller about changes
     var navigateToViewController: ((String) -> Void)?
+    var setRootViewController: ((String,String)->Void)?
 
     // MARK: -  Initialization
     init(networkManager: NetworkManagerProtocol = NetworkManager.shared, connectivityService: ConnectivityServiceProtocol = ConnectivityService.shared) {
@@ -32,7 +33,7 @@ class AuthOptionsViewModel {
         UserDefaultManager.shared.continueAsAGuest = true
         UserDefaultManager.shared.storeData()
         DispatchQueue.main.async {
-            self.navigateToViewController?("MainTabBarNavigationController")
+            self.setRootViewController?("MainTabBar","MainTabBarNavigationController")
         }
     }
     func signInButtonClicked() {
