@@ -9,17 +9,17 @@ import Foundation
 
 class SignInViewModel {
     // MARK: - Properties
-     let networkManager: NetworkManager
+     let networkManager: NetworkManagerProtocol
      let userDefaultManager: UserDefaultManager
      let connectivityService: ConnectivityServiceProtocol
 
     var onSuccess: (() -> Void)?
     var onError: ((VaildMassage) -> Void)?
 
-    init(networkManager: NetworkManager, userDefaultManager: UserDefaultManager, connectivityService: ConnectivityServiceProtocol) {
-        self.networkManager = networkManager
-        self.userDefaultManager = userDefaultManager
-        self.connectivityService = connectivityService
+    init() {
+        networkManager = NetworkManager.shared
+        userDefaultManager = UserDefaultManager.shared
+        connectivityService = ConnectivityService.shared
     }
 
     // MARK: - Public Methods
@@ -43,7 +43,7 @@ class SignInViewModel {
     }
 
     private func checkUserAuth(email: String, password: String) {
-        fetchAllCustomers { [weak self] customers in
+        fetchExactEmailCustomers(email: email) { [weak self] customers in
             guard let self = self else { return }
             guard let customers = customers else {
                 self.onError?(.checkingEmailFail)
@@ -65,17 +65,20 @@ class SignInViewModel {
         }
     }
 
-    private func fetchAllCustomers(completion: @escaping ([CustomerInfo]?) -> Void) {
-        let urlString = ShopifyAPI.customers.shopifyURLString()
-        networkManager.fetchData(from: urlString, responseType: Customers.self) { result in
-            completion(result?.customers)
+    private func fetchExactEmailCustomers(email: String, compilation: @escaping ([CustomerInfo]?) -> Void) {
+        let urlString = ShopifyAPI.customerEmail(email: email).shopifyURLString()
+        networkManager.fetchData(from: urlString, responseType: Customers.self, headers: []) { result in
+            compilation(result?.customers)
         }
     }
 
     private func saveToUserDefaults(customer: CustomerInfo) {
         userDefaultManager.isLogin = true
         userDefaultManager.name = [(customer.firstName ?? ""), (customer.lastName ?? "")].joined(separator: " ")
+        userDefaultManager.firstName = customer.firstName ?? ""
+        userDefaultManager.lastName = customer.lastName ?? ""
         userDefaultManager.email = customer.email ?? ""
+        userDefaultManager.phone = customer.phone ?? ""
         userDefaultManager.password = customer.tags ?? ""
         userDefaultManager.customerID = customer.id ?? 0
         if let draftOrderIDs = customer.note?.components(separatedBy: ","), draftOrderIDs.count == 2 {
