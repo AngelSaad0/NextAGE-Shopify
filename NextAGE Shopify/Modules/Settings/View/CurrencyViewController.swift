@@ -8,50 +8,58 @@
 import UIKit
 
 class CurrencyViewController: UIViewController {
+    // MARK: - Outlets
     @IBOutlet weak var currencyTableView: UITableView!
-
-    let userDefaultsManager: UserDefaultManager
-    let currencies = ["USD", "EGP", "SAR", "AED"]
     
+    // MARK: - Properties
+    let viewModel: CurrencyViewModel
     
+    // MARK: - Required Init
     required init?(coder: NSCoder) {
-        userDefaultsManager = UserDefaultManager.shared
+        viewModel = CurrencyViewModel()
         super.init(coder: coder)
     }
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        updateUI()
+        setupViewModel()
+    }
+    
+    // MARK: - Private Methods
+    private func updateUI() {
         title = "Currency"
         currencyTableView.delegate = self
         currencyTableView.dataSource = self
-        // Do any additional setup after loading the view.
     }
-
-
+    
+    private func setupViewModel() {
+        viewModel.popView = {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
 }
 
 extension CurrencyViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        userDefaultsManager.currency = currencies[indexPath.row]
-        userDefaultsManager.storeData()
-        self.navigationController?.popViewController(animated: true)
+        viewModel.currencyDidSelect(at: indexPath.row)
     }
 }
 
 extension CurrencyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currencies.count
+        return viewModel.getCurrenciesCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.viewWithTag(3)?.addCornerRadius(radius: 12)
-        cell.viewWithTag(3)?.addBorderView()
-        (cell.viewWithTag(1) as! UILabel).text = currencies[indexPath.row]
-        if userDefaultsManager.currency == currencies[indexPath.row] {
+        (cell.viewWithTag(1) as! UILabel).text = viewModel.getCurrencyLabel(at: indexPath.row)
+        if viewModel.isCurrentCurrency(at: indexPath.row) {
             cell.viewWithTag(2)?.isHidden = false
         }
+        cell.viewWithTag(3)?.addCornerRadius(radius: 12)
+        cell.viewWithTag(3)?.addBorderView()
         return cell
     }
     
