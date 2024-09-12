@@ -201,7 +201,7 @@ class CategoriesAndBrandsViewController: UIViewController {
 extension CategoriesAndBrandsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
-        productDetailsViewController.productID = filteredOrSortedProducts[indexPath.row].id
+        productDetailsViewController.viewModel.productID = filteredOrSortedProducts[indexPath.row].id
         navigationController?.pushViewController(productDetailsViewController, animated: true)
     }
 }

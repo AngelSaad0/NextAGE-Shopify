@@ -115,7 +115,7 @@ class ShoppingCartViewController: UIViewController {
 extension ShoppingCartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
-        vc.productID = shoppingCart[indexPath.row].productID
+        vc.viewModel.productID = shoppingCart[indexPath.row].productID
         navigationController?.pushViewController(vc, animated: true)
     }
 }

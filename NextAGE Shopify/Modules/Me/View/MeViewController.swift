@@ -167,7 +167,7 @@ extension MeViewController: UICollectionViewDelegate, UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
-        productDetailsViewController.productID = viewModel.wishlist[indexPath.row].productID
+        productDetailsViewController.viewModel.productID = viewModel.wishlist[indexPath.row].productID
         navigationController?.pushViewController(productDetailsViewController, animated: true)
     }
 

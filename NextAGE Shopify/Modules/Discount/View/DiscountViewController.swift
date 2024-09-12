@@ -136,7 +136,7 @@ class DiscountViewController: UIViewController {
 extension DiscountViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
-        productDetailsViewController.productID = shoppingCart[indexPath.row].productID
+        productDetailsViewController.viewModel.productID = shoppingCart[indexPath.row].productID
         navigationController?.pushViewController(productDetailsViewController, animated: true)
     }
 }
