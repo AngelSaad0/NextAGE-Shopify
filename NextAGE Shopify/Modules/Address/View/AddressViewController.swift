@@ -17,6 +17,7 @@ class AddressViewController: UIViewController {
     var addresses: [Address] = []
     var defaultAddressIndex: Int?
     var newDefaultAddressIndex: Int?
+    var selectedOrderAddress: Int?
     let networkManager: NetworkManager
     let userDefaultsManager: UserDefaultManager
     let indicator = UIActivityIndicatorView(style: .large)
@@ -62,6 +63,21 @@ class AddressViewController: UIViewController {
             self.addressesTableView.reloadData()
         }
     }
+    
+    private func submitAddress(completion: @escaping ()->()) {
+        var addressParameters: [String: Any] = [:]
+        if addresses.indices.contains(selectedOrderAddress ?? -1) {
+            addressParameters = [
+                "name": addresses[selectedOrderAddress!].name,
+                "address1": addresses[selectedOrderAddress!].address1,
+                "city": addresses[selectedOrderAddress!].city,
+                "phone": addresses[selectedOrderAddress!].phone,
+            ]
+        }
+        networkManager.updateData(at: ShopifyAPI.draftOrder(id: userDefaultsManager.shoppingCartID).shopifyURLString(), with: ["draft_order": ["shipping_address": addressParameters]]) {
+            completion()
+        }
+    }
 
     @IBAction func addAddressButton(_ sender: Any) {
         pushViewController(vcIdentifier: "AddAddressViewController", withNav: navigationController)
@@ -81,23 +97,28 @@ class AddressViewController: UIViewController {
             }
         } else {
             // select payment
-            pushViewController(vcIdentifier: "PaymentViewController", withNav: navigationController)
+            submitAddress {
+                self.pushViewController(vcIdentifier: "PaymentViewController", withNav: self.navigationController)
+            }
         }
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: "PaymentViewController")
-//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension AddressViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         for index in addresses.indices {
-            (tableView.cellForRow(at: IndexPath(row: index, section: 0)) as! PaymentMethodCell).deselect()
+            if let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? PaymentMethodCell {
+                cell.deselect()
+            }
         }
-        (tableView.cellForRow(at: indexPath) as! PaymentMethodCell).select()
+        if let cell = tableView.cellForRow(at: indexPath) as? PaymentMethodCell {
+            cell.select()
+        }
         if isSettings {
             newDefaultAddressIndex = indexPath.row
             selectPayment.isEnabled = newDefaultAddressIndex != defaultAddressIndex
+        } else {
+            selectedOrderAddress = indexPath.row
         }
     }
 }
@@ -112,6 +133,7 @@ extension AddressViewController: UITableViewDataSource {
         cell.config(methodName: addresses[indexPath.row].address1, methodImageName: "gps")
         if addresses[indexPath.row].addressDefault {
             defaultAddressIndex = indexPath.row
+            selectedOrderAddress = indexPath.row
             cell.select()
             if !isSettings {
                 selectPayment.isEnabled = true
