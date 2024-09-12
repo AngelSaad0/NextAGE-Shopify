@@ -20,9 +20,9 @@ class CustomBlueButton: UIButton {
     }
 
     private func setupButton() {
-        self.backgroundColor =  UIColor(named:         Colors.C535353.rawValue)
+        self.backgroundColor =  UIColor(named:         Colors.C0079FB.rawValue)
         self.setTitleColor(.white, for: .normal)
-        self.addRoundedRadius(radius: 12)
+        self.layer.cornerRadius = 12
         self.layer.masksToBounds = true
     }
 
