@@ -25,6 +25,8 @@ enum ShopifyAPI {
     case draftOrder(id: Int)
     case addresses(id: Int)
     case defaultAddress(addressID: Int, customerID: Int)
+    case priceRules
+    case priceRule(title: String)
 
     private var path: String {
         switch self {
@@ -50,6 +52,10 @@ enum ShopifyAPI {
             return "customers/\(id)/addresses.json"
         case .defaultAddress(let addressID, let customerID):
             return "customers/\(customerID)/addresses/\(addressID)/default.json"
+        case .priceRules:
+            return "price_rules.json"
+        case .priceRule(title: let id):
+            return "price_rules.json?title=\(id)"
         }
         
     }

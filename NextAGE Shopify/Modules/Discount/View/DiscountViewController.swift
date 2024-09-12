@@ -8,8 +8,7 @@
 import UIKit
 
 class DiscountViewController: UIViewController {
-    var isApplied = false
-    
+    // MARK: - IBOutlets
     @IBOutlet var selectAddressButton: UIButton!
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var discountTextField: UITextField!
@@ -18,12 +17,15 @@ class DiscountViewController: UIViewController {
     @IBOutlet weak var discountLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     
+    var isApplied = false
+
     private let indicator = UIActivityIndicatorView(style: .large)
     private let networkManager: NetworkManager
     private let userDefaultManager: UserDefaultManager
     private var shoppingCart: [LineItem] = []
     private var subTotal: Double = 0.0
-    private var discountAmount: String = "0.0"
+    private var discountAmount: Double = 0.0
+    private var priceRule: PriceRule?
     
     required init?(coder: NSCoder) {
         networkManager = NetworkManager()
@@ -80,14 +82,54 @@ class DiscountViewController: UIViewController {
         }
     }
     
+    private func submitDiscount(completion: @escaping ()->()) {
+        var discountParameters: [String: String] = [:]
+        if let priceRule = priceRule {
+            discountParameters = [
+                "value": priceRule.value.replacingOccurrences(of: "-", with: ""),
+                "title": priceRule.title,
+                "value_type": priceRule.valueType
+            ]
+        }
+        networkManager.updateData(at: ShopifyAPI.draftOrder(id: userDefaultManager.shoppingCartID).shopifyURLString(), with: ["draft_order": ["applied_discount": discountParameters]]) {
+            print("applied")
+            completion()
+        }
+    }
+    
     @IBAction func applyDiscountButton(_ sender: Any) {
-        isApplied.toggle()
-        applyDiscountButton.setTitle(isApplied ? "Change" : "Apply", for: .normal)
+        if !isApplied {
+            let title = discountTextField.text?.trimmingCharacters(in: .whitespaces)
+            guard title != "" else {
+                displayMessage(massage: .discountCodeEmpty, isError: true)
+                return
+            }
+            networkManager.fetchData(from: ShopifyAPI.priceRule(title: title ?? "nil").shopifyURLString(), responseType: PriceRules.self) { result in
+                guard let priceRule = result?.priceRules.first else {
+                    displayMessage(massage: .discountCodeFailed, isError: true)
+                    return
+                }
+                self.priceRule = priceRule
+                self.discountAmount = Double(priceRule.value) ?? 0
+                self.calcTotal()
+                displayMessage(massage: .discountCodeApplied, isError: false)
+                self.isApplied.toggle()
+                self.applyDiscountButton.setTitle("Change", for: .normal)
+                self.discountTextField.isEnabled = false
+            }
+        } else {
+            priceRule = nil
+            isApplied.toggle()
+            discountAmount = 0
+            calcTotal()
+            applyDiscountButton.setTitle("Apply", for: .normal)
+            discountTextField.isEnabled = true
+        }
     }
     @IBAction func selectAddressButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "AddressViewController")
-        self.navigationController?.pushViewController(vc, animated: true)
+        submitDiscount {
+            self.pushViewController(vcIdentifier: "AddressViewController", withNav: self.navigationController)
+        }
     }
 }
 
