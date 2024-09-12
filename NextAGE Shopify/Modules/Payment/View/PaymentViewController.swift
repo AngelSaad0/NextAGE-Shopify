@@ -49,6 +49,9 @@ class PaymentViewController: UIViewController {
         viewModel.pushConfirmationViewController = {
             self.pushViewController(vcIdentifier: "ConfirmationViewController", withNav: self.navigationController)
         }
+        viewModel.showFailOrderMessage = {
+            displayMessage(massage: .placingOrderFailed, isError: true)
+        }
     }
     
     // MARK: - IBActions

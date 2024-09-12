@@ -31,7 +31,7 @@ struct DraftOrder: Codable {
     let id: Int
     let name: String
     let customer: CustomerInfo?
-//    let shippingAddress, billingAddress: Address?
+    let shippingAddress, billingAddress: ShippingAddress?
     let note: String?
     let noteAttributes: [NoteAttribute]
     let email, currency: String?
@@ -45,8 +45,8 @@ struct DraftOrder: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case name, customer
-//        case shippingAddress = "shipping_address"
-//        case billingAddress = "billing_address"
+        case shippingAddress = "shipping_address"
+        case billingAddress = "billing_address"
         case note
         case noteAttributes = "note_attributes"
         case email, currency

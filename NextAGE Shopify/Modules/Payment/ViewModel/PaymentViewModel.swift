@@ -23,6 +23,7 @@ class PaymentViewModel {
     // MARK: - Closures
     var presentPaymentRequest: (PKPaymentRequest)->() = {_ in}
     var pushConfirmationViewController: ()->() = {}
+    var showFailOrderMessage: ()->() = {}
     
     // MARK: - Init
     init() {
@@ -35,14 +36,19 @@ class PaymentViewModel {
     // MARK: - Public Methods
     func applePay() {
         let price = String(calculateTotalPrice())
-        paymentRequest.paymentSummaryItems = [PKPaymentSummaryItem(label: "NextAGE order", amount: NSDecimalNumber(string: price))]
+        paymentRequest.paymentSummaryItems = [PKPaymentSummaryItem(label: "NextAGE New Order Payment", amount: NSDecimalNumber(string: price))]
         presentPaymentRequest(paymentRequest)
     }
     
     func purchaseOrder() {
-        submitOrder()
-        clearShoppingCart(shoppingCartID: userDefaultsManager.shoppingCartID)
-        pushConfirmationViewController()
+        submitOrder { success in
+            if success {
+                self.clearShoppingCart(shoppingCartID: self.userDefaultsManager.shoppingCartID)
+                self.pushConfirmationViewController()
+            } else {
+                self.showFailOrderMessage()
+            }
+        }
     }
     
     // MARK: - Private Methods
@@ -61,13 +67,14 @@ class PaymentViewModel {
         }
     }
     
-    private func submitOrder() {
-        networkManager.postWithoutResponse(to: ShopifyAPI.orders.shopifyURLString(), parameters: ["order": getOrderDictionary()])
+    private func submitOrder(completion: @escaping (Bool)->()) {
+        networkManager.postData(to: ShopifyAPI.orders.shopifyURLString(), responseType: EmptyResponse.self, parameters: ["order": getOrderDictionary()]) { result in
+            completion(result != nil)
+        }
     }
     
     private func clearShoppingCart(shoppingCartID: Int) {
-        networkManager.updateData(at: ShopifyAPI.draftOrder(id: userDefaultsManager.shoppingCartID).shopifyURLString(), with: getEmptyDraft()) {
-        }
+        networkManager.updateData(at: ShopifyAPI.draftOrder(id: userDefaultsManager.shoppingCartID).shopifyURLString(), with: getEmptyDraft()) { }
     }
     
     private func getCartLineItems() -> [[String: Any]] {
@@ -87,6 +94,8 @@ class PaymentViewModel {
     private func getOrderDictionary() -> [String: Any] {
         let orderDictionary: [String: Any] = [
             "line_items": getCartLineItems(),
+            "billing_address": getShippingAddressDictionary(),
+            "shipping_address": getShippingAddressDictionary(),
             "currency": userDefaultsManager.currency,
             "customer": [
 //                "first_name": userDefaultsManager.firstName,
@@ -94,14 +103,35 @@ class PaymentViewModel {
                 "email": userDefaultsManager.email,
 //                "phone": userDefaultsManager.phone
             ],
-            "applied_discount": [
-                "value": shoppingCartDraftOrder?.appliedDiscount?.value,
-                "value_type": shoppingCartDraftOrder?.appliedDiscount?.valueType ?? "percentage",
-                "description": shoppingCartDraftOrder?.appliedDiscount?.description
-            ],
-            "total_price": shoppingCartDraftOrder?.totalPrice ?? ""
+            "discount_codes": [getDiscountDictionary()],
+            "total_price": shoppingCartDraftOrder?.totalPrice ?? "",
         ]
         return orderDictionary
+    }
+    
+    private func getShippingAddressDictionary() -> [String: Any] {
+        var addressParameters: [String: Any] = [:]
+        if let shippingAddress = shoppingCartDraftOrder?.shippingAddress {
+            addressParameters = [
+                "name": shippingAddress.name,
+                "address1": shippingAddress.address1,
+                "phone": shippingAddress.phone,
+                "city": shippingAddress.city
+            ]
+        }
+        return addressParameters
+    }
+    
+    private func getDiscountDictionary() -> [String: Any] {
+        var discountParameters: [String: String] = [:]
+        if let priceRule = shoppingCartDraftOrder?.appliedDiscount {
+            discountParameters = [
+                "code": priceRule.title,
+                "amount": priceRule.value.replacingOccurrences(of: "-", with: ""),
+                "type": priceRule.valueType
+            ]
+        }
+        return discountParameters
     }
     
     private func getEmptyDraft() -> [String: Any] {
@@ -125,6 +155,7 @@ class PaymentViewModel {
         for item in shoppingCart {
             totalPrice += userDefaultsManager.exchangeRate * (Double(item.price) ?? 0.0) * Double(item.quantity)
         }
-        return totalPrice
+        let discount = Double(shoppingCartDraftOrder?.appliedDiscount?.value ?? "0.0") ?? 0.0
+        return totalPrice - discount
     }
 }

@@ -39,6 +39,15 @@ struct Address: Codable {
     }
 }
 
+// MARK: - ShippingAddress
+struct ShippingAddress: Codable {
+    let address1: String
+    let city: String
+    let phone: String
+    let name: String
+}
+
+
 //// MARK: - Encode/decode helpers
 //
 //class JSONNull: Codable, Hashable {
