@@ -8,35 +8,38 @@
 import UIKit
 
 class AddressViewController: UIViewController {
-
+    // MARK: - IBOutlets
     @IBOutlet weak var addressesTableView: UITableView!
     @IBOutlet weak var selectPayment: UIButton!
     @IBOutlet var addNewAddressButton: UIButton!
     
+    // MARK: - Properties
     var isSettings = false
-    var addresses: [Address] = []
-    var defaultAddressIndex: Int?
-    var newDefaultAddressIndex: Int?
-    var selectedOrderAddress: Int?
-    let networkManager: NetworkManager
-    let userDefaultsManager: UserDefaultManager
+    let viewModel: AddressViewModel
     let indicator = UIActivityIndicatorView(style: .large)
+    
+    // MARK: - Required Init
     required init?(coder: NSCoder) {
-        networkManager = NetworkManager()
-        userDefaultsManager = UserDefaultManager.shared
+        viewModel = AddressViewModel()
         super.init(coder: coder)
     }
+    
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        setupViewModel()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-        fetchAddresses()
+        viewModel.fetchAddresses()
     }
+    
+    // MARK: - Private Methods
     private func updateUI() {
         title = "Address"
-        addNewAddressButton.addCornerRadius(radius: 12)
-        selectPayment.addCornerRadius(radius: 12)
+//        addNewAddressButton.addCornerRadius(radius: 12)
+//        selectPayment.addCornerRadius(radius: 12)
         addressesTableView.delegate = self
         addressesTableView.dataSource = self
         selectPayment.isEnabled = false
@@ -44,60 +47,51 @@ class AddressViewController: UIViewController {
             selectPayment.setTitle("Set as default address", for: .normal)
         }
         setupIndicator()
-        fetchAddresses()
+        viewModel.fetchAddresses()
     }
+    
     private func setupIndicator() {
         indicator.center = view.center
         view.addSubview(indicator)
     }
     
-    private func fetchAddresses() {
-        indicator.startAnimating()
-        networkManager.fetchData(from: ShopifyAPI.addresses(id: userDefaultsManager.customerID).shopifyURLString(), responseType: Addresses.self) { result in
-            self.indicator.stopAnimating()
-            guard let addresses = result?.addresses else {
-                displayMessage(massage: .addressesFetchingFailed, isError: true)
-                return
+    private func setupViewModel() {
+        viewModel.setIndicator = { state in
+            DispatchQueue.main.async { [weak self] in
+                if state {
+                    self?.indicator.startAnimating()
+                } else {
+                    self?.indicator.stopAnimating()
+                }
             }
-            self.addresses = addresses
-            self.addressesTableView.reloadData()
+        }
+        viewModel.setSelectPaymentButton = { state in
+            DispatchQueue.main.async { [weak self] in
+                self?.selectPayment.isEnabled = state
+            }
+        }
+        viewModel.bindResultToTableView = {
+            DispatchQueue.main.async { [weak self] in
+                self?.addressesTableView.reloadData()
+            }
+        }
+        viewModel.showMessage = { message, isError in
+            displayMessage(massage: message, isError: isError)
         }
     }
     
-    private func submitAddress(completion: @escaping ()->()) {
-        var addressParameters: [String: Any] = [:]
-        if addresses.indices.contains(selectedOrderAddress ?? -1) {
-            addressParameters = [
-                "name": addresses[selectedOrderAddress!].name,
-                "address1": addresses[selectedOrderAddress!].address1,
-                "city": addresses[selectedOrderAddress!].city,
-                "phone": addresses[selectedOrderAddress!].phone,
-            ]
-        }
-        networkManager.updateData(at: ShopifyAPI.draftOrder(id: userDefaultsManager.shoppingCartID).shopifyURLString(), with: ["draft_order": ["shipping_address": addressParameters]]) {
-            completion()
-        }
-    }
-
+    // MARK: - IBActions
     @IBAction func addAddressButton(_ sender: Any) {
         pushViewController(vcIdentifier: "AddAddressViewController", withNav: navigationController)
     }
+    
     @IBAction func selectPaymentOrSetDefaultAddressButton(_ sender: Any) {
         if isSettings {
             // set default address
-            guard let selectedNewAddressIndex = newDefaultAddressIndex else {
-                displayMessage(massage: .newSelectedAddressFailed, isError: true)
-                return
-            }
-            let addressID = addresses[selectedNewAddressIndex].id
-            networkManager.updateData(at: ShopifyAPI.defaultAddress(addressID: addressID, customerID: userDefaultsManager.customerID).shopifyURLString(), with: [:]) {
-                displayMessage(massage: .defaultAddressUpdated, isError: false)
-                self.selectPayment.isEnabled = false
-                self.fetchAddresses()
-            }
+            viewModel.setDefaultAddress()
         } else {
             // select payment
-            submitAddress {
+            viewModel.submitAddress {
                 self.pushViewController(vcIdentifier: "PaymentViewController", withNav: self.navigationController)
             }
         }
@@ -106,7 +100,7 @@ class AddressViewController: UIViewController {
 
 extension AddressViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        for index in addresses.indices {
+        for index in viewModel.addresses.indices {
             if let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? PaymentMethodCell {
                 cell.deselect()
             }
@@ -115,25 +109,25 @@ extension AddressViewController: UITableViewDelegate {
             cell.select()
         }
         if isSettings {
-            newDefaultAddressIndex = indexPath.row
-            selectPayment.isEnabled = newDefaultAddressIndex != defaultAddressIndex
+            viewModel.newDefaultAddressIndex = indexPath.row
+            selectPayment.isEnabled = viewModel.newDefaultAddressIndex != viewModel.defaultAddressIndex
         } else {
-            selectedOrderAddress = indexPath.row
+            viewModel.selectedOrderAddress = indexPath.row
         }
     }
 }
 
 extension AddressViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return addresses.count
+        return viewModel.addresses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PaymentMethodCell
-        cell.config(methodName: addresses[indexPath.row].address1, methodImageName: "gps")
-        if addresses[indexPath.row].addressDefault {
-            defaultAddressIndex = indexPath.row
-            selectedOrderAddress = indexPath.row
+        cell.config(methodName: viewModel.addresses[indexPath.row].address1, methodImageName: "gps")
+        if viewModel.addresses[indexPath.row].addressDefault {
+            viewModel.defaultAddressIndex = indexPath.row
+            viewModel.selectedOrderAddress = indexPath.row
             cell.select()
             if !isSettings {
                 selectPayment.isEnabled = true
