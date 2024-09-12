@@ -26,3 +26,5 @@ enum NetworkErrorType: Error {
     case parsingError
     case badURL
 }
+struct EmptyResponse: Codable {}
+
