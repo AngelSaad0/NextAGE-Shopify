@@ -334,7 +334,7 @@ class ProductDetailsViewController: UIViewController {
                 
                 if wishlistLineItems.isEmpty {
                     wishlistLineItems = [[
-                        "title": "Test",
+                        "title": "Empty",
                         "quantity": 1,
                         "price": "0",
                         "properties":[]

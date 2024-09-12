@@ -14,6 +14,9 @@ class UserDefaultManager {
     var darkModeEnabled: Bool = false
     
     var name: String = ""
+    var firstName: String = ""
+    var lastName: String = ""
+    var phone: String = ""
     var email: String = ""
     var password: String = ""
     var customerID: Int = 0
@@ -33,6 +36,9 @@ class UserDefaultManager {
         self.isLogin  = getSharedBool(forKey: "isLogin")
         self.darkModeEnabled  = getSharedBool(forKey: "darkMode")
         self.name = getSharedString(forKey: "name")
+        self.firstName = getSharedString(forKey: "firstName")
+        self.lastName = getSharedString(forKey: "lastName")
+        self.phone = getSharedString(forKey: "phone")
         self.email = getSharedString(forKey: "email")
         self.password = getSharedString(forKey: "password")
         self.customerID = getSharedInt(forKey: "userID")
@@ -55,6 +61,9 @@ class UserDefaultManager {
         setSharedValue("isLogin", value: isLogin)
         setSharedValue("darkMode",value: darkModeEnabled)
         setSharedValue("name", value: name)
+        setSharedValue("firstName", value: firstName)
+        setSharedValue("lastName", value: lastName)
+        setSharedValue("phone", value: phone)
         setSharedValue("email", value: email)
         setSharedValue("password", value: password)
         setSharedValue("userID", value: customerID)
@@ -70,6 +79,9 @@ class UserDefaultManager {
         removeValue(forKey: "isLogin")
         removeValue(forKey: "darkMode")
         removeValue(forKey: "name")
+        removeValue(forKey: "firstName")
+        removeValue(forKey: "lastName")
+        removeValue(forKey: "phone")
         removeValue(forKey: "email")
         removeValue(forKey: "password")
         removeValue(forKey: "userID")

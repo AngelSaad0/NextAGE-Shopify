@@ -162,7 +162,7 @@ class SignUpViewController: UIViewController {
     private func createShoppingCartAndWishlist(completion: @escaping ((Int, Int)?) -> Void) {
         let lineItem: [String : Any] =
         [
-            "title": "Test",
+            "title": "Empty",
             "quantity": 1,
             "price": "0",
             "properties":[]
