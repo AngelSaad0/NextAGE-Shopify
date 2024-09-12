@@ -10,22 +10,24 @@ import UIKit
 class AllOrdersViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet var orderTableView: UITableView!
+    
     // MARK: - Properties
-    let networkManager: NetworkManager
-    let userDefaultManager: UserDefaultManager
-    var orders: [Order] = []
+    let viewModel: AllOrdersViewModel
     private let indicator = UIActivityIndicatorView(style: .large)
+    
     // MARK: - Required Init
     required init?(coder: NSCoder) {
-        networkManager = NetworkManager()
-        userDefaultManager = UserDefaultManager.shared
+        viewModel = AllOrdersViewModel()
         super.init(coder: coder)
     }
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        setupViewModel()
     }
+    
     // MARK: - Private Methods
     private func updateUI() {
         title = "All Orders"
@@ -33,58 +35,57 @@ class AllOrdersViewController: UIViewController {
         orderTableView.dataSource = self
         orderTableView.register(UINib(nibName: "OrdersTableViewCell", bundle: nil), forCellReuseIdentifier: "OrdersTableViewCell")
         setupIndicators()
-        updateUserOrders()
+        viewModel.updateUserOrders()
     }
+    
     private func setupIndicators() {
         indicator.center = view.center
         view.addSubview(indicator)
     }
-    private func fetchAllOrders(completion: @escaping ([Order]?)->()) {
-        networkManager.fetchData(from: ShopifyAPI.orders.shopifyURLString(), responseType: Orders.self) { result in
-            completion(result?.orders)
+    
+    private func setupViewModel() {
+        viewModel.setIndicator = { state in
+            DispatchQueue.main.async { [weak self] in
+                if state {
+                    self?.indicator.startAnimating()
+                } else {
+                    self?.indicator.stopAnimating()
+                }
+            }
         }
-    }
-    private func updateUserOrders() {
-        indicator.startAnimating()
-        fetchAllOrders { orders in
-            self.indicator.stopAnimating()
-            guard let orders = orders else {
-                displayMessage(massage: .ordersFetchingFailed, isError: true)
-                return
-            }
-            self.orders = orders.filter {$0.customer.id == self.userDefaultManager.customerID}
-            if self.orders.count == 0 {
-                self.orderTableView.displayEmptyMessage("No Orders Yet ")
-            } else {
-                self.orderTableView.removeEmptyMessage()
-            }
+        viewModel.showMessage = { message in
+            self.orderTableView.displayEmptyMessage(message)
+        }
+        viewModel.removeMessage = {
+            self.orderTableView.removeEmptyMessage()
+        }
+        viewModel.bindResultToTableView = {
             self.orderTableView.reloadData()
+        }
+        viewModel.displayMessage = { message, isError in
+            displayMessage(massage: message, isError: isError)
         }
     }
 }
 
 extension AllOrdersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let orderDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
-        navigationController?.pushViewController(orderDetailsViewController, animated: true)
+        pushViewController(vcIdentifier: "OrderDetailsViewController", withNav: navigationController)
     }
 }
 
 extension AllOrdersViewController: UITableViewDataSource {
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orders.count
+        return viewModel.orders.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrdersTableViewCell", for: indexPath) as! OrdersTableViewCell
-        cell.configure(with: orders[indexPath.row])
+        cell.configure(with: viewModel.orders[indexPath.row])
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
-        
     }
-
 }
