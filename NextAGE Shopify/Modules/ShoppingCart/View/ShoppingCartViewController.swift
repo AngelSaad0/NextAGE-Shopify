@@ -77,7 +77,7 @@ class ShoppingCartViewController: UIViewController {
         
         if shoppingCartLineItems.isEmpty {
             shoppingCartLineItems = [[
-                "title": "Test",
+                "title": "Empty",
                 "quantity": 1,
                 "price": "0",
                 "properties":[]
