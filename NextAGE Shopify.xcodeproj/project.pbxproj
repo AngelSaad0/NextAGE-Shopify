@@ -40,6 +40,8 @@
 		A9D0F0D02C864B9B00ABA14E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9D0F0CF2C864B9B00ABA14E /* Colors.xcassets */; };
 		A9D0F0D22C864BBD00ABA14E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0D12C864BBD00ABA14E /* Colors.swift */; };
 		A9F72BF62C8E2E6600D884E6 /* DumyReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F72BF52C8E2E6600D884E6 /* DumyReview.swift */; };
+		A9F72BFC2C92155D00D884E6 /* CustomBlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F72BFB2C92155D00D884E6 /* CustomBlueButton.swift */; };
+		A9F72BFF2C92189F00D884E6 /* CustomCommanButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F72BFE2C92189F00D884E6 /* CustomCommanButton.swift */; };
 		C64C33832C8741F500EF1928 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */; };
 		C64C33842C8741F500EF1928 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */; };
 		C64C33852C8741F500EF1928 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337D2C8741F500EF1928 /* PaymentViewController.swift */; };
@@ -127,6 +129,8 @@
 		A9D0F0CF2C864B9B00ABA14E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		A9D0F0D12C864BBD00ABA14E /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		A9F72BF52C8E2E6600D884E6 /* DumyReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumyReview.swift; sourceTree = "<group>"; };
+		A9F72BFB2C92155D00D884E6 /* CustomBlueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBlueButton.swift; sourceTree = "<group>"; };
+		A9F72BFE2C92189F00D884E6 /* CustomCommanButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCommanButton.swift; sourceTree = "<group>"; };
 		C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 		C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
 		C64C337D2C8741F500EF1928 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +239,8 @@
 				A94A121F2C84D07000AE0E09 /* LaunchScreen.storyboard */,
 				A970BF222C87AB580082ED45 /* CategoriesCollectionCell.xib */,
 				A970BF212C87AB580082ED45 /* CategoriesCollectionCell.swift */,
+				A9F72BFB2C92155D00D884E6 /* CustomBlueButton.swift */,
+				A9F72BFE2C92189F00D884E6 /* CustomCommanButton.swift */,
 				A9AB32BA2C8CE3CF00A3EB88 /* OrdersTableViewCell.xib */,
 				A9AB32B92C8CE3CF00A3EB88 /* OrdersTableViewCell.swift */,
 			);
@@ -888,6 +894,7 @@
 				C67432902C863F11001A0753 /* SettingCell.swift in Sources */,
 				C66E1F652C85108F001127F6 /* MainTabBarController.swift in Sources */,
 				C64C33862C8741F500EF1928 /* PaymentViewModel.swift in Sources */,
+				A9F72BFF2C92189F00D884E6 /* CustomCommanButton.swift in Sources */,
 				A9D0F0CC2C864B6400ABA14E /* CustomTapBar.swift in Sources */,
 				C6AEABFF2C8D21C000246123 /* SignInViewModel.swift in Sources */,
 				C68C4EC22C878ADC0040DF87 /* NetworkManager.swift in Sources */,
@@ -914,6 +921,7 @@
 				C67432882C863CE6001A0753 /* ProductCell.swift in Sources */,
 				A95F17CB2C88F50C001FF2EF /* SearchViewController.swift in Sources */,
 				A94A12172C84D06D00AE0E09 /* SceneDelegate.swift in Sources */,
+				A9F72BFC2C92155D00D884E6 /* CustomBlueButton.swift in Sources */,
 				C6B78B7C2C8A117100889849 /* DiscountViewController.swift in Sources */,
 				C64C33842C8741F500EF1928 /* PaymentMethodCell.swift in Sources */,
 				C67432912C863F11001A0753 /* SettingsViewController.swift in Sources */,
