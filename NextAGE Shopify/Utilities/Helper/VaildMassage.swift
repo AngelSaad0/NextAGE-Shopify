@@ -44,5 +44,10 @@ public enum VaildMassage: String {
    case newSelectedAddressFailed = "Error happened while updating your default address"
    case defaultAddressUpdated = "Default address updated successfully"
 
+   case discountCodeEmpty = "You have not entered a discount code"
+   case discountCodeFailed = "Entered discount code is not valid"
+   case discountCodeApplied = "Congratulations, discount code applied"
+    
+   case placingOrderFailed = "Error happened while sending your order"
 }
 
