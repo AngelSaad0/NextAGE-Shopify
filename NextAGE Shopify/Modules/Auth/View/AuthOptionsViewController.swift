@@ -33,6 +33,10 @@ class AuthOptionsViewController: UIViewController {
         viewModel.navigateToViewController = { [weak self] viewControllerName in
             self?.pushViewController(vcIdentifier: viewControllerName, withNav: self?.navigationController)
         }
+        viewModel.setRootViewController = { storyboard,vcIdentifier in
+            UIWindow.setRootViewController(storyboard: "Main", vcIdentifier: "MainTabBarNavigationController")
+
+        }
     }
 
     private func  setupBindings(){
