@@ -127,7 +127,7 @@ extension SearchViewController:UITableViewDataSource {
 extension SearchViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let productDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
-        productDetailsViewController.productID = filteredProducts[indexPath.row].id
+        productDetailsViewController.viewModel.productID = filteredProducts[indexPath.row].id
         navigationController?.pushViewController(productDetailsViewController, animated: true)
     }
 }

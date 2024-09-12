@@ -8,39 +8,36 @@
 import UIKit
 
 class ReviewCell: UITableViewCell {
-
+    // MARK: - IBOutlets
     @IBOutlet weak var cellBackgroundView: UIStackView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var reviewRatingLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userReviewLabel: UILabel!
-
     @IBOutlet var dateLabel: UILabel!
     
-
+    // MARK: - View Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         updateUI()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(false, animated: animated)
-
-        // Configure the view for the selected state
     }
     
+    // MARK: - Private Methods
     func updateUI() {
         cellBackgroundView.addCornerRadius(radius: 12)
         cellBackgroundView.addBorderView()
     }
-    func configure(with cell:DumyReview) {
-        userImageView.image = UIImage(named:cell.userImage)
+    
+    // MARK: - Public Methods
+    func configure(with cell: DumyReview) {
+        userImageView.image = UIImage(named: cell.userImage)
         userNameLabel.text = cell.userName
         reviewRatingLabel.text = cell.rating
         dateLabel.text = cell.date
         userReviewLabel.text = cell.review
-
-
-
     }
 }
