@@ -21,6 +21,7 @@ enum ShopifyAPI {
     case order(id: String)
     case customers
     case customer(id: String)
+    case customerEmail(email: String)
     case draftOrders
     case draftOrder(id: Int)
     case addresses(id: Int)
@@ -44,6 +45,8 @@ enum ShopifyAPI {
             return "customers.json?since_id=1"
         case .customer(id: let id):
             return "customers/\(id).json"
+        case .customerEmail(email: let email):
+            return "customers.json?email=\(email)"
         case .draftOrders:
             return "draft_orders.json"
         case .draftOrder(id: let id):

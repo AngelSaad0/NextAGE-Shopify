@@ -17,22 +17,20 @@ class SignInViewController: UIViewController {
     @IBOutlet var hidePasswordButton: UIButton!
 
     // MARK: - Properties
-    private var viewModel: SignInViewModel!
+    private var viewModel: SignInViewModel
     private var isSecurePasswordText = true
 
+    // MARK: - Required Init
+    required init?(coder: NSCoder) {
+        viewModel = SignInViewModel()
+        super.init(coder: coder)
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-
-        // Initialize ViewModel
-        viewModel = SignInViewModel(
-            networkManager: NetworkManager(),
-            userDefaultManager: UserDefaultManager.shared,
-            connectivityService: ConnectivityService.shared
-        )
-
-        setupBindings()
+        setupViewModel()
     }
 
     // MARK: - Private Methods
@@ -43,7 +41,7 @@ class SignInViewController: UIViewController {
         passwordView.addCornerRadius(radius: 8)
     }
 
-    private func setupBindings() {
+    private func setupViewModel() {
         viewModel.onSuccess = {
             DispatchQueue.main.async {
                 UIWindow.setRootViewController(storyboard: "Main", vcIdentifier: "MainTabBarNavigationController")
@@ -58,7 +56,7 @@ class SignInViewController: UIViewController {
         }
     }
 
-    // MARK: - Actions
+    // MARK: - IBActions
     @IBAction func hidePasswordButtonClicked(_ sender: UIButton) {
         isSecurePasswordText.toggle()
         hidePasswordButton.setImage(UIImage(systemName: isSecurePasswordText ? "eye.slash" : "eye"), for: .normal)
@@ -79,7 +77,7 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func registerButtonClicked(_ sender: UIButton) {
-        self.pushViewController(vcIdentifier: "SignUpViewController", withNav: self.navigationController)
+        pushViewController(vcIdentifier: "SignUpViewController", withNav: navigationController)
     }
 
     @IBAction func forgetPasswordButtonClicked(_ sender: UIButton) {
@@ -87,8 +85,8 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func guestButtonClicked(_ sender: UIButton) {
-        UserDefaultManager.shared.continueAsAGuest = true
-        UserDefaultManager.shared.storeData()
-        UIWindow.setRootViewController(storyboard: "Main", vcIdentifier: "MainTabBarNavigationController")
+        viewModel.userDefaultManager.continueAsAGuest = true
+        viewModel.userDefaultManager.storeData()
+        UIWindow.setRootViewController(vcIdentifier: "MainTabBarNavigationController")
     }
 }
