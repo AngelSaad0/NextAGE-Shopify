@@ -12,6 +12,7 @@ class AddAddressViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
+    @IBOutlet weak var countryTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var defaultSwitch: UISwitch!
     @IBOutlet weak var addAddressButton: UIButton!

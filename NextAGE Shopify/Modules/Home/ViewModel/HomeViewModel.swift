@@ -15,7 +15,7 @@ class HomeViewModel {
 
     private(set) var brandsResultArray: [SmartCollection] = []
     private(set) var discountCodes: [String] = []
-    private(set) var offersList: [String] = ["COUPON10_1","COUPON20_1"] /*["COUPON10_20_1","COUPON10_1","COUPON20_1","COUPON10_20_2","COUPON10_2","COUPON20_2","COUPON10_20_3","COUPON10_3","COUPON20_3","COUPON20_1","COUPON10_4","COUPON20_3","COUPON10_5"]*/
+    private(set) var offersList: [String] = ["COUPON10_1","COUPON20_1"] 
 
     var isLoggedIn: Bool {
         return userDefaultsManager.isLogin

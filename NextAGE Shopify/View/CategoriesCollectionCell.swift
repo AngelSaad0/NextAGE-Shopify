@@ -8,16 +8,16 @@
 import UIKit
 
 class CategoriesCollectionCell: UICollectionViewCell {
-    
-    @IBOutlet var imageBackground: UIView!
 
+    @IBOutlet var imageBackground: UIView!
     @IBOutlet var shadowView: UIView!
     @IBOutlet var productImage: UIImageView!
     @IBOutlet var productTitle: UILabel!
     @IBOutlet var productDetails: UILabel!
     @IBOutlet var productPrice: UILabel!
     @IBOutlet var currency: UILabel!
-    
+    @IBOutlet var wishListButton: UIButton!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         productImage.addCornerRadius(radius: 10)
@@ -47,5 +47,10 @@ class CategoriesCollectionCell: UICollectionViewCell {
         productDetails.text = cell.title?.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
         currency.text = UserDefaultManager.shared.currency
 
+    }
+
+    @IBAction func wishListButtonClicked(_ sender: UIButton) {
+        sender.setImage(UIImage(systemName:sender.currentImage ==
+                                UIImage(systemName: "heart") ? "heart.fill" : "heart" ), for: .normal)
     }
 }

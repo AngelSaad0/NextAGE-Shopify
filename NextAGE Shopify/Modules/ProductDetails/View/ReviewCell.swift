@@ -15,6 +15,8 @@ class ReviewCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userReviewLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
+
+    @IBOutlet var shadowBackground: UIView!
     
     // MARK: - View Life Cycle
     override func awakeFromNib() {
@@ -28,7 +30,7 @@ class ReviewCell: UITableViewCell {
     
     // MARK: - Private Methods
     func updateUI() {
-        cellBackgroundView.addCornerRadius(radius: 12)
+        [cellBackgroundView,shadowBackground].forEach{$0.addCornerRadius(radius: 12)}
         cellBackgroundView.addBorderView()
     }
     
