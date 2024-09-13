@@ -74,6 +74,7 @@ class HomeViewController: UIViewController {
             DispatchQueue.main.async {
                 if isConnected {
                     self?.loadBrands()
+                    self?.loadPriceRules()
                 } else {
                     self?.showNoInternetAlert()
                     self?.brandsCollection.displayEmptyMessage("No items found")
@@ -91,7 +92,17 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    
+
+    private func loadPriceRules() {
+        viewModel.loadPriceRules { [weak self] in
+            DispatchQueue.main.async {
+                self?.adsCollectionView.reloadData()
+                self?.configureAdsPageControl()
+
+            }
+        }
+    }
+
     private func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateAdsScroll), userInfo: nil, repeats: true)
     }
@@ -146,7 +157,11 @@ extension HomeViewController: UICollectionViewDelegate {
                 showNotLoggedInAlert()
                 return
             }
-            showCouponAlert(code: "code")
+            if viewModel.discountCodes.indices.contains(indexPath.row) {
+                showCouponAlert(code: viewModel.discountCodes[indexPath.row])
+            } else {
+                showAlert(title: "Still loading", message: "Please wait while discount code loads")
+            }
         } else if collectionView == brandsCollection {
             let brandsVC = storyboard?.instantiateViewController(identifier: "CategoriesAndBrandsViewController") as! CategoriesAndBrandsViewController
             brandsVC.viewModel.isBrandScreen = true
