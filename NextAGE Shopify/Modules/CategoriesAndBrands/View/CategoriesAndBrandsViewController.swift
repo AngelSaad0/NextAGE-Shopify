@@ -6,11 +6,10 @@
 //
 
 import UIKit
-import Combine
 import Kingfisher
 
 class CategoriesAndBrandsViewController: UIViewController {
-    // MARK: -  @IBOutlet
+    // MARK: - @IBOutlet
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var categoryOrBrandCollectionView: UICollectionView!
     @IBOutlet var brandFilterView: UIView!
@@ -19,204 +18,127 @@ class CategoriesAndBrandsViewController: UIViewController {
     @IBOutlet var sortingOptionsView: UIView!
     @IBOutlet var itemsCountLabel: UILabel!
     @IBOutlet var brandLogoImageView: UIImageView!
-
-    // MARK: -  Properties
-    var isBrandScreen: Bool = false
-    var isSearching: Bool = false
-    var isFilterApplied: Bool = false
-    var isSearchActive: Bool = false
-    var searchKeyword: String = ""
-    var selectedCategory: String?
-    var selectedSubCategory: String?
-    var selectedVendor: String?
-    var brandLogoURL: String?
-    var id: Int?
-    var networkManager: NetworkManager
-    var connectivityService: ConnectivityServiceProtocol
-    private var searchTextSubject = PassthroughSubject<String, Never>()
-    private let activityIndicator = UIActivityIndicatorView(style: .large)
-    var itemsCountPublisher = PassthroughSubject<Int, Never>()
-    private var cancellables = Set<AnyCancellable>()
-    var productResults: [ProductInfo] = []
-    var filteredOrSortedProducts: [ProductInfo] = [] {
-        didSet {
-            itemsCountLabel.text = "\(filteredOrSortedProducts.count) Items"
-        }
-    }
-
-    // MARK: -  required init
+    
+    // MARK: - Properties
+    let viewModel:CategoriesAndBrandsViewModel
+    private let indicator = UIActivityIndicatorView(style: .large)
+    
+    // MARK: - Initializer
     required init?(coder: NSCoder) {
-        networkManager = NetworkManager()
-        connectivityService = ConnectivityService.shared
+        viewModel = CategoriesAndBrandsViewModel()
         super.init(coder: coder)
     }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        setupViewModel()
         configureUIForCurrentScreen()
         setupActivityIndicator()
         checkInternetConnection()
-        setupSearchTextPublisher()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         categoryOrBrandCollectionView.reloadData()
     }
-
-    // MARK: -  Action
-    @IBAction func categorySegmentControlClicked(_ sender: UISegmentedControl) {
-        selectedCategory = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? "All"
-        applyFiltersAndSearch()
-    }
-
-    @IBAction func subCategorySegmentControlClicked(_ sender: UISegmentedControl) {
-        selectedSubCategory = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? "All"
-        applyFiltersAndSearch()
-    }
-
-    @IBAction func sortButtonClicked(_ sender: UIButton) {
-        filteredOrSortedProducts.sort {
-            ((Double($0.variants[0].price) ?? 0.0) > (Double($1.variants[0].price) ?? 0.0)) == isFilterApplied
-        }
-        isFilterApplied.toggle()
-        categoryOrBrandCollectionView.reloadData()
-    }
-
-    func filterResults(category: String = "All", subCategory: String = "All") {
-        var filteredResults = productResults
-
-        switch category {
-        case "Women":
-            filteredResults = filteredResults.filter { product in
-                product.tags.contains("women")
-            }
-        case "Men":
-            filteredResults = filteredResults.filter { product in
-                product.tags.contains("men") && !product.tags.contains("women")
-            }
-        case "Kids":
-            filteredResults = filteredResults.filter { product in
-                product.tags.contains("kids")
-            }
-        default:
-            filteredResults = productResults
-        }
-
-        if subCategory == "Accessories" || subCategory == "T-Shirts" || subCategory == "Shoes" {
-            filteredResults = filteredResults.filter { product in
-                product.productType.rawValue == subCategory.uppercased()
-            }
-        }
-
-        if !searchKeyword.isEmpty {
-            filteredResults = filteredResults.filter { product in
-                product.title.lowercased().contains(searchKeyword.lowercased())
-            }
-        }
-
-        filteredOrSortedProducts = filteredResults
-        updateUIForNoResults()
-        categoryOrBrandCollectionView.reloadData()
-    }
-
-    private func applyFiltersAndSearch() {
-        filterResults(category: selectedCategory ?? "All", subCategory: selectedSubCategory ?? "All")
-    }
-
-    private func updateUIForNoResults() {
-        if filteredOrSortedProducts.isEmpty {
-            categoryOrBrandCollectionView.displayEmptyMessage("No Items In Stock")
-        } else {
-            categoryOrBrandCollectionView.removeEmptyMessage()
-        }
-    }
-
-    func updateUI() {
-        if isBrandScreen {
+    
+    // MARK: - private Methods
+    private  func updateUI() {
+        if viewModel.isBrandScreen {
             title = "NextAGE"
         }
         categoryOrBrandCollectionView.register(UINib(nibName: "CategoriesCollectionCell", bundle: nil), forCellWithReuseIdentifier: "CategoriesCollectionCell")
     }
-
-    func configureUIForCurrentScreen() {
-        brandFilterView.isHidden = isBrandScreen
-        sortingOptionsView.isHidden = !isBrandScreen
-        if isBrandScreen {
-            brandLogoImageView.kf.setImage(with: URL(string: brandLogoURL ?? ""), placeholder: UIImage(named: "loading"))
+    private func setupViewModel(){
+        viewModel.bindResultTable = {
+            DispatchQueue.main.async { [weak self] in
+                self?.categoryOrBrandCollectionView.reloadData()
+            }
+        }
+        viewModel.setIndicator = { state in
+            DispatchQueue.main.async { [weak self] in
+                state ? self?.indicator.startAnimating() : self?.indicator.stopAnimating()
+            }
+        }
+        viewModel.displayEmptyMessage = { message in
+            self.categoryOrBrandCollectionView.displayEmptyMessage(message)
+        }
+        viewModel.removeEmptyMessage = {
+            self.categoryOrBrandCollectionView.removeEmptyMessage()
+        }
+        viewModel.updateItemsCount = { labelText in
+            DispatchQueue.main.async { [weak self] in
+                self?.itemsCountLabel.text =  labelText
+            }
         }
     }
-
-    // MARK: -  private Method
-    private func setupSearchTextPublisher() {
-        searchTextSubject
-            .removeDuplicates()
-            .sink { [weak self] searchText in
-                self?.searchProducts(with: searchText)
-            }
-            .store(in: &cancellables)
+    
+    private func configureUIForCurrentScreen() {
+        brandFilterView.isHidden = viewModel.isBrandScreen
+        sortingOptionsView.isHidden = !viewModel.isBrandScreen
+        if viewModel.isBrandScreen {
+            brandLogoImageView.kf.setImage(with: URL(string: viewModel.brandLogoURL ?? ""), placeholder: UIImage(named: "loading"))
+        }
     }
-
     private func setupActivityIndicator() {
-        activityIndicator.center = view.center
-        activityIndicator.startAnimating()
-        view.addSubview(activityIndicator)
+        indicator.center = view.center
+        indicator.startAnimating()
+        view.addSubview(indicator)
     }
     
     private func checkInternetConnection() {
-        connectivityService.checkInternetConnection { [weak self] isConnected in
+        viewModel.connectivityService.checkInternetConnection { [weak self] isConnected in
             guard let self = self else { return }
             if isConnected {
-                loadProducts()
+                self.viewModel.loadProducts()
             } else {
                 self.showNoInternetAlert()
             }
         }
     }
-    private func loadProducts() {
-        networkManager.fetchData(from: ShopifyAPI.products.shopifyURLString(), responseType: Products.self) { result in
-            guard let products = result else {return}
-            DispatchQueue.main.async { [weak self] in
-                if self?.isBrandScreen ?? false {
-                    self?.productResults = products.products.filter { $0.vendor == self?.selectedVendor }
-                } else {
-                    self?.productResults = products.products
-                }
-                self?.filteredOrSortedProducts = self?.productResults ?? []
-                self?.itemsCountPublisher.send(self?.filteredOrSortedProducts.count ?? 0)
-                self?.categoryOrBrandCollectionView.reloadData()
-                self?.activityIndicator.stopAnimating()
-            }
-        }
+    // MARK: -  Actions
+    
+    @IBAction func categorySegmentControlClicked(_ sender: UISegmentedControl) {
+        viewModel.selectedCategory = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? "All"
+        viewModel.applyFiltersAndSearch()
     }
-
-    private func searchProducts(with searchText: String) {
-        searchKeyword = searchText
-        applyFiltersAndSearch()
+    
+    @IBAction func subCategorySegmentControlClicked(_ sender: UISegmentedControl) {
+        viewModel.selectedSubCategory = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? "All"
+        viewModel.applyFiltersAndSearch()
+    }
+    
+    @IBAction func sortButtonClicked(_ sender: UIButton) {
+        viewModel.filteredOrSortedProducts.sort {
+            ((Double($0.variants[0].price) ?? 0.0) > (Double($1.variants[0].price) ?? 0.0)) == viewModel.isFilterApplied
+        }
+        viewModel.isFilterApplied.toggle()
+        categoryOrBrandCollectionView.reloadData()
     }
 }
 
-// MARK: -  Collection View Data Source and Delegate Methods
+// MARK: - Collection View Data Source and Delegate Methods
 
 extension CategoriesAndBrandsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
-        productDetailsViewController.viewModel.productID = filteredOrSortedProducts[indexPath.row].id
+        productDetailsViewController.viewModel.productID = viewModel.filteredOrSortedProducts[indexPath.row].id
         navigationController?.pushViewController(productDetailsViewController, animated: true)
     }
 }
 
 extension CategoriesAndBrandsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredOrSortedProducts.count
+        return viewModel.filteredOrSortedProducts.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesCollectionCell", for: indexPath) as! CategoriesCollectionCell
-        let product = filteredOrSortedProducts[indexPath.row]
+        let product = viewModel.filteredOrSortedProducts[indexPath.row]
         cell.configure(with: product)
         return cell
     }
+    
 }
 
 extension CategoriesAndBrandsViewController: UICollectionViewDelegateFlowLayout {
@@ -226,34 +148,34 @@ extension CategoriesAndBrandsViewController: UICollectionViewDelegateFlowLayout 
     }
 }
 
-// MARK: -  Search Bar Delegate Methods
-
+// MARK: - Search Bar Delegate Methods
 extension CategoriesAndBrandsViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
-        isSearching = true
+        viewModel.isSearching = true
     }
-
+    
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
-        isSearching = false
+        viewModel.isSearching = false
     }
-
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchTextSubject.send(searchText.trimmingCharacters(in: .whitespacesAndNewlines))
+        viewModel.searchProducts(with: searchText.trimmingCharacters(in: .whitespacesAndNewlines))
     }
-
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
-            searchTextSubject.send(searchText)
+            viewModel.searchProducts(with: searchText)
         }
         searchBar.resignFirstResponder()
     }
-
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
         searchBar.resignFirstResponder()
         searchBar.text = ""
-        searchTextSubject.send("")
+        viewModel.searchProducts(with: "")
     }
+    
 }

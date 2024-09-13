@@ -10,26 +10,26 @@ import UIKit
 import UIKit
 
 class HomeViewController: UIViewController {
-
+    
     // MARK: - @IBOutlet
     @IBOutlet var brandViewForTitle: UIView!
     @IBOutlet private weak var brandBackground: UIImageView!
     @IBOutlet private weak var brandsCollection: UICollectionView!
     @IBOutlet private weak var adsCollectionView: UICollectionView!
     @IBOutlet private weak var adSlideshowPageControl: UIPageControl!
-
+    
     // MARK: - Properties
     private let activityIndicator = UIActivityIndicatorView(style: .large)
     private var viewModel: HomeViewModel
     private var currentPage = 0
     private var timer: Timer?
-
+    
     // MARK: - Required init
     required init?(coder: NSCoder) {
         viewModel = HomeViewModel()
         super.init(coder: coder)
     }
-
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,38 +37,38 @@ class HomeViewController: UIViewController {
         updateUI()
         checkInternetConnection()
     }
-
+    
     private func updateUI() {
         tabBarController?.navigationItem.title = "NextAGE"
         brandViewForTitle.addRoundedRadius(radius: 8)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startTimer()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         stopTimer()
     }
-
+    
     // MARK: - Private Methods
     private func initializeUIComponents() {
         setupActivityIndicator()
         configureAdsPageControl()
     }
-
+    
     private func setupActivityIndicator() {
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y + 100)
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
     }
-
+    
     private func configureAdsPageControl() {
         adSlideshowPageControl.numberOfPages = viewModel.offersList.count
     }
-
+    
     private func checkInternetConnection() {
         viewModel.checkInternetConnection { [weak self] isConnected in
             DispatchQueue.main.async {
@@ -81,7 +81,7 @@ class HomeViewController: UIViewController {
             }
         }
     }
-
+    
     private func loadBrands() {
         viewModel.loadBrands { [weak self] in
             DispatchQueue.main.async {
@@ -91,21 +91,21 @@ class HomeViewController: UIViewController {
             }
         }
     }
-
+    
     private func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateAdsScroll), userInfo: nil, repeats: true)
     }
-
+    
     private func stopTimer() {
         timer?.invalidate()
         timer = nil
     }
-
+    
     @objc private func updateAdsScroll() {
         let nextPage = (currentPage < viewModel.offersList.count - 1) ? currentPage + 1 : 0
         adsCollectionView.scrollToItem(at: IndexPath(item: nextPage, section: 0), at: .centeredHorizontally, animated: true)
     }
-
+    
     private func updateBrandsCollectionState() {
         if viewModel.brandsResultArray.isEmpty {
             brandsCollection.displayEmptyMessage("No Items Found")
@@ -113,7 +113,7 @@ class HomeViewController: UIViewController {
             brandsCollection.removeEmptyMessage()
         }
     }
-
+    
     private func showCouponAlert(code: String) {
         showAlert(
             title: "Congratulations",
@@ -124,7 +124,7 @@ class HomeViewController: UIViewController {
             }
         )
     }
-
+    
     private func showNotLoggedInAlert() {
         showAlert(
             title: "Not Logged In",
@@ -149,9 +149,9 @@ extension HomeViewController: UICollectionViewDelegate {
             showCouponAlert(code: "code")
         } else if collectionView == brandsCollection {
             let brandsVC = storyboard?.instantiateViewController(identifier: "CategoriesAndBrandsViewController") as! CategoriesAndBrandsViewController
-            brandsVC.isBrandScreen = true
-            brandsVC.brandLogoURL = viewModel.brandsResultArray[indexPath.row].image.src
-            brandsVC.selectedVendor = viewModel.brandsResultArray[indexPath.row].title
+            brandsVC.viewModel.isBrandScreen = true
+            brandsVC.viewModel.brandLogoURL = viewModel.brandsResultArray[indexPath.row].image.src
+            brandsVC.viewModel.selectedVendor = viewModel.brandsResultArray[indexPath.row].title
             navigationController?.pushViewController(brandsVC, animated: true)
         }
     }
@@ -162,7 +162,7 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionView == adsCollectionView ? viewModel.offersList.count : viewModel.brandsResultArray.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == adsCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AdsCollectionCell", for: indexPath)
@@ -185,18 +185,18 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView == adsCollectionView ? adsItemSize(for: collectionView) : brandsItemSize(for: collectionView)
     }
-
+    
     private func adsItemSize(for collectionView: UICollectionView) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
     }
-
+    
     private func brandsItemSize(for collectionView: UICollectionView) -> CGSize {
         let numberOfCellsPerRow: CGFloat = 2
         let collectionViewWidth = collectionView.bounds.width
         let adjustedWidth = (collectionViewWidth - 60) / numberOfCellsPerRow
         return CGSize(width: adjustedWidth, height: adjustedWidth)
     }
-
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == adsCollectionView {
             currentPage = Int(scrollView.contentOffset.x / scrollView.frame.width)
