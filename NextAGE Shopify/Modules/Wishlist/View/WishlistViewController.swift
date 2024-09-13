@@ -11,25 +11,24 @@ class WishlistViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var wishlistCollectionView: UICollectionView!
     // MARK: - Properties
-    let networkManager: NetworkManager
-    let userDefaultsManager: UserDefaultManager
-    var wishlist: [LineItem] = []
+    var viewModel:WishlistViewModel
     let indicator = UIActivityIndicatorView(style: .large)
+
     // MARK: - Required Init
     required init?(coder: NSCoder) {
-        networkManager = NetworkManager()
-        userDefaultsManager = UserDefaultManager.shared
+        viewModel = WishlistViewModel()
         super.init(coder: coder)
     }
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        fetchWishlist()
+        setupViewModel()
+        viewModel.fetchWishlist()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchWishlist()
+        viewModel.fetchWishlist()
     }
     // MARK: - Private Methods
     private func updateUI() {
@@ -43,21 +42,23 @@ class WishlistViewController: UIViewController {
         indicator.center = view.center
         view.addSubview(indicator)
     }
-    private func fetchWishlist() {
-        indicator.startAnimating()
-        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultsManager.wishlistID).shopifyURLString(), responseType: DraftOrderWrapper.self) { result in
-            self.wishlist = result?.draftOrder.lineItems ?? []
-            if self.wishlist.first?.variantID == nil {
-                self.wishlist = Array(self.wishlist.dropFirst())
+
+    private func setupViewModel(){
+        viewModel.displayEmptyMessage = { message in
+            self.wishlistCollectionView.displayEmptyMessage(message)
+        }
+        viewModel.removeEmptyMessage = {
+            self.wishlistCollectionView.removeEmptyMessage()
+        }
+        viewModel.bindResultToTableView = {
+            DispatchQueue.main.async {
+                self.wishlistCollectionView.reloadData()
             }
-            self.indicator.stopAnimating()
-            if self.wishlist.count == 0 {
-                self.wishlistCollectionView.displayEmptyMessage("Add some products to your wishlist ")
-            } else {
-                self.wishlistCollectionView.removeEmptyMessage()
+        }
+        viewModel.setIndicator = { [weak self] state in
+            DispatchQueue.main.async {
+                state ? self?.indicator.startAnimating():self?.indicator.stopAnimating()
             }
-            self.wishlistCollectionView.reloadData()
-            
         }
     }
 }
@@ -65,23 +66,24 @@ class WishlistViewController: UIViewController {
 extension WishlistViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
-        productDetailsViewController.viewModel.productID = wishlist[indexPath.row].productID
+        productDetailsViewController.viewModel.productID = viewModel.wishlist[indexPath.row].productID
         navigationController?.pushViewController(productDetailsViewController, animated: true)
+
     }
 }
 
 extension WishlistViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return wishlist.count
+        return viewModel.wishlist.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesCollectionCell", for: indexPath) as! CategoriesCollectionCell
-        cell.configureForWishlist(with: wishlist[indexPath.row])
+        cell.configureForWishlist(with: viewModel.wishlist[indexPath.row])
         return cell
     }
-    
-    
+
+
 }
 
 extension WishlistViewController: UICollectionViewDelegateFlowLayout {
