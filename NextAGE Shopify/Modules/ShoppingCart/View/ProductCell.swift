@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 class ProductCell: UITableViewCell {
-
+    // MARK: - IBOutlets
     @IBOutlet var backgroundViewCell: UIView!
     @IBOutlet weak var countPlus: UIButton!
     @IBOutlet weak var countMinus: UIButton!
@@ -18,6 +18,7 @@ class ProductCell: UITableViewCell {
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var productImage: UIImageView!
     
+    // MARK: - Properties
     var maxCount = 1
     var product: LineItem?
     var deleteButton: ()->() = {}
@@ -25,39 +26,25 @@ class ProductCell: UITableViewCell {
     private let networkManager: NetworkManager
     private let userDefaultManager: UserDefaultManager
     
+    // MARK: - Required Initializer
     required init?(coder: NSCoder) {
         networkManager = NetworkManager()
         userDefaultManager = UserDefaultManager.shared
         super.init(coder: coder)
     }
     
+    // MARK: - View Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         updateCountingState()
         updateUI()
     }
     
-    private func updateUI(){
-        backgroundViewCell.addBorderView()
-        backgroundViewCell.addCornerRadius(radius: 12)
-    }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(false, animated: animated)
     }
-    @IBAction func countPlusButton(_ sender: Any) {
-        productCount.text = String(Int(productCount.text!)! + 1)
-#warning("make delegate to update subtotal form shoppingCartVC and reload table")
-        updateItemQuantity(newQuantity: Int(productCount.text ?? "") ?? 1)
-        updateCountingState()
-    }
     
-    @IBAction func countMinusButton(_ sender: Any) {
-        productCount.text = String(Int(productCount.text!)! - 1)
-        updateItemQuantity(newQuantity: Int(productCount.text ?? "") ?? 1)
-        updateCountingState()
-    }
-    
+    // MARK: - Public Methods
     func configCell(with product: LineItem) {
         self.product = product
         productName.text = product.name
@@ -69,6 +56,12 @@ class ProductCell: UITableViewCell {
         updateCountingState()
     }
     
+    // MARK: - Private Methods
+    private func updateUI(){
+        backgroundViewCell.addBorderView()
+        backgroundViewCell.addCornerRadius(radius: 12)
+    }
+
     private func updateItemQuantity(newQuantity: Int) {
         networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultManager.shoppingCartID).shopifyURLString(), responseType: DraftOrderWrapper.self) { result in
             let shoppingCart = result?.draftOrder.lineItems ?? []
@@ -100,6 +93,19 @@ class ProductCell: UITableViewCell {
         } else {
             countPlus.isEnabled = false
         }
+    }
+    
+    // MARK: - IBActions
+    @IBAction func countPlusButton(_ sender: Any) {
+        productCount.text = String(Int(productCount.text!)! + 1)
+        updateItemQuantity(newQuantity: Int(productCount.text ?? "") ?? 1)
+        updateCountingState()
+    }
+    
+    @IBAction func countMinusButton(_ sender: Any) {
+        productCount.text = String(Int(productCount.text!)! - 1)
+        updateItemQuantity(newQuantity: Int(productCount.text ?? "") ?? 1)
+        updateCountingState()
     }
     
     @IBAction func removeItemButtonClicked(_ sender: Any) {
