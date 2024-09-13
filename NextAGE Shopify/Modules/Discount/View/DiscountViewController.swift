@@ -17,117 +17,86 @@ class DiscountViewController: UIViewController {
     @IBOutlet weak var discountLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     
-    var isApplied = false
-
+    // MARK: - Properties
+    let viewModel: DiscountViewModel
     private let indicator = UIActivityIndicatorView(style: .large)
-    private let networkManager: NetworkManager
-    private let userDefaultManager: UserDefaultManager
-    private var shoppingCart: [LineItem] = []
-    private var subTotal: Double = 0.0
-    private var discountAmount: Double = 0.0
-    private var priceRule: PriceRule?
     
+    // MARK: - Required Initializer
     required init?(coder: NSCoder) {
-        networkManager = NetworkManager()
-        userDefaultManager = UserDefaultManager.shared
+        viewModel = DiscountViewModel()
         super.init(coder: coder)
     }
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        fetchShoppingCart()
+        setupViewModel()
+        viewModel.fetchShoppingCart()
     }
     
     private func updateUI() {
         title = "Review"
         productsCollectionView.delegate = self
         productsCollectionView.dataSource = self
-        selectAddressButton.addCornerRadius(radius: 12)
+//        selectAddressButton.addCornerRadius(radius: 12)
         applyDiscountButton.addCornerRadius(radius: 12)
         setupIndicator()
         productsCollectionView.register(UINib(nibName: "CategoriesCollectionCell", bundle: nil), forCellWithReuseIdentifier: "CategoriesCollectionCell")
     }
-
+    
     private func setupIndicator() {
         indicator.center = view.center
         indicator.startAnimating()
         view.addSubview(indicator)
     }
     
-    private func calcSubTotal() {
-        subTotal = 0.0
-        for product in shoppingCart {
-            subTotal += (Double(product.price) ?? 0.0) * Double(product.quantity)
-        }
-        subtotalLabel.text = String(format: "%.2f", subTotal) + " \(UserDefaultManager.shared.currency)"
-    }
-    
-    private func calcTotal() {
-        calcSubTotal()
-        #warning("fetch discount")
-        discountLabel.text = String(format: "%.2f", discountAmount) + " \(UserDefaultManager.shared.currency)"
-        totalLabel.text = String(format: "%.2f", subTotal + (Double(discountAmount) ?? 0.0)) + " \(UserDefaultManager.shared.currency)"
-    }
-    
-    private func fetchShoppingCart() {
-        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultManager.shoppingCartID).shopifyURLString(), responseType: DraftOrderWrapper.self) { result in
-            self.shoppingCart = result?.draftOrder.lineItems ?? []
-            if self.shoppingCart.first?.variantID == nil {
-                self.shoppingCart = Array(self.shoppingCart.dropFirst())
+    private func setupViewModel() {
+        viewModel.setIndicator = { state in
+            DispatchQueue.main.async { [weak self] in
+                state ? self?.indicator.startAnimating() : self?.indicator.stopAnimating()
             }
-            self.indicator.stopAnimating()
-            self.calcTotal()
-            self.productsCollectionView.reloadData()
         }
-    }
-    
-    private func submitDiscount(completion: @escaping ()->()) {
-        var discountParameters: [String: String] = [:]
-        if let priceRule = priceRule {
-            discountParameters = [
-                "value": priceRule.value.replacingOccurrences(of: "-", with: ""),
-                "title": priceRule.title,
-                "value_type": priceRule.valueType
-            ]
-        }
-        networkManager.updateData(at: ShopifyAPI.draftOrder(id: userDefaultManager.shoppingCartID).shopifyURLString(), with: ["draft_order": ["applied_discount": discountParameters]]) {
-            print("applied")
-            completion()
-        }
-    }
-    
-    @IBAction func applyDiscountButton(_ sender: Any) {
-        if !isApplied {
-            let title = discountTextField.text?.trimmingCharacters(in: .whitespaces)
-            guard title != "" else {
-                displayMessage(massage: .discountCodeEmpty, isError: true)
-                return
+        viewModel.bindResultToCollectionView = {
+            DispatchQueue.main.async { [weak self] in
+                self?.productsCollectionView.reloadData()
             }
-            networkManager.fetchData(from: ShopifyAPI.priceRule(title: title ?? "nil").shopifyURLString(), responseType: PriceRules.self) { result in
-                guard let priceRule = result?.priceRules.first else {
-                    displayMessage(massage: .discountCodeFailed, isError: true)
-                    return
+        }
+        viewModel.discountApplied = { state in
+            DispatchQueue.main.async { [weak self] in
+                if state {
+                    self?.applyDiscountButton.setTitle("Change", for: .normal)
+                    self?.discountTextField.isEnabled = false
+                } else {
+                    self?.applyDiscountButton.setTitle("Apply", for: .normal)
+                    self?.discountTextField.isEnabled = true
                 }
-                self.priceRule = priceRule
-                self.discountAmount = Double(priceRule.value) ?? 0
-                self.calcTotal()
-                displayMessage(massage: .discountCodeApplied, isError: false)
-                self.isApplied.toggle()
-                self.applyDiscountButton.setTitle("Change", for: .normal)
-                self.discountTextField.isEnabled = false
             }
-        } else {
-            priceRule = nil
-            isApplied.toggle()
-            discountAmount = 0
-            calcTotal()
-            applyDiscountButton.setTitle("Apply", for: .normal)
-            discountTextField.isEnabled = true
+        }
+        viewModel.displayMessage = { massage, isError in
+            displayMessage(massage: massage, isError: isError)
+        }
+        viewModel.getDiscountTitle = {
+            return self.discountTextField.text?.trimmingCharacters(in: .whitespaces)
+        }
+        viewModel.bindSubtotalPrice = { subtotal in
+            self.subtotalLabel.text = subtotal
+        }
+        viewModel.bindDiscountPrice = { discount in
+            self.discountLabel.text = discount
+        }
+        viewModel.bindTotalPrice = { total in
+            self.totalLabel.text = total
         }
     }
+    
+    // MARK: - IBActions
+    @IBAction func applyDiscountButton(_ sender: Any) {
+        viewModel.applyDiscount()
+    }
+    
     @IBAction func selectAddressButton(_ sender: Any) {
-        submitDiscount {
+        viewModel.submitDiscount {
             self.pushViewController(vcIdentifier: "AddressViewController", withNav: self.navigationController)
         }
     }
@@ -136,24 +105,22 @@ class DiscountViewController: UIViewController {
 extension DiscountViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
-        productDetailsViewController.viewModel.productID = shoppingCart[indexPath.row].productID
+        productDetailsViewController.viewModel.productID = viewModel.shoppingCart[indexPath.row].productID
         navigationController?.pushViewController(productDetailsViewController, animated: true)
     }
 }
 
 extension DiscountViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return shoppingCart.count
+        return viewModel.shoppingCart.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesCollectionCell", for: indexPath) as! CategoriesCollectionCell
-        let product = shoppingCart[indexPath.row]
+        let product = viewModel.shoppingCart[indexPath.row]
         cell.configure(with: product)
         return cell
     }
-    
-    
 }
 
 extension DiscountViewController: UICollectionViewDelegateFlowLayout {
