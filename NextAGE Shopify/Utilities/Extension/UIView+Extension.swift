@@ -37,7 +37,7 @@ extension UIView {
         layer.shadowOffset = offset
         layer.shadowRadius = radius
     }
-    func displayEmptyMessage(_ message: String) {
+    @MainActor func displayEmptyMessage(_ message: String) {
         let messageLabel = UILabel()
         messageLabel.text = message
         messageLabel.textColor = .black
@@ -56,7 +56,7 @@ extension UIView {
         ])
     }
     
-    func removeEmptyMessage() {
+    @MainActor func removeEmptyMessage() {
         for subview in self.subviews {
             if let label = subview as? UILabel, label.textColor == .black {
                 label.removeFromSuperview()
