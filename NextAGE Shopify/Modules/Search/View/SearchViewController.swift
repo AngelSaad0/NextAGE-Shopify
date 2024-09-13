@@ -6,162 +6,129 @@
 //
 
 import UIKit
-import Combine
+
 class SearchViewController: UIViewController {
-    // MARK: -  IBOutlet
+
+    // MARK: - IBOutlet
     @IBOutlet weak var productTableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
-    
-    // MARK: -  properties
-    var products: [ProductInfo] = []
-    var filteredProducts: [ProductInfo] = []
-    var searchKeyword : String = ""
-    var isSearching : Bool = false
-    var networkManager: NetworkManager
-    var connectivityService: ConnectivityServiceProtocol
+
+    // MARK: - Properties
+
     private let activityIndicator = UIActivityIndicatorView(style: .large)
-    
-    //combine
-    private var searchTextSubject = PassthroughSubject<String, Never>()
-    private var cancellables = Set<AnyCancellable>()
-    
-    
-    // MARK: -  required init
+    var viewModel : SearchViewModel
+
+    // MARK: - Required Init
     required init?(coder: NSCoder) {
-        networkManager = NetworkManager()
-        connectivityService = ConnectivityService.shared
+        viewModel = SearchViewModel()
         super.init(coder: coder)
     }
-    // MARK: -  ViewLifeCycle
+
+    // MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupActivityIndicator()
-        checkInternetConnection()
-        setupSearchTextPublisher()
+        setupViewModel()
+        viewModel.checkInternetConnection()
     }
+
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         productTableView.reloadData()
     }
-    
-    // MARK: -  private Method
-    private func setupSearchTextPublisher() {
-        searchTextSubject
-            .removeDuplicates()
-            .sink { [weak self] searchText in
-                self?.searchProducts(with: searchText)
-            }
-            .store(in: &cancellables)
-    }
+
+    // MARK: - Private Methods
     private func setupActivityIndicator() {
         activityIndicator.center = view.center
         activityIndicator.startAnimating()
         view.addSubview(activityIndicator)
     }
-    
-    private func checkInternetConnection() {
-        connectivityService.checkInternetConnection { [weak self] isConnected in
-            guard let self = self else { return }
-            if isConnected {
-                loadProducts()
-            } else {
-                self.showNoInternetAlert()
+
+    private func setupViewModel(){
+        viewModel.activityIndicator = { state in
+            DispatchQueue.main.async {[weak self] in
+                state ? self?.activityIndicator.startAnimating() : self?.activityIndicator.stopAnimating()
             }
+
         }
-    }
-    private func loadProducts() {
-        networkManager.fetchData(from: ShopifyAPI.products.shopifyURLString(), responseType: Products.self) { result in
-            guard let products = result else {return}
-            DispatchQueue.main.async { [weak self] in
-                self?.products = products.products
-                self?.filteredProducts = self?.products ?? []
+        viewModel.showNoInternetAlert = {
+            self.showNoInternetAlert()
+        }
+        viewModel.bindTablView = {
+            DispatchQueue.main.async {[weak self] in
                 self?.productTableView.reloadData()
-                self?.activityIndicator.stopAnimating()
             }
         }
-        
-    }
-    private func searchProducts(with searchText:String) {
-        if isSearching {
-            print(searchText)
-            if searchText.isEmpty {
-                filteredProducts = products
-            } else {
-                filteredProducts = products.filter { $0.title.lowercased().contains(searchText.lowercased()) }
-            }
-        } else {
-            filteredProducts = products
+        viewModel.displayEmptyMessage = { message in
+            self.productTableView.displayEmptyMessage(message)
+
         }
-        updateUIForNoResults()
-        productTableView.reloadData()
-    }
-    
-    private func updateUIForNoResults() {
-        if (filteredProducts.count  == 0) {
-            productTableView.displayEmptyMessage("No items found")
-        } else {
-            productTableView.removeEmptyMessage()
+        viewModel.removeEmptyMessage = {
+            self.productTableView.removeEmptyMessage()
         }
+
     }
+
 }
-// MARK: -  TableViewDataSource
-extension SearchViewController:UITableViewDataSource {
+
+// MARK: - UITableViewDataSource
+extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell  = tableView.dequeueReusableCell(withIdentifier: "SearchTableCell", for: indexPath) as! SearchTableCell
-        let product = filteredProducts[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableCell", for: indexPath) as! SearchTableCell
+        let product = viewModel.filteredProducts[indexPath.row]
         cell.configure(with: product)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        120
+        return 120
     }
+
     func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        return 1
     }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredProducts.count
+        return viewModel.filteredProducts.count
     }
-    
-    
 }
-extension SearchViewController:UITableViewDelegate {
+
+// MARK: - UITableViewDelegate
+extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let productDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
-        productDetailsViewController.viewModel.productID = filteredProducts[indexPath.row].id
+        productDetailsViewController.viewModel.productID = viewModel.filteredProducts[indexPath.row].id
         navigationController?.pushViewController(productDetailsViewController, animated: true)
     }
 }
 
-extension SearchViewController:UISearchBarDelegate {
+// MARK: - UISearchBarDelegate
+extension SearchViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
-        isSearching = true
+        viewModel.isSearching = true
     }
+
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
-        isSearching = false
+        viewModel.isSearching = false
     }
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchTextSubject.send(searchText.trimmingCharacters(in: .whitespacesAndNewlines))
-        
+        viewModel.searchProducts(with: searchText.trimmingCharacters(in: .whitespacesAndNewlines))
     }
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
-            searchTextSubject.send(searchText)
+            viewModel.searchProducts(with: searchText)
         }
         searchBar.resignFirstResponder()
     }
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
         searchBar.resignFirstResponder()
         searchBar.text = ""
-        searchTextSubject.send("")
+        viewModel.searchProducts(with: "")
     }
-    
 }
-
-
-
-
-
