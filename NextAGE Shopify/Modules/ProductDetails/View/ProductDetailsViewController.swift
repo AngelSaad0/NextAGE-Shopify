@@ -97,6 +97,10 @@ class ProductDetailsViewController: UIViewController {
             self.addToCartButton.setTitle("Added To Cart Successfully", for: .normal)
             self.addToCartButton.isEnabled = false
         }
+        viewModel.didFoundInCart = {
+            self.addToCartButton.setTitle("Item already in Cart", for: .normal)
+            self.addToCartButton.isEnabled = false
+        }
         viewModel.showMessage = { message, isError in
             displayMessage(massage: message, isError: isError)
         }

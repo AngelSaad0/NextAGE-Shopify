@@ -12,15 +12,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-                window = UIWindow(windowScene: windowScene)
-                let viewController: UIViewController
-                if UserDefaultsManager.shared.continueAsAGuest || UserDefaultsManager.shared.isLogin {
-                    viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarNavigationController")
-                } else {
-                    viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AuthOptionsNavigationController")
-                }
-                window?.rootViewController = viewController
-                window?.makeKeyAndVisible()
+        
+        let wishlistManager = WishlistManager.shared
+        
+        window = UIWindow(windowScene: windowScene)
+        let viewController: UIViewController
+        if UserDefaultsManager.shared.continueAsAGuest || UserDefaultsManager.shared.isLogin {
+            viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarNavigationController")
+        } else {
+            viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AuthOptionsNavigationController")
+        }
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -9,7 +9,7 @@ import Foundation
 class ProductDetailsViewModel {
     // MARK: - Properties
     let networkManager: NetworkManagerProtocol
-    var userDefaultManger:UserDefaultsManager
+    let userDefaultManger:UserDefaultsManager
     private var selectedVariantID:Int?
     private var selectedVariantInventoryQuantity:Int?
     var selectedColor:String?
@@ -41,6 +41,7 @@ class ProductDetailsViewModel {
     var updateDropdownOptions: ()->() = {}
     var updateFavoriteImage: ()->() = {}
     var didAddToCart: ()->() = {}
+    var didFoundInCart: ()->() = {}
     var showMessage: (ValidMessage, Bool)->() = {_, _ in}
     var bindDataToVC: (String, String, String)->() = {_, _, _ in}
     
@@ -99,7 +100,12 @@ class ProductDetailsViewModel {
         var cartLineItems: [[String: Any]] = []
         for item in shoppingCart ?? [] {
             var properties : [[String: String]] = []
-            if item.variantID != nil {
+            if item.variantID == nil {
+            } else if item.variantID == selectedVariantID {
+                self.showMessage(.foundInShoppingCart, false)
+                didFoundInCart()
+                return
+            } else {
                 for property in item.properties {
                     properties.append(["name":property.name, "value": property.value])
                 }

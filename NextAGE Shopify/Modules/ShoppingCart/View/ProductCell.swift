@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 import Kingfisher
 
 class ProductCell: UITableViewCell {
@@ -25,6 +26,10 @@ class ProductCell: UITableViewCell {
     var recalculateSum: ()->() = {}
     private let networkManager: NetworkManager
     private let userDefaultManager: UserDefaultsManager
+    private var cancellables = Set<AnyCancellable>()
+    private let incrementSubject = PassthroughSubject<Void, Never>()
+    private let decrementSubject = PassthroughSubject<Void, Never>()
+    private let debounceInterval = 0.5
     
     // MARK: - Required Initializer
     required init?(coder: NSCoder) {
@@ -36,6 +41,7 @@ class ProductCell: UITableViewCell {
     // MARK: - View Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupDebounce()
         updateCountingState()
         updateUI()
     }
@@ -95,16 +101,32 @@ class ProductCell: UITableViewCell {
         }
     }
     
+    private func setupDebounce() {
+        incrementSubject
+            .debounce(for: .seconds(debounceInterval), scheduler: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.updateItemQuantity(newQuantity: Int(self?.productCount.text ?? "") ?? 1)
+            }
+            .store(in: &cancellables)
+
+        decrementSubject
+            .debounce(for: .seconds(debounceInterval), scheduler: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.updateItemQuantity(newQuantity: Int(self?.productCount.text ?? "") ?? 1)
+            }
+            .store(in: &cancellables)
+    }
+    
     // MARK: - IBActions
     @IBAction func countPlusButton(_ sender: Any) {
         productCount.text = String(Int(productCount.text!)! + 1)
-        updateItemQuantity(newQuantity: Int(productCount.text ?? "") ?? 1)
+        incrementSubject.send()
         updateCountingState()
     }
     
     @IBAction func countMinusButton(_ sender: Any) {
         productCount.text = String(Int(productCount.text!)! - 1)
-        updateItemQuantity(newQuantity: Int(productCount.text ?? "") ?? 1)
+        decrementSubject.send()
         updateCountingState()
     }
     
