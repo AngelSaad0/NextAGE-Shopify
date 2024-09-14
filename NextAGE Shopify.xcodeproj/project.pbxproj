@@ -43,6 +43,8 @@
 		A9D0F0D22C864BBD00ABA14E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0D12C864BBD00ABA14E /* Colors.swift */; };
 		A9F72BF62C8E2E6600D884E6 /* DumyReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F72BF52C8E2E6600D884E6 /* DumyReview.swift */; };
 		A9F72BFF2C92189F00D884E6 /* CustomCommanButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F72BFE2C92189F00D884E6 /* CustomCommanButton.swift */; };
+		C63F86292C9576B30035D4C7 /* CurrencyDataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F86282C9576B30035D4C7 /* CurrencyDataAPI.swift */; };
+		C63F862B2C957D760035D4C7 /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F862A2C957D760035D4C7 /* CurrencyData.swift */; };
 		C64C33832C8741F500EF1928 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */; };
 		C64C33842C8741F500EF1928 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */; };
 		C64C33852C8741F500EF1928 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337D2C8741F500EF1928 /* PaymentViewController.swift */; };
@@ -134,6 +136,8 @@
 		A9D0F0D12C864BBD00ABA14E /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		A9F72BF52C8E2E6600D884E6 /* DumyReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumyReview.swift; sourceTree = "<group>"; };
 		A9F72BFE2C92189F00D884E6 /* CustomCommanButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCommanButton.swift; sourceTree = "<group>"; };
+		C63F86282C9576B30035D4C7 /* CurrencyDataAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDataAPI.swift; sourceTree = "<group>"; };
+		C63F862A2C957D760035D4C7 /* CurrencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyData.swift; sourceTree = "<group>"; };
 		C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 		C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
 		C64C337D2C8741F500EF1928 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
@@ -341,6 +345,7 @@
 				A970BF292C87D3070082ED45 /* ConnectivityService.swift */,
 				C68C4EC52C878CBE0040DF87 /* NetworkHelper.swift */,
 				C68C4EDE2C87A6B00040DF87 /* ShopfiyAPI.swift */,
+				C63F86282C9576B30035D4C7 /* CurrencyDataAPI.swift */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -472,6 +477,7 @@
 				A970BF2B2C87F3AF0082ED45 /* Products.swift */,
 				C6C53E692C919827009CD638 /* Addresses.swift */,
 				C66D7AFC2C9338C400DB1A71 /* PriceRules.swift */,
+				C63F862A2C957D760035D4C7 /* CurrencyData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -869,6 +875,7 @@
 				C6AEAC0C2C8D27A300246123 /* MeViewModel.swift in Sources */,
 				C674327C2C863AA6001A0753 /* ProductDetailsViewModel.swift in Sources */,
 				C6AEAC012C8D21C800246123 /* SignUpViewModel.swift in Sources */,
+				C63F86292C9576B30035D4C7 /* CurrencyDataAPI.swift in Sources */,
 				C6AEAC302C8D2C3C00246123 /* DiscountViewModel.swift in Sources */,
 				A9AB32B82C8BC32400A3EB88 /* AllOrdersViewController.swift in Sources */,
 				C674326C2C863693001A0753 /* AuthOptionsViewController.swift in Sources */,
@@ -886,6 +893,7 @@
 				C67432942C863F35001A0753 /* SettingsViewModel.swift in Sources */,
 				A970BF032C8780950082ED45 /* UICollectionView+Extension.swift in Sources */,
 				C6AEAC0A2C8D273300246123 /* CategoriesAndBrandsViewModel.swift in Sources */,
+				C63F862B2C957D760035D4C7 /* CurrencyData.swift in Sources */,
 				A970BF282C87D2940082ED45 /* UIViewController+Extension.swift in Sources */,
 				A943E1122C8A56BD00E655C8 /* ValidMessage.swift in Sources */,
 				C6B78B7D2C8A117100889849 /* AddAddressViewController.swift in Sources */,

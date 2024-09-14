@@ -17,6 +17,14 @@ import Foundation
        return dateFormatter.string(from: date)
    }
 
+func exchange(_ price: String) -> String {
+    return String(format: "%.2f", (Double(price) ?? 0.0) * UserDefaultsManager.shared.exchangeRate)
+}
+
+func exchange(_ price: Double) -> String {
+    return String(format: "%.2f", price * UserDefaultsManager.shared.exchangeRate)
+}
+
 @MainActor
 public func displayMessage(message: String,buttonTitle:String, isError: Bool, handler: (() -> Void)? = nil) {
     let view = MessageView.viewFromNib(layout: .cardView)

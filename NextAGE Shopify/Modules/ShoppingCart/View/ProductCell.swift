@@ -48,7 +48,7 @@ class ProductCell: UITableViewCell {
     func configCell(with product: LineItem) {
         self.product = product
         productName.text = product.name
-        productPrice.text = product.price + " \(UserDefaultsManager.shared.currency)"
+        productPrice.text = exchange(product.price) + " \(UserDefaultsManager.shared.currency)"
         productImage.kf.setImage(with: URL(string: product.properties[0].value))
         
         productCount.text = "\(product.quantity)"

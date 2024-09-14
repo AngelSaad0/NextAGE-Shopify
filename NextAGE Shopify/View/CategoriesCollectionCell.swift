@@ -28,14 +28,15 @@ class CategoriesCollectionCell: UICollectionViewCell {
     func configure(with cell: Product) {
         productImage.kf.setImage(with: URL(string: cell.image.src),placeholder: UIImage(named: "brand1"))
         productTitle.text = cell.vendor
-        productPrice.text = cell.variants[0].price
+        productPrice.text = exchange(cell.variants[0].price)
         productDetails.text = cell.title.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
+        currency.text = UserDefaultsManager.shared.currency
 
     }
     func configure(with cell: LineItem) {
         productImage.kf.setImage(with: URL(string: cell.properties[0].value),placeholder: UIImage(named: "brand1"))
         productTitle.text = "Quantity: \(cell.quantity)"
-        productPrice.text = cell.price
+        productPrice.text = exchange(cell.price)
         productDetails.text = cell.name?.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
         currency.text = UserDefaultsManager.shared.currency
 
@@ -43,7 +44,7 @@ class CategoriesCollectionCell: UICollectionViewCell {
     func configureForWishlist(with cell: LineItem) {
         productImage.kf.setImage(with: URL(string: cell.properties[0].value),placeholder: UIImage(named: "brand1"))
         productTitle.text = cell.title?.split(separator: "|").first?.trimmingCharacters(in: .whitespaces)
-        productPrice.text = cell.price
+        productPrice.text = exchange(cell.price)
         productDetails.text = cell.title?.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
         currency.text = UserDefaultsManager.shared.currency
 

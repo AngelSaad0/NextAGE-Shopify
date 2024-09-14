@@ -85,7 +85,7 @@ class PaymentViewModel {
                 for property in item.properties {
                     properties.append(["name":property.name, "value": property.value])
                 }
-                cartLineItems.append(["variant_id": item.variantID ?? 0, "quantity": item.quantity, "properties": properties, "product_id": item.productID ?? 0])
+                cartLineItems.append(["variant_id": item.variantID ?? 0, "quantity": item.quantity, "properties": properties, "product_id": item.productID ?? 0, "price": exchange(item.price)])
             }
         }
         return cartLineItems
@@ -98,13 +98,13 @@ class PaymentViewModel {
             "shipping_address": getShippingAddressDictionary(),
             "currency": userDefaultsManager.currency,
             "customer": [
-//                "first_name": userDefaultsManager.firstName,
-//                "last_name": userDefaultsManager.lastName,
+                "first_name": userDefaultsManager.firstName,
+                "last_name": userDefaultsManager.lastName,
                 "email": userDefaultsManager.email,
 //                "phone": userDefaultsManager.phone
             ],
             "discount_codes": [getDiscountDictionary()],
-            "total_price": shoppingCartDraftOrder?.totalPrice ?? "",
+            "total_price": exchange(shoppingCartDraftOrder?.totalPrice ?? ""),
         ]
         return orderDictionary
     }
@@ -153,9 +153,9 @@ class PaymentViewModel {
         let shoppingCart = getFilteredCart()
         var totalPrice = 0.0
         for item in shoppingCart {
-            totalPrice += userDefaultsManager.exchangeRate * (Double(item.price) ?? 0.0) * Double(item.quantity)
+            totalPrice += (Double(item.price) ?? 0.0) * Double(item.quantity)
         }
         let discount = Double(shoppingCartDraftOrder?.appliedDiscount?.value ?? "0.0") ?? 0.0
-        return totalPrice - discount
+        return (Double(exchange(totalPrice)) ?? 0.0) - discount
     }
 }

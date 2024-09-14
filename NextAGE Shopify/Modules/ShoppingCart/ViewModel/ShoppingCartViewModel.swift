@@ -91,7 +91,7 @@ class ShoppingCartViewModel {
         for product in shoppingCart {
             sum += (Double(product.price) ?? 0.0) * Double(product.quantity)
         }
-        bindSubtotalPrice("Subtotal: " + String(format: "%.2f", sum) + " \(UserDefaultsManager.shared.currency)")
+        bindSubtotalPrice("Subtotal: " + exchange(sum) + " \(UserDefaultsManager.shared.currency)")
     }
     
     private func getEmptyCart() -> [[String: Any]] {

@@ -176,14 +176,12 @@ class ProductDetailsViewModel {
     private func updateProductInfo() {
         enableButtons()
         if let product = product {
-            let price = Double(product.variants.first?.price ?? "0.0") ?? 0.0
-            let exchangeRate = userDefaultManger.exchangeRate
-            let formattedPrice = String(format: "%.2f", exchangeRate * price)
+            let price = product.variants.first?.price ?? "0.0"
             let currency = userDefaultManger.currency
 #warning("rating for test ")
             rating = Double(product.id % 10 + 1) / 2
             updateStars()
-            bindDataToVC(product.title, "\(formattedPrice) \(currency)", product.bodyHTML)
+            bindDataToVC(product.title, "\(exchange(price)) \(currency)", product.bodyHTML)
             updateDropdownOptions()
             selectedVariantID = product.variants.first?.id
             selectedVariantInventoryQuantity = product.variants.first?.inventoryQuantity
