@@ -17,11 +17,11 @@ struct Address: Codable {
     let id, customerID: Int
 //    let firstName, lastName: String
 //    let company: JSONNull?
-    let address1: String
+    let address1: String?
 //    let address2: JSONNull?
-    let city: String
+    let city: String?
 //    let province: JSONNull?
-    let /*country, zip,*/ phone, name: String
+    let country, /*zip,*/ phone, name: String?
 //    let provinceCode: JSONNull?
 //    let countryCode, countryName: String
     let addressDefault: Bool
@@ -31,7 +31,7 @@ struct Address: Codable {
         case customerID = "customer_id"
 //        case firstName = "first_name"
 //        case lastName = "last_name"
-        case /*company,*/ address1/*, address2*/, city, /*province,*/ /*country, zip,*/ phone, name
+        case /*company,*/ address1/*, address2*/, city, /*province,*/ country, /*zip,*/ phone, name
 //        case provinceCode = "province_code"
 //        case countryCode = "country_code"
 //        case countryName = "country_name"
@@ -41,10 +41,10 @@ struct Address: Codable {
 
 // MARK: - ShippingAddress
 struct ShippingAddress: Codable {
-    let address1: String
-    let city: String
-    let phone: String
-    let name: String
+    let address1: String?
+    let city: String?
+    let phone: String?
+    let name: String?
 }
 
 

@@ -39,9 +39,11 @@ class PaymentViewController: UIViewController {
     
     private func setupViewModel() {
         viewModel.presentPaymentRequest = { paymentRequest in
-            if let paymentController = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest) {
-                paymentController.delegate = self
-                self.present(paymentController, animated: true)
+            DispatchQueue.main.async { [weak self] in
+                if let paymentController = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest) {
+                    paymentController.delegate = self
+                    self?.present(paymentController, animated: true)
+                }
             }
         }
         viewModel.pushConfirmationViewController = {

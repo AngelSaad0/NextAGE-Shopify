@@ -35,8 +35,9 @@ class PaymentViewModel {
     
     // MARK: - Public Methods
     func applePay() {
-        let price = String(calculateTotalPrice())
+        let price = String(format: "%.2f", calculateTotalPrice())
         paymentRequest.paymentSummaryItems = [PKPaymentSummaryItem(label: "NextAGE New Order Payment", amount: NSDecimalNumber(string: price))]
+        print(price)
         presentPaymentRequest(paymentRequest)
     }
     
@@ -113,10 +114,10 @@ class PaymentViewModel {
         var addressParameters: [String: Any] = [:]
         if let shippingAddress = shoppingCartDraftOrder?.shippingAddress {
             addressParameters = [
-                "name": shippingAddress.name,
-                "address1": shippingAddress.address1,
-                "phone": shippingAddress.phone,
-                "city": shippingAddress.city
+                "name": shippingAddress.name ?? "",
+                "address1": shippingAddress.address1 ?? "",
+                "phone": shippingAddress.phone ?? "",
+                "city": shippingAddress.city ?? ""
             ]
         }
         return addressParameters
@@ -156,6 +157,10 @@ class PaymentViewModel {
             totalPrice += (Double(item.price) ?? 0.0) * Double(item.quantity)
         }
         let discount = Double(shoppingCartDraftOrder?.appliedDiscount?.value ?? "0.0") ?? 0.0
-        return (Double(exchange(totalPrice)) ?? 0.0) - discount
+        if shoppingCartDraftOrder?.appliedDiscount?.valueType == "fixed_amount" {
+            return (Double(exchange(totalPrice)) ?? 0.0) - discount
+        } else {
+            return (Double(exchange(totalPrice)) ?? 0.0) * (1 - discount / 100)
+        }
     }
 }
