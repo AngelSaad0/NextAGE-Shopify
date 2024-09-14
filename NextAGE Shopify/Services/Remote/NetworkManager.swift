@@ -12,7 +12,7 @@ protocol NetworkManagerProtocol {
     func postData<T: Codable>(to url: String, responseType: T.Type, parameters: Parameters, completion: @escaping (T?) -> Void)
     func postWithoutResponse(to url: String, parameters: Parameters)
     func updateData(at url: String, with parameters: Parameters, completion: @escaping () -> ())
-    func deleteData(at url: String)
+    func deleteData(at url: String, completion: @escaping ()->())
 }
 
 class NetworkManager: NetworkManagerProtocol {
@@ -80,12 +80,14 @@ class NetworkManager: NetworkManagerProtocol {
         }
     }
 
-    func deleteData(at url: String) {
+    func deleteData(at url: String, completion: @escaping ()->()) {
         makeRequest(url: url, method: .delete, responseType: EmptyResponse.self) { result in
             switch result {
             case .success:
+                completion()
                 print("Item deleted successfully")
             case .failure(let error):
+                completion()
                 print("Error deleting item: \(error)")
             }
         }

@@ -32,7 +32,7 @@ class AddressViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.fetchAddresses()
+        viewModel.checkInternetConnection()
     }
     
     // MARK: - Private Methods
@@ -45,7 +45,7 @@ class AddressViewController: UIViewController {
             selectPayment.setTitle("Set as default address", for: .normal)
         }
         setupIndicator()
-        viewModel.fetchAddresses()
+        viewModel.checkInternetConnection()
     }
     
     private func setupIndicator() {
@@ -54,6 +54,9 @@ class AddressViewController: UIViewController {
     }
     
     private func setupViewModel() {
+        viewModel.showNoInternetAlert = {
+            self.showNoInternetAlert()
+        }
         viewModel.setIndicator = { state in
             DispatchQueue.main.async { [weak self] in
                 if state {
@@ -119,6 +122,10 @@ extension AddressViewController: UITableViewDelegate {
             viewModel.selectedOrderAddress = indexPath.row
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 74
+    }
 }
 
 extension AddressViewController: UITableViewDataSource {
@@ -142,8 +149,29 @@ extension AddressViewController: UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 74
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+                let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+                    if self.viewModel.addresses[indexPath.row].addressDefault {
+                        self.showAlert(title: "Default address", message: "You can't delete your default address, try setting another address to be the default in order to delete this one")
+                    } else {
+                        self.showAlert(title: "Delete address?", message: "Are you sure you want to delete this address?", okTitle: "Yes", cancelTitle: "No", okStyle: .destructive, cancelStyle: .cancel) { _ in
+                            self.viewModel.deleteAddress(at: indexPath.row)
+                        } cancelHandler: {_ in}
+                    }
+                    completionHandler(true)
+                }
+                
+                let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddAddressViewController") as! AddAddressViewController
+                    vc.viewModel.isEditing = true
+                    vc.viewModel.address = self.viewModel.addresses[indexPath.row]
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    completionHandler(true)
+                }
+                editAction.backgroundColor = .gray
+                let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+                configuration.performsFirstActionWithFullSwipe = true
+                return configuration
     }
 }
 

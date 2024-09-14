@@ -11,10 +11,13 @@ class AddAddressViewModel {
     // MARK: - Properties
     let networkManager: NetworkManager
     let userDefaultsManager: UserDefaultsManager
+    var isEditing = false
+    var address: Address?
     
     // MARK: - Closures
     var setIndicator: (Bool)->() = {_ in}
     var showSuccessMessage: ()->() = {}
+    var showSuccessEditingMessage: ()->() = {}
     
     // MARK: - Init
     init() {
@@ -28,14 +31,33 @@ class AddAddressViewModel {
         networkManager.postData(to: ShopifyAPI.addresses(id: userDefaultsManager.customerID).shopifyURLString(), responseType: EmptyResponse.self, parameters: [
             "address":
                 [
-                    "name": name ?? "",
-                    "address1": address ?? "",
-                    "city": city ?? "",
-                    "country": country ?? "",
-                    "phone": phone ?? "",
+                    "name": name?.trimmingCharacters(in: .whitespaces) ?? "",
+                    "address1": address?.trimmingCharacters(in: .whitespaces) ?? "",
+                    "city": city?.trimmingCharacters(in: .whitespaces) ?? "",
+                    "country": country?.trimmingCharacters(in: .whitespaces) ?? "",
+                    "phone": phone?.trimmingCharacters(in: .whitespaces) ?? "",
                     "default": isDefault
                 ]
         ]) { _ in
+            self.showSuccessMessage()
+            self.setIndicator(false)
+            completion()
+        }
+    }
+    
+    func editAddress(name: String?, address: String?, city: String?, country: String?, phone: String?, isDefault: Bool, completion: @escaping ()->()) {
+        setIndicator(true)
+        networkManager.updateData(at: ShopifyAPI.address(addressID: self.address?.id ?? 0, customerID: userDefaultsManager.customerID).shopifyURLString(), with: [
+            "address":
+                [
+                    "name": name?.trimmingCharacters(in: .whitespaces) ?? "",
+                    "address1": address?.trimmingCharacters(in: .whitespaces) ?? "",
+                    "city": city?.trimmingCharacters(in: .whitespaces) ?? "",
+                    "country": country?.trimmingCharacters(in: .whitespaces) ?? "",
+                    "phone": phone?.trimmingCharacters(in: .whitespaces) ?? "",
+                    "default": isDefault
+                ]
+        ]) {
             self.showSuccessMessage()
             self.setIndicator(false)
             completion()
