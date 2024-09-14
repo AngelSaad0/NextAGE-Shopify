@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15047D522C95ECB40009AEC2 /* AuthOptionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15047D512C95ECB40009AEC2 /* AuthOptionsTests.swift */; };
+		15047D552C95F0A70009AEC2 /* SignInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15047D542C95F0A70009AEC2 /* SignInViewModelTests.swift */; };
+		15047D592C95FC950009AEC2 /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15047D582C95FC950009AEC2 /* SignUpViewModelTests.swift */; };
 		8288A222BE029C913ABC395E /* Pods_NextAGE_Shopify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5890898183AD2B19A350B439 /* Pods_NextAGE_Shopify.framework */; };
 		A943E1102C8A3C1000E655C8 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A943E10F2C8A3C1000E655C8 /* UIWindow+Extension.swift */; };
 		A943E1122C8A56BD00E655C8 /* ValidMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A943E1112C8A56BD00E655C8 /* ValidMessage.swift */; };
@@ -107,6 +110,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		15047D512C95ECB40009AEC2 /* AuthOptionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthOptionsTests.swift; sourceTree = "<group>"; };
+		15047D542C95F0A70009AEC2 /* SignInViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelTests.swift; sourceTree = "<group>"; };
+		15047D582C95FC950009AEC2 /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
 		5890898183AD2B19A350B439 /* Pods_NextAGE_Shopify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextAGE_Shopify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B814936FAFE1EC6F0998431 /* Pods-NextAGE Shopify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAGE Shopify.release.xcconfig"; path = "Target Support Files/Pods-NextAGE Shopify/Pods-NextAGE Shopify.release.xcconfig"; sourceTree = "<group>"; };
 		A32D851AF21FC5A917918789 /* Pods-NextAGE Shopify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAGE Shopify.debug.xcconfig"; path = "Target Support Files/Pods-NextAGE Shopify/Pods-NextAGE Shopify.debug.xcconfig"; sourceTree = "<group>"; };
@@ -220,6 +226,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15047D532C95F07D0009AEC2 /* AuthTests */ = {
+			isa = PBXGroup;
+			children = (
+				15047D512C95ECB40009AEC2 /* AuthOptionsTests.swift */,
+				15047D542C95F0A70009AEC2 /* SignInViewModelTests.swift */,
+				15047D582C95FC950009AEC2 /* SignUpViewModelTests.swift */,
+			);
+			path = AuthTests;
+			sourceTree = "<group>";
+		};
 		909B7B01690F9411F7C9D65F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +335,7 @@
 		C627FA752C95E87A005A0861 /* NextAGE ShopifyTests */ = {
 			isa = PBXGroup;
 			children = (
+				15047D532C95F07D0009AEC2 /* AuthTests */,
 				C627FA762C95E87A005A0861 /* NextAGE_ShopifyTests.swift */,
 			);
 			path = "NextAGE ShopifyTests";
@@ -1009,6 +1026,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C627FA772C95E87A005A0861 /* NextAGE_ShopifyTests.swift in Sources */,
+				15047D552C95F0A70009AEC2 /* SignInViewModelTests.swift in Sources */,
+				15047D592C95FC950009AEC2 /* SignUpViewModelTests.swift in Sources */,
+				15047D522C95ECB40009AEC2 /* AuthOptionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
