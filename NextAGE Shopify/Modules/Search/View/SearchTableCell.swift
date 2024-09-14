@@ -12,10 +12,13 @@ class SearchTableCell: UITableViewCell {
     // MARK: -  IBOutlet
 
     @IBOutlet var backgroundViewCell: UIView!
-    @IBOutlet var productImg: UIImageView!
-    @IBOutlet var brandTitle: UILabel!
-    @IBOutlet var productTitleD: UILabel!
+    @IBOutlet var brandLabel: UILabel!
+    @IBOutlet var productLabel: UILabel!
     @IBOutlet var shadowView: UIImageView!
+    @IBOutlet var priceLabel: UILabel!
+    @IBOutlet var productImg: UIImageView!
+    @IBOutlet var wishListButton: UIButton!
+    
     // MARK: -  ViewLifeCycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,6 +40,7 @@ class SearchTableCell: UITableViewCell {
     // MARK: -  methods
 
     func updateUI(){
+        wishListButton.setImage(UIImage(systemName: "heart"), for: .normal)
         shadowView.addCornerRadius(radius: 12)
         backgroundViewCell.addCornerRadius(radius: 12)
         backgroundViewCell.addBorderView()
@@ -46,9 +50,16 @@ class SearchTableCell: UITableViewCell {
     }
     func configure(with model: ProductInfo) {
         productImg.kf.setImage(with: URL(string: model.image.src),placeholder: UIImage(named: "brand1"))
-        brandTitle.text = model.vendor
-        productTitleD.text = model.title.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
+        brandLabel.text = model.vendor
+        priceLabel.text = model.variants.first?.price
+        productLabel.text = model.title.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
 
     }
 
+    @IBAction func wishListButtonClicked(_ sender: UIButton) {
+        print("hello")
+        sender.setImage(UIImage(systemName:sender.currentImage ==
+                                UIImage(systemName: "heart") ? "heart.fill" : "heart" ), for: .normal)
+    }
+    
 }

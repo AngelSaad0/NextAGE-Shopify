@@ -28,7 +28,7 @@ class MeViewController: UIViewController {
         super.viewDidLoad()
         setupViewModel()
         setupUI()
-        checkInternetConnection()
+        viewModel.checkInternetConnection()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +48,13 @@ class MeViewController: UIViewController {
 
         viewModel.onWishlistUpdated = { [weak self] in
             self?.updateWishlistUI()
+        }
+        viewModel.ordersIndicator = { 
+            self.ordersIndicator.stopAnimating()
+        }
+        viewModel.wishlistIndicator = {
+            self.wishlistIndicator.stopAnimating()
+
         }
 
         viewModel.onInternetConnectionChecked = { [weak self] in
@@ -72,11 +79,10 @@ class MeViewController: UIViewController {
         view.addSubview(ordersIndicator)
         wishlistIndicator.center = CGPoint(x: view.center.x, y: wishlistCollectionView.center.y + 80)
         view.addSubview(wishlistIndicator)
+        ordersIndicator.startAnimating()
+        wishlistIndicator.startAnimating()
     }
 
-    private func checkInternetConnection() {
-        viewModel.checkInternetConnection()
-    }
 
     private func updateUIForLoginState() {
         if viewModel.isUserLoggedIn {

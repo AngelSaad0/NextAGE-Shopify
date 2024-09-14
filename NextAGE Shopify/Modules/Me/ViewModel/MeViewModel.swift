@@ -25,6 +25,9 @@ class MeViewModel {
     var onWishlistUpdated: (() -> Void)?
     var onInternetConnectionChecked: (() -> Void)?
     var onShowNoInternetAlert: (() -> Void)?
+    var ordersIndicator: ()->() = {}
+    var wishlistIndicator: ()->() = {}
+    var displayEmptyMessage: (String)->() = {_ in }
 
     // MARK: - Initialization
     init(networkManager: NetworkManager, userDefaultsManager: UserDefaultManager, connectivityService: ConnectivityServiceProtocol) {
@@ -46,6 +49,8 @@ class MeViewModel {
             if isConnected {
                 self.onInternetConnectionChecked?()
             } else {
+                ordersIndicator()
+                wishlistIndicator()
                 self.onShowNoInternetAlert?()
             }
         }
@@ -60,8 +65,8 @@ class MeViewModel {
             } else {
                 self.orders = []
                 Task { @MainActor in
-                                displayMessage(massage: .ordersFetchingFailed, isError: true)
-                            }
+                    displayMessage(massage: .ordersFetchingFailed, isError: true)
+                }
                 self.onOrdersUpdated?()
             }
         }

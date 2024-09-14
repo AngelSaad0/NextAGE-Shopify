@@ -184,7 +184,6 @@ extension HomeViewController: UICollectionViewDataSource {
             let image = viewModel.offersList[indexPath.row]
             let imageView = cell.viewWithTag(1) as! UIImageView
             imageView.image = UIImage(named: image)
-            imageView.addCornerRadius(radius: 10)
             return cell
         } else if collectionView == brandsCollection {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BrandsCollectionCell", for: indexPath) as! BrandCollectionCell
