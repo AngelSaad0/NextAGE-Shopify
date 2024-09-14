@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "32CAE49D-7725-4A11-8A97-3B9B7E2408D1",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:NextAGE Shopify.xcodeproj",
+      "identifier" : "A94A12102C84D06D00AE0E09",
+      "name" : "NextAGE Shopify"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:NextAGE Shopify.xcodeproj",
+        "identifier" : "C627FA732C95E87A005A0861",
+        "name" : "NextAGE ShopifyTests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -43,6 +43,7 @@
 		A9D0F0D22C864BBD00ABA14E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0F0D12C864BBD00ABA14E /* Colors.swift */; };
 		A9F72BF62C8E2E6600D884E6 /* DumyReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F72BF52C8E2E6600D884E6 /* DumyReview.swift */; };
 		A9F72BFF2C92189F00D884E6 /* CustomCommanButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F72BFE2C92189F00D884E6 /* CustomCommanButton.swift */; };
+		C627FA772C95E87A005A0861 /* NextAGE_ShopifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C627FA762C95E87A005A0861 /* NextAGE_ShopifyTests.swift */; };
 		C63F86292C9576B30035D4C7 /* CurrencyDataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F86282C9576B30035D4C7 /* CurrencyDataAPI.swift */; };
 		C63F862B2C957D760035D4C7 /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F862A2C957D760035D4C7 /* CurrencyData.swift */; };
 		C64C33832C8741F500EF1928 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */; };
@@ -95,6 +96,16 @@
 		C6C53E6A2C919827009CD638 /* Addresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C53E692C919827009CD638 /* Addresses.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C627FA782C95E87A005A0861 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A94A12092C84D06D00AE0E09 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A94A12102C84D06D00AE0E09;
+			remoteInfo = "NextAGE Shopify";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		5890898183AD2B19A350B439 /* Pods_NextAGE_Shopify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextAGE_Shopify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B814936FAFE1EC6F0998431 /* Pods-NextAGE Shopify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAGE Shopify.release.xcconfig"; path = "Target Support Files/Pods-NextAGE Shopify/Pods-NextAGE Shopify.release.xcconfig"; sourceTree = "<group>"; };
@@ -136,6 +147,8 @@
 		A9D0F0D12C864BBD00ABA14E /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		A9F72BF52C8E2E6600D884E6 /* DumyReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumyReview.swift; sourceTree = "<group>"; };
 		A9F72BFE2C92189F00D884E6 /* CustomCommanButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCommanButton.swift; sourceTree = "<group>"; };
+		C627FA742C95E87A005A0861 /* NextAGE ShopifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NextAGE ShopifyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C627FA762C95E87A005A0861 /* NextAGE_ShopifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextAGE_ShopifyTests.swift; sourceTree = "<group>"; };
 		C63F86282C9576B30035D4C7 /* CurrencyDataAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDataAPI.swift; sourceTree = "<group>"; };
 		C63F862A2C957D760035D4C7 /* CurrencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyData.swift; sourceTree = "<group>"; };
 		C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +210,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C627FA712C95E87A005A0861 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -212,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				A94A12132C84D06D00AE0E09 /* NextAGE Shopify */,
+				C627FA752C95E87A005A0861 /* NextAGE ShopifyTests */,
 				A94A12122C84D06D00AE0E09 /* Products */,
 				C9F62C285B9CD962C443C723 /* Pods */,
 				909B7B01690F9411F7C9D65F /* Frameworks */,
@@ -222,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				A94A12112C84D06D00AE0E09 /* NextAGE Shopify.app */,
+				C627FA742C95E87A005A0861 /* NextAGE ShopifyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -292,6 +314,14 @@
 				C6AEAC072C8D26EC00246123 /* ViewModel */,
 			);
 			path = CategoriesAndBrands;
+			sourceTree = "<group>";
+		};
+		C627FA752C95E87A005A0861 /* NextAGE ShopifyTests */ = {
+			isa = PBXGroup;
+			children = (
+				C627FA762C95E87A005A0861 /* NextAGE_ShopifyTests.swift */,
+			);
+			path = "NextAGE ShopifyTests";
 			sourceTree = "<group>";
 		};
 		C64C337E2C8741F500EF1928 /* View */ = {
@@ -766,6 +796,24 @@
 			productReference = A94A12112C84D06D00AE0E09 /* NextAGE Shopify.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C627FA732C95E87A005A0861 /* NextAGE ShopifyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C627FA7C2C95E87A005A0861 /* Build configuration list for PBXNativeTarget "NextAGE ShopifyTests" */;
+			buildPhases = (
+				C627FA702C95E87A005A0861 /* Sources */,
+				C627FA712C95E87A005A0861 /* Frameworks */,
+				C627FA722C95E87A005A0861 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C627FA792C95E87A005A0861 /* PBXTargetDependency */,
+			);
+			name = "NextAGE ShopifyTests";
+			productName = "NextAGE ShopifyTests";
+			productReference = C627FA742C95E87A005A0861 /* NextAGE ShopifyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -773,11 +821,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					A94A12102C84D06D00AE0E09 = {
 						CreatedOnToolsVersion = 15.2;
+					};
+					C627FA732C95E87A005A0861 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = A94A12102C84D06D00AE0E09;
 					};
 				};
 			};
@@ -795,6 +847,7 @@
 			projectRoot = "";
 			targets = (
 				A94A12102C84D06D00AE0E09 /* NextAGE Shopify */,
+				C627FA732C95E87A005A0861 /* NextAGE ShopifyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -811,6 +864,13 @@
 				A9D0F0D02C864B9B00ABA14E /* Colors.xcassets in Resources */,
 				A9AB32BC2C8CE3CF00A3EB88 /* OrdersTableViewCell.xib in Resources */,
 				A94A121C2C84D06D00AE0E09 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C627FA722C95E87A005A0861 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,7 +1004,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C627FA702C95E87A005A0861 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C627FA772C95E87A005A0861 /* NextAGE_ShopifyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C627FA792C95E87A005A0861 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A94A12102C84D06D00AE0E09 /* NextAGE Shopify */;
+			targetProxy = C627FA782C95E87A005A0861 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A94A121A2C84D06D00AE0E09 /* Main.storyboard */ = {
@@ -1143,6 +1219,50 @@
 			};
 			name = Release;
 		};
+		C627FA7A2C95E87A005A0861 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.m7aymn.NextAGE-ShopifyTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextAGE Shopify.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NextAGE Shopify";
+			};
+			name = Debug;
+		};
+		C627FA7B2C95E87A005A0861 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.m7aymn.NextAGE-ShopifyTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextAGE Shopify.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NextAGE Shopify";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1160,6 +1280,15 @@
 			buildConfigurations = (
 				A94A12262C84D07000AE0E09 /* Debug */,
 				A94A12272C84D07000AE0E09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C627FA7C2C95E87A005A0861 /* Build configuration list for PBXNativeTarget "NextAGE ShopifyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C627FA7A2C95E87A005A0861 /* Debug */,
+				C627FA7B2C95E87A005A0861 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
