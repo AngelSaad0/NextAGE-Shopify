@@ -83,10 +83,10 @@ class AddressViewModel {
         var addressParameters: [String: Any] = [:]
         if addresses.indices.contains(selectedOrderAddress ?? -1) {
             addressParameters = [
-                "name": addresses[selectedOrderAddress!].name,
-                "address1": addresses[selectedOrderAddress!].address1,
-                "city": addresses[selectedOrderAddress!].city,
-                "phone": addresses[selectedOrderAddress!].phone,
+                "name": addresses[selectedOrderAddress!].name ?? "",
+                "address1": addresses[selectedOrderAddress!].address1 ?? "",
+                "city": addresses[selectedOrderAddress!].city ?? "",
+                "phone": addresses[selectedOrderAddress!].phone ?? "",
             ]
         }
         networkManager.updateData(at: ShopifyAPI.draftOrder(id: userDefaultsManager.shoppingCartID).shopifyURLString(), with: ["draft_order": ["shipping_address": addressParameters]]) {

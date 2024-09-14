@@ -44,6 +44,7 @@ public enum ValidMessage: String {
    case newSelectedAddressFailed = "Error happened while updating your default address"
    case defaultAddressUpdated = "Default address updated successfully"
    case newAddressAdded = "New address added successfully"
+   case addressEdited = "Address has been edited successfully"
 
    case discountCodeEmpty = "You have not entered a discount code"
    case discountCodeFailed = "Entered discount code is not valid"

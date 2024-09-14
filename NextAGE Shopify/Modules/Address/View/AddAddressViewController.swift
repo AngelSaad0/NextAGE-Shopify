@@ -35,6 +35,15 @@ class AddAddressViewController: UIViewController {
         setupViewModel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if viewModel.isEditing {
+            title = "Edit Address"
+            restoreFields()
+            addAddressButton.setTitle("Edit Address", for: .normal)
+            defaultSwitch.isEnabled = !(viewModel.address?.addressDefault ?? false)
+        }
+    }
+    
     // MARK: - Private Methods
     private func updateUI() {
         title = "Add Address"
@@ -62,6 +71,22 @@ class AddAddressViewController: UIViewController {
         viewModel.showSuccessMessage = {
             displayMessage(massage: .newAddressAdded, isError: false)
         }
+        viewModel.showSuccessMessage = {
+            displayMessage(massage: .addressEdited, isError: false)
+        }
+    }
+    
+    private func restoreFields() {
+        guard let address = viewModel.address else {
+            displayMessage(massage: .addressesFetchingFailed, isError: true)
+            return
+        }
+        nameTextField.text = address.name
+        addressTextField.text = address.address1
+        cityTextField.text = address.city
+        countryTextField.text = address.country
+        phoneTextField.text = address.phone
+        defaultSwitch.isOn = address.addressDefault
     }
     
     private func validateRegisterFields() -> Bool {
@@ -111,8 +136,14 @@ class AddAddressViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func addAddressButton(_ sender: Any) {
         if validateRegisterFields() {
-            viewModel.addAddress(name: nameTextField.text, address: addressTextField.text, city: cityTextField.text,country: countryTextField.text, phone: phoneTextField.text, isDefault: defaultSwitch.isOn) {
-                self.navigationController?.popViewController(animated: true)
+            if viewModel.isEditing {
+                viewModel.editAddress(name: nameTextField.text, address: addressTextField.text, city: cityTextField.text,country: countryTextField.text, phone: phoneTextField.text, isDefault: defaultSwitch.isOn) {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            } else {
+                viewModel.addAddress(name: nameTextField.text, address: addressTextField.text, city: cityTextField.text,country: countryTextField.text, phone: phoneTextField.text, isDefault: defaultSwitch.isOn) {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }

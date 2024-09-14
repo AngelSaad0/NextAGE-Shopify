@@ -150,34 +150,28 @@ extension AddressViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        // Delete Action
                 let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
-                    self.showAlert(title: "Delete address?", message: "Are you sure you want to delete this address?", okTitle: "Yes", cancelTitle: "No", okStyle: .destructive, cancelStyle: .cancel) { _ in
-                        self.viewModel.deleteAddress(at: indexPath.row)
-                    } cancelHandler: {_ in}
+                    if self.viewModel.addresses[indexPath.row].addressDefault {
+                        self.showAlert(title: "Default address", message: "You can't delete your default address, try setting another address to be the default in order to delete this one")
+                    } else {
+                        self.showAlert(title: "Delete address?", message: "Are you sure you want to delete this address?", okTitle: "Yes", cancelTitle: "No", okStyle: .destructive, cancelStyle: .cancel) { _ in
+                            self.viewModel.deleteAddress(at: indexPath.row)
+                        } cancelHandler: {_ in}
+                    }
                     completionHandler(true)
                 }
                 
-                // Edit Action
                 let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
-                    #warning("Edit address")
-//                    self.editItem(at: indexPath)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddAddressViewController") as! AddAddressViewController
+                    vc.viewModel.isEditing = true
+                    vc.viewModel.address = self.viewModel.addresses[indexPath.row]
+                    self.navigationController?.pushViewController(vc, animated: true)
                     completionHandler(true)
                 }
                 editAction.backgroundColor = .gray
-                
-                // Return configuration with both actions
                 let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
-                configuration.performsFirstActionWithFullSwipe = true // Disable full swipe to trigger the first action
+                configuration.performsFirstActionWithFullSwipe = true
                 return configuration
     }
-    
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            
-//        } else if editingStyle == .insert {
-//            
-//        }
-//    }
 }
 
