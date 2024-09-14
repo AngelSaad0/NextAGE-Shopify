@@ -7,15 +7,16 @@
 
 import UIKit
 
-class WishLIstTableViewCell: UITableViewCell {
+class WishlistTableViewCell: UITableViewCell {
+    // MARK: - IBOutlete
     @IBOutlet var imageBackground: UIView!
     @IBOutlet var productImage: UIImageView!
     @IBOutlet var shadowView: UIView!
-
     @IBOutlet var productTitle: UILabel!
     @IBOutlet var productDetails: UILabel!
     @IBOutlet var productPrice: UILabel!
 
+    // MARK: - View Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         productImage.addCornerRadius(radius: 10)
@@ -24,14 +25,14 @@ class WishLIstTableViewCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        super.setSelected(false, animated: animated)
     }
+    
+    // MARK: - Public Methods
     func configureForWishlist(with cell: LineItem) {
         productImage.kf.setImage(with: URL(string: cell.properties[0].value),placeholder: UIImage(named: "brand1"))
         productTitle.text = cell.title?.split(separator: "|").first?.trimmingCharacters(in: .whitespaces)
-        productPrice.text = cell.price + " " + UserDefaultManager.shared.currency
+        productPrice.text = cell.price + " " + UserDefaultsManager.shared.currency
         productDetails.text = cell.title?.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
-
     }
-
 }

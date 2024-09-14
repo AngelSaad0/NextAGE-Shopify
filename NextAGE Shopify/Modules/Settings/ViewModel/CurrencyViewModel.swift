@@ -9,7 +9,7 @@ import Foundation
 
 class CurrencyViewModel {
     // MARK: - Properties
-    let userDefaultsManager: UserDefaultManager
+    let userDefaultsManager: UserDefaultsManager
     let currencies = ["USD", "EGP", "SAR", "AED"]
     
     // MARK: - Closures
@@ -17,7 +17,7 @@ class CurrencyViewModel {
     
     // MARK: - Init
     init() {
-        userDefaultsManager = UserDefaultManager.shared
+        userDefaultsManager = UserDefaultsManager.shared
     }
     
     // MARK: - Public Methods

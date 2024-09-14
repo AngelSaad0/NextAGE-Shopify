@@ -14,18 +14,20 @@ class AddressViewModel {
     var newDefaultAddressIndex: Int?
     var selectedOrderAddress: Int?
     let networkManager: NetworkManager
-    let userDefaultsManager: UserDefaultManager
+    let userDefaultsManager: UserDefaultsManager
     
     // MARK: - Closures
     var setIndicator: (Bool)->() = {_ in}
     var setSelectPaymentButton: (Bool)->() = {_ in}
     var bindResultToTableView: ()->() = {}
-    var showMessage: (VaildMassage, Bool)->() = {_, _ in}
+    var showMessage: (ValidMessage, Bool)->() = {_, _ in}
+    var displayEmptyMessage: (String)->() = {_ in}
+    var removeEmptyMessage: ()->() = {}
     
     // MARK: - Init
     init() {
         networkManager = NetworkManager()
-        userDefaultsManager = UserDefaultManager.shared
+        userDefaultsManager = UserDefaultsManager.shared
     }
     
     // MARK: - Public Methods
@@ -48,7 +50,13 @@ class AddressViewModel {
             self.setIndicator(false)
             guard let addresses = result?.addresses else {
                 self.showMessage(.addressesFetchingFailed, true)
+                self.displayEmptyMessage("No Addresses Found")
                 return
+            }
+            if addresses.count == 0 {
+                self.displayEmptyMessage("No Addresses Found")
+            } else {
+                self.removeEmptyMessage()
             }
             self.addresses = addresses
             self.bindResultToTableView()

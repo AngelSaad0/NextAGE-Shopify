@@ -38,8 +38,6 @@ class AddressViewController: UIViewController {
     // MARK: - Private Methods
     private func updateUI() {
         title = "Address"
-//        addNewAddressButton.addCornerRadius(radius: 12)
-//        selectPayment.addCornerRadius(radius: 12)
         addressesTableView.delegate = self
         addressesTableView.dataSource = self
         selectPayment.isEnabled = false
@@ -77,6 +75,12 @@ class AddressViewController: UIViewController {
         }
         viewModel.showMessage = { message, isError in
             displayMessage(massage: message, isError: isError)
+        }
+        viewModel.displayEmptyMessage = { message in
+            self.addressesTableView.displayEmptyMessage(message)
+        }
+        viewModel.removeEmptyMessage = {
+            self.addressesTableView.removeEmptyMessage()
         }
     }
     

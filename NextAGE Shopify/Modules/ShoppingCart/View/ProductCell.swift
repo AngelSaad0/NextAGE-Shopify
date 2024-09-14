@@ -24,12 +24,12 @@ class ProductCell: UITableViewCell {
     var deleteButton: ()->() = {}
     var recalculateSum: ()->() = {}
     private let networkManager: NetworkManager
-    private let userDefaultManager: UserDefaultManager
+    private let userDefaultManager: UserDefaultsManager
     
     // MARK: - Required Initializer
     required init?(coder: NSCoder) {
         networkManager = NetworkManager()
-        userDefaultManager = UserDefaultManager.shared
+        userDefaultManager = UserDefaultsManager.shared
         super.init(coder: coder)
     }
     
@@ -48,7 +48,7 @@ class ProductCell: UITableViewCell {
     func configCell(with product: LineItem) {
         self.product = product
         productName.text = product.name
-        productPrice.text = product.price + " \(UserDefaultManager.shared.currency)"
+        productPrice.text = product.price + " \(UserDefaultsManager.shared.currency)"
         productImage.kf.setImage(with: URL(string: product.properties[0].value))
         
         productCount.text = "\(product.quantity)"

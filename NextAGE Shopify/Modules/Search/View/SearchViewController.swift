@@ -54,7 +54,7 @@ class SearchViewController: UIViewController {
         viewModel.showNoInternetAlert = {
             self.showNoInternetAlert()
         }
-        viewModel.bindTablView = {
+        viewModel.bindTableView = {
             DispatchQueue.main.async {[weak self] in
                 self?.productTableView.reloadData()
             }

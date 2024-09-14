@@ -51,7 +51,7 @@ public func displayMessage(message: String,buttonTitle:String, isError: Bool, ha
 }
 
 
-@MainActor public func displayMessage(massage:VaildMassage , isError: Bool) {
+@MainActor public func displayMessage(massage:ValidMessage , isError: Bool) {
     let view = MessageView.viewFromNib(layout: .cardView)
     if isError == true {
         view.configureTheme(.error)

@@ -10,7 +10,6 @@ import PassKit
 
 class PaymentViewController: UIViewController {
     // MARK: - IBOutlets
-    @IBOutlet weak var purchase: UIButton!
     @IBOutlet weak var purchaseButton: UIButton!
     @IBOutlet weak var paymentMethodsTableView: UITableView!
     
@@ -33,10 +32,9 @@ class PaymentViewController: UIViewController {
     // MARK: - Private Methods
     private func updateUI() {
         title = "Payment method"
-        purchase.isEnabled = false
+        purchaseButton.isEnabled = false
         paymentMethodsTableView.delegate = self
         paymentMethodsTableView.dataSource = self
-        purchaseButton.addCornerRadius(radius: 12)
     }
     
     private func setupViewModel() {
@@ -55,7 +53,7 @@ class PaymentViewController: UIViewController {
     }
     
     // MARK: - IBActions
-    @IBAction func purchaseButton(_ sender: Any) {
+    @IBAction func purchaseButtonClicked(_ sender: Any) {
         switch viewModel.selectedPaymentMethod {
         case 0:
             viewModel.applePay()
@@ -72,7 +70,7 @@ extension PaymentViewController: UITableViewDelegate {
         }
         (tableView.cellForRow(at: indexPath) as! PaymentMethodCell).select()
         viewModel.selectedPaymentMethod = indexPath.row
-        purchase.isEnabled = true
+        purchaseButton.isEnabled = true
     }
 }
 

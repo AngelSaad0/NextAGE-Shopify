@@ -48,7 +48,7 @@ class SearchTableCell: UITableViewCell {
 
 
     }
-    func configure(with model: ProductInfo) {
+    func configure(with model: Product) {
         productImg.kf.setImage(with: URL(string: model.image.src),placeholder: UIImage(named: "brand1"))
         brandLabel.text = model.vendor
         priceLabel.text = model.variants.first?.price

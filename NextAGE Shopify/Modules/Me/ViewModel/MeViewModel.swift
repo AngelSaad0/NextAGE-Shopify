@@ -11,7 +11,7 @@ class MeViewModel {
 
     // MARK: - Properties
     private let networkManager: NetworkManagerProtocol
-    private let userDefaultsManager: UserDefaultManager
+    private let userDefaultsManager: UserDefaultsManager
     private let connectivityService: ConnectivityServiceProtocol
 
     var orders: [Order] = []
@@ -23,17 +23,16 @@ class MeViewModel {
     // MARK: - Callbacks
     var onOrdersUpdated: (() -> Void)?
     var onWishlistUpdated: (() -> Void)?
-    var onInternetConnectionChecked: (() -> Void)?
     var onShowNoInternetAlert: (() -> Void)?
     var ordersIndicator: ()->() = {}
     var wishlistIndicator: ()->() = {}
     var displayEmptyMessage: (String)->() = {_ in }
 
     // MARK: - Initialization
-    init(networkManager: NetworkManager, userDefaultsManager: UserDefaultManager, connectivityService: ConnectivityServiceProtocol) {
-        self.networkManager = networkManager
-        self.userDefaultsManager = userDefaultsManager
-        self.connectivityService = connectivityService
+    init() {
+        networkManager = NetworkManager.shared
+        userDefaultsManager = UserDefaultsManager.shared
+        connectivityService = ConnectivityService.shared
         setupInitialState()
     }
 
@@ -47,10 +46,13 @@ class MeViewModel {
         connectivityService.checkInternetConnection { [weak self] isConnected in
             guard let self = self else { return }
             if isConnected {
-                self.onInternetConnectionChecked?()
+                if isUserLoggedIn {
+                    updateUserOrders()
+                    loadWishlistData()
+                }
             } else {
-                ordersIndicator()
-                wishlistIndicator()
+                self.onOrdersUpdated?()
+                self.onWishlistUpdated?()
                 self.onShowNoInternetAlert?()
             }
         }

@@ -9,7 +9,7 @@ import UIKit
 
 class WishlistViewController: UIViewController {
     // MARK: - IBOutlets
-    @IBOutlet weak var wishlistTablView: UITableView!
+    @IBOutlet weak var wishlistTableView: UITableView!
     // MARK: - Properties
     var viewModel:WishlistViewModel
     let indicator = UIActivityIndicatorView(style: .large)
@@ -24,11 +24,11 @@ class WishlistViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
         setupViewModel()
-        viewModel.fetchWishlist()
+        viewModel.checkInternetConnection()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.fetchWishlist()
+        viewModel.checkInternetConnection()
     }
     // MARK: - Private Methods
     private func updateUI() {
@@ -37,19 +37,23 @@ class WishlistViewController: UIViewController {
     }
     private func setupIndicator() {
         indicator.center = view.center
+        indicator.startAnimating()
         view.addSubview(indicator)
     }
 
-    private func setupViewModel(){
+    private func setupViewModel() {
+        viewModel.showNoInternetAlert = {
+            self.showNoInternetAlert()
+        }
         viewModel.displayEmptyMessage = { message in
-            self.wishlistTablView.displayEmptyMessage(message)
+            self.wishlistTableView.displayEmptyMessage(message)
         }
         viewModel.removeEmptyMessage = {
-            self.wishlistTablView.removeEmptyMessage()
+            self.wishlistTableView.removeEmptyMessage()
         }
         viewModel.bindResultToTableView = {
             DispatchQueue.main.async {
-                self.wishlistTablView.reloadData()
+                self.wishlistTableView.reloadData()
             }
         }
         viewModel.setIndicator = { [weak self] state in
@@ -78,9 +82,9 @@ extension WishlistViewController: UITableViewDataSource {
 
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WishLIstTableViewCell", for: indexPath) as! WishLIstTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WishLIstTableViewCell", for: indexPath) as! WishlistTableViewCell
         cell.configureForWishlist(with: viewModel.wishlist[indexPath.row])
-        return UITableViewCell()
+        return cell
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

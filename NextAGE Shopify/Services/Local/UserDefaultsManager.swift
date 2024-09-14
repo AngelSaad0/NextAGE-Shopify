@@ -1,13 +1,13 @@
 //
-//  UserDefaultManager.swift
+//  UserDefaultsManager.swift
 //  NextAGE Shopify
 //
 //  Created by Engy on 9/3/24.
 //
 
 import Foundation
-class UserDefaultManager {
-    static let shared = UserDefaultManager()
+class UserDefaultsManager {
+    static let shared = UserDefaultsManager()
     private let pref = UserDefaults.standard
     var continueAsAGuest: Bool = false
     var isLogin: Bool = false

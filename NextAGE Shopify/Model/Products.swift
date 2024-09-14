@@ -7,14 +7,14 @@
 
 import Foundation
 struct Products: Codable {
-    let products: [ProductInfo]
+    let products: [Product]
+}
+
+struct ProductWrapper: Codable {
+    let product: Product
 }
 
 struct Product: Codable {
-    let product: ProductInfo
-}
-
-struct ProductInfo: Codable {
     let id: Int
     let title, bodyHTML, vendor: String
     let productType: ProductType

@@ -10,7 +10,7 @@ import Foundation
 class AddAddressViewModel {
     // MARK: - Properties
     let networkManager: NetworkManager
-    let userDefaultsManager: UserDefaultManager
+    let userDefaultsManager: UserDefaultsManager
     
     // MARK: - Closures
     var setIndicator: (Bool)->() = {_ in}
@@ -19,7 +19,7 @@ class AddAddressViewModel {
     // MARK: - Init
     init() {
         networkManager = NetworkManager()
-        userDefaultsManager = UserDefaultManager.shared
+        userDefaultsManager = UserDefaultsManager.shared
     }
     
     // MARK: - Public Methods

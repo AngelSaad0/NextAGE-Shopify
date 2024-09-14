@@ -9,7 +9,7 @@ import Foundation
 
 class SettingsViewModel {
     // MARK: - Properties
-    let userDefaultsManager: UserDefaultManager
+    let userDefaultsManager: UserDefaultsManager
     let settingsLabelImageOptions = [
         ("Address", "gps"),
         ("Currency", "transfer"),
@@ -23,7 +23,7 @@ class SettingsViewModel {
     
     // MARK: - Init
     init() {
-        userDefaultsManager = UserDefaultManager.shared
+        userDefaultsManager = UserDefaultsManager.shared
     }
     
     // MARK: - Public Methods

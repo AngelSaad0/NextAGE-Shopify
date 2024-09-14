@@ -39,9 +39,13 @@ class SettingsViewController: UIViewController {
     
     private func setupViewModel() {
         viewModel.navigateToAddress = {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddressViewController") as! AddressViewController
-            vc.isSettings = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            if self.viewModel.userDefaultsManager.isLogin {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddressViewController") as! AddressViewController
+                vc.isSettings = true
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                self.showLoginFirstAlert(to: "view or edit your addresses")
+            }
         }
         viewModel.navigateToCurrency = {
             self.pushViewController(vcIdentifier: "CurrencyViewController", withNav: self.navigationController)

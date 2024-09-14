@@ -10,15 +10,15 @@ import Foundation
 class SignInViewModel {
     // MARK: - Properties
      let networkManager: NetworkManagerProtocol
-     let userDefaultManager: UserDefaultManager
+     let userDefaultManager: UserDefaultsManager
      let connectivityService: ConnectivityServiceProtocol
 
     var onSuccess: (() -> Void)?
-    var onError: ((VaildMassage) -> Void)?
+    var onError: ((ValidMessage) -> Void)?
 
     init() {
         networkManager = NetworkManager.shared
-        userDefaultManager = UserDefaultManager.shared
+        userDefaultManager = UserDefaultsManager.shared
         connectivityService = ConnectivityService.shared
     }
 
@@ -65,14 +65,14 @@ class SignInViewModel {
         }
     }
 
-    private func fetchExactEmailCustomers(email: String, compilation: @escaping ([CustomerInfo]?) -> Void) {
+    private func fetchExactEmailCustomers(email: String, compilation: @escaping ([Customer]?) -> Void) {
         let urlString = ShopifyAPI.customerEmail(email: email).shopifyURLString()
         networkManager.fetchData(from: urlString, responseType: Customers.self, headers: []) { result in
             compilation(result?.customers)
         }
     }
 
-    private func saveToUserDefaults(customer: CustomerInfo) {
+    private func saveToUserDefaults(customer: Customer) {
         userDefaultManager.isLogin = true
         userDefaultManager.name = [(customer.firstName ?? ""), (customer.lastName ?? "")].joined(separator: " ")
         userDefaultManager.firstName = customer.firstName ?? ""

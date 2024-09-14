@@ -70,4 +70,10 @@ extension UIViewController {
     func changeBackButtonName(name: String) {
         navigationController?.navigationBar.topItem?.title = name
     }
+    
+    func showLoginFirstAlert(to message: String) {
+        showAlert(title: "Login first", message: "You need to login in order to \(message)", okTitle: "Login") { _ in
+            self.pushViewController(vcIdentifier: "SignInViewController", withNav: self.navigationController)
+        } cancelHandler: { _ in }
+    }
 }

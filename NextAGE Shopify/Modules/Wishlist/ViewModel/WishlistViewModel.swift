@@ -6,32 +6,44 @@
 //
 
 import Foundation
+
 class WishlistViewModel {
-    
-    // MARK: -  Properties
+    // MARK: - Properties
     let networkManager: NetworkManagerProtocol
-    let userDefaultsManager: UserDefaultManager
+    let userDefaultsManager: UserDefaultsManager
     let connectivityService: ConnectivityServiceProtocol
     var wishlist: [LineItem] = []
+    
+    // MARK: - Closures
+    var showNoInternetAlert: ()->() = {}
     var displayEmptyMessage:((String)->Void) = {_ in}
     var removeEmptyMessage:(()->()) = {}
     var bindResultToTableView:(()->()) = {}
     var setIndicator:((Bool)->()) = {_ in}
     
-    
-    
-    // MARK: -  initalzation
-    init(networkManager: NetworkManager = NetworkManager(),
-         userDefaultsManager: UserDefaultManager = UserDefaultManager.shared,
-         connectivityService: ConnectivityServiceProtocol = ConnectivityService.shared) {
-        self.networkManager = networkManager
-        self.userDefaultsManager = userDefaultsManager
-        self.connectivityService = connectivityService
+    // MARK: - Initializer
+    init() {
+        networkManager = NetworkManager.shared
+        userDefaultsManager = UserDefaultsManager.shared
+        connectivityService = ConnectivityService.shared
     }
     
-    // MARK: -  public Method
-    func fetchWishlist() {
-        setIndicator(true)
+    // MARK: - Public Methods
+    func checkInternetConnection() {
+        connectivityService.checkInternetConnection { [weak self] isConnected in
+            guard let self = self else { return }
+            if isConnected {
+                self.fetchWishlist()
+            } else {
+                self.showNoInternetAlert()
+                self.setIndicator(false)
+                displayEmptyMessage("Add some products to your wishlist")
+            }
+        }
+    }
+    
+    // MARK: - Private Methods
+    private func fetchWishlist() {
         networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultsManager.wishlistID).shopifyURLString(), responseType: DraftOrderWrapper.self, headers: []) { result in
             self.wishlist = result?.draftOrder.lineItems ?? []
             if self.wishlist.first?.variantID == nil {
@@ -44,7 +56,6 @@ class WishlistViewModel {
                 self.removeEmptyMessage()
             }
             self.bindResultToTableView()
-            
         }
     }
 }

@@ -39,6 +39,8 @@ class CategoriesAndBrandsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        resetUI()
+        checkInternetConnection()
         categoryOrBrandCollectionView.reloadData()
     }
     
@@ -49,6 +51,15 @@ class CategoriesAndBrandsViewController: UIViewController {
         }
         categoryOrBrandCollectionView.register(UINib(nibName: "CategoriesCollectionCell", bundle: nil), forCellWithReuseIdentifier: "CategoriesCollectionCell")
     }
+    
+    private func resetUI() {
+        searchBar.text = ""
+        searchBar.endEditing(true)
+        searchBar.resignFirstResponder()
+        categorySegmentControl.selectedSegmentIndex = 0
+        subCategorySegmentControl.selectedSegmentIndex = 0
+    }
+    
     private func setupViewModel(){
         viewModel.bindResultTable = {
             DispatchQueue.main.async { [weak self] in
@@ -92,7 +103,9 @@ class CategoriesAndBrandsViewController: UIViewController {
             if isConnected {
                 self.viewModel.loadProducts()
             } else {
+                self.indicator.stopAnimating()
                 self.showNoInternetAlert()
+                self.categoryOrBrandCollectionView.displayEmptyMessage("No Items In Stock")
             }
         }
     }

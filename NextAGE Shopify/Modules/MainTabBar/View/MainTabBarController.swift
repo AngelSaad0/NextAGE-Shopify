@@ -23,7 +23,11 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     @IBAction func rightButtonClicked(_ sender: Any) {
         if isWishList {
-            pushViewController(vcIdentifier: "WishlistViewController", withNav: navigationController)
+            if UserDefaultsManager.shared.isLogin {
+                pushViewController(vcIdentifier: "WishlistViewController", withNav: navigationController)
+            } else {
+                showLoginFirstAlert(to: "view your wishlist")
+            }
 
         } else {
             pushViewController(vcIdentifier: "SettingsViewController", withNav: navigationController)
@@ -31,7 +35,11 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     }
     @IBAction func cartButtonTapped(_ sender: UIBarButtonItem) {
-        pushViewController(vcIdentifier: "ShoppingCartViewController", withNav: navigationController)
+        if UserDefaultsManager.shared.isLogin {
+            pushViewController(vcIdentifier: "ShoppingCartViewController", withNav: navigationController)
+        } else {
+            showLoginFirstAlert(to: "view your shopping cart")
+        }
     }
 
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {

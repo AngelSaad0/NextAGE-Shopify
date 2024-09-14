@@ -29,7 +29,7 @@ struct Order: Codable {
     let name: String
     let subtotalPrice: String
     let totalPrice: String
-    let customer: CustomerInfo
+    let customer: Customer
     let currentTotalDiscounts: String
     let totalDiscounts: String
     enum CodingKeys: String, CodingKey {

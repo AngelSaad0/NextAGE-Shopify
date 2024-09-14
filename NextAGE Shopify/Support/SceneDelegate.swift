@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
                 window = UIWindow(windowScene: windowScene)
                 let viewController: UIViewController
-                if UserDefaultManager.shared.continueAsAGuest || UserDefaultManager.shared.isLogin {
+                if UserDefaultsManager.shared.continueAsAGuest || UserDefaultsManager.shared.isLogin {
                     viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarNavigationController")
                 } else {
                     viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AuthOptionsNavigationController")
