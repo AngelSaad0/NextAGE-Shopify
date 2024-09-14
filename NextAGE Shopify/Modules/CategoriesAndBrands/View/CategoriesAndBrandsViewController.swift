@@ -148,6 +148,7 @@ extension CategoriesAndBrandsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesCollectionCell", for: indexPath) as! CategoriesCollectionCell
         let product = viewModel.filteredOrSortedProducts[indexPath.row]
+        cell.product = product
         cell.configure(with: product)
         return cell
     }

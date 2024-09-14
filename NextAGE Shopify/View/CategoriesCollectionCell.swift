@@ -17,6 +17,8 @@ class CategoriesCollectionCell: UICollectionViewCell {
     @IBOutlet var productPrice: UILabel!
     @IBOutlet var currency: UILabel!
     @IBOutlet var wishListButton: UIButton!
+    
+    var product: Product?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,7 +33,9 @@ class CategoriesCollectionCell: UICollectionViewCell {
         productPrice.text = exchange(cell.variants[0].price)
         productDetails.text = cell.title.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
         currency.text = UserDefaultsManager.shared.currency
-
+        
+        let state = WishlistManager.shared.getFavoriteState(productID: cell.id)
+        wishListButton.setImage(UIImage(systemName: state ? "heart.fill" : "heart"), for: .normal)
     }
     func configure(with cell: LineItem) {
         productImage.kf.setImage(with: URL(string: cell.properties[0].value),placeholder: UIImage(named: "brand1"))
@@ -51,7 +55,10 @@ class CategoriesCollectionCell: UICollectionViewCell {
     }
 
     @IBAction func wishListButtonClicked(_ sender: UIButton) {
-        sender.setImage(UIImage(systemName:sender.currentImage ==
-                                UIImage(systemName: "heart") ? "heart.fill" : "heart" ), for: .normal)
+        guard let product = product else {return}
+        WishlistManager.shared.addToWishlist(product: product) { state in
+            self.wishListButton.setImage(UIImage(systemName: state ? "heart.fill" : "heart"), for: .normal)
+            self.layoutIfNeeded()
+        }
     }
 }

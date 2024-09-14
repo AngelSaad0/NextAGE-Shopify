@@ -10,7 +10,7 @@ import PassKit
 
 class PaymentViewModel {
     // MARK: - Properties
-    let networkManager: NetworkManager
+    let networkManager: NetworkManagerProtocol
     let userDefaultsManager: UserDefaultsManager
     let paymentRequest: PKPaymentRequest = PKPaymentRequest()
     let paymentMethods = [
@@ -27,7 +27,7 @@ class PaymentViewModel {
     
     // MARK: - Init
     init() {
-        networkManager = NetworkManager()
+        networkManager = NetworkManager.shared
         userDefaultsManager = UserDefaultsManager.shared
         setupPaymentRequest(request: paymentRequest)
         fetchShoppingCart(shoppingCartID: userDefaultsManager.shoppingCartID)
@@ -37,7 +37,6 @@ class PaymentViewModel {
     func applePay() {
         let price = String(format: "%.2f", calculateTotalPrice())
         paymentRequest.paymentSummaryItems = [PKPaymentSummaryItem(label: "NextAGE New Order Payment", amount: NSDecimalNumber(string: price))]
-        print(price)
         presentPaymentRequest(paymentRequest)
     }
     
@@ -63,7 +62,7 @@ class PaymentViewModel {
     }
     
     private func fetchShoppingCart(shoppingCartID: Int) {
-        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultsManager.shoppingCartID).shopifyURLString(), responseType: DraftOrderWrapper.self) { result in
+        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultsManager.shoppingCartID).shopifyURLString(), responseType: DraftOrderWrapper.self, headers: []) { result in
             self.shoppingCartDraftOrder = result?.draftOrder
         }
     }

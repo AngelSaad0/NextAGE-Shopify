@@ -36,6 +36,7 @@ public enum ValidMessage: String {
    case addedToWishlist = "Item successfully added to wishlist"
    case removedFromWishlist = "Item successfully removed from wishlist"
    case addedToShoppingCart = "Item successfully added to shopping cart"
+   case foundInShoppingCart = "Item found in shopping cart"
    case removedFromShoppingCart = "Item successfully removed from shopping cart"
     
    case ordersFetchingFailed = "Error happened while loading your orders"
