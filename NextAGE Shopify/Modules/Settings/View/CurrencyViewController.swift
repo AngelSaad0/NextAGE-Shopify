@@ -13,6 +13,7 @@ class CurrencyViewController: UIViewController {
     
     // MARK: - Properties
     let viewModel: CurrencyViewModel
+    let indicator = UIActivityIndicatorView(style: .large)
     
     // MARK: - Required Init
     required init?(coder: NSCoder) {
@@ -32,17 +33,32 @@ class CurrencyViewController: UIViewController {
         title = "Currency"
         currencyTableView.delegate = self
         currencyTableView.dataSource = self
+        setupIndicator()
+    }
+    
+    private func setupIndicator() {
+        indicator.center = view.center
+        view.addSubview(indicator)
     }
     
     private func setupViewModel() {
         viewModel.popView = {
             self.navigationController?.popViewController(animated: true)
         }
+        viewModel.displayMessage = { massage, isError in
+            displayMessage(massage: massage, isError: isError)
+        }
+        viewModel.setIndicator = { state in
+            DispatchQueue.main.async { [weak self] in
+                state ? self?.indicator.startAnimating() : self?.indicator.stopAnimating()
+            }
+        }
     }
 }
 
 extension CurrencyViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.setSelected(false, animated: true)
         viewModel.currencyDidSelect(at: indexPath.row)
     }
 }

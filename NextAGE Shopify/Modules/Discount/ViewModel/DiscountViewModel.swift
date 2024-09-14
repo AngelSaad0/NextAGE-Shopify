@@ -94,12 +94,12 @@ class DiscountViewModel {
         for product in shoppingCart {
             subTotal += (Double(product.price) ?? 0.0) * Double(product.quantity)
         }
-        bindSubtotalPrice(String(format: "%.2f", subTotal) + " \(UserDefaultsManager.shared.currency)")
+        bindSubtotalPrice(exchange(subTotal) + " \(UserDefaultsManager.shared.currency)")
     }
     
     private func calcTotal() {
         calcSubTotal()
         bindDiscountPrice(String(format: "%.2f", discountAmount) + " \(UserDefaultsManager.shared.currency)")
-        bindTotalPrice(String(format: "%.2f", subTotal + (Double(discountAmount))) + " \(UserDefaultsManager.shared.currency)")
+        bindTotalPrice(String((Double(exchange(subTotal)) ?? 0.0) + Double(discountAmount)) + " \(UserDefaultsManager.shared.currency)")
     }
 }

@@ -32,7 +32,7 @@ class WishlistTableViewCell: UITableViewCell {
     func configureForWishlist(with cell: LineItem) {
         productImage.kf.setImage(with: URL(string: cell.properties[0].value),placeholder: UIImage(named: "brand1"))
         productTitle.text = cell.title?.split(separator: "|").first?.trimmingCharacters(in: .whitespaces)
-        productPrice.text = cell.price + " " + UserDefaultsManager.shared.currency
+        productPrice.text = exchange(cell.price) + " " + UserDefaultsManager.shared.currency
         productDetails.text = cell.title?.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
     }
 }

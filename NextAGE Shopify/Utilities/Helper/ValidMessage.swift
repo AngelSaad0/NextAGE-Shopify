@@ -52,6 +52,8 @@ public enum ValidMessage: String {
    case placingOrderFailed = "Error happened while sending your order"
 
    case emptyOrderArray = "No order found"
+    
+   case exchangeRateFailed = "Failed to update currency setting"
 
 }
 
