@@ -19,33 +19,35 @@ class MeViewController: UIViewController {
     @IBOutlet var logInButton: UIButton!
 
     // MARK: -  Properties
-    private var viewModel: MeViewModel!
+    private var viewModel: MeViewModel
     private let ordersIndicator = UIActivityIndicatorView(style: .large)
     private let wishlistIndicator = UIActivityIndicatorView(style: .large)
 
+    // MARK: - Required Initializer
+    required init?(coder: NSCoder) {
+        viewModel = MeViewModel()
+        super.init(coder: coder)
+    }
+    
     // MARK: -  View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewModel()
         setupUI()
+        updateUIForLoginState()
         viewModel.checkInternetConnection()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if viewModel.isUserLoggedIn {
-            viewModel.updateUserOrders()
-            viewModel.loadWishlistData()
-        }
+        updateUIForLoginState()
+        viewModel.checkInternetConnection()
     }
 
     private func setupViewModel() {
-        viewModel = MeViewModel(networkManager: NetworkManager(), userDefaultsManager: UserDefaultManager.shared, connectivityService: ConnectivityService.shared)
-
         viewModel.onOrdersUpdated = { [weak self] in
             self?.updateOrdersUI()
         }
-
         viewModel.onWishlistUpdated = { [weak self] in
             self?.updateWishlistUI()
         }
@@ -54,13 +56,7 @@ class MeViewController: UIViewController {
         }
         viewModel.wishlistIndicator = {
             self.wishlistIndicator.stopAnimating()
-
         }
-
-        viewModel.onInternetConnectionChecked = { [weak self] in
-            self?.updateUIForLoginState()
-        }
-
         viewModel.onShowNoInternetAlert = { [weak self] in
             self?.showNoInternetAlert()
         }
@@ -92,6 +88,8 @@ class MeViewController: UIViewController {
         } else {
             notLoggedInView.isHidden = false
             logInStack.isHidden = true
+            ordersIndicator.stopAnimating()
+            wishlistIndicator.stopAnimating()
         }
     }
 

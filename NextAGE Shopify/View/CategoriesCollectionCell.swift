@@ -25,7 +25,7 @@ class CategoriesCollectionCell: UICollectionViewCell {
         imageBackground.addBorderView()
         //imageBackground.applyShadow()
     }
-    func configure(with cell: ProductInfo) {
+    func configure(with cell: Product) {
         productImage.kf.setImage(with: URL(string: cell.image.src),placeholder: UIImage(named: "brand1"))
         productTitle.text = cell.vendor
         productPrice.text = cell.variants[0].price
@@ -37,7 +37,7 @@ class CategoriesCollectionCell: UICollectionViewCell {
         productTitle.text = "Quantity: \(cell.quantity)"
         productPrice.text = cell.price
         productDetails.text = cell.name?.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
-        currency.text = UserDefaultManager.shared.currency
+        currency.text = UserDefaultsManager.shared.currency
 
     }
     func configureForWishlist(with cell: LineItem) {
@@ -45,7 +45,7 @@ class CategoriesCollectionCell: UICollectionViewCell {
         productTitle.text = cell.title?.split(separator: "|").first?.trimmingCharacters(in: .whitespaces)
         productPrice.text = cell.price
         productDetails.text = cell.title?.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
-        currency.text = UserDefaultManager.shared.currency
+        currency.text = UserDefaultsManager.shared.currency
 
     }
 

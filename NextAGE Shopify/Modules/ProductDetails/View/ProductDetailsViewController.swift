@@ -35,7 +35,6 @@ class ProductDetailsViewController: UIViewController {
         setupIndicator()
         setupViewModel()
         viewModel.fetchProduct()
-        viewModel.fetchDrafts()
     }
     
     // MARK: - Required Init
@@ -202,9 +201,7 @@ class ProductDetailsViewController: UIViewController {
         if viewModel.userDefaultManger.isLogin {
             viewModel.addToShoppingCart()
         } else {
-            showAlert(title: "Login first", message: "You need to login in order to add this product to shopping cart", okTitle: "Login") { _ in
-                self.pushViewController(vcIdentifier: "SignInViewController", withNav: self.navigationController)
-            } cancelHandler: { _ in }
+            showLoginFirstAlert(to: "add this product to shopping cart")
         }
     }
     
@@ -212,9 +209,7 @@ class ProductDetailsViewController: UIViewController {
         if viewModel.userDefaultManger.isLogin {
             viewModel.addToWishlist()
         } else {
-            showAlert(title: "Login first", message: "You need to login in order to add this product to whishlist", okTitle: "Login") { _ in
-                self.pushViewController(vcIdentifier: "SignInViewController", withNav: self.navigationController)
-            } cancelHandler: { _ in }
+            showLoginFirstAlert(to: "add this product to wishlist")
         }
     }
 }

@@ -10,9 +10,9 @@ import Foundation
 class SignUpViewModel {
     // MARK: - Properties
     private var networkManager: NetworkManagerProtocol
-    private var userDefaultManager: UserDefaultManager
+    private var userDefaultManager: UserDefaultsManager
     var connectivityService: ConnectivityServiceProtocol
-    private var customer: CustomerInfo?
+    private var customer: Customer?
     var firstName: String?
     var lastName: String?
     var email: String?
@@ -23,12 +23,12 @@ class SignUpViewModel {
     
     // MARK: - Closure
     var navigateToHome: ()->() = {}
-    var displayMessage: (VaildMassage, Bool)->() = {_, _ in}
+    var displayMessage: (ValidMessage, Bool)->() = {_, _ in}
 
     // MARK: - Initializer
     init() {
         networkManager = NetworkManager.shared
-        userDefaultManager = UserDefaultManager.shared
+        userDefaultManager = UserDefaultsManager.shared
         connectivityService = ConnectivityService.shared
     }
     
@@ -47,7 +47,7 @@ class SignUpViewModel {
         userDefaultManager.storeData()
     }
     
-    private func fetchExactEmailCustomers(compilation: @escaping ([CustomerInfo]?) -> Void) {
+    private func fetchExactEmailCustomers(compilation: @escaping ([Customer]?) -> Void) {
         let urlString = ShopifyAPI.customerEmail(email: email ?? "nil").shopifyURLString()
         networkManager.fetchData(from: urlString, responseType: Customers.self, headers: []) { result in
             compilation(result?.customers)
@@ -76,7 +76,7 @@ class SignUpViewModel {
             ]
             
             // post new customer to shopify
-            self.networkManager.postData(to: ShopifyAPI.customers.shopifyURLString(), responseType: Customer.self, parameters: ["customer": customerParameters]) { result in
+            self.networkManager.postData(to: ShopifyAPI.customers.shopifyURLString(), responseType: CustomerWrapper.self, parameters: ["customer": customerParameters]) { result in
                 guard let createdCustomer = result?.customer else {
                     self.displayMessage(.customerCreationFail, true)
                     return
@@ -99,8 +99,6 @@ class SignUpViewModel {
                     
                     self.networkManager.updateData(at: ShopifyAPI.customer(id: String(createdCustomer.id ?? 0)).shopifyURLString(), with: note) {
                         self.saveToUserDefaults()
-                        print("Successfully created new Customer")
-                        print(createdCustomer)
                         self.navigateToHome()
                     }
                 }

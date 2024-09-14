@@ -11,7 +11,7 @@ import PassKit
 class PaymentViewModel {
     // MARK: - Properties
     let networkManager: NetworkManager
-    let userDefaultsManager: UserDefaultManager
+    let userDefaultsManager: UserDefaultsManager
     let paymentRequest: PKPaymentRequest = PKPaymentRequest()
     let paymentMethods = [
         ("Apple pay", "applePay"),
@@ -28,7 +28,7 @@ class PaymentViewModel {
     // MARK: - Init
     init() {
         networkManager = NetworkManager()
-        userDefaultsManager = UserDefaultManager.shared
+        userDefaultsManager = UserDefaultsManager.shared
         setupPaymentRequest(request: paymentRequest)
         fetchShoppingCart(shoppingCartID: userDefaultsManager.shoppingCartID)
     }

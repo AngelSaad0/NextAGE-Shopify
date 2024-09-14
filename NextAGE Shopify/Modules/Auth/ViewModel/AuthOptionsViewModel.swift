@@ -30,8 +30,8 @@ class AuthOptionsViewModel {
         }
     }
     func skipButtonClicked() {
-        UserDefaultManager.shared.continueAsAGuest = true
-        UserDefaultManager.shared.storeData()
+        UserDefaultsManager.shared.continueAsAGuest = true
+        UserDefaultsManager.shared.storeData()
         DispatchQueue.main.async {
             self.setRootViewController?("MainTabBar","MainTabBarNavigationController")
         }
@@ -46,7 +46,6 @@ class AuthOptionsViewModel {
 
         DispatchQueue.main.async {
             self.navigateToViewController?("SignUpViewController")
-            print("fff")
         }
     }
 }

@@ -10,23 +10,41 @@ import Foundation
 class ShoppingCartViewModel {
     // MARK: - Properties
     let networkManager: NetworkManagerProtocol
-    let userDefaultManager: UserDefaultManager
+    let userDefaultManager: UserDefaultsManager
+    let connectivityService: ConnectivityServiceProtocol
     var shoppingCart: [LineItem] = []
     
     // MARK: - Closures
+    var showNoInternetAlert: ()->() = {}
     var setIndicator: (Bool)->() = {_ in}
     var updateReviewButtonState: ()->() = {}
     var bindResultToTableView: ()->() = {}
-    var displayMessage: (VaildMassage, Bool)->() = {_, _ in}
+    var displayMessage: (ValidMessage, Bool)->() = {_, _ in}
     var bindSubtotalPrice: (String)->() = {_ in}
+    var displayEmptyMessage: (String)->() = {_ in}
+    var removeEmptyMessage: ()->() = {}
     
     // MARK: - Initializer
     init() {
         networkManager = NetworkManager.shared
-        userDefaultManager = UserDefaultManager.shared
+        userDefaultManager = UserDefaultsManager.shared
+        connectivityService = ConnectivityService.shared
     }
     
     // MARK: - Public Methods
+    func checkInternetConnection() {
+        connectivityService.checkInternetConnection { [weak self] isConnected in
+            guard let self = self else { return }
+            if isConnected {
+                self.fetchShoppingCart()
+            } else {
+                self.showNoInternetAlert()
+                self.setIndicator(false)
+                displayEmptyMessage("Add some products to your shopping cart")
+            }
+        }
+    }
+    
     func fetchShoppingCart() {
         networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultManager.shoppingCartID).shopifyURLString(), responseType: DraftOrderWrapper.self, headers: []) { result in
             self.shoppingCart = result?.draftOrder.lineItems ?? []
@@ -34,6 +52,11 @@ class ShoppingCartViewModel {
                 self.shoppingCart = Array(self.shoppingCart.dropFirst())
             }
             self.setIndicator(false)
+            if self.shoppingCart.count == 0 {
+                self.displayEmptyMessage("Add some products to your shopping cart")
+            } else {
+                self.removeEmptyMessage()
+            }
             self.calcSubTotal()
             self.updateReviewButtonState()
             self.bindResultToTableView()
@@ -68,7 +91,7 @@ class ShoppingCartViewModel {
         for product in shoppingCart {
             sum += (Double(product.price) ?? 0.0) * Double(product.quantity)
         }
-        bindSubtotalPrice("Subtotal: " + String(format: "%.2f", sum) + " \(UserDefaultManager.shared.currency)")
+        bindSubtotalPrice("Subtotal: " + String(format: "%.2f", sum) + " \(UserDefaultsManager.shared.currency)")
     }
     
     private func getEmptyCart() -> [[String: Any]] {

@@ -18,8 +18,8 @@ class CategoriesAndBrandsViewModel {
     var brandLogoURL: String?
     private let networkManager: NetworkManagerProtocol
     let connectivityService: ConnectivityServiceProtocol
-    var productResults: [ProductInfo] = []
-    var filteredOrSortedProducts: [ProductInfo] = [] {
+    var productResults: [Product] = []
+    var filteredOrSortedProducts: [Product] = [] {
         didSet {
             updateItemsCount("\(filteredOrSortedProducts.count) Items")
             updateUIForNoResults()

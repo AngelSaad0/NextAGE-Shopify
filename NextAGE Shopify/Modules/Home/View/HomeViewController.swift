@@ -38,14 +38,10 @@ class HomeViewController: UIViewController {
         checkInternetConnection()
     }
     
-    private func updateUI() {
-        tabBarController?.navigationItem.title = "NextAGE"
-        brandViewForTitle.addRoundedRadius(radius: 8)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startTimer()
+        checkInternetConnection()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -54,6 +50,11 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Private Methods
+    private func updateUI() {
+        tabBarController?.navigationItem.title = "NextAGE"
+        brandViewForTitle.addRoundedRadius(radius: 8)
+    }
+    
     private func initializeUIComponents() {
         setupActivityIndicator()
         configureAdsPageControl()
@@ -76,6 +77,7 @@ class HomeViewController: UIViewController {
                     self?.loadBrands()
                     self?.loadPriceRules()
                 } else {
+                    self?.activityIndicator.stopAnimating()
                     self?.showNoInternetAlert()
                     self?.brandsCollection.displayEmptyMessage("No items found")
                 }

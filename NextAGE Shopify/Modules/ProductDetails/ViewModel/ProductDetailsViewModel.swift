@@ -8,8 +8,8 @@ import Foundation
 
 class ProductDetailsViewModel {
     // MARK: - Properties
-    let networkManager: NetworkManager
-    var userDefaultManger:UserDefaultManager
+    let networkManager: NetworkManagerProtocol
+    var userDefaultManger:UserDefaultsManager
     private var selectedVariantID:Int?
     private var selectedVariantInventoryQuantity:Int?
     var selectedColor:String?
@@ -18,7 +18,7 @@ class ProductDetailsViewModel {
     var productID: Int?
     var wishlist: [LineItem]?
     var shoppingCart: [LineItem]?
-    var product: ProductInfo?
+    var product: Product?
     var isFavorite = false
     var sizes: [String]? {
         didSet {
@@ -41,22 +41,25 @@ class ProductDetailsViewModel {
     var updateDropdownOptions: ()->() = {}
     var updateFavoriteImage: ()->() = {}
     var didAddToCart: ()->() = {}
-    var showMessage: (VaildMassage, Bool)->() = {_, _ in}
+    var showMessage: (ValidMessage, Bool)->() = {_, _ in}
     var bindDataToVC: (String, String, String)->() = {_, _, _ in}
     
     // MARK: - Init
     init() {
-        networkManager = NetworkManager()
-        userDefaultManger = UserDefaultManager.shared
+        networkManager = NetworkManager.shared
+        userDefaultManger = UserDefaultsManager.shared
+        if userDefaultManger.isLogin {
+            fetchDrafts()
+        }
     }
     
     // MARK: - Public Methods
     func fetchDrafts() {
-        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultManger.shoppingCartID).shopifyURLString(), responseType: DraftOrderWrapper.self) { result in
+        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultManger.shoppingCartID).shopifyURLString(), responseType: DraftOrderWrapper.self, headers: []) { result in
             self.shoppingCart = result?.draftOrder.lineItems
         }
         
-        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultManger.wishlistID).shopifyURLString(), responseType: DraftOrderWrapper.self) { result in
+        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultManger.wishlistID).shopifyURLString(), responseType: DraftOrderWrapper.self, headers: []) { result in
             self.wishlist = result?.draftOrder.lineItems
             self.updateFavoriteState()
         }
@@ -64,11 +67,10 @@ class ProductDetailsViewModel {
     
     func fetchProduct() {
         guard let productID = productID else {
-            print("ID not sent from previous view")
             presentError()
             return
         }
-        networkManager.fetchData(from: ShopifyAPI.product(id: productID).shopifyURLString(), responseType: Product.self) { [weak self] result in
+        networkManager.fetchData(from: ShopifyAPI.product(id: productID).shopifyURLString(), responseType: ProductWrapper.self, headers: []) { [weak self] result in
             guard let self = self else { return }
             setIndicator(false)
             guard let product = result?.product else {

@@ -10,7 +10,7 @@ import Foundation
 class HomeViewModel {
     // MARK: - Properties
     private let networkManager: NetworkManagerProtocol
-    private let userDefaultsManager: UserDefaultManager
+    private let userDefaultsManager: UserDefaultsManager
     private let connectivityService: ConnectivityServiceProtocol
 
     private(set) var brandsResultArray: [SmartCollection] = []
@@ -27,7 +27,7 @@ class HomeViewModel {
     // MARK: - Initialization
     init() {
         networkManager = NetworkManager.shared
-        userDefaultsManager = UserDefaultManager.shared
+        userDefaultsManager = UserDefaultsManager.shared
         connectivityService = ConnectivityService.shared
     }
 

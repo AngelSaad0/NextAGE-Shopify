@@ -8,8 +8,8 @@
 import Foundation
 class SearchViewModel {
     // MARK: -  Properties
-    var products: [ProductInfo] = []
-    var filteredProducts: [ProductInfo] = []
+    var products: [Product] = []
+    var filteredProducts: [Product] = []
     var searchKeyword: String = ""
     var isSearching: Bool = false
     var networkManager: NetworkManagerProtocol
@@ -18,7 +18,7 @@ class SearchViewModel {
     // MARK: - Closures
     var showNoInternetAlert: ()->() = {}
     var configureColorMenu: ()->() = {}
-    var bindTablView:()->() = {}
+    var bindTableView:()->() = {}
     var activityIndicator: (Bool)->() = {_ in }
     var displayEmptyMessage: (String)->() = {_ in }
     var removeEmptyMessage: ()->() = {}
@@ -37,6 +37,8 @@ class SearchViewModel {
                 self.loadProducts()
             } else {
                 self.showNoInternetAlert()
+                self.activityIndicator(false)
+                displayEmptyMessage("No items found")
             }
         }
     }
@@ -52,7 +54,7 @@ class SearchViewModel {
             filteredProducts = products
         }
         updateUIForNoResults()
-        bindTablView()
+        bindTableView()
     }
     
     // MARK: - Private Methods
@@ -62,7 +64,7 @@ class SearchViewModel {
             DispatchQueue.main.async { [weak self] in
                 self?.products = products.products
                 self?.filteredProducts = self?.products ?? []
-                self?.bindTablView()
+                self?.bindTableView()
                 self?.activityIndicator(false)
             }
         }

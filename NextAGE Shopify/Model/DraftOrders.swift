@@ -30,7 +30,7 @@ struct DraftOrderWrapper: Codable {
 struct DraftOrder: Codable {
     let id: Int
     let name: String
-    let customer: CustomerInfo?
+    let customer: Customer?
     let shippingAddress, billingAddress: ShippingAddress?
     let note: String?
     let noteAttributes: [NoteAttribute]

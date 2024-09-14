@@ -7,7 +7,7 @@
 
 
 import Foundation
-public enum VaildMassage: String {
+public enum ValidMessage: String {
    case none = ""
    case nameEmpty = "name is empty"
    case nameVaild =  "name not vaild"

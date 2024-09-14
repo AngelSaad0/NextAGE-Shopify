@@ -26,6 +26,12 @@ class AllOrdersViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
         setupViewModel()
+        viewModel.checkInternetConnection()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.checkInternetConnection()
     }
     
     // MARK: - Private Methods
@@ -35,7 +41,6 @@ class AllOrdersViewController: UIViewController {
         orderTableView.dataSource = self
         orderTableView.register(UINib(nibName: "OrdersTableViewCell", bundle: nil), forCellReuseIdentifier: "OrdersTableViewCell")
         setupIndicators()
-        viewModel.updateUserOrders()
     }
     
     private func setupIndicators() {
@@ -53,6 +58,9 @@ class AllOrdersViewController: UIViewController {
                 }
             }
         }
+        viewModel.showNoInternetAlert = {
+            self.showNoInternetAlert()
+        }
         viewModel.showMessage = { message in
             self.orderTableView.displayEmptyMessage(message)
         }
@@ -69,9 +77,6 @@ class AllOrdersViewController: UIViewController {
 }
 
 extension AllOrdersViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        pushViewController(vcIdentifier: "OrderDetailsViewController", withNav: navigationController)
-    }
 }
 
 extension AllOrdersViewController: UITableViewDataSource {

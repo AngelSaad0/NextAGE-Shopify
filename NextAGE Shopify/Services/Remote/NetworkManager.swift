@@ -98,7 +98,7 @@ class NetworkManager: NetworkManagerProtocol {
         }
     }
 
-    private func createCustomer(firstName: String, lastName: String, email: String, phone: String, password: String, completion: @escaping (CustomerInfo?) -> Void) {
+    private func createCustomer(firstName: String, lastName: String, email: String, phone: String, password: String, completion: @escaping (Customer?) -> Void) {
         #warning("replace api")
         let url = "https://api.com/customers"
         let parameters: Parameters = [
@@ -112,7 +112,7 @@ class NetworkManager: NetworkManagerProtocol {
             ]
         ]
 
-        postData(to: url, responseType: Customer.self, parameters: parameters) { response in
+        postData(to: url, responseType: CustomerWrapper.self, parameters: parameters) { response in
             completion(response?.customer)
         }
     }

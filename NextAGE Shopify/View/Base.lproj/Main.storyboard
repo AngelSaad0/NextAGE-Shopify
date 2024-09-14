@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="awn-Ql-mXg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="awn-Ql-mXg">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -1025,7 +1025,7 @@
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="purchaseButton:" destination="bJY-oh-Gbp" eventType="touchUpInside" id="kKh-nG-7rp"/>
+                                    <action selector="purchaseButtonClicked:" destination="bJY-oh-Gbp" eventType="touchUpInside" id="kKh-nG-7rp"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="i6U-gU-HUu">
@@ -1094,7 +1094,6 @@
                     </view>
                     <connections>
                         <outlet property="paymentMethodsTableView" destination="i6U-gU-HUu" id="cZ3-vZ-wne"/>
-                        <outlet property="purchase" destination="Dsu-Lh-S92" id="ai7-NJ-5dI"/>
                         <outlet property="purchaseButton" destination="Dsu-Lh-S92" id="2bJ-B3-hMk"/>
                     </connections>
                 </viewController>
@@ -1953,7 +1952,7 @@ Hassle Free 30 days returns </string>
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xeo-iJ-KlM">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xeo-iJ-KlM">
                                 <rect key="frame" x="0.0" y="115" width="393" height="687"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -2099,7 +2098,7 @@ Hassle Free 30 days returns </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCx-tu-rxM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="766" y="599"/>
+            <point key="canvasLocation" x="765.64885496183206" y="598.59154929577471"/>
         </scene>
         <!--Product Details View Controller-->
         <scene sceneID="zcV-IC-ngf">
@@ -2161,10 +2160,10 @@ Hassle Free 30 days returns </string>
                                                         <rect key="frame" x="0.0" y="210.00000000000006" width="393" height="613.33333333333348"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TIB-Yi-BUJ">
-                                                                <rect key="frame" x="16" y="0.0" width="361" height="530"/>
+                                                                <rect key="frame" x="16" y="0.0" width="369" height="530"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQx-F9-o6J">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="369" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="OfX-km-3rp"/>
                                                                         </constraints>
@@ -2173,13 +2172,13 @@ Hassle Free 30 days returns </string>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="sy2-MO-ziC">
-                                                                        <rect key="frame" x="0.0" y="40" width="361" height="110"/>
+                                                                        <rect key="frame" x="0.0" y="40" width="369" height="110"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="UIi-mM-O5V">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="361" height="30"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="369" height="30"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillProportionally" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tsA-Zs-z5O">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="170.66666666666666" height="30"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="174.66666666666666" height="30"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faZ-0C-HAD">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
@@ -2191,7 +2190,7 @@ Hassle Free 30 days returns </string>
                                                                                                 <nil key="highlightedColor"/>
                                                                                             </label>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFU-nA-702">
-                                                                                                <rect key="frame" x="58.000000000000007" y="0.0" width="112.66666666666669" height="30"/>
+                                                                                                <rect key="frame" x="58.000000000000007" y="0.0" width="116.66666666666669" height="30"/>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                 <color key="textColor" name="#121212"/>
                                                                                                 <nil key="highlightedColor"/>
@@ -2204,7 +2203,7 @@ Hassle Free 30 days returns </string>
                                                                                         </constraints>
                                                                                     </stackView>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EBA-r9-9uK">
-                                                                                        <rect key="frame" x="190.66666666666663" y="0.0" width="170.33333333333337" height="30"/>
+                                                                                        <rect key="frame" x="194.66666666666663" y="0.0" width="174.33333333333337" height="30"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgP-u1-nbv">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="58.333333333333336" height="30"/>
@@ -2213,10 +2212,10 @@ Hassle Free 30 days returns </string>
                                                                                                 <nil key="highlightedColor"/>
                                                                                             </label>
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0Q-nb-nd8">
-                                                                                                <rect key="frame" x="66.333333333333343" y="0.0" width="104" height="30"/>
+                                                                                                <rect key="frame" x="66.333333333333343" y="0.0" width="108" height="30"/>
                                                                                                 <subviews>
                                                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="oLD-Gc-gtM">
-                                                                                                        <rect key="frame" x="4" y="5" width="100" height="20"/>
+                                                                                                        <rect key="frame" x="8" y="5" width="100" height="20"/>
                                                                                                         <subviews>
                                                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxz-IU-6hx">
                                                                                                                 <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -2265,19 +2264,19 @@ Hassle Free 30 days returns </string>
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GRO-Yt-QtV">
-                                                                                <rect key="frame" x="0.0" y="50" width="361" height="60"/>
+                                                                                <rect key="frame" x="0.0" y="50" width="369" height="60"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="RGS-8b-vh0">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="170.66666666666666" height="60"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="174.66666666666666" height="60"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNd-Fu-drj">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="170.66666666666666" height="21.666666666666668"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="174.66666666666666" height="21.666666666666668"/>
                                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                                                                 <color key="textColor" name="#121212"/>
                                                                                                 <nil key="highlightedColor"/>
                                                                                             </label>
                                                                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ger-yh-vuZ">
-                                                                                                <rect key="frame" x="0.0" y="21.666666666666689" width="170.66666666666666" height="38.333333333333343"/>
+                                                                                                <rect key="frame" x="0.0" y="21.666666666666689" width="174.66666666666666" height="38.333333333333343"/>
                                                                                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 <state key="normal" title="Button"/>
                                                                                                 <buttonConfiguration key="configuration" style="filled" title=" ">
@@ -2288,16 +2287,16 @@ Hassle Free 30 days returns </string>
                                                                                         </subviews>
                                                                                     </stackView>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="FSo-54-uZh">
-                                                                                        <rect key="frame" x="190.66666666666663" y="0.0" width="170.33333333333337" height="60"/>
+                                                                                        <rect key="frame" x="194.66666666666663" y="0.0" width="174.33333333333337" height="60"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ0-fF-al6">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="170.33333333333334" height="21.666666666666668"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="174.33333333333334" height="21.666666666666668"/>
                                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                                                                 <color key="textColor" name="#121212"/>
                                                                                                 <nil key="highlightedColor"/>
                                                                                             </label>
                                                                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRh-rJ-BmB">
-                                                                                                <rect key="frame" x="0.0" y="21.666666666666689" width="170.33333333333334" height="38.333333333333343"/>
+                                                                                                <rect key="frame" x="0.0" y="21.666666666666689" width="174.33333333333334" height="38.333333333333343"/>
                                                                                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 <state key="normal" title="Button"/>
                                                                                                 <buttonConfiguration key="configuration" style="filled" title=" ">
@@ -2315,7 +2314,7 @@ Hassle Free 30 days returns </string>
                                                                         </constraints>
                                                                     </stackView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWE-8k-gNK">
-                                                                        <rect key="frame" x="0.0" y="160" width="361" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="160" width="369" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="30" id="ven-sV-VFI"/>
                                                                         </constraints>
@@ -2324,7 +2323,7 @@ Hassle Free 30 days returns </string>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOO-i7-GgO">
-                                                                        <rect key="frame" x="0.0" y="200" width="361" height="60"/>
+                                                                        <rect key="frame" x="0.0" y="200" width="369" height="60"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="60" id="cxZ-72-kox"/>
@@ -2334,7 +2333,7 @@ Hassle Free 30 days returns </string>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     </textView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="fvc-QI-mr8">
-                                                                        <rect key="frame" x="0.0" y="270" width="361" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="270" width="369" height="30"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4S-5O-Udp">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="81" height="30"/>
@@ -2343,7 +2342,7 @@ Hassle Free 30 days returns </string>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JND-d6-VpD">
-                                                                                <rect key="frame" x="266.66666666666669" y="0.0" width="94.333333333333314" height="30"/>
+                                                                                <rect key="frame" x="274.66666666666669" y="0.0" width="94.333333333333314" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="fAU-RL-yEX"/>
                                                                                 </constraints>
@@ -2363,7 +2362,7 @@ Hassle Free 30 days returns </string>
                                                                         </constraints>
                                                                     </stackView>
                                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="raH-Ib-0D3">
-                                                                        <rect key="frame" x="0.0" y="310" width="361" height="220"/>
+                                                                        <rect key="frame" x="0.0" y="310" width="369" height="220"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="220" id="ajf-rh-kkf"/>
@@ -2784,7 +2783,7 @@ Hassle Free 30 days returns </string>
                                     <constraint firstAttribute="trailing" secondItem="dL2-bM-d8u" secondAttribute="trailing" id="p9k-Tf-0ve"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NNx-Ou-q39">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NNx-Ou-q39">
                                 <rect key="frame" x="0.0" y="256" width="393" height="513"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nSv-oP-I66">
@@ -3091,7 +3090,7 @@ Hassle Free 30 days returns </string>
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WishLIstTableViewCell" rowHeight="120" id="oYb-ao-Xqt" customClass="WishLIstTableViewCell" customModule="NextAGE_Shopify" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WishLIstTableViewCell" rowHeight="120" id="oYb-ao-Xqt" customClass="WishlistTableViewCell" customModule="NextAGE_Shopify" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oYb-ao-Xqt" id="RnZ-ne-qEC">
@@ -3201,7 +3200,7 @@ Hassle Free 30 days returns </string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="wishlistTablView" destination="M72-QP-L2T" id="3bo-dc-FVg"/>
+                        <outlet property="wishlistTableView" destination="M72-QP-L2T" id="3bo-dc-FVg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4kf-NH-VnP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

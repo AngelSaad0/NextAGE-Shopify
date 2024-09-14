@@ -41,7 +41,6 @@ class AddAddressViewController: UIViewController {
         for view in cornerRadiusView {
             view.addCornerRadius(radius: 12)
         }
-//        addAddressButton.addCornerRadius(radius: 12)
         setupIndicator()
     }
     

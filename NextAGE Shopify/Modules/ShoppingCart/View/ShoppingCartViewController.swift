@@ -28,11 +28,11 @@ class ShoppingCartViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
         setupViewModel()
-        viewModel.fetchShoppingCart()
+        viewModel.checkInternetConnection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.fetchShoppingCart()
+        viewModel.checkInternetConnection()
     }
     
     // MARK: - Private Methods
@@ -40,12 +40,14 @@ class ShoppingCartViewController: UIViewController {
         title = "Shopping cart"
         cartTableView.delegate = self
         cartTableView.dataSource = self
-//        reviewButton.addCornerRadius(radius: 12)
         updateReviewButtonState()
         setupIndicator()
     }
     
     private func setupViewModel() {
+        viewModel.showNoInternetAlert = {
+            self.showNoInternetAlert()
+        }
         viewModel.setIndicator = { state in
             DispatchQueue.main.async {
                 state ? self.indicator.startAnimating() : self.indicator.stopAnimating()
@@ -68,6 +70,12 @@ class ShoppingCartViewController: UIViewController {
             DispatchQueue.main.async {
                 self.subTotalLabel.text = subtotal
             }
+        }
+        viewModel.displayEmptyMessage = { message in
+            self.cartTableView.displayEmptyMessage(message)
+        }
+        viewModel.removeEmptyMessage = {
+            self.cartTableView.removeEmptyMessage()
         }
     }
     

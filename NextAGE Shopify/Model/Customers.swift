@@ -5,14 +5,14 @@
 //  Created by Ahmed El Gndy on 9/6/24.
 //
 struct Customers: Codable{
-    let customers: [CustomerInfo]?
+    let customers: [Customer]?
 }
 
-struct Customer: Codable{
-    let customer: CustomerInfo
+struct CustomerWrapper: Codable{
+    let customer: Customer
 }
 
-struct CustomerInfo: Codable {
+struct Customer: Codable {
     let firstName: String?
     let lastName: String?
     let email: String?
