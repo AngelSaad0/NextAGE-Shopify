@@ -28,11 +28,11 @@ class AddAddressViewModel {
         networkManager.postData(to: ShopifyAPI.addresses(id: userDefaultsManager.customerID).shopifyURLString(), responseType: EmptyResponse.self, parameters: [
             "address":
                 [
-                    "name": name ?? "",
-                    "address1": address ?? "",
-                    "city": city ?? "",
-                    "country": country ?? "",
-                    "phone": phone ?? "",
+                    "name": name?.trimmingCharacters(in: .whitespaces) ?? "",
+                    "address1": address?.trimmingCharacters(in: .whitespaces) ?? "",
+                    "city": city?.trimmingCharacters(in: .whitespaces) ?? "",
+                    "country": country?.trimmingCharacters(in: .whitespaces) ?? "",
+                    "phone": phone?.trimmingCharacters(in: .whitespaces) ?? "",
                     "default": isDefault
                 ]
         ]) { _ in

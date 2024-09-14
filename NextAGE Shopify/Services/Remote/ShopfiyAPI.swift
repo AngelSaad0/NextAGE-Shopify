@@ -25,6 +25,7 @@ enum ShopifyAPI {
     case draftOrders
     case draftOrder(id: Int)
     case addresses(id: Int)
+    case address(addressID: Int, customerID: Int)
     case defaultAddress(addressID: Int, customerID: Int)
     case priceRules
     case priceRule(title: String)
@@ -53,6 +54,8 @@ enum ShopifyAPI {
             return "draft_orders/\(id).json"
         case .addresses(id: let id):
             return "customers/\(id)/addresses.json"
+        case .address(addressID: let addressID, customerID: let customerID):
+            return "customers/\(customerID)/addresses/\(addressID).json"
         case .defaultAddress(let addressID, let customerID):
             return "customers/\(customerID)/addresses/\(addressID)/default.json"
         case .priceRules:

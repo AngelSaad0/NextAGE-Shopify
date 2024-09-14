@@ -86,7 +86,7 @@ func isValidEmail(_ email: String) -> Bool {
     return emailPredicate.evaluate(with: email)
 }
 func isValidMobile(_ mobileNumber: String) -> Bool {
-    let mobileNumberRegex = "^\\d{11}$"
+    let mobileNumberRegex = "^\\+?[0-9]{10,14}$"
     let mobileNumberPredicate = NSPredicate(format: "SELF MATCHES %@", mobileNumberRegex)
     return mobileNumberPredicate.evaluate(with: mobileNumber)
 }
@@ -101,6 +101,16 @@ func isValidMobileOrEmail(_ input: String) -> Bool {
     let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
     let mobileNumberPredicate = NSPredicate(format: "SELF MATCHES %@", mobileNumberRegex)
     return emailPredicate.evaluate(with: input) || mobileNumberPredicate.evaluate(with: input)
+}
+func isValidNameWithSpaces(_ name: String) -> Bool {
+    let nameRegex = "^[a-zA-Z\\s]{4,}$"
+    let namePredicate = NSPredicate(format: "SELF MATCHES %@", nameRegex)
+    return namePredicate.evaluate(with: name)
+}
+func isValidAddress(_ address: String) -> Bool {
+    let addressRegex = "^[a-zA-Z0-9\\s\\-\\/]{3,}$"
+    let addressPredicate = NSPredicate(format: "SELF MATCHES %@", addressRegex)
+    return addressPredicate.evaluate(with: address)
 }
 //func isValidPassword(_ password: String) -> Bool {
 //    let passwordRegex = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"

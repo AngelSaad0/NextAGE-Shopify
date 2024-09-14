@@ -55,5 +55,13 @@ public enum ValidMessage: String {
     
    case exchangeRateFailed = "Failed to update currency setting"
 
+    case addressEmpty = "address is empty"
+    case addressVaild =  "address not vaild"
+    
+    case cityEmpty = "city is empty"
+    case cityVaild =  "city not vaild"
+    
+    case countryEmpty = "country is empty"
+    case countryVaild =  "country not vaild"
 }
 
