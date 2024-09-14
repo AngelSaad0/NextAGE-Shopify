@@ -66,7 +66,7 @@ class AddAddressViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func addAddressButton(_ sender: Any) {
-        viewModel.addAddress(name: nameTextField.text, address: addressTextField.text, city: cityTextField.text, phone: phoneTextField.text, isDefault: defaultSwitch.isOn) {
+        viewModel.addAddress(name: nameTextField.text, address: addressTextField.text, city: cityTextField.text,country: countryTextField.text, phone: phoneTextField.text, isDefault: defaultSwitch.isOn) {
             self.navigationController?.popViewController(animated: true)
         }
     }

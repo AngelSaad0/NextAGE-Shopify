@@ -23,7 +23,7 @@ class AddAddressViewModel {
     }
     
     // MARK: - Public Methods
-    func addAddress(name: String?, address: String?, city: String?, phone: String?, isDefault: Bool, completion: @escaping ()->()) {
+    func addAddress(name: String?, address: String?, city: String?, country: String?, phone: String?, isDefault: Bool, completion: @escaping ()->()) {
         setIndicator(true)
         networkManager.postData(to: ShopifyAPI.addresses(id: userDefaultsManager.customerID).shopifyURLString(), responseType: EmptyResponse.self, parameters: [
             "address":
@@ -31,6 +31,7 @@ class AddAddressViewModel {
                     "name": name ?? "",
                     "address1": address ?? "",
                     "city": city ?? "",
+                    "country": country ?? "",
                     "phone": phone ?? "",
                     "default": isDefault
                 ]

@@ -128,7 +128,7 @@ extension AddressViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PaymentMethodCell
-        cell.config(methodName: viewModel.addresses[indexPath.row].address1, methodImageName: "gps")
+        cell.config(methodName: viewModel.addresses[indexPath.row].address1 ?? "", methodImageName: "gps")
         if viewModel.addresses[indexPath.row].addressDefault {
             viewModel.defaultAddressIndex = indexPath.row
             viewModel.selectedOrderAddress = indexPath.row
