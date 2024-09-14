@@ -52,7 +52,7 @@ class ProductCell: UITableViewCell {
         productImage.kf.setImage(with: URL(string: product.properties[0].value))
         
         productCount.text = "\(product.quantity)"
-        maxCount = Int(product.properties[1].value) ?? 1
+        maxCount = max(1, (Int(product.properties[1].value) ?? 1) / 2)
         updateCountingState()
     }
     

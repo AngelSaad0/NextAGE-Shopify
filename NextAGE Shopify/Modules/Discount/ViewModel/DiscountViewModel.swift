@@ -99,7 +99,12 @@ class DiscountViewModel {
     
     private func calcTotal() {
         calcSubTotal()
-        bindDiscountPrice(String(format: "%.2f", discountAmount) + " \(UserDefaultsManager.shared.currency)")
-        bindTotalPrice(String((Double(exchange(subTotal)) ?? 0.0) + Double(discountAmount)) + " \(UserDefaultsManager.shared.currency)")
+        if priceRule?.valueType == "fixed_amount" {
+            bindDiscountPrice(String(format: "%.2f", discountAmount) + " \(UserDefaultsManager.shared.currency)")
+            bindTotalPrice(String((Double(exchange(subTotal)) ?? 0.0) + Double(discountAmount)) + " \(UserDefaultsManager.shared.currency)")
+        } else {
+            bindDiscountPrice(String(format: "%.2f", (Double(exchange(subTotal)) ?? 0.0) * Double(discountAmount) / 100) + " \(UserDefaultsManager.shared.currency)")
+            bindTotalPrice(String(format: "%.2f", (Double(exchange(subTotal)) ?? 0.0) * (1 + Double(discountAmount) / 100)) + " \(UserDefaultsManager.shared.currency)")
+        }
     }
 }
