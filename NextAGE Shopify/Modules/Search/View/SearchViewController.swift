@@ -77,6 +77,7 @@ extension SearchViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableCell", for: indexPath) as! SearchTableCell
         let product = viewModel.filteredProducts[indexPath.row]
         cell.configure(with: product)
+        cell.product = product
         return cell
     }
 

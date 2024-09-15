@@ -19,6 +19,8 @@ class SearchTableCell: UITableViewCell {
     @IBOutlet var productImg: UIImageView!
     @IBOutlet var wishListButton: UIButton!
     
+    var product: Product?
+    
     // MARK: -  ViewLifeCycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -54,12 +56,16 @@ class SearchTableCell: UITableViewCell {
         priceLabel.text = exchange(model.variants.first?.price ?? "") + " " + UserDefaultsManager.shared.currency
         productLabel.text = model.title.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
 
+        let state = WishlistManager.shared.getFavoriteState(productID: model.id)
+        wishListButton.setImage(UIImage(systemName: state ? "heart.fill" : "heart"), for: .normal)
     }
 
     @IBAction func wishListButtonClicked(_ sender: UIButton) {
-        print("hello")
-        sender.setImage(UIImage(systemName:sender.currentImage ==
-                                UIImage(systemName: "heart") ? "heart.fill" : "heart" ), for: .normal)
+        guard let product = product else {return}
+        WishlistManager.shared.addToOrRemoveFromWishlist(product: product) { state in
+            self.wishListButton.setImage(UIImage(systemName: state ? "heart.fill" : "heart"), for: .normal)
+            self.layoutIfNeeded()
+        }
     }
     
 }
