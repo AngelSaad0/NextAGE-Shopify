@@ -32,6 +32,7 @@ class DiscountViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
         setupViewModel()
+        setupKeyboardDismissal()
         viewModel.fetchShoppingCart()
     }
     

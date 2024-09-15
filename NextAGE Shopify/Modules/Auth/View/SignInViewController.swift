@@ -31,6 +31,7 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
         setupViewModel()
+        setupKeyboardDismissal()
     }
 
     // MARK: - Private Methods

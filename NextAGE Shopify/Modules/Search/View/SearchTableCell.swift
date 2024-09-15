@@ -20,6 +20,7 @@ class SearchTableCell: UITableViewCell {
     @IBOutlet var wishListButton: UIButton!
     
     var product: Product?
+    var showLoginAlert: ()->() = {}
     
     // MARK: -  ViewLifeCycle
     override func awakeFromNib() {
@@ -62,9 +63,13 @@ class SearchTableCell: UITableViewCell {
 
     @IBAction func wishListButtonClicked(_ sender: UIButton) {
         guard let product = product else {return}
-        WishlistManager.shared.addToOrRemoveFromWishlist(product: product) { state in
-            self.wishListButton.setImage(UIImage(systemName: state ? "heart.fill" : "heart"), for: .normal)
-            self.layoutIfNeeded()
+        if UserDefaultsManager.shared.isLogin {
+            WishlistManager.shared.addToOrRemoveFromWishlist(product: product) { state in
+                self.wishListButton.setImage(UIImage(systemName: state ? "heart.fill" : "heart"), for: .normal)
+                self.layoutIfNeeded()
+            }
+        } else {
+            showLoginAlert()
         }
     }
     
