@@ -19,6 +19,7 @@ class SignUpViewController: UIViewController {
     
     // MARK: -  Properties
     let viewModel: SignUpViewModel
+    let indicator = UIActivityIndicatorView(style: .large)
 
     // MARK: -  View life cycle
     override func viewDidLoad() {
@@ -40,17 +41,29 @@ class SignUpViewController: UIViewController {
         for view in cornerRaduisView {
             view.addCornerRadius(radius: 8)
         }
+        setupIndicator()
+    }
+    
+    private func setupIndicator() {
+        indicator.center = view.center
+        view.addSubview(indicator)
     }
     
     private func setupViewModel() {
-        viewModel.navigateToHome = {
+        viewModel.navigateToHome = { message in
             DispatchQueue.main.async {
                 UIWindow.setRootViewController(storyboard: "Main", vcIdentifier: "MainTabBarNavigationController")
-                displayMessage(massage: .successRegister, isError: false)
+                displayMessage(massage: message, isError: false)
             }
         }
         viewModel.displayMessage = { message, isError in
             displayMessage(massage: message, isError: isError)
+            self.indicator.stopAnimating()
+        }
+        viewModel.setIndicator = { state in
+            DispatchQueue.main.async { [weak self] in
+                state ? self?.indicator.startAnimating() : self?.indicator.stopAnimating()
+            }
         }
     }
     
@@ -135,6 +148,7 @@ class SignUpViewController: UIViewController {
     
     @IBAction func registerWithGoogle(_ sender: UIButton) {
         print("Register with Google")
+        viewModel.signInWithGoogle(viewController: self)
     }
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {

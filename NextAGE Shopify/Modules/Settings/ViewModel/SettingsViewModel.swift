@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 class SettingsViewModel {
     // MARK: - Properties
@@ -33,6 +34,12 @@ class SettingsViewModel {
     
     func logout() {
         userDefaultsManager.logout()
+        let firebaseAuth = Auth.auth()
+        do {
+          try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
+        }
     }
     
     func getSettingsCount() -> Int {
