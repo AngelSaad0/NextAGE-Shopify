@@ -1184,13 +1184,13 @@
                                 <state key="normal" title="Review Order">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <buttonConfiguration key="configuration" style="filled" title="Review Order">
+                                <buttonConfiguration key="configuration" style="filled" title="Select Shipping Address">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="baseBackgroundColor" name="#0079FB"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="checkoutButton:" destination="x8D-vT-gJM" eventType="touchUpInside" id="GmF-tR-GbH"/>
+                                    <action selector="selectAddressButtonClicked:" destination="x8D-vT-gJM" eventType="touchUpInside" id="hMb-4h-Qz6"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtotal: 0.0 USD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HD9-Xj-Bri">
@@ -1373,7 +1373,7 @@ Hassle Free 30 days returns </string>
                     </view>
                     <connections>
                         <outlet property="cartTableView" destination="WQo-Se-FgG" id="s46-w4-hJz"/>
-                        <outlet property="reviewButton" destination="VWV-RJ-Qvl" id="jYE-6J-cCj"/>
+                        <outlet property="selectAddressButton" destination="VWV-RJ-Qvl" id="NeD-DH-pMv"/>
                         <outlet property="subTotalLabel" destination="HD9-Xj-Bri" id="JYv-AC-bcB"/>
                     </connections>
                 </viewController>
@@ -1395,13 +1395,13 @@ Hassle Free 30 days returns </string>
                                     <constraint firstAttribute="height" constant="50" id="NyL-0A-We4"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Select Address">
+                                <buttonConfiguration key="configuration" style="filled" title="Select Payment Method">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="baseBackgroundColor" name="#0079FB"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="selectAddressButton:" destination="yYC-vQ-OoH" eventType="touchUpInside" id="QQe-ei-3Xd"/>
+                                    <action selector="selectPaymentMethodButtonClicked:" destination="yYC-vQ-OoH" eventType="touchUpInside" id="Rds-wb-s7R"/>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ci7-a9-mVv">
@@ -1527,14 +1527,14 @@ Hassle Free 30 days returns </string>
                         <outlet property="discountLabel" destination="s0P-Ey-Lnr" id="veq-K6-lpM"/>
                         <outlet property="discountTextField" destination="rgG-3f-1a4" id="8tv-i9-QkF"/>
                         <outlet property="productsCollectionView" destination="Ci7-a9-mVv" id="hL7-4h-V87"/>
-                        <outlet property="selectAddressButton" destination="t8R-JT-9tQ" id="RdC-uW-dUD"/>
+                        <outlet property="selectPaymentMethodButton" destination="t8R-JT-9tQ" id="mDC-02-ib6"/>
                         <outlet property="subtotalLabel" destination="Eeh-Y0-3sy" id="8R3-0x-SEt"/>
                         <outlet property="totalLabel" destination="wLn-kl-AGY" id="QyX-eI-8UM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gy0-LM-eaJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="100" y="2046"/>
+            <point key="canvasLocation" x="1410" y="2046"/>
         </scene>
         <!--Address View Controller-->
         <scene sceneID="DfK-Df-wpM">
@@ -1602,12 +1602,12 @@ Hassle Free 30 days returns </string>
                                 </constraints>
                                 <color key="tintColor" name="#0079FB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Select Payment Method" cornerStyle="fixed">
+                                <buttonConfiguration key="configuration" style="filled" title="Review Order" cornerStyle="fixed">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="selectPaymentOrSetDefaultAddressButton:" destination="Nw5-kq-Q3M" eventType="touchUpInside" id="sYc-xe-pui"/>
+                                    <action selector="reviewOrderOrSetDefaultAddressButtonClicked:" destination="Nw5-kq-Q3M" eventType="touchUpInside" id="Pnv-xd-K6D"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFE-jz-rxs" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
@@ -1644,12 +1644,12 @@ Hassle Free 30 days returns </string>
                     <connections>
                         <outlet property="addNewAddressButton" destination="jFE-jz-rxs" id="KIf-DC-4zf"/>
                         <outlet property="addressesTableView" destination="poP-7X-0kM" id="TSG-xF-hRc"/>
-                        <outlet property="selectPayment" destination="D9v-kz-IOr" id="WEw-dP-iA9"/>
+                        <outlet property="reviewOrderOrSetDefaultAddressButton" destination="D9v-kz-IOr" id="DPK-MI-rtx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rnw-91-IeN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="755" y="2046"/>
+            <point key="canvasLocation" x="117" y="2046"/>
         </scene>
         <!--Add Address View Controller-->
         <scene sceneID="J60-VM-QI4">
@@ -1882,7 +1882,7 @@ Hassle Free 30 days returns </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eGm-k1-pUZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1409.9236641221373" y="2045.7746478873241"/>
+            <point key="canvasLocation" x="766" y="2046"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SUC-gI-jmg">

@@ -10,7 +10,7 @@ import UIKit
 class AddressViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var addressesTableView: UITableView!
-    @IBOutlet weak var selectPayment: UIButton!
+    @IBOutlet weak var reviewOrderOrSetDefaultAddressButton: UIButton!
     @IBOutlet var addNewAddressButton: UIButton!
     
     // MARK: - Properties
@@ -40,9 +40,9 @@ class AddressViewController: UIViewController {
         title = "Address"
         addressesTableView.delegate = self
         addressesTableView.dataSource = self
-        selectPayment.isEnabled = false
+        reviewOrderOrSetDefaultAddressButton.isEnabled = false
         if isSettings {
-            selectPayment.setTitle("Set as default address", for: .normal)
+            reviewOrderOrSetDefaultAddressButton.setTitle("Set as default address", for: .normal)
         }
         setupIndicator()
         viewModel.checkInternetConnection()
@@ -66,9 +66,9 @@ class AddressViewController: UIViewController {
                 }
             }
         }
-        viewModel.setSelectPaymentButton = { state in
+        viewModel.setReviewOrderOrDefaultAddressButton = { state in
             DispatchQueue.main.async { [weak self] in
-                self?.selectPayment.isEnabled = state
+                self?.reviewOrderOrSetDefaultAddressButton.isEnabled = state
             }
         }
         viewModel.bindResultToTableView = {
@@ -92,14 +92,14 @@ class AddressViewController: UIViewController {
         pushViewController(vcIdentifier: "AddAddressViewController", withNav: navigationController)
     }
     
-    @IBAction func selectPaymentOrSetDefaultAddressButton(_ sender: Any) {
+    @IBAction func reviewOrderOrSetDefaultAddressButtonClicked(_ sender: Any) {
         if isSettings {
             // set default address
             viewModel.setDefaultAddress()
         } else {
-            // select payment
+            // review order
             viewModel.submitAddress {
-                self.pushViewController(vcIdentifier: "PaymentViewController", withNav: self.navigationController)
+                self.pushViewController(vcIdentifier: "DiscountViewController", withNav: self.navigationController)
             }
         }
     }
@@ -117,7 +117,7 @@ extension AddressViewController: UITableViewDelegate {
         }
         if isSettings {
             viewModel.newDefaultAddressIndex = indexPath.row
-            selectPayment.isEnabled = viewModel.newDefaultAddressIndex != viewModel.defaultAddressIndex
+            reviewOrderOrSetDefaultAddressButton.isEnabled = viewModel.newDefaultAddressIndex != viewModel.defaultAddressIndex
         } else {
             viewModel.selectedOrderAddress = indexPath.row
         }
@@ -141,7 +141,7 @@ extension AddressViewController: UITableViewDataSource {
             viewModel.selectedOrderAddress = indexPath.row
             cell.select()
             if !isSettings {
-                selectPayment.isEnabled = true
+                reviewOrderOrSetDefaultAddressButton.isEnabled = true
             }
         } else {
             cell.deselect()

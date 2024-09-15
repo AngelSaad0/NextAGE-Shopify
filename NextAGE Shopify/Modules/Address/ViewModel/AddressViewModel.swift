@@ -20,7 +20,7 @@ class AddressViewModel {
     // MARK: - Closures
     var showNoInternetAlert: ()->() = {}
     var setIndicator: (Bool)->() = {_ in}
-    var setSelectPaymentButton: (Bool)->() = {_ in}
+    var setReviewOrderOrDefaultAddressButton: (Bool)->() = {_ in}
     var bindResultToTableView: ()->() = {}
     var showMessage: (ValidMessage, Bool)->() = {_, _ in}
     var displayEmptyMessage: (String)->() = {_ in}
@@ -55,7 +55,7 @@ class AddressViewModel {
         let addressID = addresses[selectedNewAddressIndex].id
         networkManager.updateData(at: ShopifyAPI.defaultAddress(addressID: addressID, customerID: userDefaultsManager.customerID).shopifyURLString(), with: [:]) {
             self.showMessage(.defaultAddressUpdated, false)
-            self.setSelectPaymentButton(false)
+            self.setReviewOrderOrDefaultAddressButton(false)
             self.fetchAddresses()
         }
     }

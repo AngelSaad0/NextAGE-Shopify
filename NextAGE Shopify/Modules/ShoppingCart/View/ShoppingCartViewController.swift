@@ -9,7 +9,7 @@ import UIKit
 
 class ShoppingCartViewController: UIViewController {
     // MARK: - IBOutlets
-    @IBOutlet var reviewButton: UIButton!
+    @IBOutlet var selectAddressButton: UIButton!
     @IBOutlet weak var subTotalLabel: UILabel!
     @IBOutlet weak var cartTableView: UITableView!
     
@@ -40,7 +40,7 @@ class ShoppingCartViewController: UIViewController {
         title = "Shopping cart"
         cartTableView.delegate = self
         cartTableView.dataSource = self
-        updateReviewButtonState()
+        updateSelectAddressButtonState()
         setupIndicator()
     }
     
@@ -53,9 +53,9 @@ class ShoppingCartViewController: UIViewController {
                 state ? self.indicator.startAnimating() : self.indicator.stopAnimating()
             }
         }
-        viewModel.updateReviewButtonState = {
+        viewModel.updateSelectAddressButtonState = {
             DispatchQueue.main.async {
-                self.updateReviewButtonState()
+                self.updateSelectAddressButtonState()
             }
         }
         viewModel.bindResultToTableView = {
@@ -79,8 +79,8 @@ class ShoppingCartViewController: UIViewController {
         }
     }
     
-    private func updateReviewButtonState() {
-        reviewButton.isEnabled = !viewModel.shoppingCart.isEmpty
+    private func updateSelectAddressButtonState() {
+        selectAddressButton.isEnabled = !viewModel.shoppingCart.isEmpty
     }
     
     private func setupIndicator() {
@@ -95,8 +95,8 @@ class ShoppingCartViewController: UIViewController {
         } cancelHandler: {_ in}
     }
     
-    @IBAction func checkoutButton(_ sender: Any) {
-        pushViewController(vcIdentifier: "DiscountViewController", withNav: navigationController)
+    @IBAction func selectAddressButtonClicked(_ sender: Any) {
+        pushViewController(vcIdentifier: "AddressViewController", withNav: navigationController)
     }
 }
 

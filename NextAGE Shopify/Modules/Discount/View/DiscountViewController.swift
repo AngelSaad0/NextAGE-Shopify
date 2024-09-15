@@ -9,7 +9,7 @@ import UIKit
 
 class DiscountViewController: UIViewController {
     // MARK: - IBOutlets
-    @IBOutlet var selectAddressButton: UIButton!
+    @IBOutlet var selectPaymentMethodButton: UIButton!
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var discountTextField: UITextField!
     @IBOutlet weak var applyDiscountButton: UIButton!
@@ -40,7 +40,6 @@ class DiscountViewController: UIViewController {
         title = "Review"
         productsCollectionView.delegate = self
         productsCollectionView.dataSource = self
-//        selectAddressButton.addCornerRadius(radius: 12)
         applyDiscountButton.addCornerRadius(radius: 12)
         setupIndicator()
         productsCollectionView.register(UINib(nibName: "CategoriesCollectionCell", bundle: nil), forCellWithReuseIdentifier: "CategoriesCollectionCell")
@@ -96,9 +95,9 @@ class DiscountViewController: UIViewController {
         viewModel.applyDiscount()
     }
     
-    @IBAction func selectAddressButton(_ sender: Any) {
+    @IBAction func selectPaymentMethodButtonClicked(_ sender: Any) {
         viewModel.submitDiscount {
-            self.pushViewController(vcIdentifier: "AddressViewController", withNav: self.navigationController)
+            self.pushViewController(vcIdentifier: "PaymentViewController", withNav: self.navigationController)
         }
     }
 }
