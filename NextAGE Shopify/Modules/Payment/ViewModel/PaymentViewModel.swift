@@ -22,6 +22,7 @@ class PaymentViewModel {
     
     // MARK: - Closures
     var presentPaymentRequest: (PKPaymentRequest)->() = {_ in}
+    var bindTotalAmount: (String)->() = {_ in}
     var pushConfirmationViewController: ()->() = {}
     var showFailOrderMessage: ()->() = {}
     
@@ -30,7 +31,6 @@ class PaymentViewModel {
         networkManager = NetworkManager.shared
         userDefaultsManager = UserDefaultsManager.shared
         setupPaymentRequest(request: paymentRequest)
-        fetchShoppingCart(shoppingCartID: userDefaultsManager.shoppingCartID)
     }
     
     // MARK: - Public Methods
@@ -51,6 +51,13 @@ class PaymentViewModel {
         }
     }
     
+    func fetchShoppingCart(shoppingCartID: Int) {
+        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultsManager.shoppingCartID).shopifyURLString(), responseType: DraftOrderWrapper.self, headers: []) { result in
+            self.shoppingCartDraftOrder = result?.draftOrder
+            self.bindTotalAmount("Total amount: \(String(format: "%.2f", self.calculateTotalPrice())) \(self.userDefaultsManager.currency)")
+        }
+    }
+    
     // MARK: - Private Methods
     private func setupPaymentRequest(request: PKPaymentRequest) {
         request.merchantIdentifier = "merchant.com.my.shopify.pay"
@@ -61,11 +68,6 @@ class PaymentViewModel {
         request.currencyCode = userDefaultsManager.currency
     }
     
-    private func fetchShoppingCart(shoppingCartID: Int) {
-        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultsManager.shoppingCartID).shopifyURLString(), responseType: DraftOrderWrapper.self, headers: []) { result in
-            self.shoppingCartDraftOrder = result?.draftOrder
-        }
-    }
     
     private func submitOrder(completion: @escaping (Bool)->()) {
         networkManager.postData(to: ShopifyAPI.orders.shopifyURLString(), responseType: EmptyResponse.self, parameters: ["order": getOrderDictionary()]) { result in
@@ -113,7 +115,7 @@ class PaymentViewModel {
         var addressParameters: [String: Any] = [:]
         if let shippingAddress = shoppingCartDraftOrder?.shippingAddress {
             addressParameters = [
-                "name": shippingAddress.name ?? "",
+                "name": shippingAddress.firstName ?? "",
                 "address1": shippingAddress.address1 ?? "",
                 "phone": shippingAddress.phone ?? "",
                 "city": shippingAddress.city ?? ""

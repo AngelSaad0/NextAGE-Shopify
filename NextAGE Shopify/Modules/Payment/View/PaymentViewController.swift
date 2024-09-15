@@ -12,6 +12,7 @@ class PaymentViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var purchaseButton: UIButton!
     @IBOutlet weak var paymentMethodsTableView: UITableView!
+    @IBOutlet weak var totalAmountLabel: UILabel!
     
     // MARK: - Properties
     let viewModel: PaymentViewModel
@@ -27,6 +28,7 @@ class PaymentViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
         setupViewModel()
+        viewModel.fetchShoppingCart(shoppingCartID: viewModel.userDefaultsManager.shoppingCartID)
     }
     
     // MARK: - Private Methods
@@ -51,6 +53,9 @@ class PaymentViewController: UIViewController {
         }
         viewModel.showFailOrderMessage = {
             displayMessage(massage: .placingOrderFailed, isError: true)
+        }
+        viewModel.bindTotalAmount = { amount in
+            self.totalAmountLabel.text = amount
         }
     }
     

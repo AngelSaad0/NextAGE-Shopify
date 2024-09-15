@@ -16,6 +16,7 @@ class DiscountViewController: UIViewController {
     @IBOutlet weak var subtotalLabel: UILabel!
     @IBOutlet weak var discountLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var addressDetailsLabel: UILabel!
     
     // MARK: - Properties
     let viewModel: DiscountViewModel
@@ -87,6 +88,9 @@ class DiscountViewController: UIViewController {
         }
         viewModel.bindTotalPrice = { total in
             self.totalLabel.text = total
+        }
+        viewModel.bindAddressDetails = { label in
+            self.addressDetailsLabel.text = label
         }
     }
     
