@@ -26,6 +26,7 @@ class DiscountViewModel {
     var bindSubtotalPrice: (String)->() = {_ in}
     var bindDiscountPrice: (String)->() = {_ in}
     var bindTotalPrice: (String)->() = {_ in}
+    var bindAddressDetails: (String)->() = {_ in}
     
     // MARK: - Initializer
     init() {
@@ -37,6 +38,7 @@ class DiscountViewModel {
     func fetchShoppingCart() {
         networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultManager.shoppingCartID).shopifyURLString(), responseType: DraftOrderWrapper.self, headers: []) { result in
             self.shoppingCart = result?.draftOrder.lineItems ?? []
+            self.getAddressDetails(address: result?.draftOrder.shippingAddress)
             if self.shoppingCart.first?.variantID == nil {
                 self.shoppingCart = Array(self.shoppingCart.dropFirst())
             }
@@ -105,6 +107,14 @@ class DiscountViewModel {
         } else {
             bindDiscountPrice(String(format: "%.2f", (Double(exchange(subTotal)) ?? 0.0) * Double(discountAmount) / 100) + " \(UserDefaultsManager.shared.currency)")
             bindTotalPrice(String(format: "%.2f", (Double(exchange(subTotal)) ?? 0.0) * (1 + Double(discountAmount) / 100)) + " \(UserDefaultsManager.shared.currency)")
+        }
+    }
+    
+    private func getAddressDetails(address: ShippingAddress?) {
+        if let shippingAddress = address {
+            bindAddressDetails("\(shippingAddress.address1 ?? "his address")\n\(shippingAddress.firstName ?? "customer") \(shippingAddress.phone ?? "")")
+        } else {
+            bindAddressDetails("")
         }
     }
 }

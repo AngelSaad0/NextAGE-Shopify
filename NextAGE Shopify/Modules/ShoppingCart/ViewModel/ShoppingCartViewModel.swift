@@ -17,7 +17,7 @@ class ShoppingCartViewModel {
     // MARK: - Closures
     var showNoInternetAlert: ()->() = {}
     var setIndicator: (Bool)->() = {_ in}
-    var updateReviewButtonState: ()->() = {}
+    var updateSelectAddressButtonState: ()->() = {}
     var bindResultToTableView: ()->() = {}
     var displayMessage: (ValidMessage, Bool)->() = {_, _ in}
     var bindSubtotalPrice: (String)->() = {_ in}
@@ -58,7 +58,7 @@ class ShoppingCartViewModel {
                 self.removeEmptyMessage()
             }
             self.calcSubTotal()
-            self.updateReviewButtonState()
+            self.updateSelectAddressButtonState()
             self.bindResultToTableView()
         }
     }

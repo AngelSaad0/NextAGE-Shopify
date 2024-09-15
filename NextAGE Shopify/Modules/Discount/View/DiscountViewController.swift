@@ -9,13 +9,14 @@ import UIKit
 
 class DiscountViewController: UIViewController {
     // MARK: - IBOutlets
-    @IBOutlet var selectAddressButton: UIButton!
+    @IBOutlet var selectPaymentMethodButton: UIButton!
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var discountTextField: UITextField!
     @IBOutlet weak var applyDiscountButton: UIButton!
     @IBOutlet weak var subtotalLabel: UILabel!
     @IBOutlet weak var discountLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var addressDetailsLabel: UILabel!
     
     // MARK: - Properties
     let viewModel: DiscountViewModel
@@ -40,7 +41,6 @@ class DiscountViewController: UIViewController {
         title = "Review"
         productsCollectionView.delegate = self
         productsCollectionView.dataSource = self
-//        selectAddressButton.addCornerRadius(radius: 12)
         applyDiscountButton.addCornerRadius(radius: 12)
         setupIndicator()
         productsCollectionView.register(UINib(nibName: "CategoriesCollectionCell", bundle: nil), forCellWithReuseIdentifier: "CategoriesCollectionCell")
@@ -89,6 +89,9 @@ class DiscountViewController: UIViewController {
         viewModel.bindTotalPrice = { total in
             self.totalLabel.text = total
         }
+        viewModel.bindAddressDetails = { label in
+            self.addressDetailsLabel.text = label
+        }
     }
     
     // MARK: - IBActions
@@ -96,9 +99,9 @@ class DiscountViewController: UIViewController {
         viewModel.applyDiscount()
     }
     
-    @IBAction func selectAddressButton(_ sender: Any) {
+    @IBAction func selectPaymentMethodButtonClicked(_ sender: Any) {
         viewModel.submitDiscount {
-            self.pushViewController(vcIdentifier: "AddressViewController", withNav: self.navigationController)
+            self.pushViewController(vcIdentifier: "PaymentViewController", withNav: self.navigationController)
         }
     }
 }
