@@ -43,7 +43,9 @@ class CategoriesCollectionCell: UICollectionViewCell {
         productPrice.text = exchange(cell.price)
         productDetails.text = cell.name?.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
         currency.text = UserDefaultsManager.shared.currency
-
+        wishListButton.isHidden = true
+//        let state = WishlistManager.shared.getFavoriteState(productID: cell.productID ?? 0)
+//        wishListButton.setImage(UIImage(systemName: state ? "heart.fill" : "heart"), for: .normal)
     }
     func configureForWishlist(with cell: LineItem) {
         productImage.kf.setImage(with: URL(string: cell.properties[0].value),placeholder: UIImage(named: "brand1"))
@@ -51,12 +53,14 @@ class CategoriesCollectionCell: UICollectionViewCell {
         productPrice.text = exchange(cell.price)
         productDetails.text = cell.title?.split(separator: "|").dropFirst().first?.trimmingCharacters(in: .whitespaces)
         currency.text = UserDefaultsManager.shared.currency
-
+        wishListButton.isHidden = true
+//        let state = WishlistManager.shared.getFavoriteState(productID: cell.productID ?? 0)
+//        wishListButton.setImage(UIImage(systemName: state ? "heart.fill" : "heart"), for: .normal)
     }
 
     @IBAction func wishListButtonClicked(_ sender: UIButton) {
         guard let product = product else {return}
-        WishlistManager.shared.addToWishlist(product: product) { state in
+        WishlistManager.shared.addToOrRemoveFromWishlist(product: product) { state in
             self.wishListButton.setImage(UIImage(systemName: state ? "heart.fill" : "heart"), for: .normal)
             self.layoutIfNeeded()
         }

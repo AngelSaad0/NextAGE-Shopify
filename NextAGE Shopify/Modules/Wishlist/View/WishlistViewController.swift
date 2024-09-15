@@ -88,8 +88,12 @@ extension WishlistViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        #warning("remove from wishList")
-
+        showAlert(title: "Remove from wishlist?", message: "Are you sure you want to remove this product from your wishlist?", okTitle: "Yes", cancelTitle: "No", okStyle: .destructive, cancelStyle: .cancel) { _ in
+            self.indicator.startAnimating()
+            WishlistManager.shared.removeFromWishlist(productID: self.viewModel.wishlist[indexPath.row].productID ?? 0) { [weak self] in
+                self?.viewModel.checkInternetConnection()
+            }
+        } cancelHandler: {_ in}
     }
 }
 

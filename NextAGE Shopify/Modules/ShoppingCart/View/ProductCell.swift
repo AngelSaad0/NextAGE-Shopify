@@ -23,6 +23,7 @@ class ProductCell: UITableViewCell {
     var maxCount = 1
     var product: LineItem?
     var deleteButton: ()->() = {}
+    var countUpdated: ()->() = {}
     var recalculateSum: ()->() = {}
     private let networkManager: NetworkManager
     private let userDefaultManager: UserDefaultsManager
@@ -121,12 +122,14 @@ class ProductCell: UITableViewCell {
     @IBAction func countPlusButton(_ sender: Any) {
         productCount.text = String(Int(productCount.text!)! + 1)
         incrementSubject.send()
+        countUpdated()
         updateCountingState()
     }
     
     @IBAction func countMinusButton(_ sender: Any) {
         productCount.text = String(Int(productCount.text!)! - 1)
         decrementSubject.send()
+        countUpdated()
         updateCountingState()
     }
     

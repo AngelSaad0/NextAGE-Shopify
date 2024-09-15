@@ -119,6 +119,9 @@ extension ShoppingCartViewController: UITableViewDataSource {
         cell.deleteButton = {
             self.showRemoveAlert(index: indexPath.row)
         }
+        cell.countUpdated = {
+            self.subTotalLabel.text = "Subtotal: . . . . . \(self.viewModel.userDefaultManager.currency)"
+        }
         cell.recalculateSum = {
             self.viewModel.fetchShoppingCart()
         }
