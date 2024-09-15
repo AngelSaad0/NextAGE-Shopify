@@ -26,6 +26,7 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
         setupViewModel()
+        setupKeyboardDismissal()
     }
     
     // MARK: - Required init

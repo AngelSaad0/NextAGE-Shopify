@@ -78,6 +78,9 @@ extension SearchViewController: UITableViewDataSource {
         let product = viewModel.filteredProducts[indexPath.row]
         cell.configure(with: product)
         cell.product = product
+        cell.showLoginAlert = {
+            self.showLoginFirstAlert(to: "add this product to wishlist")
+        }
         return cell
     }
 

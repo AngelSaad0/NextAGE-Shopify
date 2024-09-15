@@ -150,6 +150,9 @@ extension CategoriesAndBrandsViewController: UICollectionViewDataSource {
         let product = viewModel.filteredOrSortedProducts[indexPath.row]
         cell.product = product
         cell.configure(with: product)
+        cell.showLoginAlert = {
+            self.showLoginFirstAlert(to: "add this product to wishlist")
+        }
         return cell
     }
     

@@ -33,6 +33,7 @@ class AddAddressViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
         setupViewModel()
+        setupKeyboardDismissal()
     }
     
     override func viewWillAppear(_ animated: Bool) {
