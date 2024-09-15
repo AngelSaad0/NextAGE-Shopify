@@ -8,31 +8,23 @@
 import UIKit
 
 class ConfirmationViewController: UIViewController {
-
+    // MARK: - IBOutlets
+    @IBOutlet weak var continueShoppingButton: UIButton!
+    
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        updateUI()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - Private Methods
+    private func updateUI() {
+        self.navigationItem.hidesBackButton = true
+        continueShoppingButton.addCornerRadius(radius: 12)
     }
-    */
-
+    
+    // MARK: - IBActions
     @IBAction func continueShoppingButton(_ sender: Any) {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first {
-            let story = UIStoryboard(name: "MainTabBar", bundle:nil)
-            let vc = story.instantiateViewController(withIdentifier: "MainTabBarController")
-            window.rootViewController = vc
-            window.makeKeyAndVisible()
-        }
+        UIWindow.setRootViewController(vcIdentifier: "MainTabBarNavigationController")
     }
 }

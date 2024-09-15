@@ -16,8 +16,19 @@ enum ShopifyAPI {
 
     case smartCollections
     case products
+    case product(id: Int)
     case orders
     case order(id: String)
+    case customers
+    case customer(id: String)
+    case customerEmail(email: String)
+    case draftOrders
+    case draftOrder(id: Int)
+    case addresses(id: Int)
+    case address(addressID: Int, customerID: Int)
+    case defaultAddress(addressID: Int, customerID: Int)
+    case priceRules
+    case priceRule(title: String)
 
     private var path: String {
         switch self {
@@ -25,11 +36,34 @@ enum ShopifyAPI {
             return "smart_collections.json"
         case .products:
             return "products.json"
+        case .product(let id):
+            return "products/\(id).json"
         case .orders:
             return "orders.json"
         case .order(let id):
             return "orders/\(id).json"
+        case .customers:
+            return "customers.json?since_id=1"
+        case .customer(id: let id):
+            return "customers/\(id).json"
+        case .customerEmail(email: let email):
+            return "customers.json?email=\(email)"
+        case .draftOrders:
+            return "draft_orders.json"
+        case .draftOrder(id: let id):
+            return "draft_orders/\(id).json"
+        case .addresses(id: let id):
+            return "customers/\(id)/addresses.json"
+        case .address(addressID: let addressID, customerID: let customerID):
+            return "customers/\(customerID)/addresses/\(addressID).json"
+        case .defaultAddress(let addressID, let customerID):
+            return "customers/\(customerID)/addresses/\(addressID)/default.json"
+        case .priceRules:
+            return "price_rules.json"
+        case .priceRule(title: let id):
+            return "price_rules.json?title=\(id)"
         }
+        
     }
 
     func shopifyURLString() -> String {

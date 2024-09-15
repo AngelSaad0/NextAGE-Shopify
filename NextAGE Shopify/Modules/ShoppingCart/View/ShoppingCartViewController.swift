@@ -7,74 +7,134 @@
 
 import UIKit
 
-struct DummyProduct {
-    let productName: String
-    let productInfo: String
-    let productPrice: String
-    let productImage: String
-}
-
 class ShoppingCartViewController: UIViewController {
-    var dummyData = Array(repeating: DummyProduct(productName: "Adidas Halawany", productInfo: "Black", productPrice: "3197.89", productImage: "shoe.fill"), count: 10)
-    
-    
+    // MARK: - IBOutlets
+    @IBOutlet var selectAddressButton: UIButton!
     @IBOutlet weak var subTotalLabel: UILabel!
     @IBOutlet weak var cartTableView: UITableView!
+    
+    // MARK: - Properties
+    let viewModel: ShoppingCartViewModel
+    private let indicator = UIActivityIndicatorView(style: .large)
+    
+    // MARK: - Required Initializer
+    required init?(coder: NSCoder) {
+        viewModel = ShoppingCartViewModel()
+        super.init(coder: coder)
+    }
+    
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateUI()
+        setupViewModel()
+        viewModel.checkInternetConnection()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.checkInternetConnection()
+    }
+    
+    // MARK: - Private Methods
+    private func updateUI(){
         title = "Shopping cart"
-        
         cartTableView.delegate = self
         cartTableView.dataSource = self
-
-        calcSubTotal()
+        updateSelectAddressButtonState()
+        setupIndicator()
     }
     
-    func calcSubTotal() {
-        var sum = 0.0
-        for product in dummyData {
-            sum += Double(product.productPrice) ?? 0.0
+    private func setupViewModel() {
+        viewModel.showNoInternetAlert = {
+            self.showNoInternetAlert()
         }
-        subTotalLabel.text = "Sub Total: " + sum.formatted() + " EGP"
+        viewModel.setIndicator = { state in
+            DispatchQueue.main.async {
+                state ? self.indicator.startAnimating() : self.indicator.stopAnimating()
+            }
+        }
+        viewModel.updateSelectAddressButtonState = {
+            DispatchQueue.main.async {
+                self.updateSelectAddressButtonState()
+            }
+        }
+        viewModel.bindResultToTableView = {
+            DispatchQueue.main.async {
+                self.cartTableView.reloadData()
+            }
+        }
+        viewModel.displayMessage = { massage, isError in
+            displayMessage(massage: massage, isError: isError)
+        }
+        viewModel.bindSubtotalPrice = { subtotal in
+            DispatchQueue.main.async {
+                self.subTotalLabel.text = subtotal
+            }
+        }
+        viewModel.displayEmptyMessage = { message in
+            self.cartTableView.displayEmptyMessage(message)
+        }
+        viewModel.removeEmptyMessage = {
+            self.cartTableView.removeEmptyMessage()
+        }
     }
     
-    @IBAction func checkoutButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Payment", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "PaymentViewController")
-        self.navigationController?.pushViewController(vc, animated: true)
+    private func updateSelectAddressButtonState() {
+        selectAddressButton.isEnabled = !viewModel.shoppingCart.isEmpty
+    }
+    
+    private func setupIndicator() {
+        indicator.center = view.center
+        indicator.startAnimating()
+        view.addSubview(indicator)
+    }
+    
+    private func showRemoveAlert(index: Int) {
+        showAlert(title: "Delete product", message: "Are you sure you want to remove this product from your shopping cart?", okTitle: "Yes", cancelTitle: "No", okStyle: .destructive, cancelStyle: .cancel) { _ in
+            self.viewModel.removeProduct(at: index)
+        } cancelHandler: {_ in}
+    }
+    
+    @IBAction func selectAddressButtonClicked(_ sender: Any) {
+        pushViewController(vcIdentifier: "AddressViewController", withNav: navigationController)
     }
 }
 
 extension ShoppingCartViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
+        vc.viewModel.productID = viewModel.shoppingCart[indexPath.row].productID
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension ShoppingCartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummyData.count
+        return viewModel.shoppingCart.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProductCell
-        cell.configCell(with: dummyData[indexPath.row])
+        cell.configCell(with: viewModel.shoppingCart[indexPath.row])
+        cell.deleteButton = {
+            self.showRemoveAlert(index: indexPath.row)
+        }
+        cell.countUpdated = {
+            self.subTotalLabel.text = "Subtotal: . . . . . \(self.viewModel.userDefaultManager.currency)"
+        }
+        cell.recalculateSum = {
+            self.viewModel.fetchShoppingCart()
+        }
         return cell
     }
     
-#warning("removing product make unexpected behavior with count")
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Delete product", message: "Are you sure you want to remove this product from your shopping cart?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
-            self.dummyData.remove(at: indexPath.row)
-            self.calcSubTotal()
-            tableView.reloadData()
-        }))
-        alert.addAction(UIAlertAction(title: "No", style: .cancel))
-        self.present(alert, animated: true)
+        self.showRemoveAlert(index: indexPath.row)
     }
 }
 
 extension ShoppingCartViewController: UICollectionViewDelegateFlowLayout {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 124
+        return 180
     }
 }

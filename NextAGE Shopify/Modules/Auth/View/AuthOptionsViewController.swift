@@ -7,35 +7,73 @@
 
 import UIKit
 import AVFoundation
-class AuthOptionsViewController: UIViewController {
 
-    @IBOutlet var skipBtn: UIBarButtonItem!
-    @IBOutlet var singUpBtn: UIButton!
-    
-    @IBOutlet var vedioLayerView: UIView!
-    @IBOutlet var longInBtn: UIButton!
+class AuthOptionsViewController: UIViewController {
+    // MARK: -  IBOutlet
+    @IBOutlet var signInButton: UIButton!
+    @IBOutlet var signUpButton: UIButton!
+    @IBOutlet var skipButton: UIButton!
+
+    // MARK: -  Properties
+    private var viewModel:AuthOptionsViewModel!
+
+    // MARK: -  View Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = skipBtn
-        playVedio()
+        viewModel = AuthOptionsViewModel()
+        setupBindings()
+        setupViewModel()
+
+
     }
-    
-    func playVedio() {
-        guard let  path = Bundle.main.path(forResource: "intro", ofType: "mp4") else {
-            print(Bundle.main.bundlePath)
-            print("no vedio")
-            return
+
+    // MARK: -  private Method
+
+    private func setupViewModel() {
+        viewModel.navigateToViewController = { [weak self] viewControllerName in
+            self?.pushViewController(vcIdentifier: viewControllerName, withNav: self?.navigationController)
         }
-        let player = AVPlayer(url: URL(fileURLWithPath: path))
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = self.view.bounds
-        playerLayer.videoGravity = .resizeAspectFill
-        self.vedioLayerView.layer.addSublayer(playerLayer)
-        self.view.insertSubview(vedioLayerView, at: 0)
+        viewModel.setRootViewController = { storyboard,vcIdentifier in
+            UIWindow.setRootViewController(storyboard: "Main", vcIdentifier: "MainTabBarNavigationController")
 
-        player.play()
-   
-        
+        }
     }
 
+    private func  setupBindings(){
+        viewModel.checkConnectivity { [weak self] isConnected in
+            if !isConnected {
+                self!.showNoInternetAlert()
+            }
+        }
+    }
+    private func handleConnectivity(action: @escaping() -> Void) {
+        viewModel.checkConnectivity { [weak self] isConnected in
+            DispatchQueue.main.async {
+                if isConnected {
+                    action()
+                } else {
+                    self?.showNoInternetAlert()
+                }
+            }
+        }
+    }
+
+    // MARK: -  Action Button
+    @IBAction func skipButtonClicked(_ sender: UIButton) {
+        handleConnectivity {
+            self.viewModel.skipButtonClicked()
+        }
+    }
+
+    @IBAction func signInButtonClicked(_ sender: UIButton) {
+        handleConnectivity {
+            self.viewModel.signInButtonClicked()
+        }
+    }
+
+    @IBAction func signUpButtonClicked(_ sender: UIButton) {
+        handleConnectivity {
+            self.viewModel.signUpButtonClicked()
+        }
+    }
 }

@@ -8,22 +8,22 @@
 import UIKit
 
 class SettingCell: UITableViewCell {
+    // MARK: - IBOutlets
     @IBOutlet weak var settingImage: UIImageView!
     @IBOutlet weak var settingLabel: UILabel!
+    
+    // MARK: - View Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(false, animated: animated)
-
-        // Configure the view for the selected state
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(false, animated: animated)
+    }
+    
+    // MARK: - Public Methods
     func config(label: String, imageName: String) {
-        settingImage.image = UIImage(systemName: imageName)
+        settingImage.image = UIImage(named: imageName)
         settingLabel.text = label
     }
-
 }
