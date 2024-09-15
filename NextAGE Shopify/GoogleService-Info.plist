@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>71648292462-drqpcs2mv58tsqnjj18b3jbmf8ov62md.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.71648292462-drqpcs2mv58tsqnjj18b3jbmf8ov62md</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCfTOEJZ6q39ahJ3_NdZRj7u592hL52MK0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>71648292462</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>engy.NextAGE-Shopify</string>
+	<key>PROJECT_ID</key>
+	<string>nextage-8f21f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>nextage-8f21f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:71648292462:ios:e8ed748322d1061b60007f</string>
+</dict>
+</plist>

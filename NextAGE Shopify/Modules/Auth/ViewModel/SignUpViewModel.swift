@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import FirebaseCore
+import FirebaseAuth
+import GoogleSignIn
 
 class SignUpViewModel {
     // MARK: - Properties
@@ -22,7 +25,8 @@ class SignUpViewModel {
     private var shoppingCartID: Int?
     
     // MARK: - Closure
-    var navigateToHome: ()->() = {}
+    var setIndicator: (Bool)->() = {_ in}
+    var navigateToHome: (ValidMessage)->() = {_ in}
     var displayMessage: (ValidMessage, Bool)->() = {_, _ in}
 
     // MARK: - Initializer
@@ -33,29 +37,9 @@ class SignUpViewModel {
     }
     
     // MARK: - Public Methods
-    private func saveToUserDefaults() {
-        userDefaultManager.isLogin = true
-        userDefaultManager.name = (firstName ?? "") + " " + (lastName ?? "")
-        userDefaultManager.firstName = firstName ?? ""
-        userDefaultManager.lastName = lastName ?? ""
-        userDefaultManager.email = email ?? ""
-        userDefaultManager.phone = ""
-        userDefaultManager.password = password ?? ""
-        userDefaultManager.customerID = userID ?? 0
-        userDefaultManager.wishlistID = wishlistID ?? 0
-        userDefaultManager.shoppingCartID = shoppingCartID ?? 0
-        userDefaultManager.storeData()
-    }
-    
-    private func fetchExactEmailCustomers(compilation: @escaping ([Customer]?) -> Void) {
-        let urlString = ShopifyAPI.customerEmail(email: email ?? "nil").shopifyURLString()
-        networkManager.fetchData(from: urlString, responseType: Customers.self, headers: []) { result in
-            compilation(result?.customers)
-        }
-    }
-    
     func createNewCustomer() {
         // check if email already exist
+        setIndicator(true)
         fetchExactEmailCustomers { customers in
             guard let customers = customers else {
                 self.displayMessage(.checkingEmailFail, true)
@@ -99,10 +83,113 @@ class SignUpViewModel {
                     
                     self.networkManager.updateData(at: ShopifyAPI.customer(id: String(createdCustomer.id ?? 0)).shopifyURLString(), with: note) {
                         self.saveToUserDefaults()
-                        self.navigateToHome()
+                        self.navigateToHome(.successRegister)
                     }
                 }
             }
+        }
+    }
+    
+    func signInWithGoogle(viewController: UIViewController) {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
+        // Create Google Sign In configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+        
+        // Start the sign in flow!
+        GIDSignIn.sharedInstance.signIn(withPresenting: viewController) { [unowned self] result, error in
+            guard error == nil else {
+                // ...
+                return
+            }
+            
+            guard let user = result?.user,
+                  let idToken = user.idToken?.tokenString
+            else {
+                // ...
+                return
+            }
+            
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+
+            Auth.auth().signIn(with: credential) { result, error in
+                // At this point, our user is signed in
+                if let user = Auth.auth().currentUser {
+                    self.firstName = user.displayName ?? ""
+                    self.lastName = ""
+                    self.email = user.email
+                    self.password = user.uid
+                    
+                    self.signInOrUp()
+                }
+            }
+        }
+    }
+    
+    // MARK: - Private Methods
+    private func signInOrUp() {
+        self.setIndicator(true)
+        fetchExactEmailCustomers { result in
+            guard let customers = result else {
+                self.displayMessage(.checkingEmailFail, true)
+                return
+            }
+            if customers.isEmpty || !customers.contains(where: { customer in
+                customer.email == self.email?.lowercased()
+            }){
+                print("sign up")
+                self.createNewCustomer()
+            } else {
+                print("sign in")
+                self.signIn(customers: customers)
+            }
+        }
+    }
+    
+    private func signIn(customers: [Customer]) {
+        guard let foundCustomer = customers.first(where: { $0.email == self.email?.lowercased() }) else {
+            self.displayMessage(.emailDoesNotExist, true)
+            return
+        }
+        
+        if foundCustomer.tags != self.password {
+            self.displayMessage(.passwordDoesNotMatch, true)
+            return
+        }
+        
+        self.firstName = foundCustomer.firstName
+        self.lastName = foundCustomer.lastName
+        self.email = foundCustomer.email
+        self.password = foundCustomer.tags
+        self.userID = foundCustomer.id
+        if let draftOrderIDs = foundCustomer.note?.components(separatedBy: ","), draftOrderIDs.count == 2 {
+            self.shoppingCartID = Int(draftOrderIDs[0]) ?? 0
+            self.wishlistID = Int(draftOrderIDs[1]) ?? 0
+        }
+        
+        self.saveToUserDefaults()
+        self.navigateToHome(.successLogin)
+    }
+    
+    private func saveToUserDefaults() {
+        userDefaultManager.isLogin = true
+        userDefaultManager.name = (firstName ?? "") + " " + (lastName ?? "")
+        userDefaultManager.firstName = firstName ?? ""
+        userDefaultManager.lastName = lastName ?? ""
+        userDefaultManager.email = email ?? ""
+        userDefaultManager.phone = ""
+        userDefaultManager.password = password ?? ""
+        userDefaultManager.customerID = userID ?? 0
+        userDefaultManager.wishlistID = wishlistID ?? 0
+        userDefaultManager.shoppingCartID = shoppingCartID ?? 0
+        userDefaultManager.storeData()
+    }
+    
+    private func fetchExactEmailCustomers(compilation: @escaping ([Customer]?) -> Void) {
+        let urlString = ShopifyAPI.customerEmail(email: email ?? "nil").shopifyURLString()
+        networkManager.fetchData(from: urlString, responseType: Customers.self, headers: []) { result in
+            compilation(result?.customers)
         }
     }
     
