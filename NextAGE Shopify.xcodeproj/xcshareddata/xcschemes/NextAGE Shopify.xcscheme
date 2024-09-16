@@ -39,8 +39,8 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C627FA732C95E87A005A0861"
-               BuildableName = "NextAGE ShopifyTests"
+               BlueprintIdentifier = "C67B1DEC2C987B520043FB74"
+               BuildableName = "NextAGE ShopifyTests.xctest"
                BlueprintName = "NextAGE ShopifyTests"
                ReferencedContainer = "container:NextAGE Shopify.xcodeproj">
             </BuildableReference>
