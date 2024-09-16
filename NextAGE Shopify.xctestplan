@@ -19,7 +19,7 @@
     {
       "target" : {
         "containerPath" : "container:NextAGE Shopify.xcodeproj",
-        "identifier" : "C627FA732C95E87A005A0861",
+        "identifier" : "C67B1DEC2C987B520043FB74",
         "name" : "NextAGE ShopifyTests"
       }
     }
