@@ -74,6 +74,9 @@
 		C67B1DF82C987C0E0043FB74 /* PaymentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B1DF62C987C0E0043FB74 /* PaymentViewModelTests.swift */; };
 		C67B1DFB2C987C380043FB74 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B1DF92C987C380043FB74 /* SettingsViewModelTests.swift */; };
 		C67B1DFD2C987C7E0043FB74 /* CurrencyViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B1DFC2C987C7E0043FB74 /* CurrencyViewModelTests.swift */; };
+		C67B1E022C987EFD0043FB74 /* AuthOptionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B1DFE2C987EFD0043FB74 /* AuthOptionsTests.swift */; };
+		C67B1E032C987EFD0043FB74 /* SignInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B1DFF2C987EFD0043FB74 /* SignInViewModelTests.swift */; };
+		C67B1E042C987EFD0043FB74 /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B1E002C987EFD0043FB74 /* SignUpViewModelTests.swift */; };
 		C68C4EC22C878ADC0040DF87 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4EC12C878ADC0040DF87 /* NetworkManager.swift */; };
 		C68C4EC62C878CBE0040DF87 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4EC52C878CBE0040DF87 /* NetworkHelper.swift */; };
 		C68C4EDF2C87A6B00040DF87 /* ShopfiyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4EDE2C87A6B00040DF87 /* ShopfiyAPI.swift */; };
@@ -188,6 +191,9 @@
 		C67B1DF62C987C0E0043FB74 /* PaymentViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewModelTests.swift; sourceTree = "<group>"; };
 		C67B1DF92C987C380043FB74 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		C67B1DFC2C987C7E0043FB74 /* CurrencyViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyViewModelTests.swift; sourceTree = "<group>"; };
+		C67B1DFE2C987EFD0043FB74 /* AuthOptionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthOptionsTests.swift; sourceTree = "<group>"; };
+		C67B1DFF2C987EFD0043FB74 /* SignInViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewModelTests.swift; sourceTree = "<group>"; };
+		C67B1E002C987EFD0043FB74 /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
 		C68C4EC12C878ADC0040DF87 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C68C4EC52C878CBE0040DF87 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		C68C4EDE2C87A6B00040DF87 /* ShopfiyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopfiyAPI.swift; sourceTree = "<group>"; };
@@ -621,6 +627,7 @@
 		C67B1DEE2C987B520043FB74 /* NextAGE ShopifyTests */ = {
 			isa = PBXGroup;
 			children = (
+				C67B1E012C987EFD0043FB74 /* AuthTests */,
 				C67B1DFA2C987C380043FB74 /* SettingsTests */,
 				C67B1DF72C987C0E0043FB74 /* PaymentTests */,
 			);
@@ -642,6 +649,16 @@
 				C67B1DF92C987C380043FB74 /* SettingsViewModelTests.swift */,
 			);
 			path = SettingsTests;
+			sourceTree = "<group>";
+		};
+		C67B1E012C987EFD0043FB74 /* AuthTests */ = {
+			isa = PBXGroup;
+			children = (
+				C67B1DFE2C987EFD0043FB74 /* AuthOptionsTests.swift */,
+				C67B1DFF2C987EFD0043FB74 /* SignInViewModelTests.swift */,
+				C67B1E002C987EFD0043FB74 /* SignUpViewModelTests.swift */,
+			);
+			path = AuthTests;
 			sourceTree = "<group>";
 		};
 		C6AEABE92C8CFE4F00246123 /* Wishlist */ = {
@@ -1092,6 +1109,9 @@
 			files = (
 				C67B1DF82C987C0E0043FB74 /* PaymentViewModelTests.swift in Sources */,
 				C67B1DFB2C987C380043FB74 /* SettingsViewModelTests.swift in Sources */,
+				C67B1E042C987EFD0043FB74 /* SignUpViewModelTests.swift in Sources */,
+				C67B1E032C987EFD0043FB74 /* SignInViewModelTests.swift in Sources */,
+				C67B1E022C987EFD0043FB74 /* AuthOptionsTests.swift in Sources */,
 				C67B1DFD2C987C7E0043FB74 /* CurrencyViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
