@@ -650,7 +650,7 @@
 			isa = PBXGroup;
 			children = (
 				C67B1E212C9883010043FB74 /* OrdersTests */,
-				C67B1E1E2C9882D40043FB74 /* CategoriesAndBrands */,
+				C67B1E1E2C9882D40043FB74 /* CategoriesAndBrandsTests */,
 				C67B1E182C9882C40043FB74 /* HomeTests */,
 				C67B1E1A2C9882C40043FB74 /* MeTests */,
 				C67B1E132C9880810043FB74 /* Mocks */,
@@ -742,12 +742,12 @@
 			path = MeTests;
 			sourceTree = "<group>";
 		};
-		C67B1E1E2C9882D40043FB74 /* CategoriesAndBrands */ = {
+		C67B1E1E2C9882D40043FB74 /* CategoriesAndBrandsTests */ = {
 			isa = PBXGroup;
 			children = (
 				C67B1E1D2C9882D40043FB74 /* CategoriesAndBrandTests.swift */,
 			);
-			path = CategoriesAndBrands;
+			path = CategoriesAndBrandsTests;
 			sourceTree = "<group>";
 		};
 		C67B1E212C9883010043FB74 /* OrdersTests */ = {
