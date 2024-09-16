@@ -88,6 +88,7 @@
 		C67B1E1C2C9882C40043FB74 /* MeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B1E192C9882C40043FB74 /* MeViewModelTests.swift */; };
 		C67B1E1F2C9882D40043FB74 /* CategoriesAndBrandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B1E1D2C9882D40043FB74 /* CategoriesAndBrandTests.swift */; };
 		C67B1E222C9883010043FB74 /* AllOrdersViewmodelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B1E202C9883010043FB74 /* AllOrdersViewmodelTests.swift */; };
+		C67B1E252C9888B00043FB74 /* ShopingCartViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B1E232C9888AF0043FB74 /* ShopingCartViewModelTests.swift */; };
 		C68C4EC22C878ADC0040DF87 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4EC12C878ADC0040DF87 /* NetworkManager.swift */; };
 		C68C4EC62C878CBE0040DF87 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4EC52C878CBE0040DF87 /* NetworkHelper.swift */; };
 		C68C4EDF2C87A6B00040DF87 /* ShopfiyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4EDE2C87A6B00040DF87 /* ShopfiyAPI.swift */; };
@@ -216,6 +217,7 @@
 		C67B1E192C9882C40043FB74 /* MeViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewModelTests.swift; sourceTree = "<group>"; };
 		C67B1E1D2C9882D40043FB74 /* CategoriesAndBrandTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesAndBrandTests.swift; sourceTree = "<group>"; };
 		C67B1E202C9883010043FB74 /* AllOrdersViewmodelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllOrdersViewmodelTests.swift; sourceTree = "<group>"; };
+		C67B1E232C9888AF0043FB74 /* ShopingCartViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopingCartViewModelTests.swift; sourceTree = "<group>"; };
 		C68C4EC12C878ADC0040DF87 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C68C4EC52C878CBE0040DF87 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		C68C4EDE2C87A6B00040DF87 /* ShopfiyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopfiyAPI.swift; sourceTree = "<group>"; };
@@ -649,6 +651,7 @@
 		C67B1DEE2C987B520043FB74 /* NextAGE ShopifyTests */ = {
 			isa = PBXGroup;
 			children = (
+				C67B1E242C9888AF0043FB74 /* ShoppingCartTests */,
 				C67B1E212C9883010043FB74 /* OrdersTests */,
 				C67B1E1E2C9882D40043FB74 /* CategoriesAndBrandsTests */,
 				C67B1E182C9882C40043FB74 /* HomeTests */,
@@ -756,6 +759,14 @@
 				C67B1E202C9883010043FB74 /* AllOrdersViewmodelTests.swift */,
 			);
 			path = OrdersTests;
+			sourceTree = "<group>";
+		};
+		C67B1E242C9888AF0043FB74 /* ShoppingCartTests */ = {
+			isa = PBXGroup;
+			children = (
+				C67B1E232C9888AF0043FB74 /* ShopingCartViewModelTests.swift */,
+			);
+			path = ShoppingCartTests;
 			sourceTree = "<group>";
 		};
 		C6AEABE92C8CFE4F00246123 /* Wishlist */ = {
@@ -1219,6 +1230,7 @@
 				C67B1E1F2C9882D40043FB74 /* CategoriesAndBrandTests.swift in Sources */,
 				C67B1E142C9880810043FB74 /* DummyData.swift in Sources */,
 				C67B1E152C9880810043FB74 /* MockConnectivityService.swift in Sources */,
+				C67B1E252C9888B00043FB74 /* ShopingCartViewModelTests.swift in Sources */,
 				C67B1E1B2C9882C40043FB74 /* HomeTests.swift in Sources */,
 				C67B1E072C987FEF0043FB74 /* SearchViewModelTest.swift in Sources */,
 			);
