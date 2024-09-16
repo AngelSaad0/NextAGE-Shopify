@@ -31,6 +31,12 @@
 		A970BF2E2C88ABE40082ED45 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970BF2D2C88ABE40082ED45 /* Helper.swift */; };
 		A986667D2C94C33C009B6154 /* WishlistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A986667C2C94C33C009B6154 /* WishlistManager.swift */; };
 		A986667F2C94EC44009B6154 /* WishlistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A986667E2C94EC44009B6154 /* WishlistTableViewCell.swift */; };
+		A98666892C97A5A8009B6154 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98666872C97A5A8009B6154 /* OnboardingCollectionViewCell.swift */; };
+		A98666AC2C97B322009B6154 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98666AB2C97B322009B6154 /* OnboardingViewController.swift */; };
+		A98666B02C97B37A009B6154 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98666AF2C97B37A009B6154 /* OnboardingViewModel.swift */; };
+		A98666BB2C97D111009B6154 /* animation3.json in Resources */ = {isa = PBXBuildFile; fileRef = A98666B82C97D111009B6154 /* animation3.json */; };
+		A98666BD2C97D111009B6154 /* animation2.json in Resources */ = {isa = PBXBuildFile; fileRef = A98666BA2C97D111009B6154 /* animation2.json */; };
+		A98666BF2C97D210009B6154 /* animation1.json in Resources */ = {isa = PBXBuildFile; fileRef = A98666BE2C97D210009B6154 /* animation1.json */; };
 		A9AB32B22C8BBE4500A3EB88 /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AB32B12C8BBE4500A3EB88 /* Orders.swift */; };
 		A9AB32B62C8BBE7200A3EB88 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AB32B42C8BBE7200A3EB88 /* MeViewController.swift */; };
 		A9AB32B82C8BC32400A3EB88 /* AllOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AB32B72C8BC32400A3EB88 /* AllOrdersViewController.swift */; };
@@ -135,6 +141,12 @@
 		A970BF2D2C88ABE40082ED45 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		A986667C2C94C33C009B6154 /* WishlistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistManager.swift; sourceTree = "<group>"; };
 		A986667E2C94EC44009B6154 /* WishlistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistTableViewCell.swift; sourceTree = "<group>"; };
+		A98666872C97A5A8009B6154 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
+		A98666AB2C97B322009B6154 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		A98666AF2C97B37A009B6154 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		A98666B82C97D111009B6154 /* animation3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation3.json; sourceTree = "<group>"; };
+		A98666BA2C97D111009B6154 /* animation2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation2.json; sourceTree = "<group>"; };
+		A98666BE2C97D210009B6154 /* animation1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation1.json; sourceTree = "<group>"; };
 		A9AB32B12C8BBE4500A3EB88 /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
 		A9AB32B42C8BBE7200A3EB88 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		A9AB32B72C8BC32400A3EB88 /* AllOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllOrdersViewController.swift; sourceTree = "<group>"; };
@@ -242,7 +254,6 @@
 			isa = PBXGroup;
 			children = (
 				A94A12112C84D06D00AE0E09 /* NextAGE Shopify.app */,
-				C627FA742C95E87A005A0861 /* NextAGE ShopifyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -269,7 +280,6 @@
 				A94A121F2C84D07000AE0E09 /* LaunchScreen.storyboard */,
 				A970BF222C87AB580082ED45 /* CategoriesCollectionCell.xib */,
 				A970BF212C87AB580082ED45 /* CategoriesCollectionCell.swift */,
-				A986667C2C94C33C009B6154 /* WishlistManager.swift */,
 				A9F72BFE2C92189F00D884E6 /* CustomCommanButton.swift */,
 				A9AB32BA2C8CE3CF00A3EB88 /* OrdersTableViewCell.xib */,
 				A9AB32B92C8CE3CF00A3EB88 /* OrdersTableViewCell.swift */,
@@ -280,6 +290,7 @@
 		A94A122E2C84E5A900AE0E09 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A98666862C97A584009B6154 /* OnBoarding */,
 				C66E1F602C850F9B001127F6 /* Auth */,
 				C66E1F582C850E9B001127F6 /* MainTabBar */,
 				C66E1F6A2C851118001127F6 /* Home */,
@@ -316,10 +327,45 @@
 			path = CategoriesAndBrands;
 			sourceTree = "<group>";
 		};
+		A98666862C97A584009B6154 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				A98666AE2C97B349009B6154 /* View */,
+				A98666AD2C97B336009B6154 /* ViewModel */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		A98666AD2C97B336009B6154 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A98666AF2C97B37A009B6154 /* OnboardingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A98666AE2C97B349009B6154 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A98666AB2C97B322009B6154 /* OnboardingViewController.swift */,
+				A98666872C97A5A8009B6154 /* OnboardingCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A98666B12C97BA47009B6154 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				A98666BA2C97D111009B6154 /* animation2.json */,
+				A98666BE2C97D210009B6154 /* animation1.json */,
+				A98666B82C97D111009B6154 /* animation3.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		C627FA752C95E87A005A0861 /* NextAGE ShopifyTests */ = {
 			isa = PBXGroup;
 			children = (
-				C627FA762C95E87A005A0861 /* NextAGE_ShopifyTests.swift */,
 			);
 			path = "NextAGE ShopifyTests";
 			sourceTree = "<group>";
@@ -383,6 +429,7 @@
 		C66E1F572C850E74001127F6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A98666B12C97BA47009B6154 /* Lottie */,
 				C6AEAC342C8D2D8700246123 /* Extension */,
 				C6AEAC352C8D2D9700246123 /* Helper */,
 			);
@@ -758,6 +805,7 @@
 		C6AEAC352C8D2D9700246123 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				A986667C2C94C33C009B6154 /* WishlistManager.swift */,
 				A9D0F0D12C864BBD00ABA14E /* Colors.swift */,
 				A943E1112C8A56BD00E655C8 /* ValidMessage.swift */,
 				A970BF2D2C88ABE40082ED45 /* Helper.swift */,
@@ -811,7 +859,6 @@
 			);
 			name = "NextAGE ShopifyTests";
 			productName = "NextAGE ShopifyTests";
-			productReference = C627FA742C95E87A005A0861 /* NextAGE ShopifyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -858,11 +905,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6AEABF72C8D03ED00246123 /* ReviewCell.xib in Resources */,
+				A98666BB2C97D111009B6154 /* animation3.json in Resources */,
 				C6AAAD2D2C968B4B0097F12B /* GoogleService-Info.plist in Resources */,
 				A94A12212C84D07000AE0E09 /* LaunchScreen.storyboard in Resources */,
+				A98666BF2C97D210009B6154 /* animation1.json in Resources */,
 				A94A121E2C84D07000AE0E09 /* Assets.xcassets in Resources */,
 				A970BF242C87AB580082ED45 /* CategoriesCollectionCell.xib in Resources */,
 				A9D0F0D02C864B9B00ABA14E /* Colors.xcassets in Resources */,
+				A98666BD2C97D111009B6154 /* animation2.json in Resources */,
 				A9AB32BC2C8CE3CF00A3EB88 /* OrdersTableViewCell.xib in Resources */,
 				A94A121C2C84D06D00AE0E09 /* Main.storyboard in Resources */,
 			);
@@ -928,6 +978,7 @@
 				C6AEABF92C8D040900246123 /* ReviewCell.swift in Sources */,
 				A986667D2C94C33C009B6154 /* WishlistManager.swift in Sources */,
 				C67432762C863A43001A0753 /* ProductDetailsViewController.swift in Sources */,
+				A98666B02C97B37A009B6154 /* OnboardingViewModel.swift in Sources */,
 				C662651A2C86596D003D317F /* CurrencyViewController.swift in Sources */,
 				C64C33832C8741F500EF1928 /* ConfirmationViewController.swift in Sources */,
 				C6B3D69D2C8B32A900063E52 /* DraftOrders.swift in Sources */,
@@ -941,6 +992,7 @@
 				A9AB32B82C8BC32400A3EB88 /* AllOrdersViewController.swift in Sources */,
 				C674326C2C863693001A0753 /* AuthOptionsViewController.swift in Sources */,
 				C64C33852C8741F500EF1928 /* PaymentViewController.swift in Sources */,
+				A98666892C97A5A8009B6154 /* OnboardingCollectionViewCell.swift in Sources */,
 				C6AEAC292C8D2BA800246123 /* AddressViewModel.swift in Sources */,
 				A9D0F0D22C864BBD00ABA14E /* Colors.swift in Sources */,
 				A95F17CD2C88F515001FF2EF /* SearchTableCell.swift in Sources */,
@@ -950,6 +1002,7 @@
 				C66E1F6F2C85113E001127F6 /* HomeViewModel.swift in Sources */,
 				C6AEAC172C8D293A00246123 /* OrderDetailsViewModel.swift in Sources */,
 				C66E1F672C8510C4001127F6 /* MainTabBarViewModel.swift in Sources */,
+				A98666AC2C97B322009B6154 /* OnboardingViewController.swift in Sources */,
 				A94A12352C84E60E00AE0E09 /* SignInViewController.swift in Sources */,
 				C67432942C863F35001A0753 /* SettingsViewModel.swift in Sources */,
 				A970BF032C8780950082ED45 /* UICollectionView+Extension.swift in Sources */,
@@ -1009,7 +1062,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C627FA772C95E87A005A0861 /* NextAGE_ShopifyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

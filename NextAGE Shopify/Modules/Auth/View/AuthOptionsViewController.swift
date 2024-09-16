@@ -15,12 +15,17 @@ class AuthOptionsViewController: UIViewController {
     @IBOutlet var skipButton: UIButton!
 
     // MARK: -  Properties
-    private var viewModel:AuthOptionsViewModel!
+    private let viewModel:AuthOptionsViewModel
+
+    // MARK: -  initializer
+    required init?(coder: NSCoder) {
+        viewModel = AuthOptionsViewModel()
+        super.init(coder: coder)
+    }
 
     // MARK: -  View Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = AuthOptionsViewModel()
         setupBindings()
         setupViewModel()
 

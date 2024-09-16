@@ -11,6 +11,7 @@ class UserDefaultsManager {
     private let pref = UserDefaults.standard
     var continueAsAGuest: Bool = false
     var isLogin: Bool = false
+    var isBoarding:Bool = false
     var darkModeEnabled: Bool = false
     
     var name: String = ""
@@ -34,6 +35,7 @@ class UserDefaultsManager {
     func getStoredData(){
         self.continueAsAGuest = getSharedBool(forKey: "guest")
         self.isLogin  = getSharedBool(forKey: "isLogin")
+        self.isBoarding  = getSharedBool(forKey: "isBoarding")
         self.darkModeEnabled  = getSharedBool(forKey: "darkMode")
         self.name = getSharedString(forKey: "name")
         self.firstName = getSharedString(forKey: "firstName")
@@ -59,6 +61,7 @@ class UserDefaultsManager {
     func storeData(){
         setSharedValue("guest", value: continueAsAGuest)
         setSharedValue("isLogin", value: isLogin)
+        setSharedValue("isBoarding", value: isBoarding)
         setSharedValue("darkMode",value: darkModeEnabled)
         setSharedValue("name", value: name)
         setSharedValue("firstName", value: firstName)
@@ -91,6 +94,7 @@ class UserDefaultsManager {
         removeValue(forKey: "shoppingCart")
         removeValue(forKey: "wishlist")
         removeValue(forKey: "exchangeRate")
+        removeValue(forKey: "isBoarding")
         clearCache()
         getStoredData()
     }
