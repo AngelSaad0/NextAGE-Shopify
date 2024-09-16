@@ -56,3 +56,4 @@ NextAGE-Shopify is a shopping app developed using Swift with UIKit and the MVVM 
 - [Firebase/Auth](https://firebase.google.com/docs/auth) - For user authentication.
 - [GoogleSignIn](https://developers.google.com/identity/sign-in/ios/start) - Google Sign-In integration.
 - [Kingfisher](https://github.com/onevcat/Kingfisher) - For image caching and downloading.
+- [lottie-ios](https://github.com/airbnb/lottie-ios) - For animations.
