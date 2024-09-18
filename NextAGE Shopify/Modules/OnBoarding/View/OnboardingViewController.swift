@@ -8,27 +8,28 @@
 import UIKit
 
 class OnboardingViewController: UIViewController{
-    
-    // MARK: -  outlets for the viewController
+    // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet var collectionPageControl: UIPageControl!
     @IBOutlet weak var getStartedButton: UIButton!
-    // MARK: -  Properties
+    
+    // MARK: - Properties
     private let viewModel:OnboardingViewModel
     
-    // MARK: -  initializer
+    // MARK: - Initializer
     required init?(coder: NSCoder) {
         viewModel = OnboardingViewModel()
         super.init(coder: coder)
     }
-    // MARK: -  lifeCycle methods for the ViewController
+    // MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionPageControl.numberOfPages = viewModel.pages.count
     }
-    // MARK: -  outlet functions for the viewController
+    
+    // MARK: - IBActions
     @IBAction func pageChanged(_ sender: Any) {
         let pc = sender as! UIPageControl
         collectionView.scrollToItem(at: IndexPath(item: pc.currentPage, section: 0), at: .centeredHorizontally, animated: true)

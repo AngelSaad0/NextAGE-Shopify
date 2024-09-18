@@ -8,7 +8,6 @@
 import UIKit
 
 class MeViewController: UIViewController {
-
     // MARK: -  @IBOutlet
     @IBOutlet var logInStack: UIStackView!
     @IBOutlet weak var userGreetingLabel: UILabel!
@@ -44,6 +43,7 @@ class MeViewController: UIViewController {
         viewModel.checkInternetConnection()
     }
 
+    // MARK: - Private Methods
     private func setupViewModel() {
         viewModel.onOrdersUpdated = { [weak self] in
             self?.updateOrdersUI()
@@ -133,7 +133,6 @@ class MeViewController: UIViewController {
 }
 
 // MARK: - TableView DataSource & Delegate
-
 extension MeViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -156,7 +155,6 @@ extension MeViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 // MARK: - CollectionView DataSource & Delegate
-
 extension MeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

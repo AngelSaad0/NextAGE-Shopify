@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="awn-Ql-mXg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="awn-Ql-mXg">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -50,7 +49,7 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="ywn-zx-kgK">
                                                 <rect key="frame" x="0.0" y="0.0" width="314.33333333333331" height="414"/>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ta-Ut-c6s" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ta-Ut-c6s" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="435" width="314.33333333333331" height="44"/>
                                                 <color key="backgroundColor" red="0.94509804249999996" green="0.93725490570000003" blue="0.94509804249999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
@@ -66,7 +65,7 @@
                                                     <action selector="signInButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="moY-PN-1Qt"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mac-Pg-j54" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mac-Pg-j54" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="500" width="314.33333333333331" height="44"/>
                                                 <color key="backgroundColor" name="#0079FB"/>
                                                 <constraints>
@@ -233,7 +232,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hDu-hp-ywR" userLabel="Stack  login &amp;register">
                                                         <rect key="frame" x="0.0" y="223.66666666666669" width="361" height="113"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYj-B9-wOF" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYj-B9-wOF" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="361" height="48.333333333333336"/>
                                                                 <color key="backgroundColor" name="#0079FB"/>
                                                                 <constraints>
@@ -562,7 +561,7 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="TFr-Ug-Vzf">
                                                                         <rect key="frame" x="16" y="25" width="361.66666666666669" height="236"/>
                                                                         <subviews>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCJ-3p-flb" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCJ-3p-flb" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="361.66666666666669" height="48"/>
                                                                                 <color key="backgroundColor" name="#0079FB"/>
                                                                                 <constraints>
@@ -836,7 +835,7 @@
                                     <action selector="pageChanged:" destination="Q9S-up-hvp" eventType="valueChanged" id="hYx-ct-Q3m"/>
                                 </connections>
                             </pageControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gnx-d4-uax" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gnx-d4-uax" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="16" y="752" width="361" height="42"/>
                                 <color key="backgroundColor" name="#0079FB"/>
                                 <constraints>
@@ -943,7 +942,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ikY-6T-L2G" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ikY-6T-L2G" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="753" width="130" height="40"/>
                                 <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <constraints>
@@ -1151,7 +1150,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dsu-Lh-S92" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dsu-Lh-S92" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="758" width="353" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4Ix-TU-g6J"/>
@@ -1265,7 +1264,7 @@
                                 <color key="textColor" name="#121212"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7b-QJ-ARr" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7b-QJ-ARr" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="758" width="353" height="50"/>
                                 <color key="backgroundColor" name="#0079FB"/>
                                 <constraints>
@@ -1321,7 +1320,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWV-RJ-Qvl" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWV-RJ-Qvl" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="758" width="353" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ZUd-wt-1GK"/>
@@ -1536,7 +1535,7 @@ Hassle Free 30 days returns </string>
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8R-JT-9tQ" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8R-JT-9tQ" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="758" width="353" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="NyL-0A-We4"/>
@@ -1752,7 +1751,7 @@ Hassle Free 30 days returns </string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9v-kz-IOr" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9v-kz-IOr" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="758" width="353" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="YFi-04-WOf"/>
@@ -1767,7 +1766,7 @@ Hassle Free 30 days returns </string>
                                     <action selector="reviewOrderOrSetDefaultAddressButtonClicked:" destination="Nw5-kq-Q3M" eventType="touchUpInside" id="Pnv-xd-K6D"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFE-jz-rxs" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFE-jz-rxs" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="698" width="353" height="50"/>
                                 <color key="backgroundColor" red="0.94509804249999996" green="0.93725490570000003" blue="0.94509804249999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -1816,7 +1815,7 @@ Hassle Free 30 days returns </string>
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pD-Jy-czJ" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pD-Jy-czJ" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="758" width="353" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6AA-fd-khi"/>
@@ -2584,7 +2583,7 @@ Hassle Free 30 days returns </string>
                                     <constraint firstAttribute="trailing" secondItem="oyL-9T-Hy9" secondAttribute="trailing" constant="16" id="KuQ-P3-Vi6"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-dk-2Pf" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-dk-2Pf" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="16" y="760" width="261" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="i0j-NV-U3z"/>

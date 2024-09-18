@@ -94,8 +94,8 @@ class UserDefaultsManager {
         removeValue(forKey: "shoppingCart")
         removeValue(forKey: "wishlist")
         removeValue(forKey: "exchangeRate")
-        removeValue(forKey: "isBoarding")
-        clearCache()
+//        removeValue(forKey: "isBoarding")
+//        clearCache()
         getStoredData()
     }
     
@@ -121,6 +121,7 @@ class UserDefaultsManager {
     }
     
     private func removeValue(forKey key: String) {
+        self.pref.set("", forKey: key)
         self.pref.removeObject(forKey: key)
         self.pref.synchronize()
     }

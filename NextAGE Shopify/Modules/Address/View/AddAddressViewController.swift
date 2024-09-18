@@ -69,10 +69,13 @@ class AddAddressViewController: UIViewController {
                 }
             }
         }
+        viewModel.showFailureMessage = {
+            displayMessage(massage: .countryValid, isError: true)
+        }
         viewModel.showSuccessMessage = {
             displayMessage(massage: .newAddressAdded, isError: false)
         }
-        viewModel.showSuccessMessage = {
+        viewModel.showSuccessEditingMessage = {
             displayMessage(massage: .addressEdited, isError: false)
         }
     }
@@ -96,7 +99,7 @@ class AddAddressViewController: UIViewController {
             return false
         }
         if !isValidNameWithSpaces(nameTextField.text?.trimmingCharacters(in: .whitespaces) ?? "") {
-            displayMessage(massage: .nameVaild, isError: true)
+            displayMessage(massage: .nameValid, isError: true)
             return false
         }
         if addressTextField.text?.trimmingCharacters(in: .whitespaces) == "" {
@@ -104,7 +107,7 @@ class AddAddressViewController: UIViewController {
             return false
         }
         if !isValidAddress(addressTextField.text?.trimmingCharacters(in: .whitespaces) ?? "") {
-            displayMessage(massage: .addressVaild, isError: true)
+            displayMessage(massage: .addressValid, isError: true)
             return false
         }
         if cityTextField.text?.trimmingCharacters(in: .whitespaces) == "" {
@@ -112,7 +115,7 @@ class AddAddressViewController: UIViewController {
             return false
         }
         if !isValidAddress(cityTextField.text?.trimmingCharacters(in: .whitespaces) ?? "") {
-            displayMessage(massage: .cityVaild, isError: true)
+            displayMessage(massage: .cityValid, isError: true)
             return false
         }
         if countryTextField.text?.trimmingCharacters(in: .whitespaces) == "" {
@@ -120,7 +123,7 @@ class AddAddressViewController: UIViewController {
             return false
         }
         if !isValidAddress(countryTextField.text?.trimmingCharacters(in: .whitespaces) ?? "") {
-            displayMessage(massage: .cityVaild, isError: true)
+            displayMessage(massage: .cityValid, isError: true)
             return false
         }
         if phoneTextField.text?.trimmingCharacters(in: .whitespaces) == "" {
@@ -128,7 +131,7 @@ class AddAddressViewController: UIViewController {
             return false
         }
         if !isValidMobile(phoneTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""){
-            displayMessage(massage: .mobileVaild, isError: true)
+            displayMessage(massage: .mobileValid, isError: true)
             return false
         }
         return true

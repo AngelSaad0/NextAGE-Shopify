@@ -7,11 +7,8 @@
 
 import UIKit
 
-import UIKit
-
 class HomeViewController: UIViewController {
-    
-    // MARK: - @IBOutlet
+    // MARK: - IBOutlets
     @IBOutlet var brandViewForTitle: UIView!
     @IBOutlet private weak var brandBackground: UIImageView!
     @IBOutlet private weak var brandsCollection: UICollectionView!
@@ -30,7 +27,7 @@ class HomeViewController: UIViewController {
         super.init(coder: coder)
     }
     
-    // MARK: - Lifecycle
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUIComponents()
@@ -94,17 +91,17 @@ class HomeViewController: UIViewController {
             }
         }
     }
-
+    
     private func loadPriceRules() {
         viewModel.loadPriceRules { [weak self] in
             DispatchQueue.main.async {
                 self?.adsCollectionView.reloadData()
                 self?.configureAdsPageControl()
-
+                
             }
         }
     }
-
+    
     private func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateAdsScroll), userInfo: nil, repeats: true)
     }

@@ -15,27 +15,25 @@ struct Page {
 }
 
 class OnboardingCollectionViewCell: UICollectionViewCell {
-
+    // MARK: - IBOutlets
     @IBOutlet weak var animationContainer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
-
+    
+    // MARK: - Properties
     private var animationView: LottieAnimationView?
-
+    
+    // MARK: - View Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         animationViewContainer()
     }
-
-   private func animationViewContainer() {
-        animationView?.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height * 0.8)
-
-    }
-
+    
+    // MARK: - Public Methods
     func configureCell(page: Page) {
         animationView?.removeFromSuperview()
         animationView = nil
@@ -49,5 +47,10 @@ class OnboardingCollectionViewCell: UICollectionViewCell {
         }
         self.titleLabel.text = page.title
         self.descriptionTextView.text = page.description
+    }
+    
+    // MARK: - Private Methods
+    private func animationViewContainer() {
+        animationView?.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height * 0.8)
     }
 }
