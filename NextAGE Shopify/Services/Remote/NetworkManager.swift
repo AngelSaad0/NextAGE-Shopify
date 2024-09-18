@@ -28,7 +28,7 @@ class NetworkManager: NetworkManagerProtocol {
             completion(.failure(NetworkError.invalidURL))
             return
         }
-        let finalHeaders = headers.isEmpty ? defaultHeaders : headers
+//        let finalHeaders = headers.isEmpty ? defaultHeaders : headers
         AF.request(requestURL, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers.isEmpty ? defaultHeaders : headers)
             .validate(statusCode: 200..<300)
             .responseData { response in
@@ -42,7 +42,6 @@ class NetworkManager: NetworkManagerProtocol {
                         completion(.failure(NetworkError.decodingFailed))
                     }
                 case .failure(let error):
-//                    self.logError(error, data: response.data)
                     completion(.failure(error))
                 }
             }
@@ -92,30 +91,4 @@ class NetworkManager: NetworkManagerProtocol {
             }
         }
     }
-
-//    private func logError(_ error: Error, data: Data?) {
-//        print("Error: \(error.localizedDescription)")
-//        if let responseData = data {
-//            print("Response Data: \(String(data: responseData, encoding: .utf8) ?? "")")
-//        }
-//    }
-
-//    private func createCustomer(firstName: String, lastName: String, email: String, phone: String, password: String, completion: @escaping (Customer?) -> Void) {
-//        #warning("replace api")
-//        let url = "https://api.com/customers"
-//        let parameters: Parameters = [
-//            "customer": [
-//                "first_name": firstName,
-//                "last_name": lastName,
-//                "email": email,
-//                "phone": phone,
-//                "verified_email": true,
-//                "password": password
-//            ]
-//        ]
-
-//        postData(to: url, responseType: CustomerWrapper.self, parameters: parameters) { response in
-//            completion(response?.customer)
-//        }
-//    }
 }

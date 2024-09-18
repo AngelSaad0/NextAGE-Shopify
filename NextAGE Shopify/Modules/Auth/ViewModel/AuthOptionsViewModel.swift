@@ -7,21 +7,21 @@
 
 import Foundation
 class AuthOptionsViewModel {
-
-    // MARK: -  properties
+    // MARK: - Properties
     private var networkManager: NetworkManagerProtocol
     private var connectivityService: ConnectivityServiceProtocol
-
-    // MARK: -  Closure to notify the view controller about changes
+    
+    // MARK: - Closures
     var navigateToViewController: ((String) -> Void)?
     var setRootViewController: ((String,String)->Void)?
-
-    // MARK: -  Initialization
-    init(networkManager: NetworkManagerProtocol = NetworkManager.shared, connectivityService: ConnectivityServiceProtocol = ConnectivityService.shared) {
-        self.networkManager = networkManager
-        self.connectivityService = connectivityService
+    
+    // MARK: - Initializer
+    init() {
+        networkManager = NetworkManager.shared
+        connectivityService = ConnectivityService.shared
     }
-    // MARK: -  Methods
+    
+    // MARK: - Public Methods
     func checkConnectivity( completion: @escaping (Bool) -> Void) {
         connectivityService.checkInternetConnection { isConnected in
             DispatchQueue.main.async {
@@ -29,6 +29,7 @@ class AuthOptionsViewModel {
             }
         }
     }
+    
     func skipButtonClicked() {
         UserDefaultsManager.shared.continueAsAGuest = true
         UserDefaultsManager.shared.storeData()
@@ -36,14 +37,14 @@ class AuthOptionsViewModel {
             self.setRootViewController?("MainTabBar","MainTabBarNavigationController")
         }
     }
+    
     func signInButtonClicked() {
         DispatchQueue.main.async {
             self.navigateToViewController?("SignInViewController")
         }
     }
-
+    
     func signUpButtonClicked() {
-
         DispatchQueue.main.async {
             self.navigateToViewController?("SignUpViewController")
         }
