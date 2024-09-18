@@ -129,7 +129,7 @@ extension DiscountViewController: UICollectionViewDataSource {
 
 extension DiscountViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width / 2 - 25
+        let width = collectionView.frame.width / 1.8
         return CGSize(width: width, height: collectionView.frame.height - 20)
     }
 }
