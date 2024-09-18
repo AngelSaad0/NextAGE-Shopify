@@ -8,7 +8,6 @@
 import Foundation
 
 class MeViewModel {
-
     // MARK: - Properties
     private let networkManager: NetworkManagerProtocol
     private let userDefaultsManager: UserDefaultsManager
@@ -20,7 +19,7 @@ class MeViewModel {
     var isUserLoggedIn: Bool = false
     var currentCustomerId: Int?
 
-    // MARK: - Callbacks
+    // MARK: - Closures
     var onOrdersUpdated: (() -> Void)?
     var onWishlistUpdated: (() -> Void)?
     var onShowNoInternetAlert: (() -> Void)?
@@ -28,7 +27,7 @@ class MeViewModel {
     var wishlistIndicator: ()->() = {}
     var displayEmptyMessage: (String)->() = {_ in }
 
-    // MARK: - Initialization
+    // MARK: - Initializer
     init() {
         networkManager = NetworkManager.shared
         userDefaultsManager = UserDefaultsManager.shared
@@ -36,12 +35,7 @@ class MeViewModel {
         setupInitialState()
     }
 
-    private func setupInitialState() {
-        isUserLoggedIn = userDefaultsManager.isLogin
-        currentCustomerId = userDefaultsManager.customerID
-        customerName = userDefaultsManager.name.isEmpty ? nil : userDefaultsManager.name
-    }
-
+    // MARK: - Public Methods
     func checkInternetConnection() {
         connectivityService.checkInternetConnection { [weak self] isConnected in
             guard let self = self else { return }
@@ -84,7 +78,14 @@ class MeViewModel {
             self.onWishlistUpdated?()
         }
     }
-
+    
+    // MARK: - Private Methods
+    private func setupInitialState() {
+        isUserLoggedIn = userDefaultsManager.isLogin
+        currentCustomerId = userDefaultsManager.customerID
+        customerName = userDefaultsManager.name.isEmpty ? nil : userDefaultsManager.name
+    }
+    
     private func fetchAllOrders(completion: @escaping ([Order]?)->()) {
         networkManager.fetchData(from: ShopifyAPI.orders.shopifyURLString(), responseType: Orders.self, headers: []) { result in
             completion(result?.orders)

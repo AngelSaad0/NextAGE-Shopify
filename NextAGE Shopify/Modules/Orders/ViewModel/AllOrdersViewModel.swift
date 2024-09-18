@@ -13,7 +13,7 @@ class AllOrdersViewModel {
     let userDefaultManager: UserDefaultsManager
     var connectivityService: ConnectivityServiceProtocol
     var orders: [Order] = []
-
+    
     // MARK: - Closures
     var showNoInternetAlert: ()->() = {}
     var setIndicator: (Bool)->() = {_ in}
@@ -29,7 +29,7 @@ class AllOrdersViewModel {
         connectivityService = ConnectivityService.shared
     }
     
-    // Public Methods
+    // MARK: - Public Methods
     func checkInternetConnection() {
         connectivityService.checkInternetConnection { [weak self] isConnected in
             guard let self = self else { return }
@@ -49,6 +49,7 @@ class AllOrdersViewModel {
         }
     }
     
+    // MARK: - Private Methods
     private func updateUserOrders() {
         setIndicator(true)
         fetchAllOrders { orders in

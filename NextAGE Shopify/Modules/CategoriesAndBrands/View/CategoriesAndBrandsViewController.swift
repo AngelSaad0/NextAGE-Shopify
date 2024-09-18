@@ -28,6 +28,8 @@ class CategoriesAndBrandsViewController: UIViewController {
         viewModel = CategoriesAndBrandsViewModel()
         super.init(coder: coder)
     }
+    
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
@@ -44,7 +46,7 @@ class CategoriesAndBrandsViewController: UIViewController {
         categoryOrBrandCollectionView.reloadData()
     }
     
-    // MARK: - private Methods
+    // MARK: - Private Methods
     private  func updateUI() {
         if viewModel.isBrandScreen {
             title = "NextAGE"
@@ -109,8 +111,8 @@ class CategoriesAndBrandsViewController: UIViewController {
             }
         }
     }
-    // MARK: -  Actions
     
+    // MARK: - IBActions
     @IBAction func categorySegmentControlClicked(_ sender: UISegmentedControl) {
         viewModel.selectedCategory = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? "All"
         viewModel.applyFiltersAndSearch()
@@ -131,7 +133,6 @@ class CategoriesAndBrandsViewController: UIViewController {
 }
 
 // MARK: - Collection View Data Source and Delegate Methods
-
 extension CategoriesAndBrandsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController

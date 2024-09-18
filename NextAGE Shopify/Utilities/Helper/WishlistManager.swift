@@ -8,21 +8,22 @@
 import Foundation
 
 class WishlistManager {
-
     // MARK: - Singleton Instance
     static let shared = WishlistManager()
-
+    
+    // MARK: - Properties
     let networkManager: NetworkManagerProtocol
     let userDefaultsManger:UserDefaultsManager
     var wishlist: [LineItem]?
-
-
+    
+    // MARK: - Initializer
     private init() {
         networkManager = NetworkManager.shared
         userDefaultsManger = UserDefaultsManager.shared
         fetchWishlist(completion: {})
     }
-
+    
+    // MARK: - Public Methods
     func fetchWishlist(completion: @escaping ()->()) {
         networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultsManger.wishlistID).shopifyURLString(), responseType: DraftOrderWrapper.self, headers: []) { result in
             self.wishlist = result?.draftOrder.lineItems
@@ -111,6 +112,5 @@ class WishlistManager {
             }
         }
     }
-   
 }
 

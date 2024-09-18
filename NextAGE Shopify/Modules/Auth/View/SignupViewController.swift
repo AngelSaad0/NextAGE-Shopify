@@ -81,7 +81,7 @@ class SignUpViewController: UIViewController {
             return false
         }
         if !isValidName(firstNameTextField.text?.trimmingCharacters(in: .whitespaces) ?? "") {
-            displayMessage(massage: .nameVaild, isError: true)
+            displayMessage(massage: .nameValid, isError: true)
             return false
         }
         if secondNameTextField.text?.trimmingCharacters(in: .whitespaces) == "" {
@@ -89,7 +89,7 @@ class SignUpViewController: UIViewController {
             return false
         }
         if !isValidName(secondNameTextField.text?.trimmingCharacters(in: .whitespaces) ?? "") {
-            displayMessage(massage: .nameVaild, isError: true)
+            displayMessage(massage: .nameValid, isError: true)
             return false
         }
         if emailTextField.text?.trimmingCharacters(in: .whitespaces) == "" {
@@ -105,7 +105,7 @@ class SignUpViewController: UIViewController {
             return false
         }
         if !isValidPassword(passwordTextField.text?.trimmingCharacters(in: .whitespaces) ?? "") {
-            displayMessage(massage: .passwordVaild, isError: true)
+            displayMessage(massage: .passwordValid, isError: true)
             return false
         }
         if rePasswordTextField.text?.trimmingCharacters(in: .whitespaces) == "" {
@@ -113,7 +113,7 @@ class SignUpViewController: UIViewController {
             return false
         }
         if !isValidPassword(rePasswordTextField.text?.trimmingCharacters(in: .whitespaces) ?? "") {
-            displayMessage(massage: .passwordVaild, isError: true)
+            displayMessage(massage: .passwordValid, isError: true)
             return false
         }
         if !((passwordTextField.text?.trimmingCharacters(in: .whitespaces) ?? "") == (rePasswordTextField.text?.trimmingCharacters(in: .whitespaces) ?? "")) {

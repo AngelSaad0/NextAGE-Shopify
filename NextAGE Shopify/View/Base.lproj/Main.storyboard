@@ -50,7 +50,7 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="ywn-zx-kgK">
                                                 <rect key="frame" x="0.0" y="0.0" width="314.33333333333331" height="414"/>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ta-Ut-c6s" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ta-Ut-c6s" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="435" width="314.33333333333331" height="44"/>
                                                 <color key="backgroundColor" red="0.94509804249999996" green="0.93725490570000003" blue="0.94509804249999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
@@ -66,7 +66,7 @@
                                                     <action selector="signInButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="moY-PN-1Qt"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mac-Pg-j54" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mac-Pg-j54" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="500" width="314.33333333333331" height="44"/>
                                                 <color key="backgroundColor" name="#0079FB"/>
                                                 <constraints>
@@ -233,7 +233,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hDu-hp-ywR" userLabel="Stack  login &amp;register">
                                                         <rect key="frame" x="0.0" y="223.66666666666669" width="361" height="113"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYj-B9-wOF" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYj-B9-wOF" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="361" height="48.333333333333336"/>
                                                                 <color key="backgroundColor" name="#0079FB"/>
                                                                 <constraints>
@@ -562,7 +562,7 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="TFr-Ug-Vzf">
                                                                         <rect key="frame" x="16" y="25" width="361.66666666666669" height="236"/>
                                                                         <subviews>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCJ-3p-flb" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCJ-3p-flb" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="361.66666666666669" height="48"/>
                                                                                 <color key="backgroundColor" name="#0079FB"/>
                                                                                 <constraints>
@@ -739,6 +739,142 @@
             </objects>
             <point key="canvasLocation" x="1400.7633587786258" y="-63.380281690140848"/>
         </scene>
+        <!--Onboarding View Controller-->
+        <scene sceneID="173-l5-ET2">
+            <objects>
+                <viewController storyboardIdentifier="OnboardingViewController" id="Q9S-up-hvp" customClass="OnboardingViewController" customModule="NextAGE_Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RdF-0A-rfx">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Lle-73-S3R" userLabel="collectionView">
+                                <rect key="frame" x="0.0" y="59" width="393" height="644"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ApJ-ta-dSe">
+                                    <size key="itemSize" width="385" height="656"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OnboardingCollectionViewCell" id="kjw-pw-81r" customClass="OnboardingCollectionViewCell" customModule="NextAGE_Shopify" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="-6" width="385" height="656"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DFh-ru-0LC">
+                                            <rect key="frame" x="0.0" y="0.0" width="385" height="656"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caf-Ur-87d">
+                                                    <rect key="frame" x="0.0" y="0.0" width="385" height="656"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="89K-7J-4cq">
+                                                            <rect key="frame" x="0.0" y="0.0" width="385" height="459.33333333333331"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2za-CQ-9Aa">
+                                                            <rect key="frame" x="24" y="483.33333333333331" width="337" height="32.999999999999943"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="33" id="HXq-nu-Tl6"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                                            <color key="textColor" red="0.070588235289999995" green="0.070588235289999995" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Welcome back, you have joined at a great time." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SHF-d6-LeP">
+                                                            <rect key="frame" x="24" y="526.33333333333337" width="337" height="129.66666666666663"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="74" id="u8j-e7-e1r"/>
+                                                            </constraints>
+                                                            <color key="textColor" red="0.070588235289999995" green="0.070588235289999995" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="89K-7J-4cq" firstAttribute="top" secondItem="caf-Ur-87d" secondAttribute="top" id="FxD-cQ-YdX"/>
+                                                        <constraint firstItem="2za-CQ-9Aa" firstAttribute="top" secondItem="89K-7J-4cq" secondAttribute="bottom" constant="24" id="H3b-hZ-FCX"/>
+                                                        <constraint firstItem="89K-7J-4cq" firstAttribute="leading" secondItem="caf-Ur-87d" secondAttribute="leading" id="L4O-sh-rQg"/>
+                                                        <constraint firstItem="SHF-d6-LeP" firstAttribute="top" secondItem="2za-CQ-9Aa" secondAttribute="bottom" constant="10" id="NAt-Ve-2kB"/>
+                                                        <constraint firstAttribute="bottom" secondItem="SHF-d6-LeP" secondAttribute="bottom" id="VKB-gG-Lb6"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="2za-CQ-9Aa" secondAttribute="trailing" constant="16" id="duS-hS-Fn3"/>
+                                                        <constraint firstItem="2za-CQ-9Aa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="caf-Ur-87d" secondAttribute="leading" constant="20" symbolic="YES" id="hTX-LK-hz4"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="SHF-d6-LeP" secondAttribute="trailing" constant="16" id="nAC-LZ-Sck"/>
+                                                        <constraint firstItem="2za-CQ-9Aa" firstAttribute="leading" secondItem="caf-Ur-87d" secondAttribute="leadingMargin" constant="16" id="t5g-c5-jTr"/>
+                                                        <constraint firstItem="SHF-d6-LeP" firstAttribute="leading" secondItem="caf-Ur-87d" secondAttribute="leadingMargin" constant="16" id="vow-7T-gt2"/>
+                                                        <constraint firstAttribute="trailing" secondItem="89K-7J-4cq" secondAttribute="trailing" id="yQ8-NQ-KQB"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="caf-Ur-87d" firstAttribute="leading" secondItem="DFh-ru-0LC" secondAttribute="leading" id="DdU-Gy-AVf"/>
+                                                <constraint firstItem="89K-7J-4cq" firstAttribute="height" secondItem="DFh-ru-0LC" secondAttribute="height" multiplier="0.7" id="Fjd-QP-A5j"/>
+                                                <constraint firstAttribute="trailing" secondItem="caf-Ur-87d" secondAttribute="trailing" id="K10-7z-BP0"/>
+                                                <constraint firstItem="caf-Ur-87d" firstAttribute="top" secondItem="DFh-ru-0LC" secondAttribute="top" id="OAr-vi-G9T"/>
+                                                <constraint firstAttribute="bottom" secondItem="caf-Ur-87d" secondAttribute="bottom" id="YsD-oG-JJm"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="385" height="656"/>
+                                        <connections>
+                                            <outlet property="animationContainer" destination="89K-7J-4cq" id="lgG-sb-CWM"/>
+                                            <outlet property="descriptionTextView" destination="SHF-d6-LeP" id="Fjz-8c-dIT"/>
+                                            <outlet property="titleLabel" destination="2za-CQ-9Aa" id="SEW-Mt-f6D"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="VJd-Qo-KwM">
+                                <rect key="frame" x="138.66666666666666" y="703" width="116" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="nYS-tO-7mY"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" red="0.75686275960000005" green="0.74901962280000001" blue="0.75686275960000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="currentPageIndicatorTintColor" red="0.1960784314" green="0.45098039220000002" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <action selector="pageChanged:" destination="Q9S-up-hvp" eventType="valueChanged" id="hYx-ct-Q3m"/>
+                                </connections>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gnx-d4-uax" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                                <rect key="frame" x="16" y="752" width="361" height="42"/>
+                                <color key="backgroundColor" name="#0079FB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="PUe-DY-sQD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Skip">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="getStartedButtonTapped:" destination="Q9S-up-hvp" eventType="touchUpInside" id="5Tt-fq-kcO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ybt-hd-wEg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gnx-d4-uax" firstAttribute="leading" secondItem="Ybt-hd-wEg" secondAttribute="leading" constant="16" id="3P9-o8-sOn"/>
+                            <constraint firstItem="Ybt-hd-wEg" firstAttribute="trailing" secondItem="gnx-d4-uax" secondAttribute="trailing" constant="16" id="Iik-g7-8GS"/>
+                            <constraint firstItem="Ybt-hd-wEg" firstAttribute="bottom" secondItem="gnx-d4-uax" secondAttribute="bottom" constant="24" id="Qs9-0r-VGH"/>
+                            <constraint firstItem="Lle-73-S3R" firstAttribute="leading" secondItem="Ybt-hd-wEg" secondAttribute="leading" id="Rak-Ri-fgB"/>
+                            <constraint firstItem="VJd-Qo-KwM" firstAttribute="top" secondItem="Lle-73-S3R" secondAttribute="bottom" id="RnY-1y-wqK"/>
+                            <constraint firstItem="VJd-Qo-KwM" firstAttribute="centerX" secondItem="RdF-0A-rfx" secondAttribute="centerX" id="Sg2-QU-M5O"/>
+                            <constraint firstItem="Lle-73-S3R" firstAttribute="height" secondItem="RdF-0A-rfx" secondAttribute="height" multiplier="0.77" constant="-12.039999999999964" id="gqN-BC-NjE"/>
+                            <constraint firstItem="Lle-73-S3R" firstAttribute="top" secondItem="Ybt-hd-wEg" secondAttribute="top" id="vjh-kp-9Id"/>
+                            <constraint firstItem="Ybt-hd-wEg" firstAttribute="trailing" secondItem="Lle-73-S3R" secondAttribute="trailing" id="vm0-Qy-c7k"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionPageControl" destination="VJd-Qo-KwM" id="urL-MP-Z6Z"/>
+                        <outlet property="collectionView" destination="Lle-73-S3R" id="zae-Au-R0I"/>
+                        <outlet property="getStartedButton" destination="gnx-d4-uax" id="5yI-94-t8o"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LIj-kS-B9y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1387.0229007633586" y="-63.380281690140848"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="d7Q-Uq-fB8">
             <objects>
@@ -807,7 +943,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ikY-6T-L2G" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ikY-6T-L2G" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="753" width="130" height="40"/>
                                 <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <constraints>
@@ -1015,7 +1151,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dsu-Lh-S92" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dsu-Lh-S92" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="758" width="353" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4Ix-TU-g6J"/>
@@ -1129,7 +1265,7 @@
                                 <color key="textColor" name="#121212"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7b-QJ-ARr" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7b-QJ-ARr" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="758" width="353" height="50"/>
                                 <color key="backgroundColor" name="#0079FB"/>
                                 <constraints>
@@ -1185,7 +1321,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWV-RJ-Qvl" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWV-RJ-Qvl" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="758" width="353" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ZUd-wt-1GK"/>
@@ -1400,7 +1536,7 @@ Hassle Free 30 days returns </string>
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8R-JT-9tQ" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8R-JT-9tQ" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="758" width="353" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="NyL-0A-We4"/>
@@ -1416,7 +1552,7 @@ Hassle Free 30 days returns </string>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ci7-a9-mVv">
-                                <rect key="frame" x="20" y="79" width="353" height="268"/>
+                                <rect key="frame" x="20" y="79" width="353" height="306.66666666666669"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uIr-nY-2An">
                                     <size key="itemSize" width="198" height="247"/>
@@ -1427,7 +1563,7 @@ Hassle Free 30 days returns </string>
                                 <cells/>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ScA-Cu-Kud">
-                                <rect key="frame" x="16" y="367" width="361" height="165"/>
+                                <rect key="frame" x="16" y="405.66666666666669" width="361" height="165.00000000000006"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="W7e-1c-tZk">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
@@ -1476,7 +1612,7 @@ Hassle Free 30 days returns </string>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xf6-c2-kJ4">
-                                        <rect key="frame" x="0.0" y="101.66666666666669" width="361" height="21.666666666666671"/>
+                                        <rect key="frame" x="0.0" y="101.66666666666663" width="361" height="21.666666666666671"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MtA-eU-CRi">
                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="21.666666666666668"/>
@@ -1533,7 +1669,7 @@ Hassle Free 30 days returns </string>
                             <constraint firstItem="Ci7-a9-mVv" firstAttribute="top" secondItem="u8j-Yj-wRt" secondAttribute="top" constant="20" id="ByT-rZ-CPy"/>
                             <constraint firstItem="u8j-Yj-wRt" firstAttribute="trailing" secondItem="t8R-JT-9tQ" secondAttribute="trailing" constant="20" id="GP4-uu-wpY"/>
                             <constraint firstItem="t8R-JT-9tQ" firstAttribute="leading" secondItem="u8j-Yj-wRt" secondAttribute="leading" constant="20" id="Hyc-ke-FaD"/>
-                            <constraint firstItem="Ci7-a9-mVv" firstAttribute="height" secondItem="K71-O1-I6t" secondAttribute="height" multiplier="0.314554" id="MLf-0k-kNd"/>
+                            <constraint firstItem="Ci7-a9-mVv" firstAttribute="height" secondItem="K71-O1-I6t" secondAttribute="height" multiplier="0.36" id="MLf-0k-kNd"/>
                             <constraint firstItem="Ci7-a9-mVv" firstAttribute="leading" secondItem="u8j-Yj-wRt" secondAttribute="leading" constant="20" id="Ppl-z0-VZ8"/>
                             <constraint firstItem="ScA-Cu-Kud" firstAttribute="top" secondItem="Ci7-a9-mVv" secondAttribute="bottom" constant="20" id="UNJ-Od-ehf"/>
                             <constraint firstItem="u8j-Yj-wRt" firstAttribute="bottom" secondItem="t8R-JT-9tQ" secondAttribute="bottom" constant="10" id="Uc5-ky-hxj"/>
@@ -1616,7 +1752,7 @@ Hassle Free 30 days returns </string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9v-kz-IOr" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9v-kz-IOr" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="758" width="353" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="YFi-04-WOf"/>
@@ -1631,7 +1767,7 @@ Hassle Free 30 days returns </string>
                                     <action selector="reviewOrderOrSetDefaultAddressButtonClicked:" destination="Nw5-kq-Q3M" eventType="touchUpInside" id="Pnv-xd-K6D"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFE-jz-rxs" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFE-jz-rxs" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="698" width="353" height="50"/>
                                 <color key="backgroundColor" red="0.94509804249999996" green="0.93725490570000003" blue="0.94509804249999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -1680,7 +1816,7 @@ Hassle Free 30 days returns </string>
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pD-Jy-czJ" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pD-Jy-czJ" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="20" y="758" width="353" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6AA-fd-khi"/>
@@ -2032,7 +2168,7 @@ Hassle Free 30 days returns </string>
                                                                                         <constraint firstAttribute="height" constant="35" id="6KC-ac-rBV"/>
                                                                                     </constraints>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                    <nil key="textColor"/>
+                                                                                    <color key="textColor" name="#505050"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31g-9X-QCG">
@@ -2448,7 +2584,7 @@ Hassle Free 30 days returns </string>
                                     <constraint firstAttribute="trailing" secondItem="oyL-9T-Hy9" secondAttribute="trailing" constant="16" id="KuQ-P3-Vi6"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-dk-2Pf" customClass="CustomCommanButton" customModule="NextAGE_Shopify" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-dk-2Pf" customClass="CustomCommonButton" customModule="NextAGE_Shopify" customModuleProvider="target">
                                 <rect key="frame" x="16" y="760" width="261" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="i0j-NV-U3z"/>
@@ -3152,7 +3288,7 @@ Hassle Free 30 days returns </string>
                                                                                         <constraint firstAttribute="height" constant="35" id="fgb-Bh-XIO"/>
                                                                                     </constraints>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                    <nil key="textColor"/>
+                                                                                    <color key="textColor" name="#505050"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83N-Ld-1wi">
@@ -3303,6 +3439,9 @@ Hassle Free 30 days returns </string>
         </namedColor>
         <namedColor name="#231F1F">
             <color red="0.13699999451637268" green="0.12200000137090683" blue="0.12200000137090683" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="#505050">
+            <color red="0.31400001049041748" green="0.31400001049041748" blue="0.31400001049041748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="#575757">
             <color red="0.34099999070167542" green="0.34099999070167542" blue="0.34099999070167542" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

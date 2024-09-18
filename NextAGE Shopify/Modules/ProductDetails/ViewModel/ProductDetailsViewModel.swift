@@ -10,13 +10,13 @@ class ProductDetailsViewModel {
     // MARK: - Properties
     let networkManager: NetworkManagerProtocol
     let userDefaultManger:UserDefaultsManager
+    let wishlistManager: WishlistManager
     private var selectedVariantID:Int?
     private var selectedVariantInventoryQuantity:Int?
     var selectedColor:String?
     var selectedSize:String?
     var rating: Double = 0
     var productID: Int?
-    var wishlist: [LineItem]?
     var shoppingCart: [LineItem]?
     var product: Product?
     var isFavorite = false
@@ -49,6 +49,7 @@ class ProductDetailsViewModel {
     init() {
         networkManager = NetworkManager.shared
         userDefaultManger = UserDefaultsManager.shared
+        wishlistManager = WishlistManager.shared
         if userDefaultManger.isLogin {
             fetchDrafts()
         }
@@ -58,11 +59,6 @@ class ProductDetailsViewModel {
     func fetchDrafts() {
         networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultManger.shoppingCartID).shopifyURLString(), responseType: DraftOrderWrapper.self, headers: []) { result in
             self.shoppingCart = result?.draftOrder.lineItems
-        }
-        
-        networkManager.fetchData(from: ShopifyAPI.draftOrder(id: userDefaultManger.wishlistID).shopifyURLString(), responseType: DraftOrderWrapper.self, headers: []) { result in
-            self.wishlist = result?.draftOrder.lineItems
-            self.updateFavoriteState()
         }
     }
     
@@ -81,6 +77,7 @@ class ProductDetailsViewModel {
             self.product = product
             self.updateProductInfo()
         }
+        updateFavoriteState()
     }
     
     func addToShoppingCart() {
@@ -120,57 +117,16 @@ class ProductDetailsViewModel {
     }
     
     func addToWishlist() {
+        updateSelectedVariantID()
         if isFavorite {
-            updateSelectedVariantID()
-            var wishlistLineItems: [[String: Any]] = []
-            for item in wishlist ?? [] {
-                var properties : [[String: String]] = []
-                if item.variantID != nil && item.productID != productID {
-                    for property in item.properties {
-                        properties.append(["name":property.name, "value": property.value])
-                    }
-                    wishlistLineItems.append(["variant_id": item.variantID ?? 0, "quantity": item.quantity, "properties": properties, "product_id": item.productID ?? 0])
-                }
-            }
-            if wishlistLineItems.isEmpty {
-                wishlistLineItems = [[
-                    "title": "Empty",
-                    "quantity": 1,
-                    "price": "0",
-                    "properties":[]
-                ]]
-            }
-            networkManager.updateData(at: ShopifyAPI.draftOrder(id: userDefaultManger.wishlistID).shopifyURLString(), with: ["draft_order": ["line_items": wishlistLineItems]]) {
+            wishlistManager.removeFromWishlist(productID: productID ?? 0) {
                 self.showMessage(.removedFromWishlist, false)
                 self.isFavorite = false
                 self.updateFavoriteImage()
             }
         } else {
-            updateSelectedVariantID()
-            let newItem: [String: Any] = [
-                "variant_id": selectedVariantID ?? 0,
-                "quantity" : 1,
-                "properties":[
-                    [
-                        "name": "image",
-                        "value": self.product?.image.src ?? ""
-                    ],
-                    [
-                        "name": "inventoryQuantity",
-                        "value": String(self.selectedVariantInventoryQuantity ?? 0)]]
-            ]
-            var wishlistLineItems: [[String: Any]] = []
-            for item in wishlist ?? [] {
-                var properties : [[String: String]] = []
-                if item.variantID != nil {
-                    for property in item.properties {
-                        properties.append(["name":property.name, "value": property.value])
-                    }
-                    wishlistLineItems.append(["variant_id": item.variantID ?? 0, "quantity": item.quantity, "properties": properties, "product_id": item.productID ?? 0])
-                }
-            }
-            wishlistLineItems.append(newItem)
-            networkManager.updateData(at: ShopifyAPI.draftOrder(id: userDefaultManger.wishlistID).shopifyURLString(), with: ["draft_order": ["line_items": wishlistLineItems]]) {
+            guard let product = product else {return}
+            wishlistManager.addToWishlist(product: product) {
                 self.showMessage(.addedToWishlist, false)
                 self.isFavorite = true
                 self.updateFavoriteImage()
@@ -206,12 +162,7 @@ class ProductDetailsViewModel {
     }
     
     private func updateFavoriteState() {
-        for item in wishlist ?? [] {
-            if productID == item.productID {
-                isFavorite = true
-                break
-            }
-        }
+        isFavorite = wishlistManager.getFavoriteState(productID: productID ?? 0)
         updateFavoriteImage()
     }
 }

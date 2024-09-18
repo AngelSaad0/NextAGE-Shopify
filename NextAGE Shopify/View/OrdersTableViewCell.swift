@@ -7,22 +7,17 @@
 
 import UIKit
 
-
 class OrdersTableViewCell: UITableViewCell {
-
-    // MARK: - Outlets
-
+    // MARK: - IBOutlets
     @IBOutlet var totalPriceLabel: UILabel!
     @IBOutlet weak var createdDateLabel: UILabel!
     @IBOutlet weak var orderNumberLabel: UILabel!
     @IBOutlet weak var cellBackgroundView: UIView!
-
-    // MARK: - Initialization
-
+    
+    // MARK: - View Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
-
     }
     
     override var isSelected: Bool {
@@ -30,25 +25,17 @@ class OrdersTableViewCell: UITableViewCell {
             contentView.backgroundColor = isSelected ? UIColor.systemBackground : UIColor.systemBackground
         }
     }
-
-    // MARK: - View Setup
+    
+    // MARK: - Private Methods
     private func setupView() {
         cellBackgroundView.addCornerRadius(radius: 12)
         cellBackgroundView.addBorderView()
-//        cellBackgroundView.applyShadow()
     }
-// MARK: -  configure
+    
+    // MARK: - Public Methods
     func configure(with order: Order) {
         orderNumberLabel.text = "#\(order.orderNumber)"
         totalPriceLabel.text = order.totalPrice + " " + order.currency
         createdDateLabel.text = formatDate(order.createdAt)
     }
-//    func configure(with lineItem: LineItem) {
-//           orderNumberLabel.text = "Order No \(lineItem.id)"
-//           totalPriceLabel.text = "\(lineItem.price) \(lineItem.title ?? "")"
-//        #warning("LineItem havant data what is correct pass all order array ?")
-//       // createdDateLabel.text = formatDate(LineItem.createdAt)
-//
-//       }
-
 }

@@ -15,7 +15,6 @@ class ReviewCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userReviewLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
-
     @IBOutlet var shadowBackground: UIView!
     
     // MARK: - View Life Cycle

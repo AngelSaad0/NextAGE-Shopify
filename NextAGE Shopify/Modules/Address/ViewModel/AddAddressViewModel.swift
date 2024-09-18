@@ -16,6 +16,7 @@ class AddAddressViewModel {
     
     // MARK: - Closures
     var setIndicator: (Bool)->() = {_ in}
+    var showFailureMessage: ()->() = {}
     var showSuccessMessage: ()->() = {}
     var showSuccessEditingMessage: ()->() = {}
     
@@ -38,10 +39,15 @@ class AddAddressViewModel {
                     "phone": phone?.trimmingCharacters(in: .whitespaces) ?? "",
                     "default": isDefault
                 ]
-        ]) { _ in
-            self.showSuccessMessage()
-            self.setIndicator(false)
-            completion()
+        ]) { result in
+            if result != nil {
+                self.showSuccessMessage()
+                self.setIndicator(false)
+                completion()
+            } else {
+                self.showFailureMessage()
+                self.setIndicator(false)
+            }
         }
     }
     
@@ -58,7 +64,7 @@ class AddAddressViewModel {
                     "default": isDefault
                 ]
         ]) {
-            self.showSuccessMessage()
+            self.showSuccessEditingMessage()
             self.setIndicator(false)
             completion()
         }
