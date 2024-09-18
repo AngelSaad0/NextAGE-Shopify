@@ -51,6 +51,7 @@
 		B52D29BE98F1E96A2F7CAAF1 /* Pods_NextAGE_Shopify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7683CABADF3357DC46EFB628 /* Pods_NextAGE_Shopify.framework */; };
 		C63F86292C9576B30035D4C7 /* CurrencyDataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F86282C9576B30035D4C7 /* CurrencyDataAPI.swift */; };
 		C63F862B2C957D760035D4C7 /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F862A2C957D760035D4C7 /* CurrencyData.swift */; };
+		C64BE22D2C9AE7EF00BDDF90 /* DiscountViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64BE22C2C9AE7EF00BDDF90 /* DiscountViewModelTests.swift */; };
 		C64C33832C8741F500EF1928 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */; };
 		C64C33842C8741F500EF1928 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */; };
 		C64C33852C8741F500EF1928 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337D2C8741F500EF1928 /* PaymentViewController.swift */; };
@@ -177,6 +178,7 @@
 		C0061ADA9CA6A7E2C07E84F5 /* Pods-NextAGE Shopify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAGE Shopify.release.xcconfig"; path = "Target Support Files/Pods-NextAGE Shopify/Pods-NextAGE Shopify.release.xcconfig"; sourceTree = "<group>"; };
 		C63F86282C9576B30035D4C7 /* CurrencyDataAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDataAPI.swift; sourceTree = "<group>"; };
 		C63F862A2C957D760035D4C7 /* CurrencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyData.swift; sourceTree = "<group>"; };
+		C64BE22C2C9AE7EF00BDDF90 /* DiscountViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountViewModelTests.swift; sourceTree = "<group>"; };
 		C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 		C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
 		C64C337D2C8741F500EF1928 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
@@ -395,6 +397,14 @@
 				A98666B82C97D111009B6154 /* animation3.json */,
 			);
 			path = Lottie;
+			sourceTree = "<group>";
+		};
+		C64BE2252C9AE55600BDDF90 /* DiscountTests */ = {
+			isa = PBXGroup;
+			children = (
+				C64BE22C2C9AE7EF00BDDF90 /* DiscountViewModelTests.swift */,
+			);
+			path = DiscountTests;
 			sourceTree = "<group>";
 		};
 		C64C337E2C8741F500EF1928 /* View */ = {
@@ -647,6 +657,7 @@
 		C67B1DEE2C987B520043FB74 /* NextAGE ShopifyTests */ = {
 			isa = PBXGroup;
 			children = (
+				C64BE2252C9AE55600BDDF90 /* DiscountTests */,
 				C67B1E242C9888AF0043FB74 /* ShoppingCartTests */,
 				C67B1E212C9883010043FB74 /* OrdersTests */,
 				C67B1E1E2C9882D40043FB74 /* CategoriesAndBrandsTests */,
@@ -1225,6 +1236,7 @@
 				C67B1E252C9888B00043FB74 /* ShopingCartViewModelTests.swift in Sources */,
 				C67B1E1B2C9882C40043FB74 /* HomeTests.swift in Sources */,
 				C67B1E072C987FEF0043FB74 /* SearchViewModelTest.swift in Sources */,
+				C64BE22D2C9AE7EF00BDDF90 /* DiscountViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
