@@ -52,6 +52,8 @@
 		C63F86292C9576B30035D4C7 /* CurrencyDataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F86282C9576B30035D4C7 /* CurrencyDataAPI.swift */; };
 		C63F862B2C957D760035D4C7 /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F862A2C957D760035D4C7 /* CurrencyData.swift */; };
 		C64BE22D2C9AE7EF00BDDF90 /* DiscountViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64BE22C2C9AE7EF00BDDF90 /* DiscountViewModelTests.swift */; };
+		C64BE2322C9AE8E600BDDF90 /* AddressViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64BE22F2C9AE8E600BDDF90 /* AddressViewModelTests.swift */; };
+		C64BE2342C9AED0D00BDDF90 /* AddAddressViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64BE2332C9AED0D00BDDF90 /* AddAddressViewModelTests.swift */; };
 		C64C33832C8741F500EF1928 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */; };
 		C64C33842C8741F500EF1928 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */; };
 		C64C33852C8741F500EF1928 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C337D2C8741F500EF1928 /* PaymentViewController.swift */; };
@@ -179,6 +181,8 @@
 		C63F86282C9576B30035D4C7 /* CurrencyDataAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDataAPI.swift; sourceTree = "<group>"; };
 		C63F862A2C957D760035D4C7 /* CurrencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyData.swift; sourceTree = "<group>"; };
 		C64BE22C2C9AE7EF00BDDF90 /* DiscountViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountViewModelTests.swift; sourceTree = "<group>"; };
+		C64BE22F2C9AE8E600BDDF90 /* AddressViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressViewModelTests.swift; sourceTree = "<group>"; };
+		C64BE2332C9AED0D00BDDF90 /* AddAddressViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAddressViewModelTests.swift; sourceTree = "<group>"; };
 		C64C337B2C8741F500EF1928 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 		C64C337C2C8741F500EF1928 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
 		C64C337D2C8741F500EF1928 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
@@ -405,6 +409,15 @@
 				C64BE22C2C9AE7EF00BDDF90 /* DiscountViewModelTests.swift */,
 			);
 			path = DiscountTests;
+			sourceTree = "<group>";
+		};
+		C64BE2302C9AE8E600BDDF90 /* AddressTests */ = {
+			isa = PBXGroup;
+			children = (
+				C64BE22F2C9AE8E600BDDF90 /* AddressViewModelTests.swift */,
+				C64BE2332C9AED0D00BDDF90 /* AddAddressViewModelTests.swift */,
+			);
+			path = AddressTests;
 			sourceTree = "<group>";
 		};
 		C64C337E2C8741F500EF1928 /* View */ = {
@@ -657,6 +670,7 @@
 		C67B1DEE2C987B520043FB74 /* NextAGE ShopifyTests */ = {
 			isa = PBXGroup;
 			children = (
+				C64BE2302C9AE8E600BDDF90 /* AddressTests */,
 				C64BE2252C9AE55600BDDF90 /* DiscountTests */,
 				C67B1E242C9888AF0043FB74 /* ShoppingCartTests */,
 				C67B1E212C9883010043FB74 /* OrdersTests */,
@@ -1226,6 +1240,7 @@
 				C67B1E162C9880810043FB74 /* MockNetwork.swift in Sources */,
 				C67B1DFB2C987C380043FB74 /* SettingsViewModelTests.swift in Sources */,
 				C67B1E042C987EFD0043FB74 /* SignUpViewModelTests.swift in Sources */,
+				C64BE2342C9AED0D00BDDF90 /* AddAddressViewModelTests.swift in Sources */,
 				C67B1E032C987EFD0043FB74 /* SignInViewModelTests.swift in Sources */,
 				C67B1E022C987EFD0043FB74 /* AuthOptionsTests.swift in Sources */,
 				C67B1E0F2C9880170043FB74 /* WishlistViewModelTests.swift in Sources */,
@@ -1236,6 +1251,7 @@
 				C67B1E252C9888B00043FB74 /* ShopingCartViewModelTests.swift in Sources */,
 				C67B1E1B2C9882C40043FB74 /* HomeTests.swift in Sources */,
 				C67B1E072C987FEF0043FB74 /* SearchViewModelTest.swift in Sources */,
+				C64BE2322C9AE8E600BDDF90 /* AddressViewModelTests.swift in Sources */,
 				C64BE22D2C9AE7EF00BDDF90 /* DiscountViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
