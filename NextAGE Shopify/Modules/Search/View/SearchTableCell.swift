@@ -20,6 +20,7 @@ class SearchTableCell: UITableViewCell {
     
     // MARK: - Properties
     var product: Product?
+    let indicator = UIActivityIndicatorView(style: .medium)
     
     // MARK: - Closures
     var showLoginAlert: ()->() = {}
@@ -48,6 +49,13 @@ class SearchTableCell: UITableViewCell {
         backgroundViewCell.addCornerRadius(radius: 12)
         backgroundViewCell.addBorderView()
         productImg.applyShadow()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.color = .systemPink
+        wishListButton.addSubview(indicator)
+        NSLayoutConstraint.activate([
+            indicator.topAnchor.constraint(equalTo: wishListButton.bottomAnchor, constant: -10),
+            indicator.centerXAnchor.constraint(equalTo: wishListButton.centerXAnchor)
+        ])
     }
     
     func configure(with model: Product) {
@@ -64,7 +72,9 @@ class SearchTableCell: UITableViewCell {
     @IBAction func wishListButtonClicked(_ sender: UIButton) {
         guard let product = product else {return}
         if UserDefaultsManager.shared.isLogin {
+            indicator.startAnimating()
             WishlistManager.shared.addToOrRemoveFromWishlist(product: product) { state in
+                self.indicator.stopAnimating()
                 self.wishListButton.setImage(UIImage(systemName: state ? "heart.fill" : "heart"), for: .normal)
                 self.layoutIfNeeded()
             }

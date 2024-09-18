@@ -25,6 +25,7 @@ class ProductDetailsViewController: UIViewController {
     // MARK: - Properties
     let viewModel: ProductDetailsViewModel
     let indicator = UIActivityIndicatorView(style: .large)
+    let wishlistIndicator = UIActivityIndicatorView(style: .medium)
     private var selectedButton: UIButton?
     private let selectedButtonColor = UIColor.red
     
@@ -32,7 +33,7 @@ class ProductDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        setupIndicator()
+        setupIndicators()
         setupViewModel()
         viewModel.fetchProduct()
     }
@@ -54,10 +55,18 @@ class ProductDetailsViewController: UIViewController {
         reviewTableView.register(UINib(nibName: "ReviewCell", bundle: nil), forCellReuseIdentifier: "ReviewCell")
     }
     
-    private func setupIndicator() {
+    private func setupIndicators() {
         indicator.center = view.center
         indicator.startAnimating()
         view.addSubview(indicator)
+        
+        wishlistIndicator.translatesAutoresizingMaskIntoConstraints = false
+        wishlistIndicator.color = .systemPink
+        view.addSubview(wishlistIndicator)
+        NSLayoutConstraint.activate([
+            wishlistIndicator.centerXAnchor.constraint(equalTo: addToFavoriteButton.centerXAnchor, constant: -30),
+            wishlistIndicator.centerYAnchor.constraint(equalTo: addToFavoriteButton.centerYAnchor)
+        ])
     }
     
     private func setupViewModel() {
@@ -91,6 +100,7 @@ class ProductDetailsViewController: UIViewController {
             self.updateDropdownOptions()
         }
         viewModel.updateFavoriteImage = {
+            self.wishlistIndicator.stopAnimating()
             self.updateFavoriteImage()
         }
         viewModel.didAddToCart = {
@@ -211,6 +221,7 @@ class ProductDetailsViewController: UIViewController {
     
     @IBAction func addToWishListButtonClicked(_ sender: UIButton) {
         if viewModel.userDefaultManger.isLogin {
+            wishlistIndicator.startAnimating()
             viewModel.addToWishlist()
         } else {
             showLoginFirstAlert(to: "add this product to wishlist")
