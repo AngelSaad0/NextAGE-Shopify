@@ -20,6 +20,7 @@ class CategoriesCollectionCell: UICollectionViewCell {
     
     // MARK: - Properties
     var product: Product?
+    let indicator = UIActivityIndicatorView(style: .medium)
     
     // MARK: - Closures
     var showLoginAlert: ()->() = {}
@@ -30,6 +31,13 @@ class CategoriesCollectionCell: UICollectionViewCell {
         productImage.addCornerRadius(radius: 10)
         imageBackground.addCornerRadius(radius: 12)
         imageBackground.addBorderView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.color = .systemPink
+        wishListButton.addSubview(indicator)
+        NSLayoutConstraint.activate([
+            indicator.topAnchor.constraint(equalTo: wishListButton.bottomAnchor, constant: -10),
+            indicator.centerXAnchor.constraint(equalTo: wishListButton.centerXAnchor)
+        ])
     }
     
     // MARK: - Public Methods
@@ -66,7 +74,9 @@ class CategoriesCollectionCell: UICollectionViewCell {
     @IBAction func wishListButtonClicked(_ sender: UIButton) {
         guard let product = product else {return}
         if UserDefaultsManager.shared.isLogin {
+            indicator.startAnimating()
             WishlistManager.shared.addToOrRemoveFromWishlist(product: product) { state in
+                self.indicator.stopAnimating()
                 self.wishListButton.setImage(UIImage(systemName: state ? "heart.fill" : "heart"), for: .normal)
                 self.layoutIfNeeded()
             }
